@@ -402,25 +402,36 @@
     color: var(--ink-2); font-size: 0.93rem; line-height: 1.7; max-width: 80ch; margin: 0;
   }
 
-  /* ---------- Writing ---------- */
-  .writing-list { display: grid; gap: 0; border-top: 1px solid var(--rule-strong); }
-  .writing-row {
-    display: grid; grid-template-columns: 90px 1fr auto; gap: 1.5rem;
-    align-items: baseline;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--rule-strong);
-    transition: padding .2s ease;
+  /* ---------- Media (LinkedIn embeds) ---------- */
+  /* CSS columns give a masonry feel without JS — short cards don't leave gaps. */
+  .media-grid {
+    column-count: 1;
+    column-gap: 1.5rem;
   }
-  .writing-row:hover { padding-left: 8px; }
-  .writing-row .date { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-3); }
-  .writing-row .title-line { display: grid; gap: 6px; }
-  .writing-row h3 { font-size: clamp(1.35rem, 2.2vw, 1.85rem); line-height: 1.15; }
-  .writing-row h3 .essay-title { font-style: italic; }
-  .writing-row .desc { color: var(--ink-2); font-size: 0.97rem; max-width: 64ch; }
-  .writing-row .read { white-space: nowrap; }
-  @media (max-width: 700px) {
-    .writing-row { grid-template-columns: 1fr; gap: .35rem; padding: 1.25rem 0; }
-    .writing-row .read { justify-self: start; margin-top: .5rem; }
+  @media (min-width: 760px) {
+    .media-grid { column-count: 2; column-gap: 1.75rem; }
+  }
+  .media-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    display: flex; justify-content: center;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .media-item:hover { border-color: var(--ink); box-shadow: 0 18px 36px -28px rgba(14,13,20,0.25); }
+  .media-item iframe {
+    display: block;
+    width: 100%;
+    max-width: 504px;
+    border: 0;
+  }
+  .media-foot {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
   }
 
   /* ---------- Stack ---------- */
@@ -533,7 +544,7 @@
     <a class="wordmark" href="#top" aria-label="ece berrak — home">ece berrak<span class="dot">.</span></a>
     <div class="nav-links">
       <a href="#work">Work</a>
-      <a href="#writing">Writing</a>
+      <a href="#media">Media</a>
       <a href="#stack" class="hide-sm">Stack</a>
       <a href="#contact">Contact</a>
     </div>
@@ -887,50 +898,36 @@
   </div>
 </section>
 
-<!-- ============ WRITING ============ -->
-<section class="section" id="writing" data-screen-label="Writing">
+<!-- ============ MEDIA ============ -->
+<section class="section" id="media" data-screen-label="Media">
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 05 — writing</div>
-        <h2>Selected essays and <span class="italic">case studies.</span></h2>
+        <div class="eyebrow">// 05 — media</div>
+        <h2>Things I've <span class="italic">published.</span></h2>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Selected LinkedIn posts — product reveals, build logs, and notes from the Nautilida journey. Lazy-loaded so the page stays fast.</p>
+      </div>
     </div>
 
-    <div class="writing-list">
-      <a class="writing-row" href="#contact">
-        <span class="date">2026</span>
-        <span class="title-line">
-          <h3><span class="essay-title">AEO/GEO is the new SEO.</span></h3>
-          <span class="desc">How to make AI answer engines cite your product by name.</span>
-        </span>
-        <span class="read linkish">Read <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="writing-row" href="#contact">
-        <span class="date">2026</span>
-        <span class="title-line">
-          <h3><span class="essay-title">The marketer who ships.</span></h3>
-          <span class="desc">Why the line between marketing and product is dissolving in AI-native teams.</span>
-        </span>
-        <span class="read linkish">Read <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="writing-row" href="#contact">
-        <span class="date">2026</span>
-        <span class="title-line">
-          <h3><span class="essay-title">From SDR seat to agentic flows.</span></h3>
-          <span class="desc">What we replaced our outbound headcount with — and what we deliberately didn't.</span>
-        </span>
-        <span class="read linkish">Read <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="writing-row" href="#contact">
-        <span class="date">2026</span>
-        <span class="title-line">
-          <h3><span class="essay-title">Designing a 7-chapter microsite for VCs.</span></h3>
-          <span class="desc">Case study on building Nautilida's literacy site.</span>
-        </span>
-        <span class="read linkish">Read <span class="arr" aria-hidden="true">→</span></span>
-      </a>
+    <div class="media-grid">
+      <div class="media-item">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7458110184586969088" height="1112" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+      </div>
+      <div class="media-item">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7456977542760108032" height="920" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+      </div>
+      <div class="media-item">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7457346198228668418" height="899" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+      </div>
+      <div class="media-item">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7459872820093747200" height="626" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+      </div>
+    </div>
+
+    <div class="media-foot">
+      <a class="linkish" href="https://linkedin.com/in/eceberrak" target="_blank" rel="noopener">More on LinkedIn <span class="arr" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
