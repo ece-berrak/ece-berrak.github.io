@@ -325,81 +325,151 @@
   /* ---------- Experience ---------- */
   .exp-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
   .exp-row {
-    display: grid; grid-template-columns: 1fr; gap: 1rem;
-    padding: 2rem 0;
+    display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    padding: 2.25rem 0 2.5rem 1.25rem;
     border-top: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--violet);
+    position: relative;
+    transition: padding-left .2s ease, background .2s ease;
   }
+  .exp-row::before {
+    content: "";
+    position: absolute; left: -8px; top: 2.5rem;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--violet);
+    box-shadow: 0 0 0 4px var(--bone);
+  }
+  .exp-row[data-accent="lime"] { border-left-color: var(--ink); }
+  .exp-row[data-accent="lime"]::before { background: var(--lime); border: 1px solid var(--ink); box-shadow: 0 0 0 4px var(--bone); }
   .exp-row:last-child { border-bottom: 1px solid var(--rule-strong); }
-  @media (min-width: 800px) {
-    .exp-row { grid-template-columns: 220px 1fr; gap: 2.5rem; }
+  .exp-row:hover { padding-left: 1.6rem; }
+  @media (min-width: 900px) {
+    .exp-row { grid-template-columns: 240px 1fr; gap: 2.5rem; padding-right: 1rem; }
   }
   .exp-time {
-    display: flex; flex-direction: column; gap: .75rem; align-items: flex-start;
+    display: flex; flex-direction: column; gap: .9rem; align-items: flex-start;
   }
   .exp-years {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-3); text-transform: uppercase;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--ink); text-transform: uppercase; font-weight: 500;
   }
-  .exp-pill {
-    display: inline-block; padding: 4px 10px;
-    font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
-    border: 1px solid var(--ink); border-radius: 999px;
-    color: var(--ink); background: transparent;
+  .exp-stick {
+    /* Slight wobble per row for playful texture (overridden below). */
+    transform: rotate(-2deg);
+    transform-origin: left center;
+    font-size: 10px;
   }
-  .exp-body h3 { font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.15; }
-  .exp-body h3 .exp-sub {
-    font-family: var(--sans); font-style: normal; font-size: 0.85em; font-weight: 400; color: var(--ink-3); letter-spacing: 0;
+  .exp-row:nth-child(even) .exp-stick { transform: rotate(1.5deg); }
+  .exp-where {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+    color: var(--ink-3); text-transform: uppercase;
   }
-  .exp-body p { color: var(--ink-2); margin-top: .9rem; margin-bottom: .9rem; max-width: 64ch; }
+  .exp-company {
+    font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height: .95; letter-spacing: -.02em; color: var(--ink);
+    margin-bottom: .25rem;
+  }
+  .exp-hook {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.35;
+    color: var(--ink-2); max-width: 60ch; margin: 0 0 1.1rem;
+  }
+  .exp-stats {
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+    margin: 0 0 1.2rem;
+  }
+  .exp-stats span {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+    color: var(--ink-2); text-transform: none;
+    display: inline-flex; align-items: center;
+  }
+  .exp-stats span:not(:last-child)::after {
+    content: ""; display: inline-block;
+    width: 5px; height: 5px; background: var(--violet); border-radius: 50%;
+    margin-left: 14px; opacity: .8;
+  }
+  .exp-body p { color: var(--ink-2); margin: 0 0 1rem; max-width: 64ch; font-size: 0.97rem; }
   .exp-bullets {
     list-style: none; padding: 0; margin: 0;
     display: grid; gap: 8px;
   }
   .exp-bullets li {
     position: relative; padding-left: 22px;
-    font-size: 0.95rem; line-height: 1.5; color: var(--ink-2);
+    font-size: 0.94rem; line-height: 1.55; color: var(--ink-2);
     max-width: 70ch;
   }
   .exp-bullets li::before {
-    content: ""; position: absolute; left: 0; top: 0.6em;
+    content: ""; position: absolute; left: 0; top: 0.65em;
     width: 12px; height: 1px; background: var(--ink);
   }
 
   /* ---------- Education ---------- */
   .edu-grid {
-    display: grid; grid-template-columns: 1fr; gap: 1.25rem;
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem;
     margin-bottom: 2.5rem;
   }
-  @media (min-width: 800px) { .edu-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+  @media (min-width: 800px) { .edu-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
   .edu-card {
     background: var(--bone);
     border: 1px solid var(--rule-strong);
-    border-radius: 6px;
-    padding: 1.5rem 1.6rem;
-    display: flex; flex-direction: column; gap: .6rem;
+    border-radius: 8px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    display: flex; flex-direction: column; gap: .55rem;
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   }
+  .edu-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--ink);
+    box-shadow: 0 22px 38px -28px rgba(14,13,20,0.2);
+  }
+  .edu-stick {
+    position: absolute;
+    top: -14px; right: 18px;
+    font-size: 12px;
+    padding: 6px 14px 7px;
+    transform: rotate(3deg);
+  }
+  .edu-card:nth-child(2) .edu-stick { transform: rotate(-3deg); }
   .edu-meta {
     display: flex; justify-content: space-between; gap: 1rem;
-    margin-bottom: .25rem;
+    margin-bottom: .35rem;
   }
-  .edu-card h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); line-height: 1.2; }
-  .edu-degree { font-size: 0.97rem; color: var(--ink-2); margin: 0; }
-  .edu-bullets {
-    list-style: none; padding: 0; margin: .5rem 0 0;
-    display: grid; gap: 6px;
+  .edu-card h3 {
+    font-family: var(--serif); font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+    line-height: 1.1; letter-spacing: -.01em;
   }
-  .edu-bullets li {
-    position: relative; padding-left: 18px;
-    font-size: 0.91rem; line-height: 1.5; color: var(--ink-2);
+  .edu-degree {
+    font-family: var(--sans); font-size: 1.02rem; color: var(--ink); margin: 0;
+    font-weight: 500;
   }
-  .edu-bullets li::before {
-    content: ""; position: absolute; left: 0; top: 0.6em;
-    width: 10px; height: 1px; background: var(--ink);
+  .edu-minor {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+    color: var(--ink-3); font-weight: 400;
+  }
+  .edu-line {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.02rem; line-height: 1.45;
+    color: var(--ink-2); max-width: 42ch; margin: .35rem 0 0;
+  }
+  .edu-thesis {
+    margin-top: 1rem; padding-top: 1rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .edu-thesis-label {
+    display: inline-block;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--violet-ink);
+    margin-bottom: .35rem;
+  }
+  .edu-thesis p {
+    margin: 0; font-family: var(--serif); font-style: italic;
+    font-size: 1rem; line-height: 1.4; color: var(--ink);
   }
   .edu-certs {
-    padding-top: 1.5rem; border-top: 1px solid var(--rule);
+    padding-top: 1.75rem; border-top: 1px solid var(--rule);
   }
   .edu-certs-list {
-    color: var(--ink-2); font-size: 0.93rem; line-height: 1.7; max-width: 80ch; margin: 0;
+    color: var(--ink-2); font-size: 0.93rem; line-height: 1.75; max-width: 80ch; margin: 0;
   }
 
   /* ---------- Media (LinkedIn embeds) ---------- */
@@ -782,17 +852,23 @@
 
     <ol class="exp-list">
 
-      <li class="exp-row">
+      <li class="exp-row" data-accent="violet">
         <div class="exp-time">
           <span class="exp-years">2025 — Now</span>
-          <span class="exp-pill">Co-founder &amp; CEO</span>
+          <span class="stick exp-stick">✦ Co-founder &amp; CEO</span>
+          <span class="exp-where">Berlin · Pre-seed SaaS</span>
         </div>
         <div class="exp-body">
-          <h3>Nautilida <span class="exp-sub">— AI Team Lead for Sales (pre-seed SaaS)</span></h3>
+          <h3 class="exp-company">Nautilida</h3>
+          <p class="exp-hook"><em>AI Team Lead for Sales — built and ship it top to bottom.</em></p>
+          <div class="exp-stats">
+            <span>First LOIs secured</span>
+            <span>1st design partner onboarded</span>
+            <span>SDR-less GTM engine in production</span>
+          </div>
           <p>Co-founded an AI-native sales platform that unifies the revenue stack, cross-coordinates sales teams, and automates follow-through across the pipeline.</p>
           <ul class="exp-bullets">
             <li>Lead product strategy and GTM end-to-end alongside technical co-founder; own roadmap, positioning, messaging, and customer development.</li>
-            <li>Secured Letters of Intent (LOIs) and onboarded the first design partner through structured discovery and validation cycles.</li>
             <li>Built and shipped the company website and core marketing surfaces in Claude Code, applying SEO, AEO, and GEO so AI answer engines cite us by name.</li>
             <li>Designed and operates an automated GTM engine (n8n, outreach sequencing, CRM workflows) for lead gen, qualification, and nurture — replacing manual SDR work with agentic flows.</li>
             <li>Developed prompt engineering frameworks used across product, content, and customer research.</li>
@@ -800,16 +876,22 @@
         </div>
       </li>
 
-      <li class="exp-row">
+      <li class="exp-row" data-accent="lime">
         <div class="exp-time">
           <span class="exp-years">2024 — 2025</span>
-          <span class="exp-pill">Growth Marketing</span>
+          <span class="stick exp-stick bone">◐ Growth Marketing</span>
+          <span class="exp-where">Berlin · Enterprise SaaS</span>
         </div>
         <div class="exp-body">
-          <h3>Dataiku <span class="exp-sub">— User Communication &amp; Growth Marketing</span></h3>
-          <p>Enterprise AI &amp; analytics platform. Owned user-facing communication across email (HubSpot) and in-product messaging, supporting adoption, retention, and ongoing engagement.</p>
+          <h3 class="exp-company">Dataiku</h3>
+          <p class="exp-hook"><em>Owned user communication for an AI &amp; analytics platform — two segments, one engine.</em></p>
+          <div class="exp-stats">
+            <span>HubSpot email + in-product</span>
+            <span>Freemium-to-paid lifecycle</span>
+            <span>5 teams in the loop</span>
+          </div>
+          <p>Worked cross-functionally with Product, Customer Success, Technical, Content, and Event teams to align communication with product updates and campaigns.</p>
           <ul class="exp-bullets">
-            <li>Worked cross-functionally with Product, Customer Success, Technical, Content, and Event teams to align communication with product updates and campaigns.</li>
             <li>Managed two distinct user segments — general users (onboarding, day-to-day clarity) and user champions (advanced usage, long-term engagement).</li>
             <li>Acted as a direct point of contact for users, resolving adoption-related questions and supporting freemium usage with awareness of extension and renewal contexts.</li>
             <li>Joined the initiative at an early stage and helped establish the communication workflows the team continues to scale.</li>
@@ -817,14 +899,21 @@
         </div>
       </li>
 
-      <li class="exp-row">
+      <li class="exp-row" data-accent="violet">
         <div class="exp-time">
           <span class="exp-years">2022</span>
-          <span class="exp-pill">Creative Marketing</span>
+          <span class="stick exp-stick violet">✸ Creative Marketing</span>
+          <span class="exp-where">Istanbul · B2B Software</span>
         </div>
         <div class="exp-body">
-          <h3>CRS Soft <span class="exp-sub">— Creative Marketing Associate</span></h3>
-          <p>Enterprise software company. Worked at the intersection of UX, SEO, and content for B2B software products.</p>
+          <h3 class="exp-company">CRS Soft</h3>
+          <p class="exp-hook"><em>UX, SEO, and content for B2B software — where marketing and product overlap.</em></p>
+          <div class="exp-stats">
+            <span>UX + SEO</span>
+            <span>Employer branding</span>
+            <span>Miro research frameworks</span>
+          </div>
+          <p>Worked at the intersection of UX, SEO, and content for enterprise software products.</p>
           <ul class="exp-bullets">
             <li>Contributed to UX, SEO, and content optimization for software products, improving user flows, discoverability, and usability.</li>
             <li>Supported HR marketing and employer branding initiatives, including career pages and recruitment-focused content.</li>
@@ -833,14 +922,21 @@
         </div>
       </li>
 
-      <li class="exp-row">
+      <li class="exp-row" data-accent="lime">
         <div class="exp-time">
           <span class="exp-years">2020 — 2022</span>
-          <span class="exp-pill">Community &amp; Content</span>
+          <span class="stick exp-stick bone">▶ Community &amp; Content</span>
+          <span class="exp-where">Istanbul · Event SaaS</span>
         </div>
         <div class="exp-body">
-          <h3>Plandy <span class="exp-sub">— Community &amp; Content Specialist</span></h3>
-          <p>Event discovery and ticketing SaaS. Sat between BDR, product, and growth — translating community feedback into messaging and feature decisions.</p>
+          <h3 class="exp-company">Plandy</h3>
+          <p class="exp-hook"><em>Translated community feedback into product and messaging — feet on the ground, hands on the loop.</em></p>
+          <div class="exp-stats">
+            <span>Live events &amp; activations</span>
+            <span>BDR ↔ Product ↔ Marketing</span>
+            <span>Community-led acquisition</span>
+          </div>
+          <p>Sat between BDR, product, and growth teams at an event discovery and ticketing SaaS, turning community signal into messaging and feature decisions.</p>
           <ul class="exp-bullets">
             <li>Collaborated with BDR and growth teams on community-led acquisition initiatives.</li>
             <li>Represented the platform at events and community activations, gathering direct feedback from users and event organizers on discovery, ticketing, and usability.</li>
@@ -866,27 +962,33 @@
     </div>
 
     <div class="edu-grid">
+
       <article class="edu-card">
+        <span class="stick edu-stick" aria-hidden="true">M.A.</span>
         <div class="edu-meta">
           <span class="mono">2023 — 2025</span>
           <span class="mono">Berlin · DE</span>
         </div>
-        <h3>Hochschule für Wirtschaft und Recht Berlin</h3>
-        <p class="edu-degree"><span class="italic">M.A. Political Economy</span></p>
-        <ul class="edu-bullets">
-          <li>Focus on economic policy, governance, and digital transformation.</li>
-          <li>Master's thesis: <em>Digitalization and Technological Transformation in Retail Chains.</em></li>
-        </ul>
+        <h3>Hochschule für Wirtschaft und Recht <span class="italic">Berlin</span></h3>
+        <p class="edu-degree">Political Economy</p>
+        <p class="edu-line">Focused on economic policy, governance, and digital transformation — where my interest in tech-meets-policy started.</p>
+        <div class="edu-thesis">
+          <span class="edu-thesis-label">Master's thesis</span>
+          <p>Digitalization and Technological Transformation in Retail Chains.</p>
+        </div>
       </article>
 
       <article class="edu-card">
+        <span class="stick edu-stick violet" aria-hidden="true">B.A.</span>
         <div class="edu-meta">
           <span class="mono">2019 — 2023</span>
           <span class="mono">Istanbul · TR</span>
         </div>
-        <h3>Istanbul Bilgi University</h3>
-        <p class="edu-degree"><span class="italic">B.A. International Relations &amp; Public Relations</span> <span class="mono" style="font-size:11px;color:var(--ink-3);">(Marketing Minor)</span></p>
+        <h3>Istanbul Bilgi <span class="italic">University</span></h3>
+        <p class="edu-degree">International Relations &amp; Public Relations <span class="edu-minor">— Marketing minor</span></p>
+        <p class="edu-line">Where I learned how stories travel — across borders, audiences, and channels — and started building the marketing toolkit I still use.</p>
       </article>
+
     </div>
 
     <div class="edu-certs">
@@ -982,22 +1084,23 @@
         </ul>
       </div>
       <div class="stack-col">
-        <h4>Web, content, design</h4>
+        <h4>Web, content, CMS</h4>
         <ul>
           <li>HTML / CSS / vanilla JS — <em>basic literacy, ship with Claude Code</em></li>
           <li>React — read and edit confidently with AI assistance</li>
-          <li>WordPress basics</li>
-          <li>Webflow, Framer, Tally for fast iteration</li>
+          <li><strong>CMS:</strong> WordPress, Webflow CMS, Framer CMS, Tally</li>
           <li>Figma, Canva (with Brand Kits)</li>
           <li>GitHub (public + private)</li>
         </ul>
       </div>
-      <div class="stack-col" style="grid-column: 1 / -1; max-width: 60ch;">
-        <h4>SEO / AEO / GEO</h4>
+      <div class="stack-col" style="grid-column: 1 / -1; max-width: 70ch;">
+        <h4>SEO / AEO / GEO &amp; performance</h4>
         <ul>
+          <li><strong>Blog posts &amp; SEO content production</strong> — long-form, briefs to publish, topical clusters</li>
+          <li><strong>Comparison-page strategy</strong> for category creation</li>
           <li>Schema.org structured data</li>
-          <li>llms.txt, AI-discoverability frameworks</li>
-          <li>Comparison-page strategy for category creation</li>
+          <li>llms.txt, AI-discoverability frameworks (AEO/GEO)</li>
+          <li><strong>Google Ads basics</strong> — keyword research, ad copy, conversion tracking</li>
         </ul>
       </div>
     </div>
