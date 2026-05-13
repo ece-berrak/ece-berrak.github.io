@@ -302,6 +302,23 @@
   .thumb-4 .thumb-mono { color: var(--ink-3); }
   .thumb-4 .thumb-num { color: var(--ink-3); }
   .thumb-5 { background: linear-gradient(180deg, #4F32D8 0%, #2a1a99 100%); }
+  .thumb-6 {
+    background: linear-gradient(180deg, #0E0D14 0%, #1f1c33 100%);
+  }
+  .thumb-6 .pipeline-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.92;
+  }
+  .thumb-6::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 0%, transparent 55%, rgba(14,13,20,0.65) 100%);
+    pointer-events: none;
+  }
+  .thumb-6 .thumb-mono, .thumb-6 .thumb-num { z-index: 2; }
 
   .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
   .card h3 { margin-top: -.25rem; }
@@ -684,7 +701,7 @@
         <h2>Things I designed, built, and <span class="italic">shipped.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Four projects that show what "marketing that ships" looks like in practice — websites, automations, GTM engines, and category content I built end-to-end.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five projects that show what "marketing that ships" looks like in practice — websites, automations, GTM engines, and category content I built end-to-end.</p>
       </div>
     </div>
 
@@ -696,7 +713,7 @@
           <span class="grid-bg" aria-hidden="true"></span>
           <span class="thumb-mono">nautilida.ai</span>
           <div class="thumb-fig"><em>Marketing that ships</em><span class="thumb-sub">— site live in 3 weeks</span></div>
-          <span class="thumb-num">01 / 04</span>
+          <span class="thumb-num">01 / 05</span>
         </div>
         <div>
           <div class="kicker">WEBSITE · AEO/GEO · CONTENT</div>
@@ -726,7 +743,7 @@
   notifyChat(payload);
 }
 // → 0 € infra · MIT</pre>
-          <span class="thumb-num">02 / 04</span>
+          <span class="thumb-num">02 / 05</span>
         </div>
         <div class="kicker">AUTOMATION · OPEN SOURCE</div>
         <h3>Inbound lead automation, <span class="italic">Apps Script edition</span></h3>
@@ -772,7 +789,7 @@
             </g>
           </svg>
           <span class="thumb-mono">discovery → qualified meeting</span>
-          <span class="thumb-num">03 / 04</span>
+          <span class="thumb-num">03 / 05</span>
         </div>
         <div class="kicker">GTM ENGINE · AGENTIC FLOWS</div>
         <h3>SDR-less outbound <span class="italic">for Nautilida</span></h3>
@@ -815,7 +832,7 @@
             </g>
           </svg>
           <span class="thumb-mono" style="color:rgba(255,255,255,0.7);">nautilida.ai/literacy</span>
-          <span class="thumb-num">04 / 04</span>
+          <span class="thumb-num">04 / 05</span>
         </div>
         <div>
           <div class="kicker">MICROSITE · LONG-FORM NARRATIVE</div>
@@ -829,6 +846,30 @@
           <div class="card-foot">
             <span class="meta">2026</span>
             <a class="linkish" href="https://nautilida.ai/literacy" target="_blank" rel="noopener">nautilida.ai/literacy <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 (feature, full width) -->
+      <article class="card feature">
+        <div class="thumb thumb-6">
+          <img class="pipeline-img" src="uploads/n8n-pipeline.png" alt="n8n workflow visualization — 12 nodes from Schedule Trigger through Notion read, Claude draft, Google Docs create, to Notion property update" />
+          <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/aeo-content-pipeline</span>
+          <span class="thumb-num">05 / 05</span>
+        </div>
+        <div>
+          <div class="kicker">AUTOMATION · AI-NATIVE · OPEN SOURCE</div>
+          <h3 style="margin-top:.5rem;">Brand-aware content draft generator, <span class="italic">Notion + n8n + Claude</span></h3>
+          <p class="card-desc" style="margin-top:1rem;">A Notion-driven, n8n-orchestrated pipeline that turns a single keyword ticket into a fully drafted, voice-aligned long-form blog (or LinkedIn post, X thread, glossary entry) inside a Google Doc — ready for human review and manual publishing. Reads a 16-section Brand Context page, calls Claude Sonnet 4.6 with prompt caching enabled, drops the draft into Drive and writes the link back to the Notion ticket.</p>
+          <ul class="outcomes">
+            <li>~$0.02 per draft with prompt caching (90% input cost reduction)</li>
+            <li>12-node n8n flow, 3 APIs (Notion, Anthropic, Google Docs)</li>
+            <li>10 content formats supported via Brand Context format specs</li>
+            <li>Open-sourced under MIT</li>
+          </ul>
+          <div class="card-foot">
+            <span class="meta">Open source</span>
+            <a class="linkish" href="https://github.com/ece-berrak/aeo-content-pipeline" target="_blank" rel="noopener">github.com/ece-berrak/aeo-content-pipeline <span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
