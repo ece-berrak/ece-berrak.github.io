@@ -489,6 +489,193 @@
     color: var(--ink-2); font-size: 0.93rem; line-height: 1.75; max-width: 80ch; margin: 0;
   }
 
+  /* ---------- Writing (long-form) ---------- */
+  .writing-list { display: grid; gap: 1.25rem; }
+  .writing-item {
+    border: 1px solid var(--rule-strong);
+    border-radius: 8px;
+    background: var(--bone);
+    overflow: hidden;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  .writing-item:hover { border-color: var(--ink); }
+  .writing-item[open] { border-color: var(--ink); box-shadow: 0 24px 40px -28px rgba(14,13,20,0.25); }
+  .writing-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(1.4rem, 2.4vw, 2rem);
+    display: grid;
+    gap: 0.85rem;
+  }
+  .writing-summary::-webkit-details-marker { display: none; }
+  .writing-summary::marker { content: ""; }
+  .writing-meta {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex; flex-wrap: wrap; gap: 6px 18px;
+  }
+  .writing-meta .kicker { color: var(--violet); }
+  .writing-title {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.55rem, 3vw, 2.3rem);
+    line-height: 1.1; letter-spacing: -.01em;
+    margin: 0;
+  }
+  .writing-title .italic { font-style: italic; }
+  .writing-deck {
+    color: var(--ink-2);
+    font-size: 1rem; line-height: 1.55;
+    max-width: 64ch; margin: 0;
+  }
+  .writing-summary-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 14px; flex-wrap: wrap; margin-top: .25rem;
+    padding-top: .9rem; border-top: 1px dashed var(--rule-strong);
+  }
+  .writing-toggle {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .writing-toggle .plus {
+    width: 16px; height: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--ink); border-radius: 50%;
+    font-size: 12px; line-height: 1;
+    transition: transform .25s ease, background .2s ease, color .2s ease;
+  }
+  .writing-item[open] .writing-toggle .plus {
+    transform: rotate(45deg);
+    background: var(--ink); color: var(--bone);
+  }
+  .writing-item[open] .writing-toggle .label-closed,
+  .writing-item:not([open]) .writing-toggle .label-open { display: none; }
+
+  .writing-body {
+    padding: 0 clamp(1.4rem, 2.4vw, 2rem) clamp(1.4rem, 2.4vw, 2rem);
+    max-width: 72ch;
+  }
+  .writing-body p {
+    font-size: 1.02rem; line-height: 1.7;
+    color: var(--ink-2); margin: 0 0 1rem;
+  }
+  .writing-body p strong { color: var(--ink); font-weight: 600; }
+  .writing-body h4 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+    line-height: 1.15; letter-spacing: -.005em;
+    color: var(--ink);
+    margin: 2rem 0 .8rem;
+  }
+  .writing-body ul {
+    margin: 0 0 1rem; padding-left: 1.25rem;
+  }
+  .writing-body ul li {
+    font-size: 0.98rem; line-height: 1.6;
+    color: var(--ink-2); margin-bottom: .45rem;
+  }
+  .writing-body ul li strong { color: var(--ink); font-weight: 600; }
+  .writing-callout {
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.3rem;
+    background: var(--bone-2);
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: 6px 6px 0 var(--violet);
+  }
+  .writing-callout .mono { color: var(--violet); font-size: 10px; letter-spacing: .14em; }
+  .writing-callout p { margin: .5rem 0 0; font-size: 0.98rem; line-height: 1.6; color: var(--ink); }
+  .writing-takeaways {
+    margin: 1.75rem 0 1.25rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--ink); color: var(--bone);
+    border-radius: 10px;
+  }
+  .writing-takeaways .mono { color: var(--lime); font-size: 10px; letter-spacing: .14em; }
+  .writing-takeaways ul { margin: .75rem 0 0; padding-left: 1.2rem; }
+  .writing-takeaways li {
+    font-size: 0.93rem; line-height: 1.55;
+    color: rgba(250,248,241,.92);
+    margin-bottom: .4rem;
+  }
+  .writing-faq {
+    margin-top: 1.25rem;
+    display: grid; gap: .75rem;
+  }
+  .writing-faq h5 {
+    margin: 0; font-size: 0.97rem;
+    font-weight: 600; color: var(--ink);
+    line-height: 1.4;
+  }
+  .writing-faq h5::before { content: "Q · "; color: var(--violet); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; }
+  .writing-faq p { margin: .35rem 0 0; font-size: 0.93rem; line-height: 1.6; color: var(--ink-2); }
+  .writing-faq > div {
+    padding: .9rem 1rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    background: var(--bone);
+  }
+  .writing-body-foot {
+    margin-top: 1.75rem; padding-top: 1.1rem;
+    border-top: 1px solid var(--rule-strong);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 14px; flex-wrap: wrap;
+  }
+
+  /* More from nautilida — compare + use cases */
+  .writing-more {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .writing-more h4 {
+    margin: 0 0 1.25rem;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .writing-more-grid {
+    display: grid; gap: .85rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) { .writing-more-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .writing-more-grid { grid-template-columns: repeat(3, 1fr); } }
+  .writing-more-card {
+    display: flex; flex-direction: column; gap: .55rem;
+    padding: 1.1rem 1.25rem 1rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    background: var(--bone);
+    color: var(--ink); text-decoration: none;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    min-height: 130px;
+  }
+  .writing-more-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px -28px rgba(14,13,20,.2);
+    text-decoration: none;
+  }
+  .writing-more-kicker {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--violet);
+  }
+  .writing-more-title {
+    font-family: var(--serif); font-size: 1.25rem;
+    line-height: 1.15; letter-spacing: -.005em;
+    color: var(--ink);
+  }
+  .writing-more-foot {
+    margin-top: auto; padding-top: .4rem;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .04em; color: var(--ink-3);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .writing-more-foot .arr { color: var(--ink); }
+
   /* ---------- Media (LinkedIn embeds) ---------- */
   /* CSS columns give a masonry feel without JS — short cards don't leave gaps. */
   .media-grid {
@@ -631,7 +818,8 @@
     <a class="wordmark" href="#top" aria-label="ece berrak — home">ece berrak<span class="dot">.</span></a>
     <div class="nav-links">
       <a href="#work">Work</a>
-      <a href="#media">Media</a>
+      <a href="#writing">Writing</a>
+      <a href="#media" class="hide-sm">Media</a>
       <a href="#stack" class="hide-sm">Stack</a>
       <a href="#contact">Contact</a>
     </div>
@@ -684,7 +872,7 @@
     <div class="about-body">
       <p>I'm a <strong>T-shaped marketer</strong> — depth in B2B/SaaS growth, communication, and lifecycle; breadth across product, applied AI, GTM automation, and shipping the web surfaces myself. In practice that means I don't hand a brief to a developer and wait for a website — I open Claude Code and ship one. I don't ask an SDR to source leads — I build the agentic flow that does it. I don't write a positioning doc and pray someone reads it — I publish it as a comparison page that AI answer engines cite by name.</p>
       <p>I'm co-founder and CEO of Nautilida, an AI-native sales platform. I lead product strategy and go-to-market end-to-end alongside a technical co-founder: roadmap, positioning, messaging, customer development. I secured our first LOIs and onboarded our first design partner. I designed the site, wrote every word of it, set up the GTM engine, and operate the lead pipeline. Before Nautilida, I owned user communication at Dataiku (an enterprise AI/analytics platform) — building email and in-product messaging for the freemium-to-paid lifecycle across two distinct user segments.</p>
-      <p>What I'm looking for next: fractional Head of Growth engagements, founding marketer roles at AI-native startups, or projects where I get to design, ship, and operate — not just brief and review.</p>
+      <p>While I keep building Nautilida, I take on a small number of outside engagements — partly to help other B2B teams solve growth problems, partly to give myself room to experiment with new AI tooling and bring what I learn back into the product. What I'm looking for: fractional Head of Growth or founding-marketer collaborations alongside Nautilida, and AI-product projects where I can design, ship, and operate end-to-end.</p>
     </div>
     <div class="about-cta">
       <a class="linkish" href="#work">See what shipped <span class="arr" aria-hidden="true">→</span></a>
@@ -878,12 +1066,394 @@
   </div>
 </section>
 
+<!-- ============ WRITING ============ -->
+<section class="section" id="writing" data-screen-label="Writing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <div class="eyebrow">// 03 — writing</div>
+        <h2>Long-form I <span class="italic">wrote.</span></h2>
+      </div>
+      <div class="right">
+        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Three pieces I wrote for Nautilida — a manifesto, a category definition, and a comparison note. Published live on nautilida.ai; the full text is here too. Tap any title to expand.</p>
+      </div>
+    </div>
+
+    <div class="writing-list">
+
+      <!-- Post 1 — Weekly Loop -->
+      <details class="writing-item">
+        <summary class="writing-summary">
+          <div class="writing-meta">
+            <span class="kicker">Manifesto · Operating rhythm</span>
+            <span>April 2026</span>
+            <span>9 min read</span>
+          </div>
+          <h3 class="writing-title">The weekly revenue coordination loop, <span class="italic">explained.</span></h3>
+          <p class="writing-deck">Monday brief, mid-week execution, Friday recap, compounding memory. The operating rhythm that replaces dashboard anxiety with direction.</p>
+          <div class="writing-summary-foot">
+            <span class="writing-toggle">
+              <span class="plus" aria-hidden="true">+</span>
+              <span class="label-closed">Read full piece</span>
+              <span class="label-open">Close</span>
+            </span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/weekly-loop" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </summary>
+        <div class="writing-body">
+          <div class="writing-callout">
+            <span class="mono">◉ THE SHORT ANSWER</span>
+            <p>The weekly revenue coordination loop is a four-part operating rhythm: a Monday brief that names the priorities, mid-week owner lists that route those priorities to the right people, a Friday recap that closes the loop on what moved, and a compounding memory that carries into next Monday. <strong>Cadence over alerts. Direction over dashboards.</strong></p>
+          </div>
+
+          <h4>Why a loop, not a dashboard</h4>
+          <p>The last decade of revenue tooling built more dashboards. The next one has to build more rhythm. Visibility without cadence is noise. A dashboard that shows you the same chart on Monday and on Friday is not a system — it is a mirror. The weekly loop is a system. It starts somewhere, ends somewhere, and hands you a decision you did not have to manufacture.</p>
+          <p>A good loop is short enough that patterns show up, long enough that action is possible, and strict enough that the team can rely on it. A week is almost exactly the right length.</p>
+
+          <h4>Monday · The leadership brief</h4>
+          <p>Monday opens with a single document, delivered before 9am in the tool the team already lives in. It is not a dashboard. It is a written brief that reads like something a senior partner would hand you over coffee.</p>
+          <p>A working Monday brief contains four elements:</p>
+          <ul>
+            <li>The top three accounts at risk this week, with the specific reason each one is flagged.</li>
+            <li>The two opportunities with the most expected movement, and what is expected to happen.</li>
+            <li>The one pattern that changed since Friday — a reorder window that shifted, a champion who went quiet, a new buyer who surfaced.</li>
+            <li>Handovers or rotations that carry forward context from last week.</li>
+          </ul>
+          <p>Short. Specific. Actionable. Leadership walks into Monday already knowing where the week is going. There is no reconstruction meeting. There is no "who is covering which accounts" triage. The plan is already written.</p>
+
+          <h4>Mid-week · Owner-level priorities</h4>
+          <p>Between Monday and Thursday, the loop routes priorities to specific owners. Every account manager starts their day with a short list: the three conversations that matter most today, with the why attached.</p>
+          <p>Pre-meeting prep arrives before every call — the last three touches with this account, the promises made, the questions left open, the pattern this account is showing this month. No account manager has to reconstruct context. The context travels with the meeting.</p>
+          <p>The mid-week phase is not a sprint. It is a quiet hand-delivery of direction. When it works, the team never feels overwhelmed by signals. They feel calm, pointed, and prepared.</p>
+
+          <h4>Friday · The narrative recap</h4>
+          <p>Friday closes the loop. Not with a table of numbers, but with narrative. What moved, what decided, what carries forward, what the plan is for Monday.</p>
+          <p>A good Friday recap answers the four questions a revenue leader actually has:</p>
+          <ul>
+            <li><strong>What changed in the book this week?</strong> Not "here is the pipeline chart" — what actually shifted and why.</li>
+            <li><strong>Which risks resolved and which new ones appeared?</strong> Named accounts, named reasons.</li>
+            <li><strong>What decisions did the team make?</strong> The calls that matter, documented once, never re-litigated.</li>
+            <li><strong>What is the plan for next Monday?</strong> Already drafted, ready for the next brief.</li>
+          </ul>
+          <p>CRM reports tell you what happened. The Friday recap tells you what it means. That is the job of a team lead, and that is why the loop ends with narrative, not with numbers.</p>
+
+          <h4>Monday and Friday from the rep seat</h4>
+          <p>The leader's brief is the macro view. Each account manager opens the same loop from a different angle.</p>
+          <p><strong>Monday for an AM</strong> is not a list of dashboards to check. It is a short, owned plan: this week's priorities, already triaged when the laptop opens. Three or four accounts that need movement, with the why attached for each one. Pre-meeting prep — last touches, open promises, questions still unanswered — travels with every call on the calendar. Nothing to reconstruct, nothing to dig for.</p>
+          <p><strong>Friday for an AM</strong> is the wrap. What closed, what rolled, what carries. Three Monday-ready next moves are drafted before the AM logs off. There is no separate update to send to leadership, no recap to write — the loop already wrote it. Monday begins with the work already lined up.</p>
+          <p>Same loop, different lens. Leaders get direction across the portfolio; AMs get direction inside their book. Nobody is left guessing what to do, and nobody has to assemble the answer themselves on Monday morning.</p>
+
+          <h4>The compound · Memory between weeks</h4>
+          <p>The part that changes everything is what happens between Friday and Monday. Every signal, every decision, every pattern is remembered. The book sharpens week over week. Accounts that showed a specific reorder rhythm in March are understood by the loop in April. The team does not start from zero on Monday — it picks up exactly where Friday left off, every week, for as long as the loop runs.</p>
+          <p>This is why <strong>coordination is the moat, not intelligence.</strong> Intelligence gives you a sharp snapshot. The loop gives you a sharp team that gets sharper every week.</p>
+
+          <h4>What the loop replaces</h4>
+          <p>The weekly loop replaces a specific set of painful rituals. You know which ones:</p>
+          <ul>
+            <li>The Monday standup that mostly reconstructs what happened last week.</li>
+            <li>The forecast call that argues about which deals are real.</li>
+            <li>The Slack thread where someone asks "who is covering X account?" and three people answer differently.</li>
+            <li>The Friday "any updates?" that nobody replies to until the following Tuesday.</li>
+            <li>The quarterly QBR that tries to reconstruct nine months of context in forty-five minutes.</li>
+          </ul>
+          <p>None of those rituals are the loop. The loop is what lets the team stop doing them.</p>
+
+          <h4>How Nautilida runs the loop</h4>
+          <p>Nautilida is the AI team lead that runs this loop end to end. It connects to your CRM, email, and chat, builds a single cross-stack memory, drafts the Monday brief, delivers owner priorities through the week, writes the Friday recap, and compounds everything it learns into next week's plan. No dashboards to interpret. Direction where your team already works.</p>
+
+          <div class="writing-takeaways">
+            <span class="mono">◉ KEY TAKEAWAYS</span>
+            <ul>
+              <li>The loop has four parts: Monday brief, mid-week priorities, Friday recap, compounding memory.</li>
+              <li>A week is the right unit: long enough for patterns, short enough for action.</li>
+              <li>Monday brief is written narrative, not a dashboard. Three risks, two opportunities, one changed pattern.</li>
+              <li>Mid-week routes the why to the right owner. Pre-meeting prep travels with every call.</li>
+              <li>Friday closes with a narrative recap — what moved, what decided, what carries forward.</li>
+              <li>Memory compounds between weeks. The team picks up where Friday left off, every Monday.</li>
+            </ul>
+          </div>
+
+          <h4>Frequently asked</h4>
+          <div class="writing-faq">
+            <div>
+              <h5>What is the weekly revenue coordination loop?</h5>
+              <p>It is a repeating weekly rhythm with four parts: a Monday leadership brief that names the week's priorities, mid-week owner-level priorities delivered to each account manager, a Friday recap that closes the loop on what moved, and a compounding memory that carries forward into next Monday's plan. No dashboards to interpret, no meetings to reconstruct.</p>
+            </div>
+            <div>
+              <h5>Why weekly and not daily or real-time?</h5>
+              <p>Revenue teams need cadence, not constant alerts. A week is long enough for real signals to emerge and short enough to act before the window closes. Real-time dashboards create anxiety. The weekly loop creates rhythm.</p>
+            </div>
+            <div>
+              <h5>What goes into a Monday brief?</h5>
+              <p>The three accounts most likely to slip this week, the two opportunities with the highest expected movement, the one pattern that changed since Friday, and any handovers or rotations that need context. Short, specific, actionable.</p>
+            </div>
+            <div>
+              <h5>How is the Friday recap different from a CRM report?</h5>
+              <p>A CRM report tells you what happened. A Friday recap tells you what moved and why, what was decided, what carries forward, and what the plan is for next Monday. It is written narrative that reads like a team lead summary, not a table of numbers.</p>
+            </div>
+            <div>
+              <h5>What does compounding memory mean in practice?</h5>
+              <p>Every signal, every decision, every exchange is remembered across weeks. Patterns sharpen over months. Handovers travel with the account. The team does not start from zero on Monday — it picks up exactly where Friday left off, every week.</p>
+            </div>
+          </div>
+
+          <div class="writing-body-foot">
+            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · April 2026</span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/weekly-loop" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </details>
+
+      <!-- Post 2 — AI team lead -->
+      <details class="writing-item">
+        <summary class="writing-summary">
+          <div class="writing-meta">
+            <span class="kicker">Definition · Category note</span>
+            <span>April 2026</span>
+            <span>7 min read</span>
+          </div>
+          <h3 class="writing-title">What is an AI team lead <span class="italic">for sales?</span></h3>
+          <p class="writing-deck">A short definition, how it differs from assistants and dashboards, and what it actually does for revenue teams that live on recurring accounts.</p>
+          <div class="writing-summary-foot">
+            <span class="writing-toggle">
+              <span class="plus" aria-hidden="true">+</span>
+              <span class="label-closed">Read full piece</span>
+              <span class="label-open">Close</span>
+            </span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/ai-team-lead" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </summary>
+        <div class="writing-body">
+          <div class="writing-callout">
+            <span class="mono">◉ THE SHORT ANSWER</span>
+            <p>An AI team lead for sales is a <strong>coordination layer</strong>, not an assistant. It carries memory across your stack, hands the right priorities to the right owners at the right time, and closes the loop every week. Senior level judgment that shows up in the tools your team already uses.</p>
+          </div>
+
+          <h4>The short answer</h4>
+          <p>An AI team lead is the layer that runs your revenue rhythm. It reads signals from CRM, email and chat, remembers every exchange, routes the week's priorities to specific owners, and narrates the outcome back to leadership. It behaves like a senior partner who happens to have perfect recall and never sleeps.</p>
+
+          <h4>What it is not</h4>
+          <p>An AI team lead is <strong>not a chatbot.</strong> It is not a dashboard. It is not a faster search bar over your CRM. Those tools show you information or answer a single question. They do not coordinate. They do not decide who acts next, when, or with what context.</p>
+          <p>An AI assistant waits for you to prompt it. A team lead runs the week whether you prompt it or not. That is the difference that matters.</p>
+
+          <h4>What it actually does</h4>
+          <p>A working AI team lead for sales does three things every week:</p>
+          <ul>
+            <li><strong>Carries memory.</strong> Every ask, every reply, every pattern stays with the team. No one re-asks, no one re-explains.</li>
+            <li><strong>Coordinates execution.</strong> Monday brings a leadership brief. Through the week, owners get priorities with the why attached. Friday closes with an outcome narrative.</li>
+            <li><strong>Compounds.</strong> Every cycle sharpens the patterns. Every handover travels with the account. The longer it runs, the sharper the team gets.</li>
+          </ul>
+
+          <h4>The weekly loop</h4>
+          <p>The team lead runs a weekly rhythm. Monday opens with a leadership brief. Through the week, every AE gets their own priority list and pre-meeting prep. Friday closes with a summary of what moved and what carries forward. The plan for next Monday is already written.</p>
+
+          <h4>Why coordination beats visibility</h4>
+          <p>For the last decade, revenue tools have been about visibility. More dashboards, more signals, more charts. The problem is not visibility. The problem is that nobody is coordinated around the visibility. The AI team lead closes that gap.</p>
+          <p>Instead of asking <em>what is happening</em>, the team starts asking <em>what are we doing about it</em>. The second question is the one that moves revenue.</p>
+
+          <h4>Signs your team needs one</h4>
+          <ul>
+            <li>Monday mornings are spent reconstructing "which accounts slipped?"</li>
+            <li>Every rep rotation feels like losing a quarter of context.</li>
+            <li>You own a CRM, you own dashboards, and you still cannot tell which accounts need attention this week.</li>
+            <li>Your best patterns live in two or three peoples' heads, not in a system.</li>
+          </ul>
+
+          <h4>How Nautilida does it</h4>
+          <p>Nautilida is the AI team lead for sales, built for revenue teams that live on recurring accounts and cross-stack context. It connects to your CRM, email, and chat, builds a single memory, and runs the weekly loop end to end. No dashboards to interpret, no manual reconstruction, just direction that arrives where your team already works.</p>
+
+          <div class="writing-takeaways">
+            <span class="mono">◉ KEY TAKEAWAYS</span>
+            <ul>
+              <li>A team lead carries memory across your stack. An assistant only answers questions.</li>
+              <li>Coordination beats visibility. The next move is more valuable than the next chart.</li>
+              <li>The weekly loop beats real-time anxiety. Monday plans, Friday recaps, everything in between.</li>
+              <li>Every owner gets the right priority, on time, with the why attached.</li>
+              <li>Handovers travel with the account, not in someone's head.</li>
+            </ul>
+          </div>
+
+          <h4>Frequently asked</h4>
+          <div class="writing-faq">
+            <div>
+              <h5>Is an AI team lead the same as an AI assistant?</h5>
+              <p>No. An AI assistant responds to prompts. An AI team lead carries memory across your stack, routes priorities to specific owners, closes the loop on what happened, and coordinates the team week over week. Assistants answer. A team lead runs the rhythm.</p>
+            </div>
+            <div>
+              <h5>Does it replace the revenue leader?</h5>
+              <p>No. It frees the revenue leader from reconstruction work so they can lead. Monday briefs and Friday recaps arrive already written. Leaders still make judgment calls, set strategy, and own outcomes.</p>
+            </div>
+            <div>
+              <h5>What tools does it connect to?</h5>
+              <p>CRM (HubSpot, Pipedrive, Attio — Salesforce on the roadmap), chat (Slack, Teams), and email (Gmail, Outlook). It reads signals from all of them and delivers briefs back into the tool your team already lives in.</p>
+            </div>
+            <div>
+              <h5>How is it different from revenue intelligence tools?</h5>
+              <p>Revenue intelligence tools show you what happened inside one silo. An AI team lead builds a single memory across all silos, delivers the why and the next move, and coordinates execution across owners. Coordination over visibility.</p>
+            </div>
+            <div>
+              <h5>Who uses it on the team?</h5>
+              <p>Everyone. Leaders get Monday plans and Friday recaps. Account owners get priority lists and pre-meeting prep. RevOps and customer success ask it anything, any time, and get months of history in one answer.</p>
+            </div>
+          </div>
+
+          <div class="writing-body-foot">
+            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · April 2026</span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/ai-team-lead" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </details>
+
+      <!-- Post 3 — Revenue intelligence vs Nautilida -->
+      <details class="writing-item">
+        <summary class="writing-summary">
+          <div class="writing-meta">
+            <span class="kicker">Comparison · Category note</span>
+            <span>May 2026</span>
+            <span>6 min read</span>
+          </div>
+          <h3 class="writing-title">Revenue intelligence <span class="italic">vs Nautilida.</span></h3>
+          <p class="writing-deck">Revenue intelligence tools tell you what happened on calls. Nautilida tells you what to do next about the deal. Here's the real difference — and why the two solve different halves of the same problem.</p>
+          <div class="writing-summary-foot">
+            <span class="writing-toggle">
+              <span class="plus" aria-hidden="true">+</span>
+              <span class="label-closed">Read full piece</span>
+              <span class="label-open">Close</span>
+            </span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/revenue-intelligence-vs-nautilida" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </summary>
+        <div class="writing-body">
+          <div class="writing-callout">
+            <span class="mono">◉ THE SHORT ANSWER</span>
+            <p>Revenue intelligence platforms are <strong>listeners</strong> — they record, transcribe, and surface what was said. Nautilida is a <strong>coordination layer</strong> that watches the full pipeline and pushes the next move to the right person at the right moment. Different layers, complementary in most stacks.</p>
+          </div>
+
+          <p>Revenue intelligence platforms are built around one core idea: listen to every customer interaction, then surface patterns from what was said. That's useful. It's also only half the job.</p>
+
+          <h4>What revenue intelligence actually does</h4>
+          <p>Tools like Gong record calls, transcribe them, score them, and flag risk signals buried in the conversation. The value is real — a rep who stops saying "hopefully" on calls closes more deals. A manager who sees three stalled opportunities all missing economic buyers can coach faster.</p>
+          <p>But the model is fundamentally retrospective. The platform watches what happened, packages it into a report, and delivers it to whoever has time to read a report. Acting on it is still a human problem — usually a RevOps person stitching together signals from three different tools at 9 PM on a Sunday.</p>
+
+          <h4>Where that model breaks down</h4>
+          <p>Revenue intelligence assumes someone is always watching the dashboard. In a 50–200-person B2B SaaS company, that person often doesn't exist — or exists as a 0.5 FTE RevOps hire who also manages the CRM, the forecasting call, and every one-off CEO request.</p>
+          <p>The result: the signal is there, but nobody acts on it in time. A deal slips because the follow-up from two weeks ago was never sent. An account goes cold because the AM's weekly review got pushed. The call transcript sits in Gong, accurately flagged, completely ignored.</p>
+          <p>Roughly 30% of a RevOps lead's week goes to manual report stitching — pulling signals from revenue intelligence tools, CRM data, and email threads into something a leader can act on. That's a tax on the team, not a capability.</p>
+
+          <h4>What Nautilida does instead</h4>
+          <p>Nautilida isn't a smarter listener. It's a system that runs the coordination layer above the tools — watching the full pipeline (calls, emails, CRM state, deal stage, last touch, forecast delta) and pushing the right action to the right person at the right moment.</p>
+          <p>A CRO gets a Monday morning view of everything that needs attention this week — not a 40-row spreadsheet, but a prioritized read on which deals are at risk and why. An AM gets a Friday note on their own book: what moved, what stalled, what needs a follow-up by Tuesday. Neither of them has to ask for it, search for it, or stitch it together.</p>
+          <p>When a deal looks like the three you lost in Q2, Nautilida says so — in plain English, in the moment the pattern is relevant, not buried in a quarterly business review deck.</p>
+
+          <h4>The takeaway</h4>
+          <p>Revenue intelligence tells you what happened. Nautilida tells you what to do next — and makes sure the right person hears it before it's too late to act.</p>
+          <p>If your team is using a revenue intelligence tool and still losing deals to slow follow-through, that's the gap. The recordings are fine. The coordination layer is broken.</p>
+
+          <div class="writing-takeaways">
+            <span class="mono">◉ KEY TAKEAWAYS</span>
+            <ul>
+              <li>Revenue intelligence is retrospective — it tells you what happened on the call.</li>
+              <li>Nautilida is prospective — it tells you what to do next about the deal.</li>
+              <li>Most mid-market teams have the signal already; what they lack is coordinated action on it.</li>
+              <li>Roughly 30% of a RevOps lead's week is spent stitching signals into something leaders can act on. That's a tax, not a capability.</li>
+              <li>The two layers are complementary in most stacks — keep your revenue intelligence tool, add the coordination layer on top.</li>
+            </ul>
+          </div>
+
+          <h4>Frequently asked</h4>
+          <div class="writing-faq">
+            <div>
+              <h5>Is Nautilida a revenue intelligence tool?</h5>
+              <p>No. Revenue intelligence tools (Gong, Chorus, Avoma) record and analyze customer conversations. Nautilida is a coordination layer that runs above the entire pipeline — calls, email, CRM, forecast — and pushes the next move to the right person. Different layer, different job.</p>
+            </div>
+            <div>
+              <h5>Should we use Gong and Nautilida together?</h5>
+              <p>For most teams, yes. Gong covers the conversation layer with depth. Nautilida covers the coordination layer across all signals, including Gong's. The two are complementary — keep what you have on conversations, add coordination on top.</p>
+            </div>
+            <div>
+              <h5>What does "coordination layer" actually mean?</h5>
+              <p>A coordination layer decides who acts next, with what context, on what timeline. It reads from every silo (CRM, calls, email, chat), holds memory across weeks, and routes priorities to specific owners. Dashboards show; a coordination layer directs.</p>
+            </div>
+            <div>
+              <h5>Do I still need a RevOps person if I use Nautilida?</h5>
+              <p>Yes — but freed from manual report stitching. Nautilida runs the weekly rhythm (Monday brief, mid-week priorities, Friday recap) automatically. RevOps moves from data plumbing to strategic work: territory design, comp planning, deal desk, sales process.</p>
+            </div>
+            <div>
+              <h5>How fast does a team see value?</h5>
+              <p>The first Monday brief lands within the first week of connecting HubSpot/Salesforce and chat. Pattern recognition compounds over weeks as more signal flows in. By month three, the system has enough memory to surface non-obvious account risk before it shows up in the CRM.</p>
+            </div>
+          </div>
+
+          <div class="writing-body-foot">
+            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · May 2026</span>
+            <a class="linkish" href="https://nautilida.ai/#/blog/revenue-intelligence-vs-nautilida" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- More from nautilida.ai -->
+    <div class="writing-more">
+      <h4>More I wrote &amp; shipped on nautilida.ai</h4>
+      <div class="writing-more-grid">
+
+        <a class="writing-more-card" href="https://nautilida.ai/#/compare/gong" target="_blank" rel="noopener">
+          <span class="writing-more-kicker">Comparison page</span>
+          <span class="writing-more-title">Nautilida <span class="italic">vs Gong</span></span>
+          <span class="writing-more-foot">
+            <span>/compare/gong</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a class="writing-more-card" href="https://nautilida.ai/#/compare/clari" target="_blank" rel="noopener">
+          <span class="writing-more-kicker">Comparison page</span>
+          <span class="writing-more-title">Nautilida <span class="italic">vs Clari</span></span>
+          <span class="writing-more-foot">
+            <span>/compare/clari</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a class="writing-more-card" href="https://nautilida.ai/#/compare/gainsight" target="_blank" rel="noopener">
+          <span class="writing-more-kicker">Comparison page</span>
+          <span class="writing-more-title">Nautilida <span class="italic">vs Gainsight</span></span>
+          <span class="writing-more-foot">
+            <span>/compare/gainsight</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a class="writing-more-card" href="https://nautilida.ai/#/use-cases/manufacturing" target="_blank" rel="noopener">
+          <span class="writing-more-kicker">Use case</span>
+          <span class="writing-more-title">Manufacturing <span class="italic">— recurring orders, named accounts</span></span>
+          <span class="writing-more-foot">
+            <span>/use-cases/manufacturing</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+        <a class="writing-more-card" href="https://nautilida.ai/#/use-cases/catering" target="_blank" rel="noopener">
+          <span class="writing-more-kicker">Use case</span>
+          <span class="writing-more-title">Catering <span class="italic">— B2B kitchens, repeat customers</span></span>
+          <span class="writing-more-foot">
+            <span>/use-cases/catering</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ EXPERIENCE ============ -->
 <section class="section" id="experience" data-screen-label="Experience">
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 03 — experience</div>
+        <div class="eyebrow">// 04 — experience</div>
         <h2>Where I've <span class="italic">worked.</span></h2>
       </div>
       <div class="right">
@@ -996,7 +1566,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 04 — education</div>
+        <div class="eyebrow">// 05 — education</div>
         <h2>What I <span class="italic">studied.</span></h2>
       </div>
       <div class="right"></div>
@@ -1046,7 +1616,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 05 — media</div>
+        <div class="eyebrow">// 06 — media</div>
         <h2>Things I've <span class="italic">published.</span></h2>
       </div>
       <div class="right">
@@ -1080,7 +1650,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 06 — stack</div>
+        <div class="eyebrow">// 07 — stack</div>
         <h2>Tools I actually <span class="italic">use.</span></h2>
       </div>
       <div class="right"></div>
@@ -1128,10 +1698,20 @@
         <h4>Web, content, CMS</h4>
         <ul>
           <li>HTML / CSS / vanilla JS — <em>basic literacy, ship with Claude Code</em></li>
-          <li>React — read and edit confidently with AI assistance</li>
           <li><strong>CMS:</strong> WordPress, Webflow CMS, Framer CMS, Tally</li>
           <li>Figma, Canva (with Brand Kits)</li>
+          <li><strong>CapCut</strong> — short-form video editing</li>
           <li>GitHub (public + private)</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h4>Ops &amp; productivity</h4>
+        <ul>
+          <li><strong>Lex Office</strong> — invoicing, accounting, DE compliance</li>
+          <li><strong>Microsoft 365</strong> — Excel, PowerPoint, Word</li>
+          <li>Google Workspace — Docs, Sheets, Slides</li>
+          <li><strong>Notion</strong> (knowledge + content ops)</li>
+          <li><strong>Asana</strong> (project &amp; cross-team coordination)</li>
         </ul>
       </div>
       <div class="stack-col" style="grid-column: 1 / -1; max-width: 70ch;">
@@ -1153,14 +1733,14 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 07 — contact</div>
+        <div class="eyebrow">// 08 — contact</div>
         <div class="contact-headline-wrap">
           <h2>Let's <span class="italic">talk.</span></h2>
           <span class="stick violet contact-stick" aria-hidden="true">Replies &lt; 24h</span>
         </div>
       </div>
       <div class="right">
-        <p class="lede" style="font-size: 1.05rem; max-width:46ch;">Currently open to fractional GTM engagements, founding marketer / Head of Growth roles at AI-native startups, and AI-product collaborations. I reply within a day.</p>
+        <p class="lede" style="font-size: 1.05rem; max-width:46ch;">Currently open to fractional GTM engagements alongside Nautilida, and AI-product collaborations. I reply within a day.</p>
       </div>
     </div>
 
