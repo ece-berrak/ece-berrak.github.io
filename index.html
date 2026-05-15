@@ -708,21 +708,187 @@
     border-top: 1px solid var(--rule);
   }
 
-  /* ---------- Stack ---------- */
-  .stack-grid {
-    display: grid; gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  /* ---------- Stack (chip rows + marquee) ---------- */
+  .stack-rows { display: grid; gap: 0; }
+  .stack-row {
+    display: grid;
     grid-template-columns: 1fr;
+    gap: .9rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
   }
-  @media (min-width: 700px) { .stack-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1100px) { .stack-grid { grid-template-columns: repeat(5, 1fr); } }
-  .stack-col { display: flex; flex-direction: column; gap: 1rem; }
-  .stack-col h4 {
-    margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-3); padding-bottom: 12px; border-bottom: 1px solid var(--rule-strong);
+  .stack-row:first-child { border-top: 0; padding-top: .25rem; }
+  @media (min-width: 800px) {
+    .stack-row {
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
   }
-  .stack-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-  .stack-col li { font-size: 0.93rem; line-height: 1.45; color: var(--ink-2); position: relative; padding-left: 0; }
-  .stack-col li strong { color: var(--ink); font-weight: 500; }
+  .stack-row-label {
+    margin: 0;
+    font: 500 11px/1 var(--mono);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 11px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .stack-row-label::before {
+    content: "";
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--violet); border-radius: 1px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .stack-row[data-accent="lime"] .stack-row-label::before { background: var(--lime); border: 1px solid var(--ink); }
+
+  .chip-list {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    list-style: none; padding: 0; margin: 0;
+  }
+  .chip {
+    --r: 0deg;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 14px 10px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: var(--bone);
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -.005em;
+    white-space: nowrap;
+    cursor: default;
+    transform: rotate(var(--r));
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .chip-meta {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+    transition: color .25s ease;
+  }
+  .chip:hover {
+    transform: translateY(-3px) rotate(0deg);
+    background: var(--ink); color: var(--bone);
+    border-color: var(--ink);
+    box-shadow: 5px 6px 0 var(--violet);
+  }
+  .chip:hover .chip-meta { color: var(--lime); }
+
+  .chip.featured {
+    background: var(--bone-2);
+    border-color: var(--ink);
+  }
+  .chip.featured::before {
+    content: "★";
+    color: var(--violet);
+    font-size: 10px;
+    margin-right: -2px;
+    transition: color .25s ease;
+  }
+  .chip.featured:hover { background: var(--violet); color: var(--bone); border-color: var(--violet); box-shadow: 5px 6px 0 var(--ink); }
+  .chip.featured:hover::before { color: var(--lime); }
+  .chip.featured:hover .chip-meta { color: var(--lime); }
+
+  .chip.cert {
+    background: var(--bone);
+  }
+  .chip.cert::before {
+    content: "";
+    width: 9px; height: 9px;
+    background: var(--lime);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    transform: rotate(45deg);
+    margin-right: 2px;
+    transition: background .25s ease;
+  }
+  .chip.cert:hover::before { background: var(--bone); }
+
+  /* Organic wobble — every 7th chip cycles through rotations */
+  .chip-list .chip:nth-child(7n+1) { --r: -0.7deg; }
+  .chip-list .chip:nth-child(7n+2) { --r: 0.6deg; }
+  .chip-list .chip:nth-child(7n+3) { --r: -0.3deg; }
+  .chip-list .chip:nth-child(7n+4) { --r: 0.9deg; }
+  .chip-list .chip:nth-child(7n+5) { --r: -0.5deg; }
+  .chip-list .chip:nth-child(7n+6) { --r: 0.4deg; }
+  .chip-list .chip:nth-child(7n+7) { --r: -0.8deg; }
+
+  /* Scroll-in stagger — relies on .reveal/.in observer */
+  .stack-row.reveal { opacity: 1; transform: none; transition: none; }
+  .stack-row.reveal .chip {
+    opacity: 0;
+    transform: translateY(10px) rotate(var(--r));
+    transition: opacity .55s cubic-bezier(.2,.7,.2,1), transform .55s cubic-bezier(.2,.7,.2,1), background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .stack-row.reveal.in .chip {
+    opacity: 1;
+    transform: rotate(var(--r));
+  }
+  .stack-row.reveal.in .chip-list .chip:nth-child(1) { transition-delay: 0ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(2) { transition-delay: 50ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(3) { transition-delay: 100ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(4) { transition-delay: 150ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(5) { transition-delay: 200ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(6) { transition-delay: 250ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(7) { transition-delay: 300ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(8) { transition-delay: 350ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(9) { transition-delay: 400ms; }
+  .stack-row.reveal.in .chip-list .chip:nth-child(n+10) { transition-delay: 450ms; }
+  /* Re-enable hover after entrance — overrides transition-delay */
+  .stack-row.reveal .chip:hover { transition-delay: 0ms !important; transform: translateY(-3px) rotate(0deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-row.reveal .chip { opacity: 1; transform: rotate(var(--r)); transition: none; }
+  }
+
+  /* Marquee ribbon */
+  .stack-marquee {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding: 18px 0;
+    border-top: 1px dashed var(--rule-strong);
+    border-bottom: 1px dashed var(--rule-strong);
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .stack-marquee-track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: stack-scroll 60s linear infinite;
+    will-change: transform;
+  }
+  .stack-marquee:hover .stack-marquee-track { animation-play-state: paused; }
+  .stack-marquee-track span {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding: 0 24px 0 0;
+    display: inline-flex; align-items: center;
+  }
+  .stack-marquee-track span::after {
+    content: "◆";
+    color: var(--violet);
+    font-size: 6px;
+    margin-left: 24px;
+    vertical-align: 3px;
+    opacity: .7;
+  }
+  @keyframes stack-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stack-marquee-track { animation: none; transform: translateX(-25%); }
+  }
 
   /* ---------- Contact ---------- */
   .contact-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 4vw, 3rem); }
@@ -1653,76 +1819,99 @@
         <div class="eyebrow">// 07 — stack</div>
         <h2>Tools I actually <span class="italic">use.</span></h2>
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Daily-driver stack across AI, GTM, CRM, analytics, web, and ops. <span style="color:var(--violet);">★</span> = primary tool. Hover any chip — it bites back.</p>
+      </div>
     </div>
 
-    <div class="stack-grid">
-      <div class="stack-col">
-        <h4>AI &amp; product</h4>
-        <ul>
-          <li><strong>Claude Code</strong> (daily shipping environment)</li>
-          <li><strong>ChatGPT</strong> (drafting, research, automation)</li>
-          <li>Anthropic API basics</li>
-          <li>Perplexity (research)</li>
-          <li>Prompt engineering frameworks (own)</li>
+    <div class="stack-rows">
+
+      <div class="stack-row reveal">
+        <h4 class="stack-row-label">AI &amp; product</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">Claude Code</span><span class="chip-meta">daily shipping</span></li>
+          <li class="chip featured"><span class="chip-name">ChatGPT</span><span class="chip-meta">drafting · research</span></li>
+          <li class="chip"><span class="chip-name">Anthropic API</span><span class="chip-meta">basics</span></li>
+          <li class="chip"><span class="chip-name">Perplexity</span><span class="chip-meta">research</span></li>
+          <li class="chip"><span class="chip-name">Prompt frameworks</span><span class="chip-meta">own</span></li>
         </ul>
       </div>
-      <div class="stack-col">
-        <h4>GTM &amp; outbound</h4>
-        <ul>
-          <li><strong>n8n</strong> (visual flows, AI agents, sequencing)</li>
-          <li><strong>Instantly</strong> (cold email at scale)</li>
-          <li><strong>Apollo.io</strong> (prospecting + enrichment)</li>
-          <li>Zapier</li>
-          <li>Google Apps Script (custom integrations)</li>
+
+      <div class="stack-row reveal" data-accent="lime">
+        <h4 class="stack-row-label">GTM &amp; outbound</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">n8n</span><span class="chip-meta">flows · AI agents</span></li>
+          <li class="chip featured"><span class="chip-name">Instantly</span><span class="chip-meta">cold email at scale</span></li>
+          <li class="chip featured"><span class="chip-name">Apollo.io</span><span class="chip-meta">prospect + enrich</span></li>
+          <li class="chip"><span class="chip-name">Zapier</span></li>
+          <li class="chip"><span class="chip-name">Google Apps Script</span><span class="chip-meta">custom integrations</span></li>
         </ul>
       </div>
-      <div class="stack-col">
-        <h4>CRM &amp; lifecycle</h4>
-        <ul>
-          <li><strong>HubSpot</strong> — Sales Hub + Marketing Hub</li>
-          <li>Certified: Sales Hub Software, Reporting, Email Marketing</li>
-          <li><strong>Gojiberry</strong> (customer feedback / micro-surveys)</li>
+
+      <div class="stack-row reveal">
+        <h4 class="stack-row-label">CRM &amp; lifecycle</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">HubSpot</span><span class="chip-meta">Sales + Marketing Hub</span></li>
+          <li class="chip cert"><span class="chip-name">Sales Hub</span><span class="chip-meta">certified</span></li>
+          <li class="chip cert"><span class="chip-name">HubSpot Reporting</span><span class="chip-meta">certified</span></li>
+          <li class="chip cert"><span class="chip-name">Email Marketing</span><span class="chip-meta">certified</span></li>
+          <li class="chip"><span class="chip-name">Gojiberry</span><span class="chip-meta">micro-surveys</span></li>
         </ul>
       </div>
-      <div class="stack-col">
-        <h4>Analytics &amp; data</h4>
-        <ul>
-          <li><strong>Dataiku</strong> (Core Designer certified)</li>
-          <li>Google Analytics 4</li>
-          <li>Search Console</li>
-          <li>HubSpot Reporting</li>
+
+      <div class="stack-row reveal" data-accent="lime">
+        <h4 class="stack-row-label">Analytics &amp; data</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">Dataiku</span><span class="chip-meta">Core Designer cert.</span></li>
+          <li class="chip"><span class="chip-name">Google Analytics 4</span></li>
+          <li class="chip"><span class="chip-name">Search Console</span></li>
+          <li class="chip"><span class="chip-name">HubSpot Reporting</span></li>
         </ul>
       </div>
-      <div class="stack-col">
-        <h4>Web, content, CMS</h4>
-        <ul>
-          <li>HTML / CSS / vanilla JS — <em>basic literacy, ship with Claude Code</em></li>
-          <li><strong>CMS:</strong> WordPress, Webflow CMS, Framer CMS, Tally</li>
-          <li>Figma, Canva (with Brand Kits)</li>
-          <li><strong>CapCut</strong> — short-form video editing</li>
-          <li>GitHub (public + private)</li>
+
+      <div class="stack-row reveal">
+        <h4 class="stack-row-label">Web, content, CMS</h4>
+        <ul class="chip-list">
+          <li class="chip"><span class="chip-name">HTML / CSS / JS</span><span class="chip-meta">ship w/ Claude Code</span></li>
+          <li class="chip featured"><span class="chip-name">WordPress</span></li>
+          <li class="chip featured"><span class="chip-name">Webflow CMS</span></li>
+          <li class="chip featured"><span class="chip-name">Framer CMS</span></li>
+          <li class="chip"><span class="chip-name">Tally</span></li>
+          <li class="chip"><span class="chip-name">Figma</span></li>
+          <li class="chip"><span class="chip-name">Canva</span><span class="chip-meta">Brand Kits</span></li>
+          <li class="chip featured"><span class="chip-name">CapCut</span><span class="chip-meta">short-form video</span></li>
+          <li class="chip"><span class="chip-name">GitHub</span></li>
         </ul>
       </div>
-      <div class="stack-col">
-        <h4>Ops &amp; productivity</h4>
-        <ul>
-          <li><strong>Lex Office</strong> — invoicing, accounting, DE compliance</li>
-          <li><strong>Microsoft 365</strong> — Excel, PowerPoint, Word</li>
-          <li>Google Workspace — Docs, Sheets, Slides</li>
-          <li><strong>Notion</strong> (knowledge + content ops)</li>
-          <li><strong>Asana</strong> (project &amp; cross-team coordination)</li>
+
+      <div class="stack-row reveal" data-accent="lime">
+        <h4 class="stack-row-label">Ops &amp; productivity</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">Lex Office</span><span class="chip-meta">DE accounting</span></li>
+          <li class="chip featured"><span class="chip-name">Microsoft 365</span><span class="chip-meta">Excel · PPT · Word</span></li>
+          <li class="chip"><span class="chip-name">Google Workspace</span></li>
+          <li class="chip featured"><span class="chip-name">Notion</span><span class="chip-meta">knowledge + content ops</span></li>
+          <li class="chip featured"><span class="chip-name">Asana</span><span class="chip-meta">project coordination</span></li>
         </ul>
       </div>
-      <div class="stack-col" style="grid-column: 1 / -1; max-width: 70ch;">
-        <h4>SEO / AEO / GEO &amp; performance</h4>
-        <ul>
-          <li><strong>Blog posts &amp; SEO content production</strong> — long-form, briefs to publish, topical clusters</li>
-          <li><strong>Comparison-page strategy</strong> for category creation</li>
-          <li>Schema.org structured data</li>
-          <li>llms.txt, AI-discoverability frameworks (AEO/GEO)</li>
-          <li><strong>Google Ads basics</strong> — keyword research, ad copy, conversion tracking</li>
+
+      <div class="stack-row reveal">
+        <h4 class="stack-row-label">SEO / AEO / GEO</h4>
+        <ul class="chip-list">
+          <li class="chip featured"><span class="chip-name">Blog &amp; SEO content</span><span class="chip-meta">briefs to publish</span></li>
+          <li class="chip featured"><span class="chip-name">Comparison pages</span><span class="chip-meta">category creation</span></li>
+          <li class="chip"><span class="chip-name">Schema.org</span><span class="chip-meta">structured data</span></li>
+          <li class="chip"><span class="chip-name">llms.txt</span><span class="chip-meta">AEO / GEO</span></li>
+          <li class="chip featured"><span class="chip-name">Google Ads</span><span class="chip-meta">keywords · copy · tracking</span></li>
         </ul>
+      </div>
+
+    </div>
+
+    <!-- Marquee ribbon -->
+    <div class="stack-marquee" aria-hidden="true">
+      <div class="stack-marquee-track">
+        <span>Claude Code</span><span>n8n</span><span>Apollo.io</span><span>HubSpot</span><span>Dataiku</span><span>Notion</span><span>Asana</span><span>CapCut</span><span>Figma</span><span>Canva</span><span>WordPress</span><span>Webflow CMS</span><span>Framer CMS</span><span>Lex Office</span><span>Microsoft 365</span><span>Instantly</span><span>Zapier</span><span>Apps Script</span><span>ChatGPT</span><span>Anthropic API</span><span>Perplexity</span><span>Google Analytics 4</span><span>Search Console</span><span>Google Ads</span><span>llms.txt</span><span>Schema.org</span><span>GitHub</span><span>Tally</span><span>Gojiberry</span><span>Claude Code</span><span>n8n</span><span>Apollo.io</span><span>HubSpot</span><span>Dataiku</span><span>Notion</span><span>Asana</span><span>CapCut</span><span>Figma</span><span>Canva</span><span>WordPress</span><span>Webflow CMS</span><span>Framer CMS</span><span>Lex Office</span><span>Microsoft 365</span><span>Instantly</span><span>Zapier</span><span>Apps Script</span><span>ChatGPT</span><span>Anthropic API</span><span>Perplexity</span><span>Google Analytics 4</span><span>Search Console</span><span>Google Ads</span><span>llms.txt</span><span>Schema.org</span><span>GitHub</span><span>Tally</span><span>Gojiberry</span>
       </div>
     </div>
   </div>
