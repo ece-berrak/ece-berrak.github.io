@@ -45,7 +45,60 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
+
+  /* ---------- Mobile baseline fixes ---------- */
+  @media (max-width: 760px) {
+    /* No-hover devices: writing card overlays are invisible — show a small tap hint inline instead */
+    .writing-mag-card::before, .writing-mag-card::after,
+    .writing-list.compact .writing-card::before,
+    .writing-list.compact .writing-card::after {
+      display: none;
+    }
+    .writing-mag-card .mag-foot,
+    .writing-list.compact .writing-card .writing-card-foot {
+      display: flex !important;
+      gap: 8px;
+      align-items: baseline;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px dashed var(--rule-strong);
+      margin-top: 4px;
+    }
+    .writing-mag-card .mag-cta,
+    .writing-list.compact .writing-card .writing-cta {
+      display: inline-flex !important;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--violet);
+      align-items: center;
+      gap: 4px;
+    }
+    /* LinkedIn carousel cards — kill scale/rotation transforms on touch (no hover) */
+    .li-track > .li-card {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    .li-track > .li-card:hover { transform: none !important; }
+    .li-track > .li-card.is-active {
+      box-shadow: 5px 5px 0 0 var(--ink) !important;
+    }
+    /* Stack chips slightly smaller on small screens */
+    .chip { font-size: 0.82rem; padding: 6px 10px 7px; }
+    .chip-list { gap: 6px; }
+    /* Quietly available — slimmer, lower on small screens */
+    .quietly-available {
+      top: 80px;
+      right: 14px;
+      font-size: 11px;
+      padding: 5px 11px 6px;
+    }
+  }
+  /* Avoid double-tap zoom on touchable interactive elements */
+  button, a, .chip, .media-tab, .media-sub-filter { touch-action: manipulation; }
   img { max-width: 100%; display: block; }
   a { color: var(--violet); text-decoration: none; text-underline-offset: 3px; }
   a:hover { text-decoration: underline; }
@@ -111,6 +164,75 @@
     .nav-links { gap: 18px; }
     .nav-links a { font-size: 13px; }
     .nav-links .hide-sm { display: none; }
+  }
+
+  /* "Quietly available" badge — anti-OPEN-TO-WORK joke */
+  .quietly-available {
+    position: absolute;
+    top: clamp(80px, 9vw, 110px);
+    right: var(--pad);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 8px;
+    background: var(--bone);
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transform: rotate(3deg);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+    pointer-events: none;
+    animation: qaDrift 6s ease-in-out infinite;
+  }
+  @keyframes qaDrift {
+    0%, 100% { transform: rotate(3deg) translateY(0); }
+    50%      { transform: rotate(4deg) translateY(-3px); }
+  }
+  .qa-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 0 0 rgba(212,255,61,.7);
+    animation: qaPulse 2s ease-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes qaPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(212,255,61,.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(212,255,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(212,255,61,0); }
+  }
+  @media (max-width: 760px) {
+    .quietly-available { right: 16px; top: 76px; font-size: 11px; padding: 5px 10px 6px; }
+    .qa-dot { width: 6px; height: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .quietly-available, .qa-dot { animation: none; }
+  }
+
+  /* Cursor sparkle — gentle follower */
+  .cursor-spark {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--violet);
+    opacity: 0;
+    transition: opacity .3s, color .3s;
+    will-change: transform;
+    mix-blend-mode: multiply;
+    user-select: none;
+  }
+  .cursor-spark.is-active { opacity: 0.85; }
+  .cursor-spark.is-hot { color: var(--ink); transform-origin: center; }
+  @media (max-width: 760px), (prefers-reduced-motion: reduce), (pointer: coarse) {
+    .cursor-spark { display: none !important; }
   }
 
   /* ---------- Hero ---------- */
@@ -2348,7 +2470,7 @@
     object-fit: contain;
   }
   .li-card-visual .li-visual.no-img::before {
-    content: "drop image →";
+    content: "";
     position: absolute;
     inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -2593,6 +2715,292 @@
   .li-cta .arr { transition: transform .25s; }
   .li-card:hover .li-cta { gap: 10px; color: var(--ink); }
   .li-card:hover .li-cta .arr { transform: translate(3px, -2px); }
+
+  /* Sub-filters — two rows: brand + format */
+  .media-sub-filters {
+    display: flex; flex-direction: column;
+    gap: 10px;
+    margin: 0 0 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--rule-strong);
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Brand identity tooltip popup */
+  .media-sub-filter[data-value="folio"],
+  .media-sub-filter[data-value="yap"] {
+    position: relative;
+  }
+  .brand-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 0;
+    z-index: 100;
+    width: 280px;
+    padding: 14px 16px;
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 0 var(--ink);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px) rotate(-1deg);
+    transition: opacity .25s ease, transform .3s cubic-bezier(.34,1.4,.64,1);
+    text-align: left;
+  }
+  .media-sub-filter:hover .brand-tooltip,
+  .media-sub-filter:focus .brand-tooltip {
+    opacity: 1;
+    transform: translateY(0) rotate(-1deg);
+    pointer-events: auto;
+  }
+  .brand-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: -7px; left: 22px;
+    width: 12px; height: 12px;
+    background: var(--bone);
+    border-right: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    transform: rotate(45deg);
+  }
+  .bt-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--rule-strong);
+  }
+  .bt-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .bt-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .bt-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .bt-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    min-width: 44px;
+    font-weight: 700;
+  }
+  .bt-colors { display: flex; gap: 6px; }
+  .bt-swatch {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--ink);
+    box-shadow: 1px 1px 0 0 rgba(14,13,20,0.2);
+  }
+  .bt-fonts { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+  .bt-font {
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .bt-voice {
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rule-strong);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  @media (pointer: coarse), (max-width: 600px) {
+    .brand-tooltip { display: none; }
+  }
+  .filter-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  }
+  .filter-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    font-weight: 600;
+    min-width: 56px;
+    margin-right: 4px;
+  }
+  .media-sub-filter {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .02em;
+    background: var(--bone);
+    color: var(--ink-2);
+    border: 1px solid var(--rule-strong);
+    padding: 6px 12px 7px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all .25s cubic-bezier(.34,1.4,.64,1);
+    font-weight: 500;
+  }
+  .media-sub-filter:hover {
+    background: var(--lime);
+    color: var(--ink);
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+  .media-sub-filter.is-active {
+    background: var(--violet);
+    color: var(--bone);
+    border-color: var(--violet);
+    font-weight: 600;
+  }
+
+  /* Design grid — adaptive to portrait/square */
+  .media-design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .media-design {
+    position: relative;
+    background:
+      repeating-linear-gradient(45deg, rgba(124,58,237,0.08) 0 10px, transparent 10px 22px),
+      linear-gradient(135deg, var(--violet) 0%, #6c4dff 50%, var(--lime) 200%);
+    border: 1.5px dashed var(--ink);
+    border-radius: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+    color: var(--bone);
+    font-family: var(--mono);
+    text-align: center;
+    padding: 16px;
+    transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .25s;
+  }
+  .media-design[data-format="portrait"]  { aspect-ratio: 1080 / 1350; }
+  .media-design[data-format="square"]    { aspect-ratio: 1 / 1; }
+  .media-design[data-format="landscape"] { aspect-ratio: 1200 / 627; }
+
+  /* Email templates: let portrait images show their full natural height */
+  .media-panel[data-cat="email"] .media-design[data-format="portrait"] {
+    aspect-ratio: auto;
+    align-self: start;
+  }
+  .media-panel[data-cat="email"] .media-design.is-filled[data-format="portrait"] {
+    height: auto;
+  }
+  .media-panel[data-cat="email"] .media-design.is-filled[data-format="portrait"] img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+  }
+  .media-panel[data-cat="email"] .media-design-grid {
+    align-items: start;
+  }
+
+  /* Filled designs — real video/image takes over the slot */
+  .media-design.is-filled {
+    background: none;
+    border: 1.5px solid var(--ink);
+    padding: 0;
+    overflow: hidden;
+  }
+  .media-design.is-filled video,
+  .media-design.is-filled img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  /* Hover lifts filled designs so content becomes readable */
+  .media-design.is-filled {
+    transition: transform .35s cubic-bezier(.34,1.3,.64,1), box-shadow .35s, z-index 0s;
+    will-change: transform;
+    transform-origin: center;
+  }
+  .media-design.is-filled:hover {
+    transform: scale(1.45);
+    z-index: 20;
+    box-shadow: 14px 14px 0 0 var(--ink);
+  }
+  .media-design.is-filled:hover video,
+  .media-design.is-filled:hover img { transform: none; }
+  .media-design-grid { overflow: visible; }
+  .media-design.is-filled .md-overlay {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    display: flex; flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+    z-index: 2;
+    align-items: flex-start;
+  }
+  .media-design.is-filled .md-brand-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bone);
+    padding: 3px 8px 4px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .media-design.is-filled .md-format-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .08em;
+    color: var(--bone);
+    background: rgba(14,13,20,0.75);
+    padding: 2px 7px 3px;
+    border-radius: 999px;
+  }
+  .media-design.is-filled::after { display: none; }
+  .media-design:hover {
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .media-design .md-brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--bone);
+    margin-bottom: 4px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .media-design .md-format {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--bone);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  .media-design .md-platform {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    opacity: 0.9;
+  }
+  .media-design::after {
+    content: "";
+    position: absolute;
+    bottom: 12px; right: 12px;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(244,239,228,0.7);
+  }
+  .media-design.is-hidden { display: none; }
 
   /* Empty-category placeholder */
   .media-placeholder {
@@ -2915,6 +3323,10 @@
 <!-- ============ HERO ============ -->
 <header class="section hero">
   <div class="wrap">
+    <div class="quietly-available" aria-hidden="true">
+      <span class="qa-dot"></span>
+      <em>quietly available</em>
+    </div>
     <div class="hero-grid">
       <div>
         <div class="eyebrow reveal">// AVAILABLE FOR SELECT ENGAGEMENTS — Q3 2026</div>
@@ -3639,54 +4051,433 @@
       </div>
     </div>
 
-    <!-- Blog announcements panel — placeholder -->
+    <!-- Blog announcements -->
     <div class="media-panel" role="tabpanel" data-cat="blog" hidden>
-      <div class="media-placeholder">
-        <span class="media-ph-icon">✦</span>
-        <h4>Blog announcement designs</h4>
-        <p>Coming soon. The launch graphics I made for each long-form piece, sized for LinkedIn, X, and the site itself.</p>
+      <div class="media-sub-filters">
+        <div class="filter-row">
+          <span class="filter-label">// brand</span>
+          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="folio">Folio<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name">Folio<span style="color:#C84A2E">.</span></span>
+              <span class="bt-tag">Editorial · long-form</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#F0EAD9"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#C84A2E"></span>
+                <span class="bt-swatch" style="background:#7C7470"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Georgia,Times,serif;font-style:italic">Tiempos · serif display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Söhne · mono accent</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Quiet software. Trust earned through craft."</span>
+          </span></button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
+              <span class="bt-tag">Playful · anti-corporate</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#FAF7EE"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#FFD93B"></span>
+                <span class="bt-swatch" style="background:#B6F542"></span>
+                <span class="bt-swatch" style="background:#FF5A4D"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
+          </span></button>
+        </div>
+      </div>
+      <div class="media-design-grid">
+        <div class="media-design is-filled" data-brand="folio" data-format="landscape">
+          <video src="uploads/folio-blog-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio blog announcement — landscape"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="square">
+          <video src="uploads/yap-blog-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. blog announcement — square"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <img src="uploads/folio-blog-portrait.png" alt="Folio — A Letter to Notion" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="square">
+          <video src="uploads/folio-blog-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio blog announcement — square"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Use cases panel -->
+    <!-- Use cases -->
     <div class="media-panel" role="tabpanel" data-cat="usecases" hidden>
-      <div class="media-placeholder">
-        <span class="media-ph-icon">◆</span>
-        <h4>Use-case visuals</h4>
-        <p>Coming soon. Hero graphics, sector cards, and explainer visuals for the vertical use cases (manufacturing, catering, more).</p>
+      <div class="media-sub-filters">
+        <div class="filter-row">
+          <span class="filter-label">// brand</span>
+          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="folio">Folio<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name">Folio<span style="color:#C84A2E">.</span></span>
+              <span class="bt-tag">Editorial · long-form</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#F0EAD9"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#C84A2E"></span>
+                <span class="bt-swatch" style="background:#7C7470"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Georgia,Times,serif;font-style:italic">Tiempos · serif display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Söhne · mono accent</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Quiet software. Trust earned through craft."</span>
+          </span></button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
+              <span class="bt-tag">Playful · anti-corporate</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#FAF7EE"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#FFD93B"></span>
+                <span class="bt-swatch" style="background:#B6F542"></span>
+                <span class="bt-swatch" style="background:#FF5A4D"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
+          </span></button>
+        </div>
+      </div>
+      <div class="media-design-grid">
+        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
+          <video src="uploads/yap-usecase-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. use case — landscape"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
+          <video src="uploads/yap-usecase-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. use case — portrait"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <img src="uploads/folio-usecase-portrait.png" alt="The Folio — The case for hiring me at Notion" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="square">
+          <video src="uploads/folio-usecase-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio — hire me"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Testimonials panel -->
+    <!-- Testimonials -->
     <div class="media-panel" role="tabpanel" data-cat="testimonials" hidden>
-      <div class="media-placeholder">
-        <span class="media-ph-icon">❝</span>
-        <h4>Testimonials</h4>
-        <p>Coming soon. Quote cards and short reels from design partners and early customers.</p>
+      <div class="media-sub-filters">
+        <div class="filter-row">
+          <span class="filter-label">// brand</span>
+          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="folio">Folio<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name">Folio<span style="color:#C84A2E">.</span></span>
+              <span class="bt-tag">Editorial · long-form</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#F0EAD9"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#C84A2E"></span>
+                <span class="bt-swatch" style="background:#7C7470"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Georgia,Times,serif;font-style:italic">Tiempos · serif display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Söhne · mono accent</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Quiet software. Trust earned through craft."</span>
+          </span></button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
+              <span class="bt-tag">Playful · anti-corporate</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#FAF7EE"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#FFD93B"></span>
+                <span class="bt-swatch" style="background:#B6F542"></span>
+                <span class="bt-swatch" style="background:#FF5A4D"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
+          </span></button>
+        </div>
+      </div>
+      <div class="media-design-grid">
+        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
+          <img src="uploads/yap-testimonial-landscape.png" alt="Yap. testimonials — what teams are actually saying" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
+          <video src="uploads/yap-testimonial-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. testimonial — portrait"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Product updates panel -->
+    <!-- Product updates -->
     <div class="media-panel" role="tabpanel" data-cat="updates" hidden>
-      <div class="media-placeholder">
-        <span class="media-ph-icon">◐</span>
-        <h4>Product update designs</h4>
-        <p>Coming soon. Release announcement graphics, changelog visuals, in-app screenshots for shipping moments.</p>
+      <div class="media-sub-filters">
+        <div class="filter-row">
+          <span class="filter-label">// brand</span>
+          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="folio">Folio<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name">Folio<span style="color:#C84A2E">.</span></span>
+              <span class="bt-tag">Editorial · long-form</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#F0EAD9"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#C84A2E"></span>
+                <span class="bt-swatch" style="background:#7C7470"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Georgia,Times,serif;font-style:italic">Tiempos · serif display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Söhne · mono accent</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Quiet software. Trust earned through craft."</span>
+          </span></button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
+              <span class="bt-tag">Playful · anti-corporate</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#FAF7EE"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#FFD93B"></span>
+                <span class="bt-swatch" style="background:#B6F542"></span>
+                <span class="bt-swatch" style="background:#FF5A4D"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
+          </span></button>
+        </div>
+      </div>
+      <div class="media-design-grid">
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <video src="uploads/folio-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio product update — portrait"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="square">
+          <video src="uploads/folio-update-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio product update — square"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="square">
+          <img src="uploads/folio-series-b.jpg" alt="Folio Series B announcement" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
+          <video src="uploads/yap-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — portrait"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
+          <video src="uploads/yap-update-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — landscape"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="square">
+          <video src="uploads/yap-update-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — square"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="square">
+          <video src="uploads/yap-update-square-2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — square (2)"></video>
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <img src="uploads/folio-update-portrait-2.png" alt="Folio — I'd like to design at Notion" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Email templates panel -->
+    <!-- Email templates -->
     <div class="media-panel" role="tabpanel" data-cat="email" hidden>
-      <div class="media-placeholder">
-        <span class="media-ph-icon">✉</span>
-        <h4>Email templates</h4>
-        <p>Coming soon. Designed-for-readability email templates for lifecycle, outreach, and announcement campaigns.</p>
+      <div class="media-sub-filters">
+        <div class="filter-row">
+          <span class="filter-label">// brand</span>
+          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="folio">Folio<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name">Folio<span style="color:#C84A2E">.</span></span>
+              <span class="bt-tag">Editorial · long-form</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#F0EAD9"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#C84A2E"></span>
+                <span class="bt-swatch" style="background:#7C7470"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Georgia,Times,serif;font-style:italic">Tiempos · serif display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Söhne · mono accent</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Quiet software. Trust earned through craft."</span>
+          </span></button>
+          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
+            <span class="bt-head">
+              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
+              <span class="bt-tag">Playful · anti-corporate</span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Palette</span>
+              <span class="bt-colors">
+                <span class="bt-swatch" style="background:#FAF7EE"></span>
+                <span class="bt-swatch" style="background:#0E0D14"></span>
+                <span class="bt-swatch" style="background:#FFD93B"></span>
+                <span class="bt-swatch" style="background:#B6F542"></span>
+                <span class="bt-swatch" style="background:#FF5A4D"></span>
+              </span>
+            </span>
+            <span class="bt-row">
+              <span class="bt-label">Type</span>
+              <span class="bt-fonts">
+                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
+                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
+              </span>
+            </span>
+            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
+          </span></button>
+        </div>
+      </div>
+      <div class="media-design-grid">
+        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
+          <img src="uploads/yap-email-portrait.png" alt="Yap. welcome email — welcome to yap" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
+          <img src="uploads/yap-email-portrait-2.png" alt="Yap. weekly email — what we actually talked about this week" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Yap.</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <img src="uploads/folio-email-portrait.png" alt="Folio welcome email — A small welcome" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
+        <div class="media-design is-filled" data-brand="folio" data-format="portrait">
+          <img src="uploads/folio-email-portrait-2.png" alt="Folio Letter #14 — The Folio Letter" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
+          <div class="md-overlay">
+            <span class="md-brand-tag">Folio</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="media-foot">
-      <a class="linkish" href="https://linkedin.com/in/eceberrak" target="_blank" rel="noopener">More on LinkedIn <span class="arr" aria-hidden="true">→</span></a>
-    </div>
   </div>
 </section>
 
@@ -3838,6 +4629,64 @@
 </footer>
 
 <script>
+  // Cursor sparkle — gentle follower with mood swings
+  (function () {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var EMOJIS_DEFAULT = '✦';
+    var EMOJIS_HOT = ['✨', '✦', '✧', '★'];
+
+    var spark = document.createElement('div');
+    spark.className = 'cursor-spark';
+    spark.textContent = EMOJIS_DEFAULT;
+    document.body.appendChild(spark);
+
+    var x = window.innerWidth / 2, y = window.innerHeight / 2;
+    var sx = x, sy = y;
+    var hot = false;
+    var raf = null;
+
+    function pickHot() {
+      spark.textContent = EMOJIS_HOT[Math.floor(Math.random() * EMOJIS_HOT.length)];
+    }
+
+    function loop() {
+      sx += (x - sx) * 0.18;
+      sy += (y - sy) * 0.18;
+      spark.style.transform = 'translate(' + (sx - 8) + 'px, ' + (sy - 8) + 'px)' + (hot ? ' scale(1.4) rotate(' + (sx % 20 - 10) + 'deg)' : '');
+      raf = requestAnimationFrame(loop);
+    }
+    loop();
+
+    document.addEventListener('mousemove', function (e) {
+      x = e.clientX; y = e.clientY;
+      if (!spark.classList.contains('is-active')) spark.classList.add('is-active');
+    });
+    document.addEventListener('mouseleave', function () {
+      spark.classList.remove('is-active');
+    });
+
+    // "Hot" mood when hovering clickable things
+    var HOT_SELECTORS = 'a, button, .chip, .li-card, .writing-mag-card, .writing-card, .work-card, .exp-row, .card, .nav-cta, .hero-cv, [role="button"]';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest && e.target.closest(HOT_SELECTORS)) {
+        if (!hot) {
+          hot = true;
+          spark.classList.add('is-hot');
+          pickHot();
+        }
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (hot && (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest(HOT_SELECTORS))) {
+        hot = false;
+        spark.classList.remove('is-hot');
+        spark.textContent = EMOJIS_DEFAULT;
+      }
+    });
+  })();
+
   // Sticky nav blur
   (function () {
     var nav = document.getElementById('nav');
@@ -3886,6 +4735,40 @@
           p.classList.toggle('is-active', active);
           if (active) p.removeAttribute('hidden');
           else p.setAttribute('hidden', '');
+        });
+      });
+    });
+  })();
+
+  // Media sub-filters — two-axis (brand × format) per panel
+  (function () {
+    var panels = document.querySelectorAll('.media-panel');
+    panels.forEach(function (panel) {
+      var filters = panel.querySelectorAll('.media-sub-filter');
+      var designs = panel.querySelectorAll('.media-design');
+      if (!filters.length || !designs.length) return;
+
+      // Track current state per filter axis
+      var state = { brand: 'all', format: 'all' };
+
+      function applyFilters() {
+        designs.forEach(function (d) {
+          var bOk = state.brand === 'all' || d.dataset.brand === state.brand;
+          var fOk = state.format === 'all' || d.dataset.format === state.format;
+          d.classList.toggle('is-hidden', !(bOk && fOk));
+        });
+      }
+
+      filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var axis = btn.dataset.filter;
+          var value = btn.dataset.value;
+          state[axis] = value;
+          // Mark active only within same axis
+          panel.querySelectorAll('.media-sub-filter[data-filter="' + axis + '"]').forEach(function (b) {
+            b.classList.toggle('is-active', b === btn);
+          });
+          applyFilters();
         });
       });
     });
