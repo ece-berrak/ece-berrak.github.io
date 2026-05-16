@@ -3045,6 +3045,32 @@
     padding-top: 1.5rem;
     border-top: 1px solid var(--rule);
   }
+  .media-disclaimer {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--rule-strong);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+    color: var(--ink-3);
+    text-align: center;
+    max-width: 56ch;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.6;
+  }
+  .media-disclaimer em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--violet);
+    text-transform: none;
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  .media-disclaimer .md-c {
+    color: var(--violet);
+    font-weight: 700;
+    margin-right: 4px;
+  }
 
   /* ---------- Stack (chip rows + marquee) ---------- */
   .stack-rows { display: grid; gap: 0; }
@@ -3964,7 +3990,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-1.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 1"></video>
+              <video src="uploads/li-1.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 1"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -3975,7 +4001,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 2"></video>
+              <video src="uploads/li-2.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 2"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -3986,7 +4012,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 3"></video>
+              <video src="uploads/li-3.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 3"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -3997,7 +4023,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-4.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 4"></video>
+              <video src="uploads/li-4.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 4"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -4008,7 +4034,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-5.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 5"></video>
+              <video src="uploads/li-5.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 5"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -4019,7 +4045,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-6.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 6"></video>
+              <video src="uploads/li-6.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 6"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -4030,7 +4056,7 @@
 
           <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
             <div class="li-visual">
-              <video src="uploads/li-7.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 7"></video>
+              <video src="uploads/li-7.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 7"></video>
             </div>
             <div class="li-meta">
               <span class="li-avatar li-avatar-nauti"></span>
@@ -4108,13 +4134,13 @@
       </div>
       <div class="media-design-grid">
         <div class="media-design is-filled" data-brand="folio" data-format="landscape">
-          <video src="uploads/folio-blog-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio blog announcement — landscape"></video>
+          <video src="uploads/folio-blog-landscape.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Folio blog announcement — landscape"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Folio</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-blog-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. blog announcement — square"></video>
+          <video src="uploads/yap-blog-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. blog announcement — square"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
@@ -4126,7 +4152,7 @@
           </div>
         </div>
         <div class="media-design is-filled" data-brand="folio" data-format="square">
-          <video src="uploads/folio-blog-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio blog announcement — square"></video>
+          <video src="uploads/folio-blog-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Folio blog announcement — square"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Folio</span>
           </div>
@@ -4191,13 +4217,13 @@
       </div>
       <div class="media-design-grid">
         <div class="media-design is-filled" data-brand="yap" data-format="landscape">
-          <video src="uploads/yap-usecase-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. use case — landscape"></video>
+          <video src="uploads/yap-usecase-landscape.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. use case — landscape"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-usecase-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. use case — portrait"></video>
+          <video src="uploads/yap-usecase-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. use case — portrait"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
@@ -4209,7 +4235,7 @@
           </div>
         </div>
         <div class="media-design is-filled" data-brand="folio" data-format="square">
-          <video src="uploads/folio-usecase-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio — hire me"></video>
+          <video src="uploads/folio-usecase-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Folio — hire me"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Folio</span>
           </div>
@@ -4280,7 +4306,7 @@
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-testimonial-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. testimonial — portrait"></video>
+          <video src="uploads/yap-testimonial-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. testimonial — portrait"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
@@ -4345,13 +4371,13 @@
       </div>
       <div class="media-design-grid">
         <div class="media-design is-filled" data-brand="folio" data-format="portrait">
-          <video src="uploads/folio-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio product update — portrait"></video>
+          <video src="uploads/folio-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Folio product update — portrait"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Folio</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="folio" data-format="square">
-          <video src="uploads/folio-update-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Folio product update — square"></video>
+          <video src="uploads/folio-update-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Folio product update — square"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Folio</span>
           </div>
@@ -4363,25 +4389,25 @@
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — portrait"></video>
+          <video src="uploads/yap-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — portrait"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="landscape">
-          <video src="uploads/yap-update-landscape.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — landscape"></video>
+          <video src="uploads/yap-update-landscape.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — landscape"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-update-square.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — square"></video>
+          <video src="uploads/yap-update-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — square"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
         </div>
         <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-update-square-2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Yap. product update — square (2)"></video>
+          <video src="uploads/yap-update-square-2.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — square (2)"></video>
           <div class="md-overlay">
             <span class="md-brand-tag">Yap.</span>
           </div>
@@ -4477,6 +4503,10 @@
         </div>
       </div>
     </div>
+
+    <p class="media-disclaimer">
+      <span class="md-c">©</span> design portfolio — all work belongs to <em>ece berrak.</em> reuse without permission isn't cool.
+    </p>
 
   </div>
 </section>
