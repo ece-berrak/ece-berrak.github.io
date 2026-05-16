@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ece Berrak — CV</title>
+<meta name="description" content="Ece Berrak — T-shaped B2B/SaaS marketer based in Berlin. Lifecycle & user communication, applied AI, hands-on web shipping, cross-team by default." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bone:#F4EFE4; --ink:#0E0D14; --ink-2:#3a3744; --ink-3:#7c7686;
+  --rule:#e6dfd0; --rule-strong:#1a1922;
+  --violet:#4F32D8; --lime:#D4FF3D;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --pad: clamp(20px, 4vw, 56px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+em, .italic { font-family: var(--serif); font-style: italic; font-weight: 400; }
+strong { font-weight: 600; }
+
+/* Top bar */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244,239,228,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.top-inner {
+  max-width: 980px; margin: 0 auto;
+  padding: 14px var(--pad);
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: .04em;
+  padding: 8px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all .2s;
+}
+.back:hover { background: var(--ink); color: var(--bone); }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.btn-print, .btn-pdf {
+  font-family: var(--mono); font-size: 12px;
+  background: var(--ink); color: var(--bone);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none; cursor: pointer;
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: background .2s;
+}
+.btn-print:hover { background: var(--violet); }
+
+/* Hero */
+.cv-hero {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 88px) var(--pad) clamp(28px, 4vw, 44px);
+  border-bottom: 1.5px solid var(--ink);
+}
+.cv-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.cv-hero h1 {
+  font-family: var(--sans);
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.cv-hero h1 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--violet);
+}
+.cv-hero p.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(19px, 2.2vw, 23px);
+  line-height: 1.35;
+  color: var(--ink-2);
+  max-width: 56ch;
+  margin: 18px 0 24px;
+}
+.cv-contact {
+  display: flex; flex-wrap: wrap; gap: 8px 22px;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--ink-2);
+}
+.cv-contact a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+}
+.cv-contact a:hover { color: var(--violet); border-color: var(--violet); }
+.cv-contact strong { color: var(--ink); font-weight: 500; }
+
+/* Sections */
+.cv-section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 44px) var(--pad);
+  border-bottom: 1px solid var(--rule);
+}
+.cv-section:last-of-type { border-bottom: none; }
+.cv-section h2 {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--sans);
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.cv-section h2::before {
+  content: attr(data-num);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--violet);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 6px;
+}
+.cv-section h2 em { font-family: var(--serif); font-weight: 400; }
+
+/* Experience */
+.exp-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 760px) {
+  .exp-row { grid-template-columns: 180px 1fr; gap: 36px; }
+}
+.exp-row:first-of-type { border-top: none; padding-top: 0; }
+.exp-side {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--ink-2); letter-spacing: .04em;
+}
+.exp-side strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 4px; }
+.exp-main h3 {
+  font-family: var(--sans);
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+.exp-main .role {
+  font-family: var(--serif); font-style: italic;
+  font-size: 17px;
+  color: var(--violet);
+  margin-bottom: 10px;
+}
+.exp-main p { color: var(--ink-2); margin-bottom: 8px; font-size: 14.5px; line-height: 1.6; }
+.exp-main ul {
+  list-style: none;
+  display: grid; gap: 6px;
+  padding-left: 0;
+  margin-top: 8px;
+}
+.exp-main ul li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.exp-main ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.6em;
+  width: 14px; height: 1.5px;
+  background: var(--violet);
+}
+
+/* Education */
+.edu-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 760px) {
+  .edu-row { grid-template-columns: 180px 1fr; gap: 36px; }
+}
+.edu-row:first-of-type { border-top: none; padding-top: 0; }
+.edu-row .exp-side strong { color: var(--ink); }
+.edu-row h3 {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+.edu-row h3 em { font-family: var(--serif); font-weight: 400; }
+.edu-row .field {
+  font-family: var(--serif); font-style: italic;
+  color: var(--violet);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.edu-row .thesis {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+/* Skills grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 760px) { .skills-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+.skills-col h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.skills-col p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.skills-col strong { color: var(--ink); font-weight: 500; }
+
+/* Certifications */
+.cert-list {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  list-style: none;
+  padding-left: 0;
+}
+.cert-list li {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fff;
+  border: 1px solid var(--ink);
+  padding: 6px 12px 7px;
+  border-radius: 999px;
+}
+
+/* Languages */
+.langs {
+  display: flex; flex-wrap: wrap; gap: 24px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.langs strong { color: var(--ink); font-weight: 600; font-size: 16px; }
+
+/* Footer */
+.cv-foot {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px var(--pad);
+  border-top: 1.5px solid var(--ink);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* Print styles */
+@media print {
+  .top, .cv-foot { display: none; }
+  body { background: #fff; font-size: 12px; }
+  .cv-section, .cv-hero { padding: 16px 24px; max-width: none; }
+  .cv-hero h1 { font-size: 36px; }
+  .cv-hero p.lede { font-size: 14px; }
+  .cv-section h2 { font-size: 18px; margin-bottom: 14px; }
+  .exp-row, .edu-row { page-break-inside: avoid; padding: 10px 0; }
+  .exp-main h3 { font-size: 14px; }
+  .exp-main p, .exp-main ul li { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="back" href="index.html#top">← back to portfolio</a>
+    <div class="top-actions">
+      <button class="btn-print" onclick="window.print()">Print / save as PDF</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="cv-hero">
+  <div class="cv-kicker">// curriculum vitae · 2026</div>
+  <h1>Ece <em>Berrak.</em></h1>
+  <p class="lede">T-shaped B2B/SaaS marketer. Deep bar in customer & user communication; breadth in applied AI, lifecycle, hands-on web shipping. Cross-team by default. Berlin · CET · EN/TR/DE.</p>
+  <div class="cv-contact">
+    <span><strong>Email</strong> · <a href="mailto:ece@nautilida.ai">ece@nautilida.ai</a></span>
+    <span><strong>LinkedIn</strong> · <a href="https://linkedin.com/in/eceberrak" target="_blank" rel="noopener">/in/eceberrak</a></span>
+    <span><strong>GitHub</strong> · <a href="https://github.com/ece-berrak" target="_blank" rel="noopener">/ece-berrak</a></span>
+    <span><strong>Portfolio</strong> · <a href="index.html">eceberrak.com</a></span>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="cv-section">
+  <h2 data-num="// 01">Experience</h2>
+
+  <div class="exp-row">
+    <div class="exp-side">
+      <strong>2025 — Now</strong>
+      Berlin · Pre-seed SaaS
+    </div>
+    <div class="exp-main">
+      <h3>Nautilida</h3>
+      <p class="role">Co-founder & CEO</p>
+      <p>Co-founded an AI-native sales platform that unifies the revenue stack, cross-coordinates sales teams, and automates follow-through across the pipeline.</p>
+      <ul>
+        <li>Lead product strategy and GTM end-to-end alongside technical co-founder. Own roadmap, positioning, messaging, customer development.</li>
+        <li>Designed and shipped nautilida.ai in Claude Code: marketing site, comparison pages, glossary, 7-chapter literacy microsite. Schema, llms.txt, AEO/GEO foundations.</li>
+        <li>Designed and operates an automated GTM engine (n8n, Apollo, HubSpot) replacing manual SDR work with agentic flows.</li>
+        <li>First LOIs secured. First design partner onboarded. Prompt engineering frameworks used across product, content, and research.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-side">
+      <strong>2024 — 2025</strong>
+      Berlin · Enterprise SaaS
+    </div>
+    <div class="exp-main">
+      <h3>Dataiku</h3>
+      <p class="role">Growth Marketing</p>
+      <p>Owned user communication for an enterprise AI & analytics platform. Two distinct user segments through the freemium-to-paid lifecycle.</p>
+      <ul>
+        <li>Built HubSpot email + in-product messaging carrying onboarding, day-to-day clarity, and renewal contexts.</li>
+        <li>Worked the loop across Product, Customer Success, Technical, Content, and Events teams.</li>
+        <li>Direct point of contact resolving adoption-related questions. Joined the initiative early and helped establish communication workflows the team continues to scale.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-side">
+      <strong>2022</strong>
+      Istanbul · B2B Software
+    </div>
+    <div class="exp-main">
+      <h3>CRS Soft</h3>
+      <p class="role">Creative Marketing</p>
+      <p>UX, SEO, and content for B2B software products at the intersection of marketing and product.</p>
+      <ul>
+        <li>Contributed to UX, SEO, and content optimization. Improved user flows, discoverability, usability.</li>
+        <li>Supported HR marketing and employer branding initiatives.</li>
+        <li>Designed and optimized user journeys and research frameworks in Miro.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-row">
+    <div class="exp-side">
+      <strong>2020 — 2022</strong>
+      Istanbul · Event SaaS
+    </div>
+    <div class="exp-main">
+      <h3>Plandy</h3>
+      <p class="role">Community & Content</p>
+      <p>Sat between BDR, product, and growth at an event discovery and ticketing SaaS. Translated community signal into the roadmap.</p>
+      <ul>
+        <li>Collaborated on community-led acquisition initiatives.</li>
+        <li>Represented the platform at events and activations. Gathered direct feedback from users and organizers.</li>
+        <li>Facilitated feedback loops between users, organizers, product, and marketing teams.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="cv-section">
+  <h2 data-num="// 02">Education</h2>
+
+  <div class="edu-row">
+    <div class="exp-side">
+      <strong>2023 — 2025</strong>
+      Berlin · DE
+    </div>
+    <div>
+      <h3>Hochschule für Wirtschaft und Recht <em>Berlin</em></h3>
+      <p class="field">M.A. · Political Economy</p>
+      <p style="color:var(--ink-2);font-size:14px;line-height:1.55;">Economic policy, governance, and digital transformation. Where the tech-meets-policy interest started getting concrete.</p>
+      <p class="thesis"><strong>Thesis (2025):</strong> <em>Digitalization &amp; Technological Transformation in Retail Chains — Implications for the Labor Market, a USA / Germany Comparison.</em></p>
+    </div>
+  </div>
+
+  <div class="edu-row">
+    <div class="exp-side">
+      <strong>2019 — 2023</strong>
+      Istanbul · TR
+    </div>
+    <div>
+      <h3>Istanbul Bilgi <em>University</em></h3>
+      <p class="field">B.A. · International Relations & Public Relations · Marketing minor</p>
+      <p style="color:var(--ink-2);font-size:14px;line-height:1.55;">How stories travel across borders, audiences, and channels. Where the marketing toolkit started.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="cv-section">
+  <h2 data-num="// 03">Skills &amp; <em>stack</em></h2>
+  <div class="skills-grid">
+    <div class="skills-col">
+      <h4>AI & product</h4>
+      <p><strong>Claude Code</strong> (daily shipping), ChatGPT, Anthropic API basics, Perplexity, custom prompt frameworks.</p>
+    </div>
+    <div class="skills-col">
+      <h4>GTM & outbound</h4>
+      <p><strong>n8n</strong> (flows + AI agents), <strong>Apollo.io</strong>, Instantly, Zapier, Google Apps Script.</p>
+    </div>
+    <div class="skills-col">
+      <h4>CRM & lifecycle</h4>
+      <p><strong>HubSpot</strong> Sales + Marketing Hub (certified Sales Hub, Reporting, Email Marketing), Gojiberry.</p>
+    </div>
+    <div class="skills-col">
+      <h4>Analytics & data</h4>
+      <p>Dataiku (Core Designer cert.), Google Analytics 4, Search Console, HubSpot Reporting.</p>
+    </div>
+    <div class="skills-col">
+      <h4>Web, content, CMS</h4>
+      <p>HTML / CSS / JS (ship in Claude Code), WordPress, Webflow CMS, Framer CMS, Tally, Figma, Canva, CapCut, GitHub.</p>
+    </div>
+    <div class="skills-col">
+      <h4>Ops & productivity</h4>
+      <p><strong>Notion</strong> (knowledge + content ops), Asana, Microsoft 365, Google Workspace, Lex Office (DE accounting).</p>
+    </div>
+    <div class="skills-col">
+      <h4>SEO / AEO / GEO</h4>
+      <p>Blog & SEO content briefs, comparison pages, schema.org structured data, llms.txt, Google Ads.</p>
+    </div>
+    <div class="skills-col">
+      <h4>Languages</h4>
+      <div class="langs">
+        <span><strong>English</strong></span>
+        <span><strong>Türkçe</strong></span>
+        <span><strong>Deutsch</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section class="cv-section">
+  <h2 data-num="// 04">Certifications</h2>
+  <ul class="cert-list">
+    <li>HubSpot Sales Hub</li>
+    <li>HubSpot Reporting</li>
+    <li>HubSpot Email Marketing</li>
+    <li>Google Ads</li>
+    <li>Google Digital Marketing & E-commerce</li>
+    <li>Dataiku Core Designer</li>
+    <li>Field Guide to HCD · IDEO.org</li>
+    <li>Basics of Strategic Management · IBMI</li>
+  </ul>
+</section>
+
+<footer class="cv-foot">
+  <span>© 2026 ece berrak · last updated may 2026</span>
+  <span>built in claude code · berlin</span>
+</footer>
+
+</body>
+</html>

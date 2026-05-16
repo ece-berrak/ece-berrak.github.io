@@ -254,6 +254,28 @@
   .hero-credentials span:not(:first-child)::before {
     content: ""; display: inline-block; width: 5px; height: 5px; background: var(--violet); border-radius: 1px; transform: rotate(45deg); margin-right: 14px;
   }
+  .hero-cv {
+    margin-left: 14px;
+    padding: 5px 12px 6px;
+    background: var(--ink);
+    color: var(--bone);
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: background .2s, transform .2s, box-shadow .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero-cv:hover {
+    background: var(--violet);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--lime);
+  }
+  .hero-credentials .hero-cv::before { display: none !important; }
   @media (max-width: 600px) {
     .hero-credentials span:not(:first-child)::before { display: none; }
     .hero-credentials { flex-direction: column; gap: 6px; }
@@ -470,12 +492,556 @@
   }
   .section-head h2 { max-width: 14ch; }
 
-  /* ---------- About ---------- */
-  .about-body { display: grid; grid-template-columns: 1fr; gap: 1.6rem; max-width: 70ch; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.6; color: var(--ink-2); }
-  .about-body p:first-child::first-letter {
-    font-family: var(--serif); font-style: italic; font-size: 3.2em; line-height: .85; float: left; padding: 6px 10px 0 0; color: var(--ink);
+  /* ---------- About — Chat shell ---------- */
+  .chat-shell {
+    max-width: 720px;
+    margin: 0 auto;
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    background: var(--bone);
+    box-shadow: 10px 10px 0 0 var(--ink);
+    overflow: visible;
+    position: relative;
   }
-  .about-cta { margin-top: 2.5rem; }
+  .chat-suggestions { position: relative; }
+  .chat-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px;
+    border-bottom: 1.5px solid var(--ink);
+    background: linear-gradient(to right, rgba(124,58,237,0.08), transparent 70%);
+  }
+  .chat-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: url("assets/ece.jpg") center 22% / cover;
+    border: 1.5px solid var(--ink);
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0 0 var(--ink);
+  }
+  .chat-id { flex: 1; min-width: 0; }
+  .chat-name {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .chat-sparkle {
+    display: inline-block;
+    animation: sparkleSpin 2.4s ease-in-out infinite;
+    margin-left: 4px;
+  }
+  .chat-status {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 2px;
+  }
+  .dot-pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 0 0 rgba(212,255,61,.7);
+    animation: dotPulse 2s ease-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes dotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(212,255,61,.7); }
+    70%  { box-shadow: 0 0 0 9px rgba(212,255,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(212,255,61,0); }
+  }
+  .chat-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .08em;
+  }
+
+  .chat-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 220px;
+    max-height: min(440px, 58vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    background:
+      radial-gradient(circle at top right, rgba(124,58,237,0.05), transparent 60%),
+      radial-gradient(circle at bottom left, rgba(212,255,61,0.05), transparent 50%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124,58,237,0.35) transparent;
+  }
+  .chat-body::-webkit-scrollbar { width: 6px; }
+  .chat-body::-webkit-scrollbar-track { background: transparent; }
+  .chat-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 3px; }
+  .chat-body::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.5); }
+  /* Fade-out hint at top edge when scrolled */
+  .chat-body { mask-image: linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%); }
+  .msg {
+    display: flex;
+    max-width: 86%;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity .45s cubic-bezier(.2,.7,.2,1), transform .45s cubic-bezier(.34,1.3,.64,1);
+  }
+  .msg.msg-in { opacity: 1; transform: translateY(0) scale(1); }
+  .msg-ece { align-self: flex-start; }
+  .msg-user { align-self: flex-end; }
+
+  .msg-bubble {
+    padding: 11px 16px 12px;
+    border-radius: 18px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    position: relative;
+    word-wrap: break-word;
+  }
+  .msg-ece .msg-bubble {
+    background: #f4efe4;
+    color: var(--ink);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-bottom-left-radius: 6px;
+  }
+  .msg-user .msg-bubble {
+    background: var(--violet);
+    color: var(--bone);
+    border-bottom-right-radius: 6px;
+  }
+  .msg-bubble strong { font-weight: 600; }
+  .msg-ece .msg-bubble strong { color: var(--violet); }
+  .msg-bubble a {
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+  .msg-bubble a:hover { color: var(--lime); border-color: var(--lime); text-decoration: none; }
+
+  .bounce-arrow {
+    display: inline-block;
+    animation: arrowBounce 1.6s ease-in-out infinite;
+  }
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(4px); }
+  }
+
+  /* Typing indicator */
+  .msg-bubble-typing {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 16px;
+  }
+  .msg-bubble-typing span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    animation: typingDot 1.2s ease-in-out infinite;
+  }
+  .msg-bubble-typing span:nth-child(2) { animation-delay: .18s; }
+  .msg-bubble-typing span:nth-child(3) { animation-delay: .36s; }
+  @keyframes typingDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+    30%           { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .chat-suggestions {
+    padding: 14px 18px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid var(--rule);
+    background: rgba(124,58,237,0.04);
+  }
+  .chip-q {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .02em;
+    background: var(--bone);
+    color: var(--ink);
+    border: 1.2px solid var(--ink);
+    padding: 8px 14px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s, color .2s, box-shadow .2s;
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+  .chip-q:hover:not(:disabled) {
+    background: var(--lime);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--ink);
+  }
+  .chip-q.asked,
+  .chip-q:disabled {
+    opacity: 0.4;
+    cursor: default;
+    text-decoration: line-through;
+  }
+  .chip-q.asked:hover { transform: none; box-shadow: none; background: var(--bone); }
+
+  /* "..." more questions button */
+  .chip-more {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+    background: transparent;
+    color: var(--violet);
+    border: 1.2px dashed var(--violet);
+    padding: 6px 14px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all .2s;
+    line-height: 1;
+  }
+  .chip-more:hover {
+    background: var(--violet);
+    color: var(--bone);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    border-style: solid;
+  }
+  /* Floating popup with more questions */
+  .more-popup {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    right: 14px;
+    width: min(330px, calc(100vw - 48px));
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 8px 8px 0 0 var(--ink);
+    padding: 14px;
+    z-index: 30;
+    transform-origin: bottom right;
+    animation: popupIn .35s cubic-bezier(.34,1.4,.64,1);
+  }
+  .more-popup[hidden] { display: none; }
+  .more-popup::after {
+    content: "";
+    position: absolute;
+    bottom: -8px; right: 26px;
+    width: 14px; height: 14px;
+    background: var(--bone);
+    border-right: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    transform: rotate(45deg);
+  }
+  .more-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .more-close {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 22px; line-height: 1;
+    color: var(--ink); padding: 0 6px;
+    font-family: inherit;
+    border-radius: 4px;
+    transition: color .2s, background .2s;
+  }
+  .more-close:hover { color: var(--violet); }
+  .more-chips {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .more-chips .chip-q {
+    text-align: left;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .chip-ask {
+    margin-top: 6px;
+    background: var(--lime) !important;
+    border-color: var(--ink) !important;
+    color: var(--ink) !important;
+    font-weight: 600;
+  }
+  .chip-ask em {
+    font-style: italic;
+    color: var(--violet);
+    margin-left: 4px;
+    font-family: var(--serif);
+    font-weight: 400;
+  }
+  .chip-ask:hover:not(:disabled) {
+    box-shadow: 3px 3px 0 0 var(--ink);
+    transform: translateY(-2px);
+  }
+  @keyframes popupIn {
+    from { opacity: 0; transform: scale(0.85) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @media (max-width: 600px) {
+    .more-popup { right: 14px; left: 14px; width: auto; }
+    .more-popup::after { right: 38px; }
+  }
+
+  /* Inline contact form (rendered as a chat bubble) */
+  .msg-form {
+    max-width: 100% !important;
+    align-self: stretch !important;
+  }
+  .inline-form {
+    display: flex; flex-direction: column; gap: 9px;
+    padding: 18px;
+    background: #f4efe4;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 18px;
+    border-bottom-left-radius: 6px;
+    width: 100%;
+  }
+  .inline-form input, .inline-form textarea {
+    font: 400 14.5px/1.4 var(--sans);
+    background: var(--bone);
+    border: 1px solid var(--rule-strong);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: var(--ink);
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  .inline-form input:focus, .inline-form textarea:focus {
+    outline: none; border-color: var(--violet);
+  }
+  .inline-form button {
+    background: var(--ink);
+    color: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 9px 18px 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    cursor: pointer;
+    align-self: flex-end;
+    text-transform: lowercase;
+    transition: all .2s;
+    font-weight: 500;
+  }
+  .inline-form button:hover:not(:disabled) {
+    background: var(--violet);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--ink);
+  }
+  .inline-form button:disabled { opacity: 0.4; cursor: default; }
+  .inline-form-msg {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+    min-height: 1em;
+    margin-top: -3px;
+  }
+  .inline-form-msg.success { color: var(--violet); }
+
+  @media (max-width: 600px) {
+    .chat-tag { display: none; }
+    .chat-body { padding: 16px; }
+    .chat-suggestions { padding: 12px 14px 16px; }
+    .msg { max-width: 92%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chat-sparkle, .bounce-arrow, .dot-pulse, .msg-bubble-typing span { animation: none; }
+  }
+
+  /* (Legacy about — unused after chat refactor) */
+  .about-body {
+    display: flex; flex-direction: column;
+    gap: clamp(3rem, 6vw, 5rem);
+    max-width: 86ch;
+  }
+  .about-para {
+    display: grid;
+    grid-template-columns: clamp(80px, 9vw, 130px) 1fr;
+    gap: clamp(20px, 3vw, 44px);
+    position: relative;
+    align-items: start;
+  }
+  /* Big decorative italic serif number */
+  .para-num {
+    font-family: var(--serif);
+    font-style: normal;
+    color: var(--violet);
+    line-height: 0.85;
+    position: relative;
+    padding-top: 0.05em;
+  }
+  .para-num em {
+    font-size: clamp(56px, 7.5vw, 104px);
+    font-style: italic;
+    font-weight: 400;
+    display: inline-block;
+    letter-spacing: -0.02em;
+  }
+  .para-num::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 4px;
+    width: 56px;
+    height: 2px;
+    background: var(--violet);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(.2,.7,.2,1);
+    transition-delay: 0.45s;
+  }
+
+  .para-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.9rem;
+  }
+  .para-text {
+    font-size: clamp(1.04rem, 1.3vw, 1.18rem);
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  /* Animated marker highlight on bold strong */
+  .para-text strong {
+    color: var(--ink);
+    font-weight: 600;
+    background-image: linear-gradient(90deg, rgba(124, 58, 237, 0.22), rgba(124, 58, 237, 0.22));
+    background-repeat: no-repeat;
+    background-size: 0% 38%;
+    background-position: 0 78%;
+    padding: 0 3px;
+    transition: background-size 1.1s cubic-bezier(.2,.7,.2,1);
+    transition-delay: 0.6s;
+  }
+  .about-para.reveal.in .para-text strong { background-size: 100% 38%; }
+
+  /* Drop-cap on first paragraph */
+  .about-para:first-of-type .para-text::first-letter {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 3.4em;
+    line-height: .8;
+    float: left;
+    padding: 8px 12px 0 0;
+    color: var(--ink);
+  }
+
+  /* Per-paragraph scroll-in stagger */
+  .about-para.reveal {
+    opacity: 0;
+    transform: translateY(56px);
+    transition: opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1);
+  }
+  .about-para.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .about-para.reveal.in .para-num::after { transform: scaleX(1); }
+  .about-para.reveal .para-num em {
+    opacity: 0;
+    transform: translateY(-12px) rotate(-6deg);
+    transition: opacity .9s ease .1s, transform .9s cubic-bezier(.34,1.4,.64,1) .1s;
+  }
+  .about-para.reveal.in .para-num em {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+  .about-para.reveal .para-kicker {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity .8s ease .25s, transform .8s ease .25s;
+  }
+  .about-para.reveal.in .para-kicker {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Pull quote breakout */
+  .about-pullquote {
+    position: relative;
+    margin: clamp(1rem, 3vw, 2rem) 0;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+    background: var(--violet);
+    color: var(--bone);
+    border: 1.5px solid var(--ink);
+    box-shadow: 8px 8px 0 0 var(--ink);
+    transform: rotate(-1.2deg);
+    text-align: center;
+    border-radius: 2px;
+    max-width: 36ch;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: visible;
+  }
+  .about-pullquote p {
+    font-family: var(--serif);
+    font-style: normal;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.18;
+    font-weight: 400;
+    color: var(--bone);
+  }
+  .about-pullquote p em {
+    font-style: italic;
+    color: var(--lime);
+  }
+  .about-pullquote .quote-mark {
+    position: absolute;
+    top: -0.45em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(4rem, 7vw, 6rem);
+    line-height: 1;
+    color: var(--lime);
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    width: 1.1em; height: 1.1em;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    padding-top: 0.25em;
+  }
+  .about-pullquote.reveal {
+    opacity: 0;
+    transform: rotate(-1.2deg) translateY(40px) scale(0.96);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.34,1.4,.64,1), box-shadow .3s;
+  }
+  .about-pullquote.reveal.in {
+    opacity: 1;
+    transform: rotate(-1.2deg) translateY(0) scale(1);
+  }
+  .about-pullquote:hover {
+    box-shadow: 12px 12px 0 0 var(--ink);
+    transform: rotate(-1.2deg) translate(-2px, -2px) !important;
+  }
+
+  @media (max-width: 600px) {
+    .about-para { grid-template-columns: 1fr; gap: 8px; }
+    .para-num::after { display: none; }
+    .para-num em { font-size: 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-para.reveal,
+    .about-para.reveal .para-num em,
+    .about-para.reveal .para-kicker,
+    .about-pullquote.reveal { opacity: 1; transform: none; transition: none; }
+    .about-pullquote.reveal { transform: rotate(-1.2deg); }
+    .para-num::after { transform: scaleX(1); transition: none; }
+    .para-text strong { background-size: 100% 38%; transition: none; }
+  }
+
+  .about-cta { margin-top: clamp(3rem, 5vw, 4rem); }
 
   /* ---------- Work ---------- */
   .work-grid { display: grid; grid-template-columns: 1fr; gap: clamp(1.25rem, 2.5vw, 2rem); }
@@ -489,8 +1055,45 @@
     display: flex; flex-direction: column; gap: 1.25rem;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     position: relative;
+    isolation: isolate;
+    overflow: hidden;
   }
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    transition: opacity .55s cubic-bezier(.2,.7,.2,1);
+  }
+  .card::before {
+    width: 240px; height: 240px;
+    background: var(--violet);
+    top: -70px; left: -70px;
+    animation: cardDrift1 12s ease-in-out infinite;
+  }
+  .card::after {
+    width: 220px; height: 220px;
+    background: var(--lime);
+    bottom: -70px; right: -60px;
+    animation: cardDrift2 16s ease-in-out infinite;
+  }
+  .card:hover::before { opacity: 0.38; }
+  .card:hover::after { opacity: 0.42; }
   .card:hover { transform: translateY(-3px); box-shadow: 0 24px 40px -28px rgba(14,13,20,0.25); border-color: var(--ink); }
+  @keyframes cardDrift1 {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(36px, 28px) scale(1.05); }
+  }
+  @keyframes cardDrift2 {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(-28px, -22px) scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card::before, .card::after { animation: none; }
+  }
   .card.feature { grid-column: 1 / -1; }
   @media (min-width: 900px) {
     .card.feature { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); padding: clamp(1.75rem, 3vw, 2.5rem); }
@@ -657,78 +1260,805 @@
     width: 12px; height: 1px; background: var(--ink);
   }
 
-  /* ---------- Education ---------- */
+  /* Experience scroll animations */
+  .exp-row.reveal {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
+  }
+  .exp-row.reveal.in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  /* Dot indicator pops in with bounce */
+  .exp-row.reveal::before {
+    transform: scale(0);
+    transition: transform .6s cubic-bezier(.34,1.6,.64,1) .4s;
+  }
+  .exp-row.reveal.in::before { transform: scale(1); }
+  /* Stick badge — gentle continuous wobble + entrance */
+  .exp-row.reveal .exp-stick {
+    opacity: 0;
+    transition: opacity .7s ease .55s;
+  }
+  .exp-row.reveal.in .exp-stick {
+    opacity: 1;
+    animation: stickWobble 5s ease-in-out infinite 1.5s;
+  }
+  .exp-row:nth-child(even).reveal.in .exp-stick {
+    animation: stickWobbleRev 5.5s ease-in-out infinite 1.5s;
+  }
+  @keyframes stickWobble {
+    0%, 100% { transform: rotate(-2deg) translateY(0); }
+    50%      { transform: rotate(-5deg) translateY(-2px); }
+  }
+  @keyframes stickWobbleRev {
+    0%, 100% { transform: rotate(1.5deg) translateY(0); }
+    50%      { transform: rotate(4.5deg) translateY(-2px); }
+  }
+  /* Stats stagger reveal */
+  .exp-row.reveal .exp-stats span {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .exp-row.reveal.in .exp-stats span { opacity: 1; transform: translateY(0); }
+  .exp-row.reveal.in .exp-stats span:nth-child(1) { transition-delay: 0.7s; }
+  .exp-row.reveal.in .exp-stats span:nth-child(2) { transition-delay: 0.82s; }
+  .exp-row.reveal.in .exp-stats span:nth-child(3) { transition-delay: 0.94s; }
+  /* Company name underline draw on reveal */
+  .exp-company {
+    position: relative;
+    display: inline-block;
+  }
+  .exp-row.reveal .exp-company::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    height: 2.5px;
+    width: 100%;
+    background: var(--violet);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(.2,.7,.2,1) 0.6s;
+  }
+  .exp-row[data-accent="lime"].reveal .exp-company::after { background: var(--lime); }
+  .exp-row.reveal.in .exp-company::after { transform: scaleX(1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exp-row.reveal, .exp-row.reveal .exp-stick,
+    .exp-row.reveal::before, .exp-row.reveal .exp-stats span,
+    .exp-row.reveal .exp-company::after {
+      opacity: 1; transform: none; animation: none; transition: none;
+    }
+    .exp-row.reveal .exp-company::after { transform: scaleX(1); }
+  }
+
+  /* ---------- Education — fun edition ---------- */
   .edu-grid {
     display: grid; grid-template-columns: 1fr; gap: 1.5rem;
     margin-bottom: 2.5rem;
   }
-  @media (min-width: 800px) { .edu-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  @media (min-width: 800px) {
+    .edu-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .edu-card-3 { grid-column: 1 / -1; }
+  }
+
+  /* Wide horizontal card for the third (no-photo) entry */
+  .edu-card-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: clamp(1.6rem, 2.5vw, 2rem) clamp(1.6rem, 2.5vw, 2rem);
+    align-items: stretch;
+  }
+  @media (min-width: 800px) {
+    .edu-card-3 {
+      grid-template-columns: minmax(220px, 280px) 1fr;
+      gap: clamp(28px, 4vw, 56px);
+      padding: clamp(1.6rem, 2.5vw, 2rem) clamp(2rem, 3vw, 2.6rem);
+      align-items: start;
+    }
+  }
+  .edu-card-3 .edu-side {
+    display: flex; flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .edu-card-3 .edu-badges {
+    margin: 0 0 2px;
+    gap: 6px;
+  }
+  /* Quieter stickers in the wide card — less wobble */
+  .edu-card-3 .edu-stick-violet,
+  .edu-card-3 .edu-stick-lime { transform: rotate(-2deg); }
+  .edu-card-3 .edu-stick-bone { transform: rotate(0); }
+  .edu-card-3:hover .edu-stick-violet,
+  .edu-card-3:hover .edu-stick-lime { transform: rotate(-4deg) translateY(-1px); }
+  .edu-card-3:hover .edu-stick-bone { transform: rotate(2deg); }
+
+  .edu-card-3 .edu-side h3 {
+    font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .edu-card-3 .edu-side .edu-degree {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .edu-card-3 .edu-main {
+    display: flex; flex-direction: column;
+    gap: 10px;
+    padding-top: 4px;
+    border-top: none;
+  }
+  @media (min-width: 800px) {
+    .edu-card-3 .edu-main {
+      padding-top: 0;
+      padding-left: clamp(20px, 2vw, 28px);
+      border-left: 1px dashed var(--ink);
+    }
+  }
+  .edu-card-3 .edu-line {
+    margin: 0;
+    max-width: 64ch;
+    font-size: 0.97rem;
+    line-height: 1.55;
+    font-family: var(--sans);
+    font-style: normal;
+    color: var(--ink-2);
+  }
+  /* Hover: gentler than the photo cards (it has no photo to lift with) */
+  .edu-card-3:hover {
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
   .edu-card {
     background: var(--bone);
-    border: 1px solid var(--rule-strong);
-    border-radius: 8px;
-    padding: 1.75rem 1.75rem 1.5rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    padding: 2.2rem 1.9rem 1.7rem;
     display: flex; flex-direction: column; gap: .55rem;
     position: relative;
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow: visible;
+    isolation: isolate;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s;
   }
+  /* Keep watermark contained — clip it inside the card */
+  .edu-card .edu-watermark { clip-path: inset(0 0 0 0 round 11px); }
   .edu-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--ink);
-    box-shadow: 0 22px 38px -28px rgba(14,13,20,0.2);
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 10px 10px 0 0 var(--ink);
   }
-  .edu-stick {
+  .edu-card-2:hover { transform: translateY(-4px) rotate(0.5deg); }
+
+  /* Polaroid photo overlay */
+  .edu-polaroid {
     position: absolute;
-    top: -14px; right: 18px;
-    font-size: 12px;
-    padding: 6px 14px 7px;
-    transform: rotate(3deg);
+    width: clamp(110px, 13vw, 150px);
+    background: #fff;
+    border: 1px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 8px 8px 10px;
+    z-index: 2;
+    transition: transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s;
+    pointer-events: none;
   }
-  .edu-card:nth-child(2) .edu-stick { transform: rotate(-3deg); }
-  .edu-meta {
-    display: flex; justify-content: space-between; gap: 1rem;
-    margin-bottom: .35rem;
+  .edu-polaroid img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    border-radius: 2px;
+    background: var(--rule);
   }
+  /* Fallback when image fails to load — gradient placeholder */
+  .edu-polaroid.no-img {
+    aspect-ratio: 3/4;
+    width: clamp(110px, 13vw, 150px);
+    position: relative;
+  }
+  .edu-polaroid.no-img::before {
+    content: "drop photo →";
+    position: absolute;
+    inset: 8px;
+    background: linear-gradient(135deg, var(--violet), var(--lime));
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--bone);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    margin-bottom: 10px;
+  }
+  .edu-polaroid-caption {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-2);
+    text-align: center;
+  }
+  /* Position + rotation per card */
+  .edu-polaroid-1 {
+    top: -18px; right: -14px;
+    transform: rotate(6deg);
+  }
+  .edu-polaroid-2 {
+    top: -18px; right: -14px;
+    transform: rotate(-5deg);
+  }
+  .edu-polaroid-3 {
+    top: -22px; right: -16px;
+    transform: rotate(7deg);
+  }
+  .edu-card-3:hover .edu-polaroid-3 {
+    transform: rotate(10deg) translateY(-4px) scale(1.04);
+    box-shadow: 9px 9px 0 0 var(--ink);
+  }
+  @media (min-width: 800px) {
+    .edu-polaroid-3 {
+      width: clamp(120px, 12vw, 150px);
+    }
+  }
+  .edu-card:hover .edu-polaroid-1 {
+    transform: rotate(8deg) translateY(-4px) scale(1.04);
+    box-shadow: 9px 9px 0 0 var(--ink);
+  }
+  .edu-card:hover .edu-polaroid-2 {
+    transform: rotate(-7deg) translateY(-4px) scale(1.04);
+    box-shadow: 9px 9px 0 0 var(--ink);
+  }
+  @media (max-width: 540px) {
+    .edu-polaroid { width: 90px; top: -14px; right: -8px; }
+  }
+
+  /* (Watermark removed for simpler Gen-Z layout) */
+  .edu-watermark { display: none; }
+
+  /* Sticker badges */
+  .edu-badges {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .edu-stick-violet {
+    background: var(--violet);
+    color: var(--bone);
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    padding: 6px 12px 7px;
+    transform: rotate(-3deg);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-flex; align-items: center;
+    transition: transform .3s;
+  }
+  .edu-stick-lime {
+    background: var(--lime);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    padding: 6px 12px 7px;
+    transform: rotate(-2deg);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-flex; align-items: center;
+    transition: transform .3s;
+  }
+  .edu-stick-bone {
+    background: var(--bone);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 5px 10px 6px;
+    transform: rotate(2deg);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .06em;
+    border-radius: 999px;
+    display: inline-flex; align-items: center;
+    transition: transform .3s;
+  }
+  .edu-card:hover .edu-stick-violet,
+  .edu-card:hover .edu-stick-lime {
+    transform: rotate(-6deg) translateY(-2px) scale(1.05);
+  }
+  .edu-card:hover .edu-stick-bone {
+    transform: rotate(5deg);
+  }
+
   .edu-card h3 {
-    font-family: var(--serif); font-size: clamp(1.45rem, 2.3vw, 1.95rem);
-    line-height: 1.1; letter-spacing: -.01em;
+    font-family: var(--sans);
+    font-size: clamp(1.45rem, 2.3vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    position: relative; z-index: 1;
+    margin-bottom: 6px;
+  }
+  .edu-card h3 .italic {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
   }
   .edu-degree {
     font-family: var(--sans); font-size: 1.02rem; color: var(--ink); margin: 0;
     font-weight: 500;
+    position: relative; z-index: 1;
+  }
+  .edu-sparkle {
+    display: inline-block;
+    color: var(--violet);
+    margin-left: 4px;
+    animation: eduSparkle 3s ease-in-out infinite;
+  }
+  .edu-card-2 .edu-sparkle { color: var(--ink); }
+  @keyframes eduSparkle {
+    0%, 100% { transform: rotate(0) scale(1); opacity: 1; }
+    50%      { transform: rotate(20deg) scale(1.3); opacity: 0.7; }
   }
   .edu-minor {
     font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
-    color: var(--ink-3); font-weight: 400;
+    color: var(--ink-2); font-weight: 500;
+    background: rgba(124, 58, 237, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
   }
   .edu-line {
     font-family: var(--serif); font-style: italic;
-    font-size: 1.02rem; line-height: 1.45;
-    color: var(--ink-2); max-width: 42ch; margin: .35rem 0 0;
+    font-size: 1.05rem; line-height: 1.45;
+    color: var(--ink-2); max-width: 42ch; margin: .55rem 0 0;
+    position: relative; z-index: 1;
   }
   .edu-thesis {
-    margin-top: 1rem; padding-top: 1rem;
-    border-top: 1px dashed var(--rule-strong);
+    margin-top: 1.1rem; padding-top: 1.1rem;
+    border-top: 1px dashed var(--ink);
+    position: relative; z-index: 1;
   }
   .edu-thesis-label {
     display: inline-block;
-    font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--violet-ink);
-    margin-bottom: .35rem;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--violet);
+    font-weight: 600;
+    margin-bottom: .4rem;
   }
   .edu-thesis p {
     margin: 0; font-family: var(--serif); font-style: italic;
-    font-size: 1rem; line-height: 1.4; color: var(--ink);
-  }
-  .edu-certs {
-    padding-top: 1.75rem; border-top: 1px solid var(--rule);
-  }
-  .edu-certs-list {
-    color: var(--ink-2); font-size: 0.93rem; line-height: 1.75; max-width: 80ch; margin: 0;
+    font-size: 1.02rem; line-height: 1.4; color: var(--ink);
   }
 
-  /* ---------- Writing (long-form) ---------- */
-  .writing-list { display: grid; gap: 1.25rem; }
+  /* Certifications — playful chips */
+  .edu-certs {
+    padding-top: 2.2rem;
+    border-top: 1.5px dashed var(--ink);
+  }
+  .edu-certs-head {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--violet); font-weight: 600;
+    margin: 0 0 1.1rem;
+  }
+  .edu-certs-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .cert-chip {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .02em;
+    background: var(--bone);
+    color: var(--ink);
+    border: 1.2px solid var(--ink);
+    padding: 7px 13px 8px;
+    border-radius: 999px;
+    transition: all .25s cubic-bezier(.34,1.4,.64,1);
+    cursor: default;
+  }
+  .cert-chip em {
+    font-family: var(--mono);
+    font-style: normal;
+    color: var(--violet);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+  .cert-chip:hover {
+    background: var(--lime);
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 3px 3px 0 0 var(--ink);
+  }
+  .cert-chip:nth-child(2n):hover { transform: translateY(-3px) rotate(1deg); }
+  .cert-chip:nth-child(3n):hover { background: var(--violet); color: var(--bone); }
+  .cert-chip:nth-child(3n):hover em { color: var(--lime); }
+
+  /* ---------- Writing — magazine layout ---------- */
+  .mag-masthead {
+    display: flex; align-items: center; gap: 14px;
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .mag-mast-line {
+    flex: 1; height: 1px; background: var(--ink);
+    opacity: 0.5;
+  }
+  .mag-mast-text { font-weight: 600; }
+
+  .writing-mag {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 2vw, 22px);
+  }
+  @media (min-width: 900px) {
+    .writing-mag { grid-template-columns: 1fr 1fr; }
+    .writing-mag-feature { grid-column: 1 / -1; }
+  }
+
+  .writing-mag-card {
+    position: relative;
+    display: block;
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.4rem, 2.2vw, 1.8rem);
+    text-decoration: none !important;
+    color: inherit;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s cubic-bezier(.2,.7,.2,1);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .writing-mag-card *, .writing-mag-card:hover * { text-decoration: none !important; }
+  .writing-mag-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 10px 10px 0 0 var(--ink);
+  }
+
+  /* Decorative big italic serif number, watermark style */
+  .mag-num-bg {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    font-family: var(--serif);
+    font-style: normal;
+    color: var(--violet);
+    line-height: 0.78;
+    user-select: none;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1), color .3s, opacity .3s;
+  }
+  .mag-num-bg em {
+    font-style: italic;
+    font-weight: 400;
+    display: block;
+  }
+  /* Feature: big number bottom-right, semi-transparent */
+  .writing-mag-feature .mag-num-bg {
+    right: -10px; bottom: -32px;
+    opacity: 0.14;
+  }
+  .writing-mag-feature .mag-num-bg em {
+    font-size: clamp(180px, 22vw, 320px);
+  }
+  /* Supporting: smaller number, top-right corner */
+  .writing-mag-card:not(.writing-mag-feature) .mag-num-bg {
+    top: 18px; right: 22px;
+    opacity: 0.5;
+  }
+  .writing-mag-card:not(.writing-mag-feature) .mag-num-bg em {
+    font-size: clamp(60px, 7vw, 92px);
+  }
+  .writing-mag-card:hover .mag-num-bg {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+  .writing-mag-feature:hover .mag-num-bg {
+    opacity: 0.22;
+    transform: scale(1.06) rotate(-3deg);
+  }
+
+  /* Washi tape strip at top */
+  .mag-tape {
+    position: absolute;
+    top: -12px; left: clamp(28px, 4vw, 56px);
+    width: clamp(110px, 14vw, 180px);
+    height: 26px;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 6px, transparent 6px 14px),
+      var(--lime);
+    border: 1px solid rgba(14,13,20,0.25);
+    transform: rotate(-3deg);
+    z-index: 2;
+    opacity: 0.95;
+  }
+  .mag-tape-violet {
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 6px, transparent 6px 14px),
+      var(--violet);
+    transform: rotate(2deg);
+    left: auto; right: clamp(28px, 4vw, 56px);
+  }
+  .writing-mag-feature .mag-tape {
+    width: clamp(160px, 18vw, 240px);
+  }
+
+  /* Content layer */
+  .mag-content { position: relative; z-index: 1; max-width: 56ch; }
+  .writing-mag-feature .mag-content { max-width: 42ch; }
+
+  /* Type sticker (Manifesto / Definition / Comparison) */
+  .mag-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--lime);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 6px 12px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--ink);
+    box-shadow: 3px 3px 0 0 var(--ink);
+    transform: rotate(-2deg);
+    transform-origin: left center;
+    margin-bottom: 18px;
+    transition: transform .3s ease;
+  }
+  .writing-mag-card:hover .mag-type {
+    transform: rotate(-4deg) translateY(-2px);
+  }
+  .mag-type-mark { color: var(--violet); }
+  .writing-mag-card:nth-of-type(3) .mag-type {
+    background: var(--violet);
+    color: var(--bone);
+  }
+  .writing-mag-card:nth-of-type(3) .mag-type-mark { color: var(--lime); }
+
+  .mag-meta {
+    display: flex; flex-wrap: wrap; gap: 4px 8px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .04em; color: var(--ink-2);
+    margin-bottom: 18px;
+  }
+  .mag-meta .dot { color: var(--violet); }
+
+  .mag-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .writing-mag-feature .mag-title {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1;
+  }
+  .mag-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .mag-deck {
+    color: var(--ink-2);
+    font-size: clamp(14px, 1.1vw, 16px);
+    line-height: 1.55;
+    margin: 0 0 22px;
+  }
+  .writing-mag-feature .mag-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(17px, 1.7vw, 20px);
+    color: var(--ink);
+    line-height: 1.35;
+    max-width: 36ch;
+  }
+
+  /* Foot hidden — replaced by hover overlay */
+  .mag-foot { display: none; }
+  .mag-cta, .mag-hint { display: none; }
+
+  /* Hover blur overlay — clean "Read" text */
+  .writing-mag-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(244, 239, 228, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+    z-index: 4;
+    border-radius: inherit;
+  }
+  .writing-mag-card::after {
+    content: attr(data-cta) " →";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 34px);
+    color: var(--ink);
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity .35s ease, transform .4s cubic-bezier(.34,1.4,.64,1);
+    pointer-events: none;
+    z-index: 5;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+  }
+  .writing-mag-card:hover::before { opacity: 1; }
+  .writing-mag-card:hover::after { opacity: 1; transform: scale(1); }
+
+  /* Same hover behavior for compact More cards */
+  .writing-list.compact .writing-card { position: relative; }
+  .writing-list.compact .writing-card .writing-card-foot { display: none; }
+  .writing-list.compact .writing-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(244, 239, 228, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity .3s;
+    pointer-events: none;
+    z-index: 4;
+    border-radius: inherit;
+  }
+  .writing-list.compact .writing-card::after {
+    content: attr(data-cta) " →";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 2.4vw, 24px);
+    color: var(--ink);
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity .3s, transform .35s cubic-bezier(.34,1.4,.64,1);
+    pointer-events: none;
+    z-index: 5;
+    text-transform: lowercase;
+  }
+  .writing-list.compact .writing-card:hover::before { opacity: 1; }
+  .writing-list.compact .writing-card:hover::after { opacity: 1; transform: scale(1); }
+
+  /* Reveal */
+  .writing-mag-card.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), box-shadow .3s, translate .3s;
+  }
+  .writing-mag-card.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .writing-mag-card.reveal.in:hover { transform: translateY(-4px); }
+  .writing-mag-card.reveal:nth-of-type(2) { transition-delay: 0.1s; }
+  .writing-mag-card.reveal:nth-of-type(3) { transition-delay: 0.2s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .writing-mag-card.reveal, .mag-num-bg, .mag-type {
+      opacity: 1; transform: none; transition: none;
+    }
+    .writing-mag-feature .mag-num-bg { opacity: 0.14; }
+    .writing-mag-card:not(.writing-mag-feature) .mag-num-bg { opacity: 0.5; }
+  }
+
+  /* ---------- Writing (legacy + compact 'More') ---------- */
+  .writing-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) {
+    .writing-list { grid-template-columns: 1fr 1fr; }
+  }
+  /* Compact variant for "More on nautilida.ai" — tighter, more per row */
+  .writing-list.compact {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 700px) {
+    .writing-list.compact { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1100px) {
+    .writing-list.compact { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .writing-list.compact .writing-card {
+    padding: 1.05rem 1.2rem 1.1rem;
+    gap: 0.5rem;
+  }
+  .writing-list.compact .writing-title {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.2;
+  }
+  .writing-list.compact .writing-deck { display: none; }
+  .writing-list.compact .writing-card-foot {
+    margin-top: 0;
+    padding-top: 0.55rem;
+    border-top: none;
+  }
+  .writing-list.compact .writing-hint { display: none; }
+  .writing-list.compact .writing-cta {
+    font-size: 11px;
+  }
+  .writing-list.compact .writing-meta {
+    font-size: 10px;
+    gap: 4px 12px;
+  }
+
+  /* Writing cards — link to reader pages */
+  .writing-card,
+  .writing-card:hover,
+  .writing-card:focus,
+  .writing-card:active,
+  .writing-card *,
+  .writing-card:hover * {
+    text-decoration: none !important;
+  }
+  .writing-card {
+    display: grid;
+    gap: 0.85rem;
+    padding: clamp(1.4rem, 2.4vw, 2rem);
+    border: 1px solid var(--rule-strong);
+    border-radius: 8px;
+    background: var(--bone);
+    color: inherit;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .writing-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 0 var(--ink);
+  }
+  .writing-card-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 14px; flex-wrap: wrap; margin-top: .25rem;
+    padding-top: .9rem; border-top: 1px dashed var(--rule-strong);
+  }
+  .writing-cta {
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: .04em; color: var(--violet);
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: gap .25s;
+  }
+  .writing-card:hover .writing-cta { gap: 12px; color: var(--ink); }
+  .writing-cta .arr { transition: transform .25s; }
+  .writing-card:hover .writing-cta .arr { transform: translateX(3px); }
+  .writing-hint {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* Legacy details styles (unused after reader migration but preserved for safety) */
   .writing-item {
     border: 1px solid var(--rule-strong);
     border-radius: 8px;
@@ -914,8 +2244,45 @@
   }
   .writing-more-foot .arr { color: var(--ink); }
 
-  /* ---------- Media (LinkedIn embeds) ---------- */
-  /* CSS columns give a masonry feel without JS — short cards don't leave gaps. */
+  /* ---------- Media (categorized) ---------- */
+  .media-tabs {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 clamp(20px, 3vw, 32px);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .media-tab {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    background: var(--bone);
+    color: var(--ink);
+    border: 1.2px solid var(--ink);
+    padding: 7px 13px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all .25s cubic-bezier(.34,1.4,.64,1);
+    font-weight: 500;
+  }
+  .media-tab:hover {
+    background: var(--lime);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--ink);
+  }
+  .media-tab.is-active {
+    background: var(--ink);
+    color: var(--bone);
+    border-color: var(--ink);
+    box-shadow: 3px 3px 0 0 var(--violet);
+  }
+  .media-tab.is-active:hover {
+    background: var(--violet);
+  }
+
+  .media-panel { display: none; }
+  .media-panel.is-active { display: block; }
+  .media-panel[hidden] { display: none; }
+
   .media-grid {
     column-count: 1;
     column-gap: 1.5rem;
@@ -931,6 +2298,7 @@
     overflow: hidden;
     background: #fff;
     display: flex; justify-content: center;
+    min-height: 200px;
     transition: border-color .2s ease, box-shadow .2s ease;
   }
   .media-item:hover { border-color: var(--ink); box-shadow: 0 18px 36px -28px rgba(14,13,20,0.25); }
@@ -940,6 +2308,330 @@
     max-width: 504px;
     border: 0;
   }
+
+  /* Visual-first LinkedIn cards — image-forward */
+  .li-card-visual {
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: hidden;
+  }
+  .li-card-visual .li-visual {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    background: linear-gradient(135deg, var(--violet) 0%, #5c3aff 60%, var(--lime) 200%);
+    position: relative;
+    overflow: hidden;
+  }
+  .li-card-visual .li-visual img,
+  .li-card-visual .li-visual video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1), object-fit 0s;
+  }
+  /* Hover: card pops out, video shows full original aspect (no crop) */
+  .li-track > .li-card-visual {
+    transition: transform .45s cubic-bezier(.34,1.3,.64,1), box-shadow .35s, opacity .35s, z-index 0s;
+  }
+  .li-track > .li-card-visual:hover {
+    transform: scale(1.18) !important;
+    z-index: 10;
+    box-shadow: 14px 14px 0 0 var(--ink) !important;
+    opacity: 1 !important;
+  }
+  .li-card-visual:hover .li-visual {
+    background: var(--ink);
+  }
+  .li-card-visual:hover .li-visual video,
+  .li-card-visual:hover .li-visual img {
+    object-fit: contain;
+  }
+  .li-card-visual .li-visual.no-img::before {
+    content: "drop image →";
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--bone);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 18px);
+  }
+  .li-card-visual .li-meta {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px 14px;
+    background: #fff;
+    border-top: 1.5px solid var(--ink);
+  }
+  .li-card-visual .li-name-mini {
+    flex: 1;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .li-card-visual .li-cta-mini {
+    width: 28px; height: 28px;
+    background: var(--violet);
+    color: var(--bone);
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform .25s, background .2s;
+  }
+  .li-card-visual:hover .li-cta-mini {
+    transform: translate(2px, -2px);
+    background: var(--ink);
+  }
+
+  /* LinkedIn discovery deck — horizontal carousel with snap + peek */
+  .li-deck {
+    position: relative;
+    margin: 0 calc(-1 * var(--pad));
+  }
+  .li-deck-hint {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+    opacity: 0.6;
+    transition: opacity .4s;
+  }
+  .li-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 28px var(--pad) 36px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    perspective: 1200px;
+  }
+  .li-track::-webkit-scrollbar { display: none; }
+  .li-track > .li-card {
+    flex: 0 0 clamp(280px, 38vw, 380px);
+    scroll-snap-align: center;
+    transition: transform .45s cubic-bezier(.34,1.3,.64,1), box-shadow .35s, opacity .35s;
+    opacity: 0.55;
+    transform: scale(0.93) rotate(-1.5deg);
+    transform-origin: center;
+  }
+  .li-track > .li-card.is-active {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+  .li-track > .li-card:nth-of-type(even):not(.is-active) {
+    transform: scale(0.93) rotate(1.5deg);
+  }
+  .li-track > .li-card:hover { opacity: 1; }
+
+  /* Controls under deck */
+  .li-deck-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 0 var(--pad);
+  }
+  .li-nav {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1;
+    transition: all .25s cubic-bezier(.34,1.4,.64,1);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .li-nav:hover {
+    background: var(--ink);
+    color: var(--bone);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 0 var(--violet);
+  }
+  .li-counter {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .14em;
+    color: var(--ink);
+    font-weight: 600;
+    min-width: 80px;
+    text-align: center;
+  }
+  .li-shuffle {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    background: var(--lime);
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    padding: 9px 16px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all .25s cubic-bezier(.34,1.4,.64,1);
+  }
+  .li-shuffle:hover {
+    background: var(--violet);
+    color: var(--bone);
+    transform: translateY(-2px) rotate(-2deg);
+    box-shadow: 3px 3px 0 0 var(--ink);
+  }
+
+  @media (max-width: 700px) {
+    .li-deck-controls { gap: 8px; }
+    .li-nav { width: 40px; height: 40px; font-size: 18px; }
+    .li-shuffle { font-size: 11px; padding: 7px 12px 8px; }
+    .li-counter { min-width: 64px; font-size: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .li-track > .li-card { transition: opacity .2s; transform: none !important; opacity: 1; }
+  }
+  .li-card {
+    display: flex; flex-direction: column;
+    gap: 14px;
+    padding: 22px 22px 20px;
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    text-decoration: none !important;
+    color: inherit;
+    transition: transform .25s, box-shadow .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .li-card * { text-decoration: none !important; }
+  .li-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+  .li-head {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .li-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: url("uploads/eceberrak.jpg") center 22% / cover, var(--ink);
+    border: 1px solid var(--ink);
+    flex-shrink: 0;
+  }
+  .li-avatar-nauti {
+    background: url("uploads/nautilida-logo.png") center / cover, var(--ink);
+    border-radius: 8px;
+  }
+  .li-id { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .li-name {
+    font-weight: 600; font-size: 14px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .li-sub {
+    font-family: var(--mono); font-size: 10.5px;
+    color: var(--ink-2);
+    letter-spacing: .02em;
+    margin-top: 2px;
+  }
+  .li-logo {
+    width: 28px; height: 28px;
+    background: #0a66c2;
+    color: #fff;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    font-style: italic;
+    flex-shrink: 0;
+    letter-spacing: -0.02em;
+  }
+  .li-excerpt {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    flex-grow: 1;
+  }
+  .li-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 10px; flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .li-tag {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .08em; text-transform: uppercase;
+    background: var(--lime);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 4px 10px 5px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .li-cta {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .04em;
+    color: var(--violet);
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: gap .25s, color .25s;
+  }
+  .li-cta .arr { transition: transform .25s; }
+  .li-card:hover .li-cta { gap: 10px; color: var(--ink); }
+  .li-card:hover .li-cta .arr { transform: translate(3px, -2px); }
+
+  /* Empty-category placeholder */
+  .media-placeholder {
+    padding: clamp(40px, 6vw, 70px) clamp(28px, 4vw, 48px);
+    background: var(--bone);
+    border: 2px dashed var(--ink);
+    border-radius: 12px;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .media-placeholder .media-ph-icon {
+    display: block;
+    font-size: 48px;
+    color: var(--violet);
+    margin-bottom: 14px;
+    animation: phSpin 6s ease-in-out infinite;
+  }
+  @keyframes phSpin {
+    0%, 100% { transform: rotate(0) scale(1); }
+    50%      { transform: rotate(180deg) scale(1.1); }
+  }
+  .media-placeholder h4 {
+    font-family: var(--sans);
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .media-placeholder p {
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 42ch;
+    margin: 0 auto;
+  }
+
   .media-foot {
     margin-top: clamp(1.5rem, 3vw, 2.5rem);
     padding-top: 1.5rem;
@@ -987,13 +2679,13 @@
   }
   .chip {
     --r: 0deg;
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 9px 14px 10px;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px 8px;
     border: 1px solid var(--rule-strong);
     border-radius: 999px;
     background: var(--bone);
-    color: var(--ink);
-    font-size: 0.92rem;
+    color: var(--ink-2);
+    font-size: 0.86rem;
     font-weight: 500;
     line-height: 1;
     letter-spacing: -.005em;
@@ -1017,20 +2709,8 @@
   }
   .chip:hover .chip-meta { color: var(--lime); }
 
-  .chip.featured {
-    background: var(--bone-2);
-    border-color: var(--ink);
-  }
-  .chip.featured::before {
-    content: "★";
-    color: var(--violet);
-    font-size: 10px;
-    margin-right: -2px;
-    transition: color .25s ease;
-  }
-  .chip.featured:hover { background: var(--violet); color: var(--bone); border-color: var(--violet); box-shadow: 5px 6px 0 var(--ink); }
-  .chip.featured:hover::before { color: var(--lime); }
-  .chip.featured:hover .chip-meta { color: var(--lime); }
+  /* Featured chips — simplified (no ★ marker, just slightly stronger border) */
+  .chip.featured { border-color: var(--ink); }
 
   .chip.cert {
     background: var(--bone);
@@ -1254,10 +2934,9 @@
           <a class="btn secondary" href="#contact">Get in touch</a>
         </div>
         <div class="hero-credentials reveal">
-          <span>Building Nautilida</span>
-          <span>Lifecycle &amp; User Comm</span>
           <span>Ex-Dataiku</span>
           <span>Berlin</span>
+          <a class="hero-cv" href="cv.html">See my CV <span class="arr" aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div class="portrait-wrap reveal" aria-hidden="false">
@@ -1280,18 +2959,276 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 01 — about</div>
-        <h2>A marketer who <span class="italic">ships.</span></h2>
+        <div class="eyebrow">// 01 about</div>
+        <h2>A marketer who <span class="italic">stays close to the user.</span></h2>
       </div>
       <div class="right"></div>
     </div>
-    <div class="about-body">
-      <p>I'm a <strong>T-shaped marketer</strong> — depth in B2B/SaaS growth, communication, and lifecycle; breadth across product, applied AI, GTM automation, and shipping the web surfaces myself. In practice that means I don't hand a brief to a developer and wait for a website — I open Claude Code and ship one. I don't ask an SDR to source leads — I build the agentic flow that does it. I don't write a positioning doc and pray someone reads it — I publish it as a comparison page that AI answer engines cite by name.</p>
-      <p>I'm co-founder and CEO of Nautilida, an AI-native sales platform. I lead product strategy and go-to-market end-to-end alongside a technical co-founder: roadmap, positioning, messaging, customer development. I secured our first LOIs and onboarded our first design partner. I designed the site, wrote every word of it, set up the GTM engine, and operate the lead pipeline. Before Nautilida, I owned user communication at Dataiku (an enterprise AI/analytics platform) — building email and in-product messaging for the freemium-to-paid lifecycle across two distinct user segments.</p>
-      <p>While I keep building Nautilida, I take on a small number of outside engagements — partly to help other B2B teams solve growth problems, partly to give myself room to experiment with new AI tooling and bring what I learn back into the product. What I'm looking for: fractional Head of Growth or founding-marketer collaborations alongside Nautilida, and AI-product projects where I can design, ship, and operate end-to-end.</p>
+
+    <div class="chat-shell reveal">
+      <div class="chat-header">
+        <div class="chat-avatar" aria-hidden="true"></div>
+        <div class="chat-id">
+          <div class="chat-name">ece <span class="chat-sparkle">✨</span></div>
+          <div class="chat-status"><span class="dot-pulse" aria-hidden="true"></span>online · usually replies in 1s</div>
+        </div>
+        <div class="chat-tag">// about</div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="msg msg-ece msg-in">
+          <div class="msg-bubble">hey, ask me anything <span class="bounce-arrow">↓</span></div>
+        </div>
+      </div>
+
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button type="button" class="chip-q" data-q="marketer">what kind of marketer are you?</button>
+        <button type="button" class="chip-q" data-q="build">why do you build things yourself?</button>
+        <button type="button" class="chip-q" data-q="team">how do you work with teams?</button>
+        <button type="button" class="chip-q" data-q="nautilida">what's nautilida about?</button>
+        <button type="button" class="chip-q" data-q="looking">what are you looking for?</button>
+        <button type="button" class="chip-more" id="chipMore" aria-haspopup="dialog" aria-expanded="false" aria-controls="morePopup">···</button>
+
+        <div class="more-popup" id="morePopup" role="dialog" aria-label="More questions" hidden>
+          <div class="more-head">
+            <span>more questions</span>
+            <button type="button" class="more-close" id="moreClose" aria-label="Close">×</button>
+          </div>
+          <div class="more-chips">
+            <button type="button" class="chip-q chip-popup" data-q="germany">how'd you end up in berlin?</button>
+            <button type="button" class="chip-q chip-popup" data-q="dataiku">tell me about dataiku</button>
+            <button type="button" class="chip-q chip-popup" data-q="plandy">tell me about plandy</button>
+            <button type="button" class="chip-q chip-popup" data-q="deep">what's your deep bar exactly?</button>
+            <button type="button" class="chip-q chip-popup" data-q="shipping">what's 'shipping in claude code' about?</button>
+            <button type="button" class="chip-q chip-popup" data-q="ai">what's your AI philosophy?</button>
+            <button type="button" class="chip-q chip-popup" data-q="start">how do we work together?</button>
+            <button type="button" class="chip-q chip-popup chip-ask" data-q="ask">didn't find your answer? <em>ask me ✨</em></button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="about-cta">
-      <a class="linkish" href="#work">See what shipped <span class="arr" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience" data-screen-label="Experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <div class="eyebrow">// 02 — experience</div>
+        <h2>Where I've <span class="italic">worked.</span></h2>
+      </div>
+      <div class="right">
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five years across enterprise SaaS, community-led growth, and AI-native product. Marketing, communication, and GTM ownership at every step.</p>
+      </div>
+    </div>
+
+    <ol class="exp-list">
+
+      <li class="exp-row reveal" data-accent="violet">
+        <div class="exp-time">
+          <span class="exp-years">2025 — Now</span>
+          <span class="stick exp-stick">✦ Co-founder &amp; CEO</span>
+          <span class="exp-where">Berlin · Pre-seed SaaS</span>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-company">Nautilida</h3>
+          <p class="exp-hook"><em>AI Team Lead for Sales — built and ship it top to bottom.</em></p>
+          <div class="exp-stats">
+            <span>First LOIs secured</span>
+            <span>1st design partner onboarded</span>
+            <span>SDR-less GTM engine in production</span>
+          </div>
+          <p>Co-founded an AI-native sales platform that unifies the revenue stack, cross-coordinates sales teams, and automates follow-through across the pipeline.</p>
+          <ul class="exp-bullets">
+            <li>Lead product strategy and GTM end-to-end alongside technical co-founder; own roadmap, positioning, messaging, and customer development.</li>
+            <li>Built and shipped the company website and core marketing surfaces in Claude Code, applying SEO, AEO, and GEO so AI answer engines cite us by name.</li>
+            <li>Designed and operates an automated GTM engine (n8n, outreach sequencing, CRM workflows) for lead gen, qualification, and nurture — replacing manual SDR work with agentic flows.</li>
+            <li>Developed prompt engineering frameworks used across product, content, and customer research.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="exp-row reveal" data-accent="lime">
+        <div class="exp-time">
+          <span class="exp-years">2024 — 2025</span>
+          <span class="stick exp-stick bone">◐ Growth Marketing</span>
+          <span class="exp-where">Berlin · Enterprise SaaS</span>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-company">Dataiku</h3>
+          <p class="exp-hook"><em>Owned user communication for an AI &amp; analytics platform — two segments, one engine.</em></p>
+          <div class="exp-stats">
+            <span>HubSpot email + in-product</span>
+            <span>Freemium-to-paid lifecycle</span>
+            <span>5 teams in the loop</span>
+          </div>
+          <p>Worked cross-functionally with Product, Customer Success, Technical, Content, and Event teams to align communication with product updates and campaigns.</p>
+          <ul class="exp-bullets">
+            <li>Managed two distinct user segments — general users (onboarding, day-to-day clarity) and user champions (advanced usage, long-term engagement).</li>
+            <li>Acted as a direct point of contact for users, resolving adoption-related questions and supporting freemium usage with awareness of extension and renewal contexts.</li>
+            <li>Joined the initiative at an early stage and helped establish the communication workflows the team continues to scale.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="exp-row reveal" data-accent="violet">
+        <div class="exp-time">
+          <span class="exp-years">2022</span>
+          <span class="stick exp-stick violet">✸ Creative Marketing</span>
+          <span class="exp-where">Istanbul · B2B Software</span>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-company">CRS Soft</h3>
+          <p class="exp-hook"><em>UX, SEO, and content for B2B software — where marketing and product overlap.</em></p>
+          <div class="exp-stats">
+            <span>UX + SEO</span>
+            <span>Employer branding</span>
+            <span>Miro research frameworks</span>
+          </div>
+          <p>Worked at the intersection of UX, SEO, and content for enterprise software products.</p>
+          <ul class="exp-bullets">
+            <li>Contributed to UX, SEO, and content optimization for software products, improving user flows, discoverability, and usability.</li>
+            <li>Supported HR marketing and employer branding initiatives, including career pages and recruitment-focused content.</li>
+            <li>Designed and optimized user journeys and research frameworks in Miro, aligning UX thinking with performance-oriented marketing and HR goals.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="exp-row reveal" data-accent="lime">
+        <div class="exp-time">
+          <span class="exp-years">2020 — 2022</span>
+          <span class="stick exp-stick bone">▶ Community &amp; Content</span>
+          <span class="exp-where">Istanbul · Event SaaS</span>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-company">Plandy</h3>
+          <p class="exp-hook"><em>Translated community feedback into product and messaging — feet on the ground, hands on the loop.</em></p>
+          <div class="exp-stats">
+            <span>Live events &amp; activations</span>
+            <span>BDR ↔ Product ↔ Marketing</span>
+            <span>Community-led acquisition</span>
+          </div>
+          <p>Sat between BDR, product, and growth teams at an event discovery and ticketing SaaS, turning community signal into messaging and feature decisions.</p>
+          <ul class="exp-bullets">
+            <li>Collaborated with BDR and growth teams on community-led acquisition initiatives.</li>
+            <li>Represented the platform at events and community activations, gathering direct feedback from users and event organizers on discovery, ticketing, and usability.</li>
+            <li>Facilitated feedback loops between users, organizers, product, and marketing teams to improve onboarding, listings, and feature communication.</li>
+            <li>Supported content and messaging across digital channels to increase event visibility, user engagement, and platform awareness.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="exp-row reveal" data-accent="violet">
+        <div class="exp-time">
+          <span class="exp-years">2019 — 2022</span>
+          <span class="stick exp-stick violet">✦ Marketing Content Manager</span>
+          <span class="exp-where">Istanbul · Student community</span>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-company">Community Bilgi</h3>
+          <p class="exp-hook"><em>Ran social and showed up in person — the campus chapter of marketing-by-doing.</em></p>
+          <div class="exp-stats">
+            <span>Social media ownership</span>
+            <span>Event presence</span>
+            <span>Brand voice on campus</span>
+          </div>
+          <p>Managed the social channels and shaped the voice of Community Bilgi while studying at Istanbul Bilgi University. The first place I owned a brand publicly, ran content end-to-end, and put a face to the work in the room.</p>
+          <ul class="exp-bullets">
+            <li>Owned the day-to-day on social — content calendar, copy, visuals, and the rhythm of posting across the community's channels.</li>
+            <li>Took an active role in on-campus events: representing the community, gathering signal, building relationships with students and partners.</li>
+            <li>Translated event energy into post-event content and recurring storylines that kept the brand alive between activations.</li>
+          </ul>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section" id="education" data-screen-label="Education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <div class="eyebrow">// 03 — education</div>
+        <h2>School <span class="italic">era.</span></h2>
+      </div>
+      <div class="right">
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Two cities, two degrees, plus the certifications that stuck. Where I learned how stories travel and where digital meets policy.</p>
+      </div>
+    </div>
+
+    <div class="edu-grid">
+
+      <article class="edu-card edu-card-1 reveal">
+        <div class="edu-polaroid edu-polaroid-1">
+          <img src="uploads/edu-hwr.jpg" alt="HWR Berlin diploma" loading="lazy" onerror="this.style.display='none'; this.parentNode.classList.add('no-img');" />
+          <span class="edu-polaroid-caption">Berlin · '25</span>
+        </div>
+        <div class="edu-badges">
+          <span class="stick edu-stick-violet">★ M.A.</span>
+          <span class="stick edu-stick-bone">'23 → '25</span>
+          <span class="stick edu-stick-bone">Berlin · DE</span>
+        </div>
+        <h3>HWR <span class="italic">Berlin.</span></h3>
+        <p class="edu-degree">Political Economy <span class="edu-sparkle">✦</span></p>
+        <p class="edu-line">Economic policy, governance, digital transformation. The tech-meets-policy itch started getting concrete here.</p>
+        <div class="edu-thesis">
+          <span class="edu-thesis-label">◆ Thesis dropped 2025</span>
+          <p><em>Digitalization &amp; Technological Transformation in Retail Chains —</em> implications for the labor market, a USA / Germany comparison.</p>
+        </div>
+      </article>
+
+      <article class="edu-card edu-card-2 reveal">
+        <div class="edu-polaroid edu-polaroid-2">
+          <img src="uploads/edu-bilgi.jpg" alt="Bilgi University graduation" loading="lazy" onerror="this.style.display='none'; this.parentNode.classList.add('no-img');" />
+          <span class="edu-polaroid-caption">Istanbul · '23</span>
+        </div>
+        <div class="edu-badges">
+          <span class="stick edu-stick-lime">✸ B.A.</span>
+          <span class="stick edu-stick-bone">'19 → '23</span>
+          <span class="stick edu-stick-bone">Istanbul · TR</span>
+        </div>
+        <h3>Istanbul Bilgi <span class="italic">University.</span></h3>
+        <p class="edu-degree">International Relations &amp; PR <span class="edu-minor">+ marketing minor</span> <span class="edu-sparkle">✦</span></p>
+        <p class="edu-line">Where I learned how stories travel — across borders, audiences, channels. The marketing toolkit started here.</p>
+      </article>
+
+      <article class="edu-card edu-card-3 reveal">
+        <div class="edu-side">
+          <div class="edu-badges">
+            <span class="stick edu-stick-violet">◐ Associate</span>
+            <span class="stick edu-stick-bone">'20 → '22</span>
+            <span class="stick edu-stick-bone">AÖF · TR</span>
+          </div>
+          <h3>Anadolu <span class="italic">Üniversitesi.</span></h3>
+          <p class="edu-degree" style="margin:0;">Social Media Management <span class="edu-minor">parallel · incomplete</span> <span class="edu-sparkle">✦</span></p>
+        </div>
+        <div class="edu-main">
+          <p class="edu-line">Social media strategy, digital marketing, and brand communication on a base of media studies, new communication technologies, and research methods.</p>
+          <p class="edu-line">Interdisciplinary coursework across content management, digital law, and media entrepreneurship — taken in parallel with the Bilgi B.A.</p>
+        </div>
+        <div class="edu-polaroid edu-polaroid-3">
+          <img src="uploads/edu-diploma.jpg" alt="Graduation diploma scroll" loading="lazy" onerror="this.style.display='none'; this.parentNode.classList.add('no-img');" />
+          <span class="edu-polaroid-caption">'23 · diploma drop</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="edu-certs reveal">
+      <h4 class="edu-certs-head">// certifications that stuck</h4>
+      <div class="edu-certs-grid">
+        <span class="cert-chip">HubSpot Sales Hub</span>
+        <span class="cert-chip">HubSpot Reporting</span>
+        <span class="cert-chip">HubSpot Email Marketing</span>
+        <span class="cert-chip">Google Ads <em>· certified</em></span>
+        <span class="cert-chip">Google Digital Marketing & E-commerce</span>
+        <span class="cert-chip">Dataiku Core Designer</span>
+        <span class="cert-chip">Field Guide to HCD <em>· IDEO.org</em></span>
+        <span class="cert-chip">Basics of Strategic Management</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1301,11 +3238,11 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 02 — selected work</div>
+        <div class="eyebrow">// 04 — selected work</div>
         <h2>Things I designed, built, and <span class="italic">shipped.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five projects that show what "marketing that ships" looks like in practice — websites, automations, GTM engines, and category content I built end-to-end.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Four projects that show what "marketing that ships" looks like in practice: websites, automations, microsites, and category content built end-to-end. Tap any card for the full story.</p>
       </div>
     </div>
 
@@ -1317,7 +3254,7 @@
           <span class="grid-bg" aria-hidden="true"></span>
           <span class="thumb-mono">nautilida.ai</span>
           <div class="thumb-fig"><em>Marketing that ships</em><span class="thumb-sub">— site live in 3 weeks</span></div>
-          <span class="thumb-num">01 / 05</span>
+          <span class="thumb-num">01 / 04</span>
         </div>
         <div>
           <div class="kicker">WEBSITE · AEO/GEO · CONTENT</div>
@@ -1330,7 +3267,7 @@
           </ul>
           <div class="card-foot">
             <span class="meta">2025 — 2026</span>
-            <a class="linkish" href="https://nautilida.ai" target="_blank" rel="noopener">View nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
+            <a class="linkish" href="projects/nautilida.html">View the case study <span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -1347,7 +3284,7 @@
   notifyChat(payload);
 }
 // → 0 € infra · MIT</pre>
-          <span class="thumb-num">02 / 05</span>
+          <span class="thumb-num">02 / 04</span>
         </div>
         <div class="kicker">AUTOMATION · OPEN SOURCE</div>
         <h3>Inbound lead automation, <span class="italic">Apps Script edition</span></h3>
@@ -1365,52 +3302,6 @@
 
       <!-- Card 3 -->
       <article class="card">
-        <div class="thumb thumb-3">
-          <svg class="nodes" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <defs>
-              <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.08)"/>
-              </pattern>
-            </defs>
-            <rect width="400" height="250" fill="url(#dots)"/>
-            <g fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2">
-              <path d="M40,200 C 90,160 130,180 170,140 S 230,90 300,80" />
-              <path d="M40,200 C 90,200 140,210 200,180 S 270,140 360,150" />
-            </g>
-            <g>
-              <circle cx="40" cy="200" r="6" fill="#D4FF3D"/>
-              <circle cx="170" cy="140" r="5" fill="#fff"/>
-              <circle cx="200" cy="180" r="5" fill="#fff"/>
-              <circle cx="300" cy="80" r="6" fill="#4F32D8" stroke="#fff" stroke-width="1.5"/>
-              <circle cx="360" cy="150" r="6" fill="#4F32D8" stroke="#fff" stroke-width="1.5"/>
-            </g>
-            <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(255,255,255,0.7)">
-              <text x="50" y="222">FORM</text>
-              <text x="148" y="128">APOLLO</text>
-              <text x="180" y="200">n8n</text>
-              <text x="265" y="68">HUBSPOT</text>
-              <text x="332" y="172">MEETING</text>
-            </g>
-          </svg>
-          <span class="thumb-mono">discovery → qualified meeting</span>
-          <span class="thumb-num">03 / 05</span>
-        </div>
-        <div class="kicker">GTM ENGINE · AGENTIC FLOWS</div>
-        <h3>SDR-less outbound <span class="italic">for Nautilida</span></h3>
-        <p class="card-desc">An automated GTM engine that replaces manual SDR work with agentic flows. n8n for sequencing and routing, Apollo for prospecting, HubSpot for CRM, custom prompt frameworks for personalization at scale.</p>
-        <ul class="outcomes">
-          <li>Sourced first design partner cohort</li>
-          <li>Discovery → qualified-meeting in &lt;72h</li>
-          <li>Zero SDR headcount required</li>
-        </ul>
-        <div class="card-foot">
-          <span class="meta">In production</span>
-          <a class="linkish" href="#contact">Case study / get in touch <span class="arr" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-
-      <!-- Card 4 (feature, full width) -->
-      <article class="card feature">
         <div class="thumb thumb-5">
           <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%;">
             <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="1">
@@ -1436,7 +3327,7 @@
             </g>
           </svg>
           <span class="thumb-mono" style="color:rgba(255,255,255,0.7);">nautilida.ai/literacy</span>
-          <span class="thumb-num">04 / 05</span>
+          <span class="thumb-num">03 / 04</span>
         </div>
         <div>
           <div class="kicker">MICROSITE · LONG-FORM NARRATIVE</div>
@@ -1449,7 +3340,7 @@
           </ul>
           <div class="card-foot">
             <span class="meta">2026</span>
-            <a class="linkish" href="https://nautilida.ai/literacy" target="_blank" rel="noopener">nautilida.ai/literacy <span class="arr" aria-hidden="true">→</span></a>
+            <a class="linkish" href="writing/literacy.html">Open the literacy microsite <span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
@@ -1459,7 +3350,7 @@
         <div class="thumb thumb-6">
           <img class="pipeline-img" src="uploads/n8n-pipeline.png" alt="n8n workflow visualization — 12 nodes from Schedule Trigger through Notion read, Claude draft, Google Docs create, to Notion property update" />
           <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/aeo-content-pipeline</span>
-          <span class="thumb-num">05 / 05</span>
+          <span class="thumb-num">04 / 04</span>
         </div>
         <div>
           <div class="kicker">AUTOMATION · AI-NATIVE · OPEN SOURCE</div>
@@ -1487,542 +3378,145 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 03 — writing</div>
+        <div class="eyebrow">// 05 — writing</div>
         <h2>Long-form I <span class="italic">wrote.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Three pieces I wrote for Nautilida — a manifesto, a category definition, and a comparison note. Published live on nautilida.ai; the full text is here too. Tap any title to expand.</p>
+        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Three pieces I wrote for Nautilida — a manifesto, a category definition, and a comparison note. Each opens in its own reader with table of contents and reading progress. Original versions on nautilida.ai.</p>
       </div>
     </div>
 
-    <div class="writing-list">
+    <!-- Magazine masthead -->
+    <div class="mag-masthead reveal" aria-hidden="true">
+      <span class="mag-mast-line"></span>
+      <span class="mag-mast-text">// READS · ISSUE 01 · SPRING 2026</span>
+      <span class="mag-mast-line"></span>
+    </div>
 
-      <!-- Post 1 — Weekly Loop -->
-      <details class="writing-item">
-        <summary class="writing-summary">
-          <div class="writing-meta">
-            <span class="kicker">Manifesto · Operating rhythm</span>
+    <div class="writing-mag">
+
+      <!-- Feature: Post 1 — Weekly Loop -->
+      <a class="writing-mag-card writing-mag-feature reveal" href="writing/weekly-loop.html" data-cta="dive in">
+        <span class="mag-tape" aria-hidden="true"></span>
+        <div class="mag-num-bg" aria-hidden="true"><em>01</em></div>
+        <div class="mag-content">
+          <span class="mag-type stick"><span class="mag-type-mark">★</span> Manifesto</span>
+          <div class="mag-meta">
             <span>April 2026</span>
+            <span class="dot">·</span>
             <span>9 min read</span>
+            <span class="dot">·</span>
+            <span>Operating rhythm</span>
           </div>
-          <h3 class="writing-title">The weekly revenue coordination loop, <span class="italic">explained.</span></h3>
-          <p class="writing-deck">Monday brief, mid-week execution, Friday recap, compounding memory. The operating rhythm that replaces dashboard anxiety with direction.</p>
-          <div class="writing-summary-foot">
-            <span class="writing-toggle">
-              <span class="plus" aria-hidden="true">+</span>
-              <span class="label-closed">Read full piece</span>
-              <span class="label-open">Close</span>
-            </span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/weekly-loop" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </summary>
-        <div class="writing-body">
-          <div class="writing-callout">
-            <span class="mono">◉ THE SHORT ANSWER</span>
-            <p>The weekly revenue coordination loop is a four-part operating rhythm: a Monday brief that names the priorities, mid-week owner lists that route those priorities to the right people, a Friday recap that closes the loop on what moved, and a compounding memory that carries into next Monday. <strong>Cadence over alerts. Direction over dashboards.</strong></p>
-          </div>
-
-          <h4>Why a loop, not a dashboard</h4>
-          <p>The last decade of revenue tooling built more dashboards. The next one has to build more rhythm. Visibility without cadence is noise. A dashboard that shows you the same chart on Monday and on Friday is not a system — it is a mirror. The weekly loop is a system. It starts somewhere, ends somewhere, and hands you a decision you did not have to manufacture.</p>
-          <p>A good loop is short enough that patterns show up, long enough that action is possible, and strict enough that the team can rely on it. A week is almost exactly the right length.</p>
-
-          <h4>Monday · The leadership brief</h4>
-          <p>Monday opens with a single document, delivered before 9am in the tool the team already lives in. It is not a dashboard. It is a written brief that reads like something a senior partner would hand you over coffee.</p>
-          <p>A working Monday brief contains four elements:</p>
-          <ul>
-            <li>The top three accounts at risk this week, with the specific reason each one is flagged.</li>
-            <li>The two opportunities with the most expected movement, and what is expected to happen.</li>
-            <li>The one pattern that changed since Friday — a reorder window that shifted, a champion who went quiet, a new buyer who surfaced.</li>
-            <li>Handovers or rotations that carry forward context from last week.</li>
-          </ul>
-          <p>Short. Specific. Actionable. Leadership walks into Monday already knowing where the week is going. There is no reconstruction meeting. There is no "who is covering which accounts" triage. The plan is already written.</p>
-
-          <h4>Mid-week · Owner-level priorities</h4>
-          <p>Between Monday and Thursday, the loop routes priorities to specific owners. Every account manager starts their day with a short list: the three conversations that matter most today, with the why attached.</p>
-          <p>Pre-meeting prep arrives before every call — the last three touches with this account, the promises made, the questions left open, the pattern this account is showing this month. No account manager has to reconstruct context. The context travels with the meeting.</p>
-          <p>The mid-week phase is not a sprint. It is a quiet hand-delivery of direction. When it works, the team never feels overwhelmed by signals. They feel calm, pointed, and prepared.</p>
-
-          <h4>Friday · The narrative recap</h4>
-          <p>Friday closes the loop. Not with a table of numbers, but with narrative. What moved, what decided, what carries forward, what the plan is for Monday.</p>
-          <p>A good Friday recap answers the four questions a revenue leader actually has:</p>
-          <ul>
-            <li><strong>What changed in the book this week?</strong> Not "here is the pipeline chart" — what actually shifted and why.</li>
-            <li><strong>Which risks resolved and which new ones appeared?</strong> Named accounts, named reasons.</li>
-            <li><strong>What decisions did the team make?</strong> The calls that matter, documented once, never re-litigated.</li>
-            <li><strong>What is the plan for next Monday?</strong> Already drafted, ready for the next brief.</li>
-          </ul>
-          <p>CRM reports tell you what happened. The Friday recap tells you what it means. That is the job of a team lead, and that is why the loop ends with narrative, not with numbers.</p>
-
-          <h4>Monday and Friday from the rep seat</h4>
-          <p>The leader's brief is the macro view. Each account manager opens the same loop from a different angle.</p>
-          <p><strong>Monday for an AM</strong> is not a list of dashboards to check. It is a short, owned plan: this week's priorities, already triaged when the laptop opens. Three or four accounts that need movement, with the why attached for each one. Pre-meeting prep — last touches, open promises, questions still unanswered — travels with every call on the calendar. Nothing to reconstruct, nothing to dig for.</p>
-          <p><strong>Friday for an AM</strong> is the wrap. What closed, what rolled, what carries. Three Monday-ready next moves are drafted before the AM logs off. There is no separate update to send to leadership, no recap to write — the loop already wrote it. Monday begins with the work already lined up.</p>
-          <p>Same loop, different lens. Leaders get direction across the portfolio; AMs get direction inside their book. Nobody is left guessing what to do, and nobody has to assemble the answer themselves on Monday morning.</p>
-
-          <h4>The compound · Memory between weeks</h4>
-          <p>The part that changes everything is what happens between Friday and Monday. Every signal, every decision, every pattern is remembered. The book sharpens week over week. Accounts that showed a specific reorder rhythm in March are understood by the loop in April. The team does not start from zero on Monday — it picks up exactly where Friday left off, every week, for as long as the loop runs.</p>
-          <p>This is why <strong>coordination is the moat, not intelligence.</strong> Intelligence gives you a sharp snapshot. The loop gives you a sharp team that gets sharper every week.</p>
-
-          <h4>What the loop replaces</h4>
-          <p>The weekly loop replaces a specific set of painful rituals. You know which ones:</p>
-          <ul>
-            <li>The Monday standup that mostly reconstructs what happened last week.</li>
-            <li>The forecast call that argues about which deals are real.</li>
-            <li>The Slack thread where someone asks "who is covering X account?" and three people answer differently.</li>
-            <li>The Friday "any updates?" that nobody replies to until the following Tuesday.</li>
-            <li>The quarterly QBR that tries to reconstruct nine months of context in forty-five minutes.</li>
-          </ul>
-          <p>None of those rituals are the loop. The loop is what lets the team stop doing them.</p>
-
-          <h4>How Nautilida runs the loop</h4>
-          <p>Nautilida is the AI team lead that runs this loop end to end. It connects to your CRM, email, and chat, builds a single cross-stack memory, drafts the Monday brief, delivers owner priorities through the week, writes the Friday recap, and compounds everything it learns into next week's plan. No dashboards to interpret. Direction where your team already works.</p>
-
-          <div class="writing-takeaways">
-            <span class="mono">◉ KEY TAKEAWAYS</span>
-            <ul>
-              <li>The loop has four parts: Monday brief, mid-week priorities, Friday recap, compounding memory.</li>
-              <li>A week is the right unit: long enough for patterns, short enough for action.</li>
-              <li>Monday brief is written narrative, not a dashboard. Three risks, two opportunities, one changed pattern.</li>
-              <li>Mid-week routes the why to the right owner. Pre-meeting prep travels with every call.</li>
-              <li>Friday closes with a narrative recap — what moved, what decided, what carries forward.</li>
-              <li>Memory compounds between weeks. The team picks up where Friday left off, every Monday.</li>
-            </ul>
-          </div>
-
-          <h4>Frequently asked</h4>
-          <div class="writing-faq">
-            <div>
-              <h5>What is the weekly revenue coordination loop?</h5>
-              <p>It is a repeating weekly rhythm with four parts: a Monday leadership brief that names the week's priorities, mid-week owner-level priorities delivered to each account manager, a Friday recap that closes the loop on what moved, and a compounding memory that carries forward into next Monday's plan. No dashboards to interpret, no meetings to reconstruct.</p>
-            </div>
-            <div>
-              <h5>Why weekly and not daily or real-time?</h5>
-              <p>Revenue teams need cadence, not constant alerts. A week is long enough for real signals to emerge and short enough to act before the window closes. Real-time dashboards create anxiety. The weekly loop creates rhythm.</p>
-            </div>
-            <div>
-              <h5>What goes into a Monday brief?</h5>
-              <p>The three accounts most likely to slip this week, the two opportunities with the highest expected movement, the one pattern that changed since Friday, and any handovers or rotations that need context. Short, specific, actionable.</p>
-            </div>
-            <div>
-              <h5>How is the Friday recap different from a CRM report?</h5>
-              <p>A CRM report tells you what happened. A Friday recap tells you what moved and why, what was decided, what carries forward, and what the plan is for next Monday. It is written narrative that reads like a team lead summary, not a table of numbers.</p>
-            </div>
-            <div>
-              <h5>What does compounding memory mean in practice?</h5>
-              <p>Every signal, every decision, every exchange is remembered across weeks. Patterns sharpen over months. Handovers travel with the account. The team does not start from zero on Monday — it picks up exactly where Friday left off, every week.</p>
-            </div>
-          </div>
-
-          <div class="writing-body-foot">
-            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · April 2026</span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/weekly-loop" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          <h3 class="mag-title">The weekly revenue coordination loop,<br/><em>explained.</em></h3>
+          <p class="mag-deck">Monday brief, mid-week execution, Friday recap, compounding memory. The operating rhythm that replaces dashboard anxiety with direction.</p>
+          <div class="mag-foot">
+            <span class="mag-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+            <span class="mag-hint">TOC · progress · drop-cap</span>
           </div>
         </div>
-      </details>
+      </a>
 
-      <!-- Post 2 — AI team lead -->
-      <details class="writing-item">
-        <summary class="writing-summary">
-          <div class="writing-meta">
-            <span class="kicker">Definition · Category note</span>
+      <!-- Pair of supporting pieces -->
+      <a class="writing-mag-card reveal" href="writing/ai-team-lead.html" data-cta="explore">
+        <span class="mag-tape mag-tape-violet" aria-hidden="true"></span>
+        <div class="mag-num-bg" aria-hidden="true"><em>02</em></div>
+        <div class="mag-content">
+          <span class="mag-type stick"><span class="mag-type-mark">◐</span> Definition</span>
+          <div class="mag-meta">
             <span>April 2026</span>
+            <span class="dot">·</span>
             <span>7 min read</span>
           </div>
-          <h3 class="writing-title">What is an AI team lead <span class="italic">for sales?</span></h3>
-          <p class="writing-deck">A short definition, how it differs from assistants and dashboards, and what it actually does for revenue teams that live on recurring accounts.</p>
-          <div class="writing-summary-foot">
-            <span class="writing-toggle">
-              <span class="plus" aria-hidden="true">+</span>
-              <span class="label-closed">Read full piece</span>
-              <span class="label-open">Close</span>
-            </span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/ai-team-lead" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </summary>
-        <div class="writing-body">
-          <div class="writing-callout">
-            <span class="mono">◉ THE SHORT ANSWER</span>
-            <p>An AI team lead for sales is a <strong>coordination layer</strong>, not an assistant. It carries memory across your stack, hands the right priorities to the right owners at the right time, and closes the loop every week. Senior level judgment that shows up in the tools your team already uses.</p>
-          </div>
-
-          <h4>The short answer</h4>
-          <p>An AI team lead is the layer that runs your revenue rhythm. It reads signals from CRM, email and chat, remembers every exchange, routes the week's priorities to specific owners, and narrates the outcome back to leadership. It behaves like a senior partner who happens to have perfect recall and never sleeps.</p>
-
-          <h4>What it is not</h4>
-          <p>An AI team lead is <strong>not a chatbot.</strong> It is not a dashboard. It is not a faster search bar over your CRM. Those tools show you information or answer a single question. They do not coordinate. They do not decide who acts next, when, or with what context.</p>
-          <p>An AI assistant waits for you to prompt it. A team lead runs the week whether you prompt it or not. That is the difference that matters.</p>
-
-          <h4>What it actually does</h4>
-          <p>A working AI team lead for sales does three things every week:</p>
-          <ul>
-            <li><strong>Carries memory.</strong> Every ask, every reply, every pattern stays with the team. No one re-asks, no one re-explains.</li>
-            <li><strong>Coordinates execution.</strong> Monday brings a leadership brief. Through the week, owners get priorities with the why attached. Friday closes with an outcome narrative.</li>
-            <li><strong>Compounds.</strong> Every cycle sharpens the patterns. Every handover travels with the account. The longer it runs, the sharper the team gets.</li>
-          </ul>
-
-          <h4>The weekly loop</h4>
-          <p>The team lead runs a weekly rhythm. Monday opens with a leadership brief. Through the week, every AE gets their own priority list and pre-meeting prep. Friday closes with a summary of what moved and what carries forward. The plan for next Monday is already written.</p>
-
-          <h4>Why coordination beats visibility</h4>
-          <p>For the last decade, revenue tools have been about visibility. More dashboards, more signals, more charts. The problem is not visibility. The problem is that nobody is coordinated around the visibility. The AI team lead closes that gap.</p>
-          <p>Instead of asking <em>what is happening</em>, the team starts asking <em>what are we doing about it</em>. The second question is the one that moves revenue.</p>
-
-          <h4>Signs your team needs one</h4>
-          <ul>
-            <li>Monday mornings are spent reconstructing "which accounts slipped?"</li>
-            <li>Every rep rotation feels like losing a quarter of context.</li>
-            <li>You own a CRM, you own dashboards, and you still cannot tell which accounts need attention this week.</li>
-            <li>Your best patterns live in two or three peoples' heads, not in a system.</li>
-          </ul>
-
-          <h4>How Nautilida does it</h4>
-          <p>Nautilida is the AI team lead for sales, built for revenue teams that live on recurring accounts and cross-stack context. It connects to your CRM, email, and chat, builds a single memory, and runs the weekly loop end to end. No dashboards to interpret, no manual reconstruction, just direction that arrives where your team already works.</p>
-
-          <div class="writing-takeaways">
-            <span class="mono">◉ KEY TAKEAWAYS</span>
-            <ul>
-              <li>A team lead carries memory across your stack. An assistant only answers questions.</li>
-              <li>Coordination beats visibility. The next move is more valuable than the next chart.</li>
-              <li>The weekly loop beats real-time anxiety. Monday plans, Friday recaps, everything in between.</li>
-              <li>Every owner gets the right priority, on time, with the why attached.</li>
-              <li>Handovers travel with the account, not in someone's head.</li>
-            </ul>
-          </div>
-
-          <h4>Frequently asked</h4>
-          <div class="writing-faq">
-            <div>
-              <h5>Is an AI team lead the same as an AI assistant?</h5>
-              <p>No. An AI assistant responds to prompts. An AI team lead carries memory across your stack, routes priorities to specific owners, closes the loop on what happened, and coordinates the team week over week. Assistants answer. A team lead runs the rhythm.</p>
-            </div>
-            <div>
-              <h5>Does it replace the revenue leader?</h5>
-              <p>No. It frees the revenue leader from reconstruction work so they can lead. Monday briefs and Friday recaps arrive already written. Leaders still make judgment calls, set strategy, and own outcomes.</p>
-            </div>
-            <div>
-              <h5>What tools does it connect to?</h5>
-              <p>CRM (HubSpot, Pipedrive, Attio — Salesforce on the roadmap), chat (Slack, Teams), and email (Gmail, Outlook). It reads signals from all of them and delivers briefs back into the tool your team already lives in.</p>
-            </div>
-            <div>
-              <h5>How is it different from revenue intelligence tools?</h5>
-              <p>Revenue intelligence tools show you what happened inside one silo. An AI team lead builds a single memory across all silos, delivers the why and the next move, and coordinates execution across owners. Coordination over visibility.</p>
-            </div>
-            <div>
-              <h5>Who uses it on the team?</h5>
-              <p>Everyone. Leaders get Monday plans and Friday recaps. Account owners get priority lists and pre-meeting prep. RevOps and customer success ask it anything, any time, and get months of history in one answer.</p>
-            </div>
-          </div>
-
-          <div class="writing-body-foot">
-            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · April 2026</span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/ai-team-lead" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          <h3 class="mag-title">What is an AI team lead <em>for sales?</em></h3>
+          <p class="mag-deck">A short definition. How it differs from assistants and dashboards. What it actually does for revenue teams that live on recurring accounts.</p>
+          <div class="mag-foot">
+            <span class="mag-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
           </div>
         </div>
-      </details>
+      </a>
 
-      <!-- Post 3 — Revenue intelligence vs Nautilida -->
-      <details class="writing-item">
-        <summary class="writing-summary">
-          <div class="writing-meta">
-            <span class="kicker">Comparison · Category note</span>
+      <a class="writing-mag-card reveal" href="writing/revenue-intelligence-vs.html" data-cta="get into it">
+        <span class="mag-tape" aria-hidden="true"></span>
+        <div class="mag-num-bg" aria-hidden="true"><em>03</em></div>
+        <div class="mag-content">
+          <span class="mag-type stick"><span class="mag-type-mark">✸</span> Comparison</span>
+          <div class="mag-meta">
             <span>May 2026</span>
+            <span class="dot">·</span>
             <span>6 min read</span>
           </div>
-          <h3 class="writing-title">Revenue intelligence <span class="italic">vs Nautilida.</span></h3>
-          <p class="writing-deck">Revenue intelligence tools tell you what happened on calls. Nautilida tells you what to do next about the deal. Here's the real difference — and why the two solve different halves of the same problem.</p>
-          <div class="writing-summary-foot">
-            <span class="writing-toggle">
-              <span class="plus" aria-hidden="true">+</span>
-              <span class="label-closed">Read full piece</span>
-              <span class="label-open">Close</span>
-            </span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/revenue-intelligence-vs-nautilida" target="_blank" rel="noopener" onclick="event.stopPropagation();">View on nautilida.ai <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </summary>
-        <div class="writing-body">
-          <div class="writing-callout">
-            <span class="mono">◉ THE SHORT ANSWER</span>
-            <p>Revenue intelligence platforms are <strong>listeners</strong> — they record, transcribe, and surface what was said. Nautilida is a <strong>coordination layer</strong> that watches the full pipeline and pushes the next move to the right person at the right moment. Different layers, complementary in most stacks.</p>
-          </div>
-
-          <p>Revenue intelligence platforms are built around one core idea: listen to every customer interaction, then surface patterns from what was said. That's useful. It's also only half the job.</p>
-
-          <h4>What revenue intelligence actually does</h4>
-          <p>Tools like Gong record calls, transcribe them, score them, and flag risk signals buried in the conversation. The value is real — a rep who stops saying "hopefully" on calls closes more deals. A manager who sees three stalled opportunities all missing economic buyers can coach faster.</p>
-          <p>But the model is fundamentally retrospective. The platform watches what happened, packages it into a report, and delivers it to whoever has time to read a report. Acting on it is still a human problem — usually a RevOps person stitching together signals from three different tools at 9 PM on a Sunday.</p>
-
-          <h4>Where that model breaks down</h4>
-          <p>Revenue intelligence assumes someone is always watching the dashboard. In a 50–200-person B2B SaaS company, that person often doesn't exist — or exists as a 0.5 FTE RevOps hire who also manages the CRM, the forecasting call, and every one-off CEO request.</p>
-          <p>The result: the signal is there, but nobody acts on it in time. A deal slips because the follow-up from two weeks ago was never sent. An account goes cold because the AM's weekly review got pushed. The call transcript sits in Gong, accurately flagged, completely ignored.</p>
-          <p>Roughly 30% of a RevOps lead's week goes to manual report stitching — pulling signals from revenue intelligence tools, CRM data, and email threads into something a leader can act on. That's a tax on the team, not a capability.</p>
-
-          <h4>What Nautilida does instead</h4>
-          <p>Nautilida isn't a smarter listener. It's a system that runs the coordination layer above the tools — watching the full pipeline (calls, emails, CRM state, deal stage, last touch, forecast delta) and pushing the right action to the right person at the right moment.</p>
-          <p>A CRO gets a Monday morning view of everything that needs attention this week — not a 40-row spreadsheet, but a prioritized read on which deals are at risk and why. An AM gets a Friday note on their own book: what moved, what stalled, what needs a follow-up by Tuesday. Neither of them has to ask for it, search for it, or stitch it together.</p>
-          <p>When a deal looks like the three you lost in Q2, Nautilida says so — in plain English, in the moment the pattern is relevant, not buried in a quarterly business review deck.</p>
-
-          <h4>The takeaway</h4>
-          <p>Revenue intelligence tells you what happened. Nautilida tells you what to do next — and makes sure the right person hears it before it's too late to act.</p>
-          <p>If your team is using a revenue intelligence tool and still losing deals to slow follow-through, that's the gap. The recordings are fine. The coordination layer is broken.</p>
-
-          <div class="writing-takeaways">
-            <span class="mono">◉ KEY TAKEAWAYS</span>
-            <ul>
-              <li>Revenue intelligence is retrospective — it tells you what happened on the call.</li>
-              <li>Nautilida is prospective — it tells you what to do next about the deal.</li>
-              <li>Most mid-market teams have the signal already; what they lack is coordinated action on it.</li>
-              <li>Roughly 30% of a RevOps lead's week is spent stitching signals into something leaders can act on. That's a tax, not a capability.</li>
-              <li>The two layers are complementary in most stacks — keep your revenue intelligence tool, add the coordination layer on top.</li>
-            </ul>
-          </div>
-
-          <h4>Frequently asked</h4>
-          <div class="writing-faq">
-            <div>
-              <h5>Is Nautilida a revenue intelligence tool?</h5>
-              <p>No. Revenue intelligence tools (Gong, Chorus, Avoma) record and analyze customer conversations. Nautilida is a coordination layer that runs above the entire pipeline — calls, email, CRM, forecast — and pushes the next move to the right person. Different layer, different job.</p>
-            </div>
-            <div>
-              <h5>Should we use Gong and Nautilida together?</h5>
-              <p>For most teams, yes. Gong covers the conversation layer with depth. Nautilida covers the coordination layer across all signals, including Gong's. The two are complementary — keep what you have on conversations, add coordination on top.</p>
-            </div>
-            <div>
-              <h5>What does "coordination layer" actually mean?</h5>
-              <p>A coordination layer decides who acts next, with what context, on what timeline. It reads from every silo (CRM, calls, email, chat), holds memory across weeks, and routes priorities to specific owners. Dashboards show; a coordination layer directs.</p>
-            </div>
-            <div>
-              <h5>Do I still need a RevOps person if I use Nautilida?</h5>
-              <p>Yes — but freed from manual report stitching. Nautilida runs the weekly rhythm (Monday brief, mid-week priorities, Friday recap) automatically. RevOps moves from data plumbing to strategic work: territory design, comp planning, deal desk, sales process.</p>
-            </div>
-            <div>
-              <h5>How fast does a team see value?</h5>
-              <p>The first Monday brief lands within the first week of connecting HubSpot/Salesforce and chat. Pattern recognition compounds over weeks as more signal flows in. By month three, the system has enough memory to surface non-obvious account risk before it shows up in the CRM.</p>
-            </div>
-          </div>
-
-          <div class="writing-body-foot">
-            <span class="mono" style="color:var(--ink-3);">Originally published at nautilida.ai · May 2026</span>
-            <a class="linkish" href="https://nautilida.ai/#/blog/revenue-intelligence-vs-nautilida" target="_blank" rel="noopener">View original <span class="arr" aria-hidden="true">→</span></a>
+          <h3 class="mag-title">Revenue intelligence <em>vs Nautilida.</em></h3>
+          <p class="mag-deck">Revenue intelligence tools tell you what happened on calls. Nautilida tells you what to do next. Different halves of the same problem.</p>
+          <div class="mag-foot">
+            <span class="mag-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
           </div>
         </div>
-      </details>
+      </a>
 
     </div>
 
-    <!-- More from nautilida.ai -->
+    <!-- More from nautilida.ai · now opens local readers -->
     <div class="writing-more">
       <h4>More I wrote &amp; shipped on nautilida.ai</h4>
-      <div class="writing-more-grid">
+      <div class="writing-list compact" style="margin-top: 1.25rem;">
 
-        <a class="writing-more-card" href="https://nautilida.ai/#/compare/gong" target="_blank" rel="noopener">
-          <span class="writing-more-kicker">Comparison page</span>
-          <span class="writing-more-title">Nautilida <span class="italic">vs Gong</span></span>
-          <span class="writing-more-foot">
+        <a class="writing-card" href="writing/vs-gong.html" data-cta="read">
+          <div class="writing-meta">
+            <span class="kicker">Comparison · 4 min</span>
             <span>/compare/gong</span>
-            <span class="arr" aria-hidden="true">→</span>
-          </span>
+          </div>
+          <h3 class="writing-title">Nautilida <span class="italic">vs Gong.</span></h3>
+          <div class="writing-card-foot">
+            <span class="writing-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+          </div>
         </a>
 
-        <a class="writing-more-card" href="https://nautilida.ai/#/compare/clari" target="_blank" rel="noopener">
-          <span class="writing-more-kicker">Comparison page</span>
-          <span class="writing-more-title">Nautilida <span class="italic">vs Clari</span></span>
-          <span class="writing-more-foot">
+        <a class="writing-card" href="writing/vs-clari.html" data-cta="peek">
+          <div class="writing-meta">
+            <span class="kicker">Comparison · 4 min</span>
             <span>/compare/clari</span>
-            <span class="arr" aria-hidden="true">→</span>
-          </span>
+          </div>
+          <h3 class="writing-title">Nautilida <span class="italic">vs Clari.</span></h3>
+          <div class="writing-card-foot">
+            <span class="writing-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+          </div>
         </a>
 
-        <a class="writing-more-card" href="https://nautilida.ai/#/compare/gainsight" target="_blank" rel="noopener">
-          <span class="writing-more-kicker">Comparison page</span>
-          <span class="writing-more-title">Nautilida <span class="italic">vs Gainsight</span></span>
-          <span class="writing-more-foot">
+        <a class="writing-card" href="writing/vs-gainsight.html" data-cta="see it">
+          <div class="writing-meta">
+            <span class="kicker">Comparison · 4 min</span>
             <span>/compare/gainsight</span>
-            <span class="arr" aria-hidden="true">→</span>
-          </span>
+          </div>
+          <h3 class="writing-title">Nautilida <span class="italic">vs Gainsight.</span></h3>
+          <div class="writing-card-foot">
+            <span class="writing-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+          </div>
         </a>
 
-        <a class="writing-more-card" href="https://nautilida.ai/#/use-cases/manufacturing" target="_blank" rel="noopener">
-          <span class="writing-more-kicker">Use case</span>
-          <span class="writing-more-title">Manufacturing <span class="italic">— recurring orders, named accounts</span></span>
-          <span class="writing-more-foot">
+        <a class="writing-card" href="writing/manufacturing.html" data-cta="dive in">
+          <div class="writing-meta">
+            <span class="kicker">Use case · 5 min</span>
             <span>/use-cases/manufacturing</span>
-            <span class="arr" aria-hidden="true">→</span>
-          </span>
+          </div>
+          <h3 class="writing-title">Nautilida for <span class="italic">manufacturing.</span></h3>
+          <div class="writing-card-foot">
+            <span class="writing-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+          </div>
         </a>
 
-        <a class="writing-more-card" href="https://nautilida.ai/#/use-cases/catering" target="_blank" rel="noopener">
-          <span class="writing-more-kicker">Use case</span>
-          <span class="writing-more-title">Catering <span class="italic">— B2B kitchens, repeat customers</span></span>
-          <span class="writing-more-foot">
+        <a class="writing-card" href="writing/catering.html" data-cta="open">
+          <div class="writing-meta">
+            <span class="kicker">Use case · 5 min</span>
             <span>/use-cases/catering</span>
-            <span class="arr" aria-hidden="true">→</span>
-          </span>
+          </div>
+          <h3 class="writing-title">Nautilida for <span class="italic">B2B catering.</span></h3>
+          <div class="writing-card-foot">
+            <span class="writing-cta">Open reader <span class="arr" aria-hidden="true">→</span></span>
+          </div>
         </a>
 
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EXPERIENCE ============ -->
-<section class="section" id="experience" data-screen-label="Experience">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="left">
-        <div class="eyebrow">// 04 — experience</div>
-        <h2>Where I've <span class="italic">worked.</span></h2>
-      </div>
-      <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five years across enterprise SaaS, community-led growth, and AI-native product. Marketing, communication, and GTM ownership at every step.</p>
-      </div>
-    </div>
-
-    <ol class="exp-list">
-
-      <li class="exp-row" data-accent="violet">
-        <div class="exp-time">
-          <span class="exp-years">2025 — Now</span>
-          <span class="stick exp-stick">✦ Co-founder &amp; CEO</span>
-          <span class="exp-where">Berlin · Pre-seed SaaS</span>
-        </div>
-        <div class="exp-body">
-          <h3 class="exp-company">Nautilida</h3>
-          <p class="exp-hook"><em>AI Team Lead for Sales — built and ship it top to bottom.</em></p>
-          <div class="exp-stats">
-            <span>First LOIs secured</span>
-            <span>1st design partner onboarded</span>
-            <span>SDR-less GTM engine in production</span>
-          </div>
-          <p>Co-founded an AI-native sales platform that unifies the revenue stack, cross-coordinates sales teams, and automates follow-through across the pipeline.</p>
-          <ul class="exp-bullets">
-            <li>Lead product strategy and GTM end-to-end alongside technical co-founder; own roadmap, positioning, messaging, and customer development.</li>
-            <li>Built and shipped the company website and core marketing surfaces in Claude Code, applying SEO, AEO, and GEO so AI answer engines cite us by name.</li>
-            <li>Designed and operates an automated GTM engine (n8n, outreach sequencing, CRM workflows) for lead gen, qualification, and nurture — replacing manual SDR work with agentic flows.</li>
-            <li>Developed prompt engineering frameworks used across product, content, and customer research.</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="exp-row" data-accent="lime">
-        <div class="exp-time">
-          <span class="exp-years">2024 — 2025</span>
-          <span class="stick exp-stick bone">◐ Growth Marketing</span>
-          <span class="exp-where">Berlin · Enterprise SaaS</span>
-        </div>
-        <div class="exp-body">
-          <h3 class="exp-company">Dataiku</h3>
-          <p class="exp-hook"><em>Owned user communication for an AI &amp; analytics platform — two segments, one engine.</em></p>
-          <div class="exp-stats">
-            <span>HubSpot email + in-product</span>
-            <span>Freemium-to-paid lifecycle</span>
-            <span>5 teams in the loop</span>
-          </div>
-          <p>Worked cross-functionally with Product, Customer Success, Technical, Content, and Event teams to align communication with product updates and campaigns.</p>
-          <ul class="exp-bullets">
-            <li>Managed two distinct user segments — general users (onboarding, day-to-day clarity) and user champions (advanced usage, long-term engagement).</li>
-            <li>Acted as a direct point of contact for users, resolving adoption-related questions and supporting freemium usage with awareness of extension and renewal contexts.</li>
-            <li>Joined the initiative at an early stage and helped establish the communication workflows the team continues to scale.</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="exp-row" data-accent="violet">
-        <div class="exp-time">
-          <span class="exp-years">2022</span>
-          <span class="stick exp-stick violet">✸ Creative Marketing</span>
-          <span class="exp-where">Istanbul · B2B Software</span>
-        </div>
-        <div class="exp-body">
-          <h3 class="exp-company">CRS Soft</h3>
-          <p class="exp-hook"><em>UX, SEO, and content for B2B software — where marketing and product overlap.</em></p>
-          <div class="exp-stats">
-            <span>UX + SEO</span>
-            <span>Employer branding</span>
-            <span>Miro research frameworks</span>
-          </div>
-          <p>Worked at the intersection of UX, SEO, and content for enterprise software products.</p>
-          <ul class="exp-bullets">
-            <li>Contributed to UX, SEO, and content optimization for software products, improving user flows, discoverability, and usability.</li>
-            <li>Supported HR marketing and employer branding initiatives, including career pages and recruitment-focused content.</li>
-            <li>Designed and optimized user journeys and research frameworks in Miro, aligning UX thinking with performance-oriented marketing and HR goals.</li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="exp-row" data-accent="lime">
-        <div class="exp-time">
-          <span class="exp-years">2020 — 2022</span>
-          <span class="stick exp-stick bone">▶ Community &amp; Content</span>
-          <span class="exp-where">Istanbul · Event SaaS</span>
-        </div>
-        <div class="exp-body">
-          <h3 class="exp-company">Plandy</h3>
-          <p class="exp-hook"><em>Translated community feedback into product and messaging — feet on the ground, hands on the loop.</em></p>
-          <div class="exp-stats">
-            <span>Live events &amp; activations</span>
-            <span>BDR ↔ Product ↔ Marketing</span>
-            <span>Community-led acquisition</span>
-          </div>
-          <p>Sat between BDR, product, and growth teams at an event discovery and ticketing SaaS, turning community signal into messaging and feature decisions.</p>
-          <ul class="exp-bullets">
-            <li>Collaborated with BDR and growth teams on community-led acquisition initiatives.</li>
-            <li>Represented the platform at events and community activations, gathering direct feedback from users and event organizers on discovery, ticketing, and usability.</li>
-            <li>Facilitated feedback loops between users, organizers, product, and marketing teams to improve onboarding, listings, and feature communication.</li>
-            <li>Supported content and messaging across digital channels to increase event visibility, user engagement, and platform awareness.</li>
-          </ul>
-        </div>
-      </li>
-
-    </ol>
-  </div>
-</section>
-
-<!-- ============ EDUCATION ============ -->
-<section class="section" id="education" data-screen-label="Education">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="left">
-        <div class="eyebrow">// 05 — education</div>
-        <h2>What I <span class="italic">studied.</span></h2>
-      </div>
-      <div class="right"></div>
-    </div>
-
-    <div class="edu-grid">
-
-      <article class="edu-card">
-        <span class="stick edu-stick" aria-hidden="true">M.A.</span>
-        <div class="edu-meta">
-          <span class="mono">2023 — 2025</span>
-          <span class="mono">Berlin · DE</span>
-        </div>
-        <h3>Hochschule für Wirtschaft und Recht <span class="italic">Berlin</span></h3>
-        <p class="edu-degree">Political Economy</p>
-        <p class="edu-line">Focused on economic policy, governance, and digital transformation — where my interest in tech-meets-policy started.</p>
-        <div class="edu-thesis">
-          <span class="edu-thesis-label">Master's thesis</span>
-          <p>Digitalization and Technological Transformation in Retail Chains.</p>
-        </div>
-      </article>
-
-      <article class="edu-card">
-        <span class="stick edu-stick violet" aria-hidden="true">B.A.</span>
-        <div class="edu-meta">
-          <span class="mono">2019 — 2023</span>
-          <span class="mono">Istanbul · TR</span>
-        </div>
-        <h3>Istanbul Bilgi <span class="italic">University</span></h3>
-        <p class="edu-degree">International Relations &amp; Public Relations <span class="edu-minor">— Marketing minor</span></p>
-        <p class="edu-line">Where I learned how stories travel — across borders, audiences, and channels — and started building the marketing toolkit I still use.</p>
-      </article>
-
-    </div>
-
-    <div class="edu-certs">
-      <h4 class="mono" style="margin:0 0 .75rem;">Certifications</h4>
-      <p class="edu-certs-list">
-        HubSpot Sales Hub Software · HubSpot Reporting · HubSpot Email Marketing · Dataiku Core Designer · Google Digital Marketing &amp; E-commerce (Coursera) · Field Guide to Human-Centered Design (IDEO.org) · Basics of Strategic Management (IBMI)
-      </p>
     </div>
   </div>
 </section>
@@ -2032,26 +3526,161 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 06 — media</div>
-        <h2>Things I've <span class="italic">published.</span></h2>
+        <div class="eyebrow">// 06 — published</div>
+        <h2>Things I've <span class="italic">shipped public.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Selected LinkedIn posts — product reveals, build logs, and notes from the Nautilida journey. Lazy-loaded so the page stays fast.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Social posts, blog announcements, use cases, testimonials, product updates, email templates. Tap a category to see the work. More dropping in soon.</p>
       </div>
     </div>
 
-    <div class="media-grid">
-      <div class="media-item">
-        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7458110184586969088" height="1112" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+    <!-- Category tabs -->
+    <div class="media-tabs" role="tablist">
+      <button type="button" class="media-tab is-active" role="tab" data-cat="nautilida" aria-selected="true">★ Nautilida</button>
+      <button type="button" class="media-tab" role="tab" data-cat="blog" aria-selected="false">Blog announcements</button>
+      <button type="button" class="media-tab" role="tab" data-cat="usecases" aria-selected="false">Use cases</button>
+      <button type="button" class="media-tab" role="tab" data-cat="testimonials" aria-selected="false">Testimonials</button>
+      <button type="button" class="media-tab" role="tab" data-cat="updates" aria-selected="false">Product updates</button>
+      <button type="button" class="media-tab" role="tab" data-cat="email" aria-selected="false">Email templates</button>
+    </div>
+
+    <!-- Nautilida panel — visual-first discovery deck -->
+    <div class="media-panel is-active" role="tabpanel" data-cat="nautilida">
+      <div class="li-deck">
+        <div class="li-deck-hint">← drag or use arrows to explore →</div>
+        <div class="li-track" id="liTrack">
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-1.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 1"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 2"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 3"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-4.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 4"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-5.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 5"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-6.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 6"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-7.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Nautilida LinkedIn post 7"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="li-deck-controls">
+          <button type="button" class="li-nav" id="liPrev" aria-label="Previous post">←</button>
+          <div class="li-counter" id="liCounter">01 / 07</div>
+          <button type="button" class="li-shuffle" id="liShuffle" aria-label="Random post">✦ shuffle</button>
+          <button type="button" class="li-nav" id="liNext" aria-label="Next post">→</button>
+        </div>
+
       </div>
-      <div class="media-item">
-        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7456977542760108032" height="920" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+    </div>
+
+    <!-- Blog announcements panel — placeholder -->
+    <div class="media-panel" role="tabpanel" data-cat="blog" hidden>
+      <div class="media-placeholder">
+        <span class="media-ph-icon">✦</span>
+        <h4>Blog announcement designs</h4>
+        <p>Coming soon. The launch graphics I made for each long-form piece, sized for LinkedIn, X, and the site itself.</p>
       </div>
-      <div class="media-item">
-        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7457346198228668418" height="899" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+    </div>
+
+    <!-- Use cases panel -->
+    <div class="media-panel" role="tabpanel" data-cat="usecases" hidden>
+      <div class="media-placeholder">
+        <span class="media-ph-icon">◆</span>
+        <h4>Use-case visuals</h4>
+        <p>Coming soon. Hero graphics, sector cards, and explainer visuals for the vertical use cases (manufacturing, catering, more).</p>
       </div>
-      <div class="media-item">
-        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7459872820093747200" height="626" width="504" frameborder="0" loading="lazy" allowfullscreen="" title="LinkedIn post — Ece Berrak"></iframe>
+    </div>
+
+    <!-- Testimonials panel -->
+    <div class="media-panel" role="tabpanel" data-cat="testimonials" hidden>
+      <div class="media-placeholder">
+        <span class="media-ph-icon">❝</span>
+        <h4>Testimonials</h4>
+        <p>Coming soon. Quote cards and short reels from design partners and early customers.</p>
+      </div>
+    </div>
+
+    <!-- Product updates panel -->
+    <div class="media-panel" role="tabpanel" data-cat="updates" hidden>
+      <div class="media-placeholder">
+        <span class="media-ph-icon">◐</span>
+        <h4>Product update designs</h4>
+        <p>Coming soon. Release announcement graphics, changelog visuals, in-app screenshots for shipping moments.</p>
+      </div>
+    </div>
+
+    <!-- Email templates panel -->
+    <div class="media-panel" role="tabpanel" data-cat="email" hidden>
+      <div class="media-placeholder">
+        <span class="media-ph-icon">✉</span>
+        <h4>Email templates</h4>
+        <p>Coming soon. Designed-for-readability email templates for lifecycle, outreach, and announcement campaigns.</p>
       </div>
     </div>
 
@@ -2070,99 +3699,69 @@
         <h2>Tools I actually <span class="italic">use.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Daily-driver stack across AI, GTM, CRM, analytics, web, and ops. <span style="color:var(--violet);">★</span> = primary tool. Hover any chip — it bites back.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Daily-driver stack across AI, GTM, CRM, analytics, web, and ops. Hover any chip — it bites back.</p>
       </div>
     </div>
 
     <div class="stack-rows">
 
       <div class="stack-row reveal">
-        <h4 class="stack-row-label">AI &amp; product</h4>
+        <h4 class="stack-row-label">AI · build · ship</h4>
         <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">Claude Code</span><span class="chip-meta">daily shipping</span></li>
-          <li class="chip featured"><span class="chip-name">ChatGPT</span><span class="chip-meta">drafting · research</span></li>
-          <li class="chip"><span class="chip-name">Anthropic API</span><span class="chip-meta">basics</span></li>
-          <li class="chip"><span class="chip-name">Perplexity</span><span class="chip-meta">research</span></li>
-          <li class="chip"><span class="chip-name">Prompt frameworks</span><span class="chip-meta">own</span></li>
+          <li class="chip"><span class="chip-name">Claude Code</span></li>
+          <li class="chip"><span class="chip-name">ChatGPT</span></li>
+          <li class="chip"><span class="chip-name">Anthropic API</span></li>
+          <li class="chip"><span class="chip-name">Perplexity</span></li>
+          <li class="chip"><span class="chip-name">HTML / CSS / JS</span></li>
+          <li class="chip"><span class="chip-name">GitHub</span></li>
+          <li class="chip"><span class="chip-name">Prompt frameworks</span></li>
         </ul>
       </div>
 
       <div class="stack-row reveal" data-accent="lime">
-        <h4 class="stack-row-label">GTM &amp; outbound</h4>
+        <h4 class="stack-row-label">GTM · CRM · automation</h4>
         <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">n8n</span><span class="chip-meta">flows · AI agents</span></li>
-          <li class="chip featured"><span class="chip-name">Instantly</span><span class="chip-meta">cold email at scale</span></li>
-          <li class="chip featured"><span class="chip-name">Apollo.io</span><span class="chip-meta">prospect + enrich</span></li>
+          <li class="chip"><span class="chip-name">n8n</span></li>
+          <li class="chip"><span class="chip-name">Apollo.io</span></li>
+          <li class="chip"><span class="chip-name">HubSpot</span></li>
+          <li class="chip"><span class="chip-name">Instantly</span></li>
           <li class="chip"><span class="chip-name">Zapier</span></li>
-          <li class="chip"><span class="chip-name">Google Apps Script</span><span class="chip-meta">custom integrations</span></li>
+          <li class="chip"><span class="chip-name">Apps Script</span></li>
+          <li class="chip"><span class="chip-name">Gojiberry</span></li>
         </ul>
       </div>
 
       <div class="stack-row reveal">
-        <h4 class="stack-row-label">CRM &amp; lifecycle</h4>
+        <h4 class="stack-row-label">Content · design · web</h4>
         <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">HubSpot</span><span class="chip-meta">Sales + Marketing Hub</span></li>
-          <li class="chip cert"><span class="chip-name">Sales Hub</span><span class="chip-meta">certified</span></li>
-          <li class="chip cert"><span class="chip-name">HubSpot Reporting</span><span class="chip-meta">certified</span></li>
-          <li class="chip cert"><span class="chip-name">Email Marketing</span><span class="chip-meta">certified</span></li>
-          <li class="chip"><span class="chip-name">Gojiberry</span><span class="chip-meta">micro-surveys</span></li>
+          <li class="chip"><span class="chip-name">WordPress</span></li>
+          <li class="chip"><span class="chip-name">Webflow</span></li>
+          <li class="chip"><span class="chip-name">Framer</span></li>
+          <li class="chip"><span class="chip-name">Figma</span></li>
+          <li class="chip"><span class="chip-name">Canva</span></li>
+          <li class="chip"><span class="chip-name">CapCut</span></li>
+          <li class="chip"><span class="chip-name">Tally</span></li>
         </ul>
       </div>
 
       <div class="stack-row reveal" data-accent="lime">
-        <h4 class="stack-row-label">Analytics &amp; data</h4>
+        <h4 class="stack-row-label">Data · ops · growth</h4>
         <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">Dataiku</span><span class="chip-meta">Core Designer cert.</span></li>
+          <li class="chip"><span class="chip-name">Notion</span></li>
+          <li class="chip"><span class="chip-name">Airtable</span></li>
+          <li class="chip"><span class="chip-name">Asana</span></li>
+          <li class="chip"><span class="chip-name">Dataiku</span></li>
           <li class="chip"><span class="chip-name">Google Analytics 4</span></li>
           <li class="chip"><span class="chip-name">Search Console</span></li>
-          <li class="chip"><span class="chip-name">HubSpot Reporting</span></li>
-        </ul>
-      </div>
-
-      <div class="stack-row reveal">
-        <h4 class="stack-row-label">Web, content, CMS</h4>
-        <ul class="chip-list">
-          <li class="chip"><span class="chip-name">HTML / CSS / JS</span><span class="chip-meta">ship w/ Claude Code</span></li>
-          <li class="chip featured"><span class="chip-name">WordPress</span></li>
-          <li class="chip featured"><span class="chip-name">Webflow CMS</span></li>
-          <li class="chip featured"><span class="chip-name">Framer CMS</span></li>
-          <li class="chip"><span class="chip-name">Tally</span></li>
-          <li class="chip"><span class="chip-name">Figma</span></li>
-          <li class="chip"><span class="chip-name">Canva</span><span class="chip-meta">Brand Kits</span></li>
-          <li class="chip featured"><span class="chip-name">CapCut</span><span class="chip-meta">short-form video</span></li>
-          <li class="chip"><span class="chip-name">GitHub</span></li>
-        </ul>
-      </div>
-
-      <div class="stack-row reveal" data-accent="lime">
-        <h4 class="stack-row-label">Ops &amp; productivity</h4>
-        <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">Lex Office</span><span class="chip-meta">DE accounting</span></li>
-          <li class="chip featured"><span class="chip-name">Microsoft 365</span><span class="chip-meta">Excel · PPT · Word</span></li>
+          <li class="chip"><span class="chip-name">Microsoft 365</span></li>
           <li class="chip"><span class="chip-name">Google Workspace</span></li>
-          <li class="chip featured"><span class="chip-name">Notion</span><span class="chip-meta">knowledge + content ops</span></li>
-          <li class="chip featured"><span class="chip-name">Asana</span><span class="chip-meta">project coordination</span></li>
+          <li class="chip"><span class="chip-name">Lex Office</span></li>
+          <li class="chip"><span class="chip-name">Google Ads</span></li>
+          <li class="chip"><span class="chip-name">Schema.org</span></li>
+          <li class="chip"><span class="chip-name">llms.txt</span></li>
         </ul>
       </div>
 
-      <div class="stack-row reveal">
-        <h4 class="stack-row-label">SEO / AEO / GEO</h4>
-        <ul class="chip-list">
-          <li class="chip featured"><span class="chip-name">Blog &amp; SEO content</span><span class="chip-meta">briefs to publish</span></li>
-          <li class="chip featured"><span class="chip-name">Comparison pages</span><span class="chip-meta">category creation</span></li>
-          <li class="chip"><span class="chip-name">Schema.org</span><span class="chip-meta">structured data</span></li>
-          <li class="chip"><span class="chip-name">llms.txt</span><span class="chip-meta">AEO / GEO</span></li>
-          <li class="chip featured"><span class="chip-name">Google Ads</span><span class="chip-meta">keywords · copy · tracking</span></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Marquee ribbon -->
-    <div class="stack-marquee" aria-hidden="true">
-      <div class="stack-marquee-track">
-        <span>Claude Code</span><span>n8n</span><span>Apollo.io</span><span>HubSpot</span><span>Dataiku</span><span>Notion</span><span>Asana</span><span>CapCut</span><span>Figma</span><span>Canva</span><span>WordPress</span><span>Webflow CMS</span><span>Framer CMS</span><span>Lex Office</span><span>Microsoft 365</span><span>Instantly</span><span>Zapier</span><span>Apps Script</span><span>ChatGPT</span><span>Anthropic API</span><span>Perplexity</span><span>Google Analytics 4</span><span>Search Console</span><span>Google Ads</span><span>llms.txt</span><span>Schema.org</span><span>GitHub</span><span>Tally</span><span>Gojiberry</span><span>Claude Code</span><span>n8n</span><span>Apollo.io</span><span>HubSpot</span><span>Dataiku</span><span>Notion</span><span>Asana</span><span>CapCut</span><span>Figma</span><span>Canva</span><span>WordPress</span><span>Webflow CMS</span><span>Framer CMS</span><span>Lex Office</span><span>Microsoft 365</span><span>Instantly</span><span>Zapier</span><span>Apps Script</span><span>ChatGPT</span><span>Anthropic API</span><span>Perplexity</span><span>Google Analytics 4</span><span>Search Console</span><span>Google Ads</span><span>llms.txt</span><span>Schema.org</span><span>GitHub</span><span>Tally</span><span>Gojiberry</span>
-      </div>
     </div>
   </div>
 </section>
@@ -2267,6 +3866,376 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // Media tabs — switch category panels
+  (function () {
+    var tabs = document.querySelectorAll('.media-tab');
+    var panels = document.querySelectorAll('.media-panel');
+    if (!tabs.length) return;
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var cat = tab.dataset.cat;
+        tabs.forEach(function (t) {
+          var active = t.dataset.cat === cat;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          var active = p.dataset.cat === cat;
+          p.classList.toggle('is-active', active);
+          if (active) p.removeAttribute('hidden');
+          else p.setAttribute('hidden', '');
+        });
+      });
+    });
+  })();
+
+  // LinkedIn deck — carousel discovery (prev / next / shuffle, active highlight)
+  (function () {
+    var track = document.getElementById('liTrack');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.li-card'));
+    var prevBtn = document.getElementById('liPrev');
+    var nextBtn = document.getElementById('liNext');
+    var shuffleBtn = document.getElementById('liShuffle');
+    var counter = document.getElementById('liCounter');
+    var hint = document.querySelector('.li-deck-hint');
+    var total = cards.length;
+    var current = 0;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function scrollToIndex(i) {
+      if (i < 0) i = 0;
+      if (i >= total) i = total - 1;
+      current = i;
+      var card = cards[i];
+      var trackRect = track.getBoundingClientRect();
+      var cardRect = card.getBoundingClientRect();
+      var offset = card.offsetLeft - track.offsetLeft - (trackRect.width - cardRect.width) / 2;
+      track.scrollTo({ left: offset, behavior: 'smooth' });
+    }
+
+    function updateActive() {
+      var trackRect = track.getBoundingClientRect();
+      var centerX = trackRect.left + trackRect.width / 2;
+      var bestIdx = 0;
+      var bestDist = Infinity;
+      cards.forEach(function (c, i) {
+        var r = c.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - centerX);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      });
+      current = bestIdx;
+      cards.forEach(function (c, i) { c.classList.toggle('is-active', i === bestIdx); });
+      counter.textContent = pad(bestIdx + 1) + ' / ' + pad(total);
+    }
+
+    track.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    // Initial state
+    requestAnimationFrame(updateActive);
+    // Center first card on load
+    setTimeout(function () { scrollToIndex(0); }, 50);
+
+    prevBtn && prevBtn.addEventListener('click', function () {
+      scrollToIndex(current - 1);
+    });
+    nextBtn && nextBtn.addEventListener('click', function () {
+      scrollToIndex(current + 1);
+    });
+    shuffleBtn && shuffleBtn.addEventListener('click', function () {
+      var next;
+      do { next = Math.floor(Math.random() * total); } while (next === current && total > 1);
+      scrollToIndex(next);
+      // Sparkle pulse on the button
+      shuffleBtn.animate(
+        [{ transform: 'rotate(0)' }, { transform: 'rotate(-12deg) scale(1.1)' }, { transform: 'rotate(0)' }],
+        { duration: 500, easing: 'cubic-bezier(.34,1.4,.64,1)' }
+      );
+    });
+
+    // Hide hint after first interaction
+    var hideHint = function () {
+      if (hint) hint.style.opacity = '0';
+      track.removeEventListener('scroll', hideHint);
+      [prevBtn, nextBtn, shuffleBtn].forEach(function (b) {
+        if (b) b.removeEventListener('click', hideHint);
+      });
+    };
+    track.addEventListener('scroll', hideHint, { once: true, passive: true });
+    [prevBtn, nextBtn, shuffleBtn].forEach(function (b) {
+      if (b) b.addEventListener('click', hideHint, { once: true });
+    });
+
+    // Keyboard nav
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(current + 1); }
+    });
+    track.setAttribute('tabindex', '0');
+  })();
+
+  // About chat — interactive Q&A in ece's voice
+  (function () {
+    var chatBody = document.getElementById('chatBody');
+    var chips = document.querySelectorAll('.chip-q');
+    if (!chatBody || !chips.length) return;
+
+    var flows = {
+      marketer: [
+        { from: 'user', text: "what kind of marketer are you?" },
+        { from: 'ece',  text: "i'm a <strong>t-shaped marketer</strong>." },
+        { from: 'ece',  text: "the deep bar: customer and user communication. being close to the people who actually use the product, in their words, at the moments that matter." },
+        { from: 'ece',  text: "the breadth: lifecycle, B2B/SaaS growth, applied AI, and shipping web surfaces myself." }
+      ],
+      build: [
+        { from: 'user', text: "why do you build things yourself?" },
+        { from: 'ece',  text: "simple: i like learning. and i don't get scared off by the unfamiliar." },
+        { from: 'ece',  text: "when i didn't know how to ship a site, i learned the tooling and shipped one. when a problem needed automation, i built the flow that solved it." },
+        { from: 'ece',  text: "AI literacy isn't a line on a tool list for me. it's the habit of walking toward what i don't know yet and coming back with it built." },
+        { from: 'ece',  text: "but the tools are never the point. <strong>the point is the user.</strong>" }
+      ],
+      team: [
+        { from: 'user', text: "how do you work with teams?" },
+        { from: 'ece',  text: "at the seam between people and product, where my best work happens." },
+        { from: 'ece',  text: "i turn what users actually feel into messaging, lifecycle, and decisions teams can act on." },
+        { from: 'ece',  text: "at <strong>dataiku</strong>: owned user communication for an enterprise AI/analytics platform. worked the loop across product, CS, technical, content, events. two user segments through the freemium-to-paid lifecycle." },
+        { from: 'ece',  text: "at <strong>plandy</strong>: sat between BDR, product, and growth. translated community signal into the roadmap." },
+        { from: 'ece',  text: "i'm connective tissue, not a silo." }
+      ],
+      nautilida: [
+        { from: 'user', text: "what's nautilida about?" },
+        { from: 'ece',  text: "nautilida was two things at once for me." },
+        { from: 'ece',  text: "<strong>the real work</strong>: solving a real B2B sales coordination problem alongside a technical co-founder. i led product strategy and go-to-market end-to-end. positioning, messaging, customer development, lead pipeline." },
+        { from: 'ece',  text: "<strong>the deliberate part</strong>: a space to experience AI hands-on. build with new tooling before it was obvious. bring what i learned back into the work." },
+        { from: 'ece',  text: "the problem and the learning sharpened each other. that chapter is wrapping up now, but the muscle stays." }
+      ],
+      looking: [
+        { from: 'user', text: "what are you looking for?" },
+        { from: 'ece',  text: "honestly, i'm open to most kinds of work. what's next is what matters." },
+        { from: 'ece',  text: "fractional Head of Growth, founding-marketer collaborations, AI-product projects, hands-on growth or automation builds. labels matter less than the problem." },
+        { from: 'ece',  text: "what i actually care about: <strong>solving a real problem</strong>. staying close to the <strong>customer</strong> and the <strong>user</strong>. learning fast. shipping things that move the work forward." },
+        { from: 'ece',  text: "bring me something real and we'll figure out the shape together." },
+        { from: 'ece',  text: "want to talk? <a href=\"#contact\">tap here →</a>" }
+      ],
+      germany: [
+        { from: 'user', text: "how'd you end up in berlin?" },
+        { from: 'ece',  text: "did my undergrad in istanbul. <strong>bilgi university</strong>, international relations & public relations, marketing minor." },
+        { from: 'ece',  text: "moved to berlin in 2023 for my master's. <strong>HWR</strong> (hochschule für wirtschaft und recht), political economy. focus on economic policy, governance, and digital transformation." },
+        { from: 'ece',  text: "wrote my thesis on digitalization and tech transformation in retail chains. that's where my interest in tech-meets-policy started getting concrete." },
+        { from: 'ece',  text: "ended up staying. berlin is home base now. CET, EN/TR/DE." }
+      ],
+      deep: [
+        { from: 'user', text: "what's your deep bar exactly?" },
+        { from: 'ece',  text: "<strong>customer and user communication.</strong> that's the part i'd defend in a knife fight." },
+        { from: 'ece',  text: "being close to the people who use what we build. in their words, at the moments they actually feel the product. not personas. not survey averages. real signal from real people." },
+        { from: 'ece',  text: "every good campaign, every lifecycle email, every messaging decision i've made starts there. lose contact with the user and the rest of marketing turns into guesswork dressed up in a deck." }
+      ],
+      shipping: [
+        { from: 'user', text: "what's 'shipping in claude code' about?" },
+        { from: 'ece',  text: "i don't hand off a brief and wait. i open <strong>claude code</strong> and ship the thing myself." },
+        { from: 'ece',  text: "marketing sites, landing pages, comparison pages, microsites, blog templates, structured data. i write it, design it, deploy it." },
+        { from: 'ece',  text: "this isn't 'i became a developer'. it's marketer with hands. the loop from idea to live page is hours, not weeks. that speed changes what's possible to test and learn from." }
+      ],
+      ai: [
+        { from: 'user', text: "what's your AI philosophy?" },
+        { from: 'ece',  text: "AI literacy isn't a line on a tool list for me." },
+        { from: 'ece',  text: "it's the habit of walking toward what i don't know yet and coming back with it built. perplexity for research. claude code for shipping. n8n for flows. anthropic API for product surfaces. prompt frameworks for repeat work." },
+        { from: 'ece',  text: "but tools are never the point. the point is the customer, the user, the problem in front of you. AI just shortens the distance between seeing the problem and doing something about it." }
+      ],
+      dataiku: [
+        { from: 'user', text: "tell me about dataiku" },
+        { from: 'ece',  text: "berlin. enterprise AI/analytics platform. growth marketing role." },
+        { from: 'ece',  text: "i owned <strong>user communication</strong>: email and in-product messaging that carried two distinct user segments through the freemium-to-paid lifecycle." },
+        { from: 'ece',  text: "worked the loop across product, customer success, technical, content, and events teams. learned what 'cross-team by default' actually looks like at scale, and what good lifecycle comms feel like when the product is complex." }
+      ],
+      plandy: [
+        { from: 'user', text: "tell me about plandy" },
+        { from: 'ece',  text: "istanbul. event discovery and ticketing SaaS." },
+        { from: 'ece',  text: "i sat between BDR, product, and growth. live events, activations, community-led acquisition." },
+        { from: 'ece',  text: "the real job was translating community signal into the roadmap — turning what organizers and attendees were actually feeling into features and messaging. first time i played connective tissue, and the muscle has stayed." }
+      ],
+      start: [
+        { from: 'user', text: "how do we work together?" },
+        { from: 'ece',  text: "easiest: drop a line right here, or message me on linkedin. usually reply within a day, often faster." },
+        { from: 'ece',  text: "when we talk i'll ask three things: what problem are we solving, who's the customer / user, and what does 'good' look like in 90 days." },
+        { from: 'ece',  text: "from there we figure out the shape: fractional, project, advisory, or just a few calls. flexible on form, picky on problem." }
+      ],
+      ask: [
+        { from: 'user', text: "didn't find what i was looking for" },
+        { from: 'ece',  text: "of course — write me directly. usually reply within a day." },
+        { from: 'form', text: '' }
+      ]
+    };
+
+    var busy = false;
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        if (busy || chip.classList.contains('asked')) return;
+        var key = chip.dataset.q;
+        var flow = flows[key];
+        if (!flow) return;
+        chip.classList.add('asked');
+        chip.disabled = true;
+        run(flow);
+      });
+    });
+
+    // "..." floating popup with more questions
+    var moreBtn = document.getElementById('chipMore');
+    var morePopup = document.getElementById('morePopup');
+    var moreClose = document.getElementById('moreClose');
+
+    function openPopup() {
+      if (!morePopup) return;
+      morePopup.hidden = false;
+      if (moreBtn) moreBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closePopup() {
+      if (!morePopup) return;
+      morePopup.hidden = true;
+      if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    if (moreBtn && morePopup) {
+      moreBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (morePopup.hidden) openPopup();
+        else closePopup();
+      });
+    }
+    if (moreClose) {
+      moreClose.addEventListener('click', closePopup);
+    }
+    // Click outside to close
+    document.addEventListener('click', function (e) {
+      if (morePopup && !morePopup.hidden && !morePopup.contains(e.target) && e.target !== moreBtn) {
+        closePopup();
+      }
+    });
+    // Close when a popup chip is clicked (after a tiny delay so the click registers)
+    if (morePopup) {
+      morePopup.addEventListener('click', function (e) {
+        var chip = e.target.closest('.chip-q');
+        if (chip) setTimeout(closePopup, 200);
+      });
+    }
+    // ESC closes popup
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && morePopup && !morePopup.hidden) closePopup();
+    });
+
+    function run(flow) {
+      busy = true;
+      var i = 0;
+      function next() {
+        if (i >= flow.length) { busy = false; return; }
+        var msg = flow[i++];
+        if (msg.from === 'user') {
+          addBubble('user', msg.text);
+          setTimeout(next, 380);
+        } else if (msg.from === 'form') {
+          var t = addTyping();
+          setTimeout(function () {
+            t.remove();
+            addInlineForm();
+            setTimeout(next, 300);
+          }, 600);
+        } else {
+          var t = addTyping();
+          var delay = 700 + Math.random() * 500;
+          setTimeout(function () {
+            t.remove();
+            addBubble('ece', msg.text);
+            setTimeout(next, 260);
+          }, delay);
+        }
+      }
+      next();
+    }
+
+    function addInlineForm() {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg msg-ece msg-form';
+      wrap.innerHTML =
+        '<form class="inline-form" novalidate>' +
+          '<input name="name" placeholder="your name" required />' +
+          '<input name="email" placeholder="your email" type="email" required />' +
+          '<textarea name="message" placeholder="what\'s on your mind?" rows="3" required></textarea>' +
+          '<button type="submit">send →</button>' +
+          '<div class="inline-form-msg" aria-live="polite"></div>' +
+        '</form>';
+      chatBody.appendChild(wrap);
+      requestAnimationFrame(function () { wrap.classList.add('msg-in'); });
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      var form = wrap.querySelector('form');
+      var msg = wrap.querySelector('.inline-form-msg');
+      var TO = 'ece' + '@' + 'nautilida.ai';
+      var ENDPOINT = 'https://formsubmit.co/ajax/' + TO;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = form.name.value.trim();
+        var email = form.email.value.trim();
+        var message = form.message.value.trim();
+        if (!name || !email || !message) {
+          msg.textContent = 'fill in name, email, and a message.';
+          msg.classList.remove('success');
+          return;
+        }
+        msg.textContent = 'sending...';
+        msg.classList.remove('success');
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: name, email: email, message: message,
+            _subject: '[eceberrak.com chat] ' + name,
+            _replyto: email, _template: 'table', _captcha: 'true'
+          })
+        }).then(function (res) {
+          return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+        }).then(function (out) {
+          if (!out.ok || (out.data.success !== 'true' && out.data.success !== true)) throw new Error();
+          msg.textContent = 'thanks — i\'ll reply within a day ✨';
+          msg.classList.add('success');
+          Array.prototype.forEach.call(form.querySelectorAll('input, textarea, button'), function (el) {
+            el.disabled = true;
+          });
+          // Final closing bubble from ece
+          setTimeout(function () {
+            addBubble('ece', "talk soon ✨");
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }, 600);
+        }).catch(function () {
+          msg.textContent = 'couldn\'t send. try ece@nautilida.ai directly.';
+          msg.classList.remove('success');
+        });
+      });
+    }
+
+    function addBubble(from, html) {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg msg-' + from;
+      wrap.innerHTML = '<div class="msg-bubble">' + html + '</div>';
+      chatBody.appendChild(wrap);
+      requestAnimationFrame(function () { wrap.classList.add('msg-in'); });
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function addTyping() {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg msg-ece msg-typing';
+      wrap.innerHTML = '<div class="msg-bubble msg-bubble-typing"><span></span><span></span><span></span></div>';
+      chatBody.appendChild(wrap);
+      requestAnimationFrame(function () { wrap.classList.add('msg-in'); });
+      chatBody.scrollTop = chatBody.scrollHeight;
+      return wrap;
+    }
   })();
 
   // Contact form — delivered to ece@nautilida.ai via FormSubmit.co.

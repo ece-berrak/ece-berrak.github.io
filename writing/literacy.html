@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Team Lead Literacy · First Edition · Ece Berrak</title>
+<meta name="description" content="A short course on the AI team lead category — what it is, what it isn't, and where it's going. Written for the people thinking about building it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="reader.css" />
+<style>
+  /* Literacy-specific magazine cover treatment */
+  .lit-cover {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) var(--pad) clamp(30px, 4vw, 50px);
+    text-align: center;
+    position: relative;
+  }
+  .lit-edition {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 26px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .lit-edition::before, .lit-edition::after {
+    content: "";
+    display: block;
+    width: 36px; height: 1px;
+    background: var(--ink);
+  }
+  .lit-title {
+    font-family: var(--sans);
+    font-size: clamp(56px, 12vw, 160px);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .lit-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    display: block;
+    color: var(--violet);
+    font-size: 0.78em;
+    line-height: 0.8;
+    margin-top: 6px;
+  }
+  .lit-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.35;
+    color: var(--ink-2);
+    max-width: 44ch;
+    margin: 30px auto 0;
+  }
+  .lit-edition-dot { color: var(--violet); }
+
+  /* Problem section */
+  .lit-problem {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) var(--pad);
+    border-top: 1px solid var(--rule);
+  }
+  .lit-problem-head {
+    margin-bottom: 32px;
+  }
+  .lit-problem-head h2 {
+    font-family: var(--sans);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    max-width: 24ch;
+  }
+  .lit-problem-head h2 em { font-family: var(--serif); font-weight: 400; }
+  .lit-problem-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+  @media (min-width: 800px) {
+    .lit-problem-grid { grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
+  }
+  .lit-problem-card {
+    padding: 24px;
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+  }
+  .lit-problem-card h4 {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: var(--violet);
+  }
+  .lit-problem-card p {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .lit-pivot {
+    padding: clamp(22px, 3vw, 30px);
+    background: var(--ink);
+    color: var(--bone);
+    border-radius: 10px;
+    border: 1.5px solid var(--ink);
+    box-shadow: 8px 8px 0 0 var(--violet);
+  }
+  .lit-pivot p {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.4;
+    color: var(--bone);
+  }
+  .lit-pivot strong {
+    color: var(--lime);
+    font-weight: 600;
+  }
+
+  /* Chapters */
+  .lit-chapters {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) var(--pad);
+    border-top: 1px solid var(--rule);
+  }
+  .lit-chapters-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 16px;
+    margin-bottom: 36px;
+  }
+  .lit-chapters-head h2 {
+    font-family: var(--sans);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .lit-chapters-head h2 em { font-family: var(--serif); font-weight: 400; }
+  .lit-chapters-head .note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2);
+    letter-spacing: .04em;
+    max-width: 38ch;
+    line-height: 1.55;
+  }
+  .lit-chapters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 760px) {
+    .lit-chapters-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+  .lit-chapter {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    align-items: start;
+    padding: 26px 24px;
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .25s, box-shadow .25s, background .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lit-chapter:hover {
+    transform: translateY(-3px) rotate(-0.4deg);
+    box-shadow: 8px 8px 0 0 var(--ink);
+    background: #fff;
+  }
+  .lit-chapter:nth-child(even):hover { transform: translateY(-3px) rotate(0.4deg); }
+  .lit-chapter-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 0.9;
+    color: var(--violet);
+    font-weight: 400;
+  }
+  .lit-chapter-body h3 {
+    font-family: var(--sans);
+    font-size: clamp(17px, 1.7vw, 21px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  .lit-chapter-body p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .lit-chapter-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<header class="reader-top">
+  <div class="reader-top-inner">
+    <a class="back" href="../index.html#work">← back to portfolio</a>
+    <div class="top-meta">
+      <span>First edition</span>
+      <a href="https://nautilida.ai/literacy/" target="_blank" rel="noopener">live ↗</a>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<!-- Magazine cover -->
+<section class="lit-cover reveal">
+  <div class="lit-edition">
+    <span class="lit-edition-dot">●</span>
+    <span>NAUTILIDA LITERACY · FIRST EDITION · 2026</span>
+    <span class="lit-edition-dot">●</span>
+  </div>
+  <h1 class="lit-title">AI&nbsp;Team Lead<em>literacy.</em></h1>
+  <p class="lit-deck">A short course on the AI team lead category. What it is, what it isn't, and where it's going. Written for the people thinking about building it.</p>
+</section>
+
+<!-- Problem section -->
+<section class="lit-problem reveal">
+  <div class="lit-problem-head">
+    <h2>AI productivity is real. The orchestration <em>is missing.</em></h2>
+  </div>
+  <p style="max-width:60ch;color:var(--ink-2);font-size:15.5px;line-height:1.6;margin-bottom:32px;">Your team probably already uses ChatGPT for drafts, Claude for analysis, Copilot for code, Notion AI for notes. Productivity per task is up. But three things break at the team layer:</p>
+
+  <div class="lit-problem-grid">
+    <div class="lit-problem-card">
+      <h4>// 01 — Fragmented admin work</h4>
+      <p>Eight tools, eight inboxes, eight notification streams. Each AI gain is isolated. Nobody is orchestrating across them, somebody is still copy-pasting between surfaces.</p>
+    </div>
+    <div class="lit-problem-card">
+      <h4>// 02 — DIY orchestration breaks down</h4>
+      <p>Build the system yourself, Zaps, internal scripts, dashboards, and you end up maintaining the orchestration instead of doing the work it was supposed to save.</p>
+    </div>
+    <div class="lit-problem-card">
+      <h4>// 03 — Motivation drops</h4>
+      <p>The team's strongest work is relationships, deals, judgement. Fragmentation pulls them back into admin, exactly the work AI was meant to remove.</p>
+    </div>
+  </div>
+
+  <div class="lit-pivot">
+    <p>An <strong>AI team lead</strong> is the orchestrator. It does the fragmented admin so the team focuses on stronger work. Onboarding cost drops because new hires walk into months of pre-organized context.</p>
+  </div>
+</section>
+
+<!-- Chapters -->
+<section class="lit-chapters reveal">
+  <div class="lit-chapters-head">
+    <div>
+      <h2>The <em>seven chapters.</em></h2>
+    </div>
+    <p class="note">Each chapter answers one core question about the category. Built to be read in 10 minutes total, in any order.</p>
+  </div>
+
+  <div class="lit-chapters-grid">
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>01</em></div>
+      <div class="lit-chapter-body">
+        <h3>What is an AI team lead?</h3>
+        <p>A new category. How it differs from AI assistants and AI chatbots, and why the distinction matters for revenue teams.</p>
+        <span class="lit-chapter-tag">// definition</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>02</em></div>
+      <div class="lit-chapter-body">
+        <h3>The shift: visibility → coordination</h3>
+        <p>Why more dashboards is the wrong answer to a coordination problem. The thesis behind every other chapter.</p>
+        <span class="lit-chapter-tag">// thesis</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>03</em></div>
+      <div class="lit-chapter-body">
+        <h3>Anatomy of the weekly loop</h3>
+        <p>Monday brief, mid-week priorities, Friday recap, compounding memory. The four parts of a working revenue rhythm, at a glance.</p>
+        <span class="lit-chapter-tag">// rhythm</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>04</em></div>
+      <div class="lit-chapter-body">
+        <h3>Memory: the layer that compounds</h3>
+        <p>Three layers of memory: conversation, pattern, loop-fed, and why a rules-based stack cannot produce them.</p>
+        <span class="lit-chapter-tag">// memory</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>05</em></div>
+      <div class="lit-chapter-body">
+        <h3>Where it fits in your stack</h3>
+        <p>Honest comparisons. Nauti vs ChatGPT, Claude, Gong, Clari, CRM AI. Different categories, different jobs.</p>
+        <span class="lit-chapter-tag">// stack fit</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>06</em></div>
+      <div class="lit-chapter-body">
+        <h3>The hard questions</h3>
+        <p>GDPR, hallucinations, "can't Claude do this?", confidential data, trust. The objections we hear most, answered without dodging.</p>
+        <span class="lit-chapter-tag">// FAQ</span>
+      </div>
+    </div>
+
+    <div class="lit-chapter">
+      <div class="lit-chapter-num"><em>07</em></div>
+      <div class="lit-chapter-body">
+        <h3>Where we're going</h3>
+        <p>Today the brain. Tomorrow the senses. What we're shipping next, what we're deliberately not, and why brain-first matters.</p>
+        <span class="lit-chapter-tag">// trajectory</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Cross-reading -->
+<section class="more-reading reveal">
+  <div class="more-reading-head">Related on the portfolio</div>
+  <div class="more-grid">
+    <a class="more-card" href="weekly-loop.html">
+      <div class="mc-kicker">Manifesto · 9 min</div>
+      <div class="mc-title">The weekly revenue coordination loop, <em>explained.</em></div>
+    </a>
+    <a class="more-card" href="ai-team-lead.html">
+      <div class="mc-kicker">Definition · 7 min</div>
+      <div class="mc-title">What is an AI team lead <em>for sales?</em></div>
+    </a>
+    <a class="more-card" href="../projects/nautilida.html">
+      <div class="mc-kicker">Case study</div>
+      <div class="mc-title">Nautilida — <em>the marketing site, end-to-end.</em></div>
+    </a>
+  </div>
+</section>
+
+<footer class="reader-foot">
+  <span>© 2026 ece berrak · literacy · first edition</span>
+  <a class="button" href="../index.html#work">← back to portfolio</a>
+</footer>
+
+<script src="reader.js"></script>
+</body>
+</html>

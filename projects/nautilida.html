@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nautilida — Marketing site, end-to-end · Ece Berrak case study</title>
+<meta name="description" content="A case study of nautilida.ai: marketing surfaces, comparison pages, glossary, and a 7-chapter literacy microsite — designed and shipped end-to-end in Claude Code. Optimized for SEO, AEO, and GEO." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bone:#F4EFE4; --ink:#0E0D14; --ink-2:#3a3744; --ink-3:#7c7686;
+  --rule:#e6dfd0; --rule-strong:#1a1922;
+  --violet:#4F32D8; --violet-soft:#a78bfa; --lime:#D4FF3D;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --pad: clamp(20px, 4vw, 56px);
+  --max: 1180px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+a { color: inherit; }
+.italic { font-style: italic; }
+em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+/* Top bar */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244,239,228,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.top-inner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 14px var(--pad);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--ink);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  transition: all .2s;
+}
+.back:hover { background: var(--ink); color: var(--bone); }
+.top-status {
+  font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.top-right { display: flex; align-items: center; gap: 12px; }
+.live-link {
+  font-family: var(--mono); font-size: 12px;
+  padding: 8px 14px;
+  background: var(--violet); color: var(--bone);
+  border-radius: 999px;
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: transform .2s, box-shadow .2s;
+}
+.live-link:hover { transform: translateY(-1px); box-shadow: 3px 3px 0 0 var(--ink); }
+
+/* Hero */
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(60px, 10vw, 120px) var(--pad) clamp(40px, 6vw, 80px);
+  position: relative;
+}
+.kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: var(--sans);
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.hero h1 em {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+.hero-deck {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 30px);
+  line-height: 1.3;
+  max-width: 32ch;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 28px;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--ink-3);
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.hero-meta strong { color: var(--ink); font-weight: 500; }
+
+/* Site map */
+.sitemap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+.sitemap-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 16px;
+  margin-bottom: 32px;
+}
+.section-num {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.section-h2 {
+  font-family: var(--sans);
+  font-size: clamp(34px, 4.5vw, 54px);
+  line-height: 1.05; letter-spacing: -0.025em;
+  font-weight: 700;
+}
+.section-h2 em { font-family: var(--serif); font-weight: 400; }
+.section-deck {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--ink-2); max-width: 50ch; margin-top: 8px;
+}
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.sitemap-card {
+  display: flex; flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.sitemap-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.sitemap-card .url {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--violet); letter-spacing: .02em;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+.sitemap-card h3 {
+  font-family: var(--sans);
+  font-size: 19px; font-weight: 600;
+  line-height: 1.25; letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.sitemap-card p {
+  font-size: 13px; color: var(--ink-2); line-height: 1.5;
+}
+.sitemap-card .arr {
+  margin-top: auto;
+  padding-top: 12px;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--ink-3); letter-spacing: .04em;
+}
+
+/* Page detail blocks */
+.pages {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+.page-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: clamp(28px, 4vw, 48px) 0;
+  border-top: 1px solid var(--rule);
+}
+.page-block:first-of-type { border-top: none; }
+@media (min-width: 900px) {
+  .page-block { grid-template-columns: 260px 1fr; gap: 60px; }
+}
+.page-side .page-id {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-3); letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.page-side .page-url {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--ink);
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--rule-strong);
+  display: inline-flex; align-items: center;
+  word-break: break-all;
+}
+.page-side .page-tags {
+  margin-top: 14px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.page-side .page-tags span {
+  font-family: var(--mono); font-size: 10px;
+  background: var(--bone); border: 1px solid var(--rule-strong);
+  padding: 4px 10px 5px; border-radius: 999px;
+  color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase;
+}
+.page-main h3 {
+  font-family: var(--sans);
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.page-main h3 em { font-family: var(--serif); font-weight: 400; }
+.page-main p {
+  color: var(--ink-2);
+  margin-bottom: 14px;
+  max-width: 64ch;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.page-main strong { color: var(--ink); font-weight: 600; }
+.page-main .purpose {
+  font-family: var(--serif); font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  border-left: 3px solid var(--violet);
+  padding: 4px 0 4px 16px;
+  max-width: 56ch;
+}
+.page-main .sections-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px dashed var(--rule-strong);
+  display: grid; gap: 10px;
+}
+.page-main .sections-list li {
+  display: grid; grid-template-columns: 24px 1fr; gap: 12px;
+  font-size: 14px;
+  align-items: baseline;
+}
+.page-main .sections-list .n {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--violet); letter-spacing: .04em;
+}
+.page-main .sections-list .t {
+  color: var(--ink-2);
+}
+.page-main .sections-list .t strong { color: var(--ink); }
+
+/* Design system block */
+.design {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+.design-grid {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 28px;
+}
+.design-tile {
+  padding: 22px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  background: #fff;
+}
+.design-tile .label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 10px;
+}
+.design-tile h4 {
+  font-size: 17px; font-weight: 600;
+  margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.design-tile p {
+  font-size: 13px; color: var(--ink-2); line-height: 1.55;
+}
+
+/* Color swatches */
+.swatches { display: flex; gap: 6px; margin-bottom: 12px; }
+.swatch {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--rule-strong);
+}
+.swatch.violet { background: var(--violet); }
+.swatch.lime { background: var(--lime); }
+.swatch.ink { background: var(--ink); }
+.swatch.bone { background: var(--bone); }
+
+/* Outcomes */
+.outcomes-section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+.outcomes-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 28px;
+}
+.outcome-card {
+  padding: 28px 22px;
+  background: var(--ink);
+  color: var(--bone);
+  border-radius: 8px;
+  border: 1.5px solid var(--ink);
+}
+.outcome-card.feature {
+  background: var(--violet);
+  border-color: var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.outcome-card .num {
+  font-family: var(--serif); font-style: italic;
+  font-size: 56px; line-height: 0.9;
+  margin-bottom: 6px;
+}
+.outcome-card .label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(244,239,228,0.7);
+}
+
+/* JSON block */
+.json-block {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+.json-frame {
+  margin-top: 24px;
+  background: var(--ink);
+  color: #e7e5df;
+  border-radius: 8px;
+  padding: 22px;
+  max-height: 480px;
+  overflow: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+}
+.json-frame::-webkit-scrollbar { width: 8px; height: 8px; }
+.json-frame::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 4px; }
+.json-note {
+  font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  letter-spacing: .04em; margin-top: 12px;
+}
+
+/* Footer */
+.foot {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.foot-back {
+  font-family: var(--mono); font-size: 13px;
+  padding: 10px 18px;
+  background: var(--ink); color: var(--bone);
+  border-radius: 999px;
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: background .2s;
+}
+.foot-back:hover { background: var(--violet); }
+
+/* Reveal animation */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="top">
+  <div class="top-inner">
+    <a class="back" href="../index.html#work">← back to portfolio</a>
+    <div class="top-right">
+      <span class="top-status">case study</span>
+      <a class="live-link" href="https://nautilida.ai" target="_blank" rel="noopener">try live ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero reveal">
+  <div class="kicker">// case study · 2025 — 2026</div>
+  <h1>Nautilida<br/><em>marketing site, end-to-end.</em></h1>
+  <p class="hero-deck">A complete B2B marketing presence — designed, written, and shipped in Claude Code as a co-founder. Optimized for SEO, AEO, and GEO so AI answer engines cite the product by name.</p>
+  <div class="hero-meta">
+    <span><strong>Role</strong> · Co-founder & CEO · marketing lead</span>
+    <span><strong>Scope</strong> · Marketing site + microsite + content system</span>
+    <span><strong>Stack</strong> · Claude Code · HTML/CSS/JS · llms.txt · schema.org</span>
+    <span><strong>Timeline</strong> · Site live in 3 weeks</span>
+  </div>
+</section>
+
+<!-- Site map -->
+<section class="sitemap reveal" id="sitemap">
+  <div class="sitemap-head">
+    <div>
+      <div class="section-num">// 01 — site map</div>
+      <h2 class="section-h2">What lives at <em>nautilida.ai</em>.</h2>
+    </div>
+    <p class="section-deck">A snapshot of every surface I designed and shipped — main site, comparison pages, use cases, glossary, blog, and the 7-chapter literacy microsite.</p>
+  </div>
+
+  <div class="sitemap-grid">
+    <a class="sitemap-card" href="#page-home">
+      <div class="url">nautilida.ai/</div>
+      <h3>Home</h3>
+      <p>The category positioning: AI Team Lead for Sales. Hero, problem framing, product surfaces, social proof, CTA.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+    <a class="sitemap-card" href="#page-compare">
+      <div class="url">/compare/{gong,clari,gainsight,...}</div>
+      <h3>Comparison pages (×12)</h3>
+      <p>Head-to-head explainers built for AI-search citation — Gong, Clari, Gainsight, and nine more.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+    <a class="sitemap-card" href="#page-usecases">
+      <div class="url">/use-cases/{manufacturing,catering}</div>
+      <h3>Use cases</h3>
+      <p>Industry-specific framing for recurring-account B2B teams — manufacturing and catering.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+    <a class="sitemap-card" href="#page-glossary">
+      <div class="url">/glossary</div>
+      <h3>Glossary</h3>
+      <p>Plain-English definitions of category terms — AEO-friendly definition pages with schema.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+    <a class="sitemap-card" href="#page-blog">
+      <div class="url">/blog</div>
+      <h3>Blog</h3>
+      <p>Long-form pieces: the weekly loop manifesto, category notes, comparison narratives.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+    <a class="sitemap-card" href="#page-literacy">
+      <div class="url">/literacy</div>
+      <h3>Literacy microsite</h3>
+      <p>7-chapter category primer for VCs and B2B buyers. Long-form narrative, not a brochure.</p>
+      <div class="arr">View breakdown →</div>
+    </a>
+  </div>
+</section>
+
+<!-- Page breakdowns -->
+<section class="pages">
+  <div class="section-num" style="margin-bottom:12px;">// 02 — page breakdowns</div>
+  <h2 class="section-h2" style="margin-bottom:48px;">Where what is, and <em>why.</em></h2>
+
+  <!-- Home -->
+  <article class="page-block reveal" id="page-home">
+    <aside class="page-side">
+      <div class="page-id">01 / home</div>
+      <div class="page-url">nautilida.ai/</div>
+      <div class="page-tags">
+        <span>Hero</span><span>Positioning</span><span>Schema</span><span>llms.txt</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>The category landing.</h3>
+      <p class="purpose">First-time visitors land here and either get the category in 10 seconds or bounce. Everything is paced for that.</p>
+      <p>The home page does three jobs at once: positions Nautilida as the <strong>AI Team Lead for Sales</strong> category (not another assistant, not another dashboard), frames the problem in operator language (revenue coordination, not "AI productivity"), and gets a qualified visitor into either a comparison page or the contact flow.</p>
+      <p>Structured data (Organization, Product, FAQ) is embedded inline; <code>llms.txt</code> at the root tells AI crawlers exactly which pages to cite for which intents.</p>
+      <ul class="sections-list">
+        <li><span class="n">01</span><span class="t"><strong>Hero</strong> — Headline + sub + dual CTA (book a call, see how it works).</span></li>
+        <li><span class="n">02</span><span class="t"><strong>Problem framing</strong> — What revenue teams actually run on, and where the breaks are.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>The weekly loop</strong> — Monday brief, mid-week priorities, Friday recap, compounding memory.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>Product surfaces</strong> — Three concrete capabilities with visual examples.</span></li>
+        <li><span class="n">05</span><span class="t"><strong>Comparison teaser</strong> — Quick-glance differentiators vs Gong, Clari, Gainsight.</span></li>
+        <li><span class="n">06</span><span class="t"><strong>Footer</strong> — Quick links, contact, llms.txt reference, schema.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Compare -->
+  <article class="page-block reveal" id="page-compare">
+    <aside class="page-side">
+      <div class="page-id">02 / comparisons</div>
+      <div class="page-url">/compare/{vendor}</div>
+      <div class="page-tags">
+        <span>AEO/GEO</span><span>Category creation</span><span>12 pages</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>Twelve comparison pages, <em>each built for AI-search.</em></h3>
+      <p class="purpose">When a buyer asks "Nautilida vs Gong?" in ChatGPT, Perplexity, or Claude — there's a page sitting there ready to be cited.</p>
+      <p>Each comparison page follows a strict editorial pattern: a <strong>short answer</strong> at the top (extractable by AI), a <strong>differentiator table</strong> in the middle, <strong>category clarification</strong> for buyers who think the two tools are alternatives (often they're complementary), and <strong>FAQs with schema</strong> at the bottom.</p>
+      <p>Examples shipped:</p>
+      <ul class="sections-list">
+        <li><span class="n">01</span><span class="t"><strong>/compare/gong</strong> — Revenue intelligence vs coordination layer.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>/compare/clari</strong> — Forecasting platform vs operating rhythm.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>/compare/gainsight</strong> — CS platform vs cross-functional revenue coordination.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>/compare/{outreach,salesloft,hubspot,...}</strong> — Plus nine more, same pattern, different category.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Use cases -->
+  <article class="page-block reveal" id="page-usecases">
+    <aside class="page-side">
+      <div class="page-id">03 / use cases</div>
+      <div class="page-url">/use-cases/{industry}</div>
+      <div class="page-tags">
+        <span>Vertical</span><span>Recurring accounts</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>Where the category clicks: <em>industries with recurring revenue.</em></h3>
+      <p class="purpose">Vertical pages exist because the buyer's "is this for me?" question is faster to answer with their own industry than with abstract category language.</p>
+      <ul class="sections-list">
+        <li><span class="n">01</span><span class="t"><strong>/use-cases/manufacturing</strong> — Named accounts, predictable reorder cadence, AM-coordinated revenue.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>/use-cases/catering</strong> — B2B kitchens with repeat customers, office and event programs, deep account memory.</span></li>
+      </ul>
+      <p>Each page is structured the same: the industry's recurring-revenue pattern, three concrete coordination problems, how Nautilida's weekly loop addresses each, and a section-specific contact CTA.</p>
+    </div>
+  </article>
+
+  <!-- Glossary -->
+  <article class="page-block reveal" id="page-glossary">
+    <aside class="page-side">
+      <div class="page-id">04 / glossary</div>
+      <div class="page-url">/glossary</div>
+      <div class="page-tags">
+        <span>AEO</span><span>Definitions</span><span>Schema</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>The category dictionary.</h3>
+      <p class="purpose">When a buyer or a search engine asks "what is an AI team lead for sales?" — there is a clean, schema-marked definition page ready to answer.</p>
+      <p>Every glossary entry follows the same anatomy: <strong>short answer</strong> (1–2 sentences, AI-extractable), <strong>longer explanation</strong>, <strong>related terms</strong>, and <strong>FAQPage / DefinedTerm schema</strong> embedded inline. Definitions cover the entire category surface — coordination layer, weekly loop, AI team lead, revenue book memory, and more.</p>
+    </div>
+  </article>
+
+  <!-- Blog -->
+  <article class="page-block reveal" id="page-blog">
+    <aside class="page-side">
+      <div class="page-id">05 / blog</div>
+      <div class="page-url">/blog</div>
+      <div class="page-tags">
+        <span>Long-form</span><span>Manifesto</span><span>Category notes</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>Long-form, written to be <em>cited.</em></h3>
+      <p class="purpose">The blog isn't a feed of news. Each piece exists to anchor a specific narrative in the buyer's head and to give AI engines something substantive to quote.</p>
+      <p>Shipped pieces:</p>
+      <ul class="sections-list">
+        <li><span class="n">01</span><span class="t"><strong>The weekly revenue coordination loop, explained.</strong> Manifesto for the operating rhythm. 9 min read.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>What is an AI team lead for sales?</strong> Definition + category note. 7 min read.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>Revenue intelligence vs Nautilida.</strong> Comparison narrative, complementary positioning. 6 min read.</span></li>
+      </ul>
+      <p>Each post has the AEO pattern: short answer at the top, narrative body, key takeaways, FAQs with schema.</p>
+    </div>
+  </article>
+
+  <!-- Literacy -->
+  <article class="page-block reveal" id="page-literacy">
+    <aside class="page-side">
+      <div class="page-id">06 / microsite</div>
+      <div class="page-url">/literacy</div>
+      <div class="page-tags">
+        <span>Microsite</span><span>VC / buyer education</span><span>7 chapters</span>
+      </div>
+    </aside>
+    <div class="page-main">
+      <h3>The Literacy microsite — <em>7-chapter category primer.</em></h3>
+      <p class="purpose">A separate microsite that exists to explain the AI-native sales category to VCs and B2B buyers before any product pitch happens. Long-form, navigable, designed to be opened in fundraising conversations.</p>
+      <ul class="sections-list">
+        <li><span class="n">01</span><span class="t"><strong>Why AI-Native Sales</strong> — Why the category exists now and why it didn't before.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>The Old Stack Breaks</strong> — Where the existing revenue tooling falls short.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>Agents, Not Seats</strong> — From software-as-tool to software-as-team-member.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>Data as Destiny</strong> — Why cross-stack memory is the real moat.</span></li>
+        <li><span class="n">05</span><span class="t"><strong>Trust at Scale</strong> — How AI earns the right to act on revenue data.</span></li>
+        <li><span class="n">06</span><span class="t"><strong>The New Metrics</strong> — What you measure when coordination is the moat.</span></li>
+        <li><span class="n">07</span><span class="t"><strong>What Comes Next</strong> — The trajectory of the category, and what to bet on.</span></li>
+      </ul>
+      <p>Written and designed solo. Used in live fundraising conversations with VCs and design-partner intros.</p>
+    </div>
+  </article>
+
+</section>
+
+<!-- Design system -->
+<section class="design reveal" id="design-system">
+  <div class="section-num">// 03 — design system</div>
+  <h2 class="section-h2">A small, opinionated <em>system.</em></h2>
+  <p class="section-deck">Tokens chosen for legibility, AEO-cited copy, and a recognizable look across surfaces.</p>
+
+  <div class="design-grid">
+    <div class="design-tile">
+      <div class="label">// palette</div>
+      <div class="swatches">
+        <div class="swatch violet" title="Violet · accent"></div>
+        <div class="swatch lime" title="Lime · highlight"></div>
+        <div class="swatch ink" title="Ink · text"></div>
+        <div class="swatch bone" title="Bone · canvas"></div>
+      </div>
+      <h4>Violet / lime / ink / bone</h4>
+      <p>Editorial cream canvas with one assertive accent (violet) and one playful accent (lime). High-contrast text on warm bg, generous white space.</p>
+    </div>
+    <div class="design-tile">
+      <div class="label">// type</div>
+      <h4>Inter + Instrument Serif + JetBrains Mono</h4>
+      <p>Sans for body, italic serif for poetic emphasis (<em>like this</em>), mono for kickers, URLs, code, and AEO machine-readable structure.</p>
+    </div>
+    <div class="design-tile">
+      <div class="label">// structure</div>
+      <h4>AEO-first content pattern</h4>
+      <p>Every page has a short answer at the top (extractable), narrative middle, FAQ + schema at the bottom. Built to be cited by Perplexity, ChatGPT, and Claude as a default answer source.</p>
+    </div>
+    <div class="design-tile">
+      <div class="label">// schema</div>
+      <h4>Structured data + llms.txt</h4>
+      <p>Organization, Product, FAQPage, DefinedTerm, Article schema embedded inline. <code>llms.txt</code> at root routes AI crawlers to the right source pages per intent.</p>
+    </div>
+    <div class="design-tile">
+      <div class="label">// motion</div>
+      <h4>Reveal on scroll, restraint elsewhere</h4>
+      <p>Fade-up on scroll for narrative sections, brief micro-interactions on CTAs, no auto-playing video or distracting parallax. Marketing reads, doesn't perform.</p>
+    </div>
+    <div class="design-tile">
+      <div class="label">// tooling</div>
+      <h4>Claude Code, end-to-end</h4>
+      <p>Site designed and shipped entirely in Claude Code. No agency, no developer handoff — copy, layout, schema, and deploy all inside the same loop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Outcomes -->
+<section class="outcomes-section reveal">
+  <div class="section-num">// 04 — outcomes</div>
+  <h2 class="section-h2">What this <em>shipped.</em></h2>
+
+  <div class="outcomes-grid">
+    <div class="outcome-card feature">
+      <div class="num">3 wks</div>
+      <div class="label">main site live</div>
+    </div>
+    <div class="outcome-card">
+      <div class="num">12</div>
+      <div class="label">comparison pages</div>
+    </div>
+    <div class="outcome-card">
+      <div class="num">7</div>
+      <div class="label">literacy chapters</div>
+    </div>
+    <div class="outcome-card">
+      <div class="num">1st</div>
+      <div class="label">LOIs + design partner</div>
+    </div>
+  </div>
+</section>
+
+<!-- JSON data block -->
+<section class="json-block reveal" id="json">
+  <div class="section-num">// 05 — design data</div>
+  <h2 class="section-h2">JSON, for <em>rebuild and reference.</em></h2>
+  <p class="section-deck">All the structure on this page lives as JSON, so a designer or another model can rebuild the entire case study from it.</p>
+
+  <pre class="json-frame" id="json-out"></pre>
+  <p class="json-note">Also embedded as <code>&lt;script type="application/json" id="nautilida-project-data"&gt;</code> below — copy-paste friendly.</p>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <span>© 2026 ece berrak · case study</span>
+  <a class="foot-back" href="../index.html#work">← back to portfolio</a>
+</footer>
+
+<!-- Project data (single source of truth) -->
+<script type="application/json" id="nautilida-project-data">
+{
+  "project": {
+    "name": "Nautilida",
+    "subtitle": "Marketing site, end-to-end",
+    "role": "Co-founder & CEO · marketing lead",
+    "timeline": "2025 — 2026",
+    "delivery": "Site live in 3 weeks",
+    "primary_url": "https://nautilida.ai",
+    "summary": "A complete B2B marketing presence designed, written, and shipped in Claude Code as a co-founder. Optimized for SEO, AEO, and GEO so AI answer engines cite the product by name."
+  },
+  "design_system": {
+    "palette": {
+      "violet": "#4F32D8",
+      "lime": "#D4FF3D",
+      "ink": "#0E0D14",
+      "bone": "#F4EFE4"
+    },
+    "type": {
+      "sans": "Inter",
+      "serif": "Instrument Serif",
+      "mono": "JetBrains Mono"
+    },
+    "content_pattern": "short answer at top (AEO-extractable) → narrative middle → FAQ + schema at bottom",
+    "schema": ["Organization", "Product", "FAQPage", "DefinedTerm", "Article"],
+    "discovery": ["llms.txt at root", "structured data inline", "AEO-cited copy structure"]
+  },
+  "pages": [
+    {
+      "id": "home",
+      "url": "/",
+      "purpose": "Position Nautilida as the AI Team Lead for Sales category; get qualified visitors into comparison pages or contact.",
+      "sections": [
+        "Hero + dual CTA",
+        "Problem framing in operator language",
+        "The weekly loop (Mon brief / mid-week priorities / Fri recap / compounding memory)",
+        "Three product surfaces",
+        "Comparison teaser",
+        "Footer + llms.txt reference"
+      ]
+    },
+    {
+      "id": "compare",
+      "url": "/compare/{vendor}",
+      "count": 12,
+      "purpose": "When a buyer asks 'Nautilida vs Gong?' in an AI search engine, a citation-ready page is waiting.",
+      "examples": ["/compare/gong", "/compare/clari", "/compare/gainsight"],
+      "page_pattern": [
+        "Short answer (1-2 sentences, AI-extractable)",
+        "Differentiator table",
+        "Category clarification (alternative vs complementary)",
+        "FAQs with FAQPage schema"
+      ]
+    },
+    {
+      "id": "use_cases",
+      "url": "/use-cases/{industry}",
+      "examples": ["/use-cases/manufacturing", "/use-cases/catering"],
+      "purpose": "Vertical-language landing — buyers see their own industry framed before they see the abstract category.",
+      "page_pattern": [
+        "Industry's recurring-revenue pattern",
+        "Three concrete coordination problems",
+        "How the weekly loop addresses each",
+        "Vertical-specific CTA"
+      ]
+    },
+    {
+      "id": "glossary",
+      "url": "/glossary",
+      "purpose": "Category dictionary, AEO-ready definitions with DefinedTerm + FAQPage schema.",
+      "entry_anatomy": ["Short answer", "Longer explanation", "Related terms", "Schema embedded inline"]
+    },
+    {
+      "id": "blog",
+      "url": "/blog",
+      "purpose": "Long-form pieces anchoring narrative in buyer's head and giving AI engines substantive citations.",
+      "shipped": [
+        { "title": "The weekly revenue coordination loop, explained.", "type": "Manifesto", "minutes": 9, "date": "April 2026" },
+        { "title": "What is an AI team lead for sales?", "type": "Definition / category note", "minutes": 7, "date": "April 2026" },
+        { "title": "Revenue intelligence vs Nautilida.", "type": "Comparison narrative", "minutes": 6, "date": "May 2026" }
+      ]
+    },
+    {
+      "id": "literacy",
+      "url": "/literacy",
+      "purpose": "Separate microsite — 7-chapter category primer for VCs and B2B buyers. Used in live fundraising conversations.",
+      "chapters": [
+        "Why AI-Native Sales",
+        "The Old Stack Breaks",
+        "Agents, Not Seats",
+        "Data as Destiny",
+        "Trust at Scale",
+        "The New Metrics",
+        "What Comes Next"
+      ]
+    }
+  ],
+  "outcomes": [
+    { "metric": "3 weeks", "label": "main site live" },
+    { "metric": "12", "label": "comparison pages shipped" },
+    { "metric": "7", "label": "literacy chapters" },
+    { "metric": "first LOIs", "label": "+ first design partner onboarded" }
+  ]
+}
+</script>
+
+<script>
+  // Render the JSON into the visible <pre> block (pretty-printed)
+  (function () {
+    var src = document.getElementById('nautilida-project-data');
+    var out = document.getElementById('json-out');
+    if (!src || !out) return;
+    try {
+      var data = JSON.parse(src.textContent);
+      out.textContent = JSON.stringify(data, null, 2);
+    } catch (e) {
+      out.textContent = '// failed to parse project JSON';
+    }
+  })();
+
+  // Reveal on scroll
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+
+</body>
+</html>
