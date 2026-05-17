@@ -1283,6 +1283,24 @@
   }
   .thumb-6 .thumb-mono, .thumb-6 .thumb-num { z-index: 2; }
 
+  .thumb-7 {
+    background: linear-gradient(180deg, #0E0D14 0%, #1f1c33 100%);
+  }
+  .thumb-7 .pipeline-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.85;
+  }
+  .thumb-7::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 0%, transparent 55%, rgba(14,13,20,0.65) 100%);
+    pointer-events: none;
+  }
+  .thumb-7 .thumb-mono, .thumb-7 .thumb-num { z-index: 2; }
+
   .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
   .card h3 { margin-top: -.25rem; }
   .card-desc { color: var(--ink-2); font-size: 0.97rem; line-height: 1.55; max-width: 56ch; }
@@ -3680,7 +3698,7 @@
         <h2>Things I designed, built, and <span class="italic">shipped.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Four projects that show what "marketing that ships" looks like in practice: websites, automations, microsites, and category content built end-to-end. Tap any card for the full story.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five projects that show what "marketing that ships" looks like in practice: websites, automations, microsites, AI agents, and category content built end-to-end. Tap any card for the full story.</p>
       </div>
     </div>
 
@@ -3692,7 +3710,7 @@
           <span class="grid-bg" aria-hidden="true"></span>
           <span class="thumb-mono">nautilida.ai</span>
           <div class="thumb-fig"><em>Marketing that ships</em><span class="thumb-sub">— site live in 3 weeks</span></div>
-          <span class="thumb-num">01 / 04</span>
+          <span class="thumb-num">01 / 05</span>
         </div>
         <div>
           <div class="kicker">WEBSITE · AEO/GEO · CONTENT</div>
@@ -3722,7 +3740,7 @@
   notifyChat(payload);
 }
 // → 0 € infra · MIT</pre>
-          <span class="thumb-num">02 / 04</span>
+          <span class="thumb-num">02 / 05</span>
         </div>
         <div class="kicker">AUTOMATION · OPEN SOURCE</div>
         <h3>Inbound lead automation, <span class="italic">Apps Script edition</span></h3>
@@ -3765,7 +3783,7 @@
             </g>
           </svg>
           <span class="thumb-mono" style="color:rgba(255,255,255,0.7);">nautilida.ai/literacy</span>
-          <span class="thumb-num">03 / 04</span>
+          <span class="thumb-num">03 / 05</span>
         </div>
         <div>
           <div class="kicker">MICROSITE · LONG-FORM NARRATIVE</div>
@@ -3788,7 +3806,7 @@
         <div class="thumb thumb-6">
           <img class="pipeline-img" src="uploads/n8n-pipeline.png" alt="n8n workflow visualization — 12 nodes from Schedule Trigger through Notion read, Claude draft, Google Docs create, to Notion property update" />
           <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/aeo-content-pipeline</span>
-          <span class="thumb-num">04 / 04</span>
+          <span class="thumb-num">04 / 05</span>
         </div>
         <div>
           <div class="kicker">AUTOMATION · AI-NATIVE · OPEN SOURCE</div>
@@ -3803,6 +3821,29 @@
           <div class="card-foot">
             <span class="meta">Open source</span>
             <a class="linkish" href="https://github.com/ece-berrak/aeo-content-pipeline" target="_blank" rel="noopener">github.com/ece-berrak/aeo-content-pipeline <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="card">
+        <div class="thumb thumb-7">
+          <img class="pipeline-img" src="uploads/n8n-research-agent.png" alt="n8n workflow visualization — Chat Trigger to AI Agent with Gemini 2.5 Flash, Simple Memory, Tavily web search, and Notion database write" />
+          <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/n8n-research-agent</span>
+          <span class="thumb-num">05 / 05</span>
+        </div>
+        <div>
+          <div class="kicker">AI AGENT · AUTOMATION · OPEN SOURCE</div>
+          <h3 style="margin-top:.5rem;">Research agent on n8n, <span class="italic">$0/month</span></h3>
+          <p class="card-desc" style="margin-top:1rem;">An end-to-end AI research agent built on n8n Cloud. Surfaces fresh findings from the web via Tavily, structures them with Gemini 2.5 Flash, and saves the result to a Notion database — all from a single chat surface. MVP shipped; v2 adds an external chat interface so the agent becomes reachable day-to-day.</p>
+          <ul class="outcomes">
+            <li>$0/month — runs entirely on free tiers (n8n, Gemini, Tavily, Notion)</li>
+            <li>Generic SOUL template — fork and customize for any vertical</li>
+            <li>Open-sourced under MIT</li>
+          </ul>
+          <div class="card-foot">
+            <span class="meta">Open source</span>
+            <a class="linkish" href="https://github.com/ece-berrak/n8n-research-agent" target="_blank" rel="noopener">github.com/ece-berrak/n8n-research-agent <span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
