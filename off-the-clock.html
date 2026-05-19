@@ -78,11 +78,26 @@
 
   /* Hero */
   .hero {
-    padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 3.5rem);
+    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(2.5rem, 5vw, 4rem);
     border-bottom: 1px solid var(--rule);
     position: relative;
     overflow: hidden;
+    background:
+      radial-gradient(circle at 88% 18%, rgba(212,255,61,.25), transparent 38%),
+      radial-gradient(circle at 8% 92%, rgba(79,50,216,.10), transparent 42%),
+      var(--bone);
   }
+  /* Floating doodles */
+  .hero-doodle {
+    position: absolute;
+    pointer-events: none;
+    opacity: .9;
+  }
+  .hero-doodle.d-1 { top: 14%; right: 8%; rotate: -8deg; }
+  .hero-doodle.d-2 { bottom: 18%; right: 22%; rotate: 14deg; }
+  .hero-doodle.d-3 { top: 22%; right: 28%; rotate: -3deg; }
+  @media (max-width: 760px) { .hero-doodle { display: none; } }
+
   .hero-eyebrow {
     font-family: var(--mono);
     font-size: 12px;
@@ -90,43 +105,79 @@
     text-transform: uppercase;
     color: var(--violet);
     margin-bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--violet);
   }
   .hero-title {
     font-family: var(--serif);
     font-weight: 400;
     font-size: clamp(3.5rem, 9vw, 7rem);
-    line-height: .98;
+    line-height: .96;
     letter-spacing: -.02em;
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.5rem;
+    position: relative;
   }
-  .hero-title em { font-style: italic; color: var(--violet); }
+  .hero-title em {
+    font-style: italic;
+    color: var(--violet);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-title em::after {
+    content: "";
+    position: absolute;
+    left: 4%; right: 4%; bottom: 6%;
+    height: 14px;
+    background: var(--lime);
+    z-index: -1;
+    transform: skewX(-6deg);
+  }
   .hero-deck {
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
     max-width: 56ch;
     color: var(--ink-2);
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .hero-deck b { color: var(--ink); font-weight: 600; }
+  .hero-deck .hl {
+    background: linear-gradient(transparent 62%, rgba(212,255,61,.7) 62%);
+    padding: 0 2px;
+  }
   .hero-warning {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 1.75rem;
+    gap: 9px;
+    margin-top: 2rem;
     font-family: var(--mono);
     font-size: 12px;
-    color: var(--ink-3);
-    background: var(--bone-2);
-    padding: 8px 14px;
+    letter-spacing: .05em;
+    color: var(--bone);
+    background: var(--ink);
+    padding: 9px 16px 10px;
     border-radius: 999px;
-    border: 1px dashed var(--rule-strong);
+    transform: rotate(-1.6deg);
+    box-shadow: 3px 3px 0 0 var(--lime);
   }
   .hero-warning .dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: var(--lime);
-    border: 1px solid var(--ink);
-    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(212,255,61,.7);
+    animation: hwPulse 2s ease-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes hwPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(212,255,61,.7); }
+    70%  { box-shadow: 0 0 0 8px rgba(212,255,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(212,255,61,0); }
   }
 
   /* Section header */
@@ -169,28 +220,34 @@
     margin: 0;
   }
 
-  /* Masonry gallery using CSS columns */
+  /* Masonry gallery — polaroid style */
   .gallery {
     column-count: 3;
-    column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    column-gap: clamp(1rem, 2vw, 1.75rem);
+    padding-top: 1rem;
   }
   @media (max-width: 1000px) { .gallery { column-count: 2; } }
   @media (max-width: 560px) { .gallery { column-count: 1; } }
 
   .g-item {
     break-inside: avoid;
-    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
     position: relative;
-    overflow: hidden;
-    border-radius: 14px;
-    border: 1px solid var(--rule-strong);
-    background: var(--bone-2);
+    padding: 14px 14px 14px;
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(14,13,20,.10), 0 1px 0 rgba(14,13,20,.06);
     cursor: zoom-in;
-    transition: transform .25s ease, box-shadow .25s ease;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, rotate .3s ease;
+    border: 1px solid rgba(14,13,20,.08);
   }
+  .g-item:nth-child(3n+1) { rotate: -1.4deg; }
+  .g-item:nth-child(3n+2) { rotate:  1.1deg; }
+  .g-item:nth-child(3n+3) { rotate: -.6deg; }
   .g-item:hover {
-    transform: translateY(-3px) rotate(-.4deg);
-    box-shadow: 6px 8px 0 0 var(--ink);
+    transform: translateY(-6px) scale(1.015);
+    rotate: 0deg;
+    box-shadow: 0 22px 38px rgba(14,13,20,.20), 0 2px 0 rgba(14,13,20,.08);
+    z-index: 2;
   }
   .g-item img {
     display: block;
@@ -198,85 +255,240 @@
     height: auto;
     object-fit: cover;
   }
+  /* Tape decoration on alternating items */
+  .g-item::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    width: 64px;
+    height: 18px;
+    background: rgba(212,255,61,.55);
+    border-left: 1px dashed rgba(14,13,20,.18);
+    border-right: 1px dashed rgba(14,13,20,.18);
+    transform: rotate(-3deg);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .g-item:nth-child(2n)::before {
+    background: rgba(79,50,216,.32);
+    transform: rotate(4deg);
+    right: 18px;
+    left: auto;
+  }
+  .g-item:nth-child(odd)::before { left: 28px; }
+
   .g-cap {
     position: absolute;
-    inset: auto 0 0 0;
-    padding: 14px 14px 12px;
-    background: linear-gradient(to top, rgba(14,13,20,.85), rgba(14,13,20,0));
-    color: #fff;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    line-height: 1.4;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity .25s ease, transform .25s ease;
-  }
-  .g-item:hover .g-cap, .g-item:focus .g-cap { opacity: 1; transform: translateY(0); }
-  /* Always show on touch */
-  @media (hover: none) {
-    .g-cap { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Vibe note inserted between gallery items via separate card */
-  .vibe-note {
-    column-span: all;
-    margin: clamp(2rem, 4vw, 3rem) 0;
-    padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--ink);
-    color: var(--bone);
-    border-radius: 14px;
+    inset: auto 0 12px 0;
+    padding: 0 18px;
+    color: var(--ink);
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(1.25rem, 2vw, 1.6rem);
-    line-height: 1.35;
-    max-width: 60ch;
-    position: relative;
+    font-size: 15px;
+    line-height: 1.3;
+    text-align: center;
   }
-  .vibe-note::before {
-    content: "//";
+  .g-cap .g-cap-mark {
+    display: block;
     font-family: var(--mono);
     font-style: normal;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 4px;
+  }
+
+  /* Field notes — event write-ups */
+  .field-notes {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .fn-eyebrow {
+    font-family: var(--mono);
     font-size: 12px;
-    color: var(--lime);
     letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  .fn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  @media (max-width: 760px) { .fn-grid { grid-template-columns: 1fr; } }
+
+  .fn-card {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 5px 5px 0 0 var(--ink);
+    position: relative;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .fn-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+  .fn-card-violet { background: linear-gradient(180deg, #f4efff 0%, #fff 60%); }
+  .fn-card-lime { background: linear-gradient(180deg, #f7ffd1 0%, #fff 60%); }
+
+  .fn-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .fn-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: var(--ink);
+    padding: 5px 10px 6px;
+    border-radius: 999px;
+  }
+  .fn-card-violet .fn-tag { background: var(--violet); }
+  .fn-where {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .03em;
+  }
+  .fn-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .fn-title em { font-style: italic; color: var(--violet); }
+  .fn-card p {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 .85rem;
+  }
+  .fn-card p:last-child { margin-bottom: 0; }
+  .fn-card p b { color: var(--ink); font-weight: 600; }
+  .fn-thanks {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-2) !important;
+    padding-top: .5rem;
+    border-top: 1px dashed var(--rule-strong);
+    margin-top: .5rem !important;
+  }
+
+  /* Sticky-note aside — replaces the old dark quote block */
+  .sticky-aside {
+    column-span: all;
+    margin: clamp(2rem, 4vw, 3rem) auto;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2rem);
+    background: var(--lime);
+    border: 1px solid var(--ink);
+    box-shadow: 5px 5px 0 0 var(--ink);
+    max-width: 56ch;
+    position: relative;
+    transform: rotate(-1.1deg);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .sticky-aside::before {
+    content: "";
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 90px; height: 22px;
+    background: rgba(255,255,255,.55);
+    border-left: 1px dashed rgba(14,13,20,.25);
+    border-right: 1px dashed rgba(14,13,20,.25);
+  }
+  .sticky-aside .sa-mark {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
     display: block;
     margin-bottom: .5rem;
   }
-  .vibe-note b { color: var(--lime); font-weight: 400; }
+  .sticky-aside b { font-weight: 600; font-style: normal; }
 
   /* Placeholder sections (travel, cats) */
   .coming {
-    border: 1.5px dashed var(--rule-strong);
-    border-radius: 14px;
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem);
+    border: 2px dashed var(--ink);
+    border-radius: 18px;
+    padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
     text-align: center;
     background: var(--bone-2);
     position: relative;
+    overflow: hidden;
+  }
+  .coming.cats { background: linear-gradient(180deg, #fff7f0 0%, var(--bone-2) 100%); }
+  .coming.travel { background: linear-gradient(180deg, #f0f5ff 0%, var(--bone-2) 100%); }
+  .coming-svg {
+    width: clamp(80px, 12vw, 130px);
+    height: clamp(80px, 12vw, 130px);
+    margin: 0 auto 1.25rem;
+    display: block;
+    color: var(--ink);
   }
   .coming-mark {
     font-family: var(--mono);
     font-size: 11px;
-    letter-spacing: .12em;
+    letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--violet);
     margin-bottom: 1rem;
+    display: inline-block;
+    background: #fff;
+    padding: 5px 12px 6px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transform: rotate(-1.2deg);
+    box-shadow: 2px 2px 0 0 var(--ink);
   }
   .coming h3 {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
     margin: 0 0 .75rem;
     line-height: 1.05;
   }
-  .coming h3 em { font-style: italic; color: var(--violet); }
+  .coming h3 em {
+    font-style: italic;
+    color: var(--violet);
+    position: relative;
+  }
+  .coming h3 em::after {
+    content: "";
+    position: absolute;
+    left: 4%; right: 4%; bottom: 8%;
+    height: 10px;
+    background: var(--lime);
+    z-index: -1;
+    transform: skewX(-6deg);
+  }
   .coming p {
     color: var(--ink-2);
     max-width: 48ch;
     margin: 0 auto;
-    font-size: 15px;
+    font-size: 15.5px;
+    line-height: 1.55;
   }
+  .coming p em { font-style: italic; color: var(--ink); }
 
   /* Footer */
   .footer {
@@ -319,12 +531,25 @@
 
 <!-- Hero -->
 <section class="hero">
+  <!-- doodles -->
+  <svg class="hero-doodle d-1" width="68" height="68" viewBox="0 0 68 68" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <circle cx="34" cy="34" r="14" stroke="#4F32D8"/>
+    <path d="M34 6 L34 18 M34 50 L34 62 M6 34 L18 34 M50 34 L62 34 M14 14 L22 22 M46 46 L54 54 M14 54 L22 46 M46 22 L54 14" stroke="#4F32D8"/>
+  </svg>
+  <svg class="hero-doodle d-2" width="84" height="60" viewBox="0 0 84 60" fill="none" stroke="#0E0D14" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M4 30 Q 20 4, 42 30 T 80 30" />
+    <path d="M76 26 L80 30 L76 34" />
+  </svg>
+  <svg class="hero-doodle d-3" width="46" height="46" viewBox="0 0 46 46" fill="#D4FF3D" stroke="#0E0D14" stroke-width="2" aria-hidden="true">
+    <path d="M23 4 L28 18 L42 19 L31 28 L35 42 L23 34 L11 42 L15 28 L4 19 L18 18 Z" stroke-linejoin="round"/>
+  </svg>
+
   <div class="wrap">
-    <div class="hero-eyebrow">// off the clock · uncensored</div>
+    <div class="hero-eyebrow">off the clock · uncensored</div>
     <h1 class="hero-title">The other<br/><em>50%.</em></h1>
     <p class="hero-deck">
       The CV says what I ship. This page says what fills the rest of the week.
-      <b>Networking events, travel, cats.</b> No filter, no positioning exercise — just what I actually like doing when I close the laptop.
+      <b>Networking events, <span class="hl">travel, cats.</span></b> No filter, no positioning exercise — just what I actually like doing when I close the laptop.
     </p>
     <span class="hero-warning"><span class="dot"></span> warning: this page is a personality, not a portfolio</span>
   </div>
@@ -346,55 +571,87 @@
 
     <div class="gallery">
 
+      <figure class="g-item" data-full="uploads/networking/1771584995851.jpg">
+        <img src="uploads/networking/1771584995851.jpg" alt="Alex, Head of Startups at Google, speaking on AI startups on the rise" loading="lazy" />
+        <figcaption class="g-cap"><span class="g-cap-mark">talk · google berlin</span>Alex — <em>Head of Startups, Google</em></figcaption>
+      </figure>
+
       <figure class="g-item" data-full="uploads/networking/1775808958950.jpg">
         <img src="uploads/networking/1775808958950.jpg" alt="Polaroid-style composite of two stage photos against the Innovation Campus Berlin sign" loading="lazy" />
-        <figcaption class="g-cap">Innovation Campus Berlin · stage time</figcaption>
+        <figcaption class="g-cap"><span class="g-cap-mark">Innovation Campus</span>Venture Café Berlin <em>#49</em></figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1761910916604.jpg">
-        <img src="uploads/networking/1761910916604.jpg" alt="At an IHK Berlin event with the Stark für die Berliner Wirtschaft banner" loading="lazy" />
-        <figcaption class="g-cap">IHK Berlin · Stark für die Berliner Wirtschaft</figcaption>
+        <img src="uploads/networking/1761910916604.jpg" alt="At the IHK Berlin venue for the SiBB × Berliner Sparkasse × IBB Ventures event" loading="lazy" />
+        <figcaption class="g-cap"><span class="g-cap-mark">IHK Berlin</span><em>SiBB × Sparkasse × IBB Ventures</em></figcaption>
       </figure>
 
-      <figure class="g-item" data-full="uploads/networking/1770918870552.jpg">
-        <img src="uploads/networking/1770918870552.jpg" alt="Three people laughing at a meetup" loading="lazy" />
-        <figcaption class="g-cap">people you keep running into</figcaption>
-      </figure>
-
-      <div class="vibe-note">
-        Cities run on rooms. <b>Berlin's are the kind you have to find.</b> Once you've found a few, the city stops being a map and starts being a network.
+      <div class="sticky-aside">
+        <span class="sa-mark">// margin note</span>
+        cities run on rooms. <b>berlin's are the kind you have to find</b> — once you've found a few, the city stops being a map and starts being a network.
       </div>
 
-      <figure class="g-item" data-full="uploads/networking/1771584995851.jpg">
-        <img src="uploads/networking/1771584995851.jpg" alt="Speaker presenting AI startup VC hub statistics at Dickes B Tech Talk" loading="lazy" />
-        <figcaption class="g-cap">Dickes B Tech Talk · AI startups on the rise</figcaption>
+      <figure class="g-item" data-full="uploads/networking/1770918870552.jpg">
+        <img src="uploads/networking/1770918870552.jpg" alt="Three people laughing — Gökçe Efe Kaplan, Jan Oberhauser (n8n founder), and me at Venture Café Berlin #49" loading="lazy" />
+        <figcaption class="g-cap"><span class="g-cap-mark">Venture Café #49</span>with <em>Jan Oberhauser</em> (n8n) + Gökçe</figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1771584997040.jpg">
         <img src="uploads/networking/1771584997040.jpg" alt="Willkommen bei Google Berlin banner at entrance" loading="lazy" />
-        <figcaption class="g-cap">Willkommen bei Google Berlin</figcaption>
+        <figcaption class="g-cap"><span class="g-cap-mark">Google Berlin</span><em>willkommen</em></figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1771584997366.jpg">
-        <img src="uploads/networking/1771584997366.jpg" alt="Fireside chat at Start Berlin Road to Start Summit with Peec AI and Gründerszene" loading="lazy" />
-        <figcaption class="g-cap">Start Berlin · Road to Start Summit fireside</figcaption>
+        <img src="uploads/networking/1771584997366.jpg" alt="Peec AI × Gründerszene fireside chat at Start Berlin Road to Start Summit" loading="lazy" />
+        <figcaption class="g-cap"><span class="g-cap-mark">Road to Start Summit</span>Peec AI × Gründerszene <em>fireside</em></figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1772014026194.jpg">
         <img src="uploads/networking/1772014026194.jpg" alt="Women's AI Breakfast event with panel and full room" loading="lazy" />
-        <figcaption class="g-cap">Women's AI Breakfast</figcaption>
+        <figcaption class="g-cap"><span class="g-cap-mark">panel</span>Women's AI <em>Breakfast</em></figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1774256959387.jpg">
-        <img src="uploads/networking/1774256959387.jpg" alt="At SiBB Digitalverband Berlin-Brandenburg event" loading="lazy" />
-        <figcaption class="g-cap">SiBB · Digitalverband Berlin-Brandenburg</figcaption>
+        <img src="uploads/networking/1774256959387.jpg" alt="At the SiBB Digitalverband event at Merantix Campus" loading="lazy" />
+        <figcaption class="g-cap"><span class="g-cap-mark">Merantix Campus</span>SiBB · <em>Digitalverband</em></figcaption>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1774256961143.jpg">
         <img src="uploads/networking/1774256961143.jpg" alt="Speaker presenting US vs EU innovation slide with bubble chart" loading="lazy" />
-        <figcaption class="g-cap">US vs EU innovation · the catch-up question</figcaption>
+        <figcaption class="g-cap"><span class="g-cap-mark">tech talk</span>US vs EU innovation — <em>the catch-up question</em></figcaption>
       </figure>
 
+    </div>
+
+    <!-- Field notes — longer event write-ups -->
+    <div class="field-notes">
+      <div class="fn-eyebrow">// field notes · the longer story</div>
+      <div class="fn-grid">
+
+        <article class="fn-card fn-card-violet">
+          <div class="fn-meta">
+            <span class="fn-tag">First VC event</span>
+            <span class="fn-where">IHK Berlin · near Brandenburg Gate</span>
+          </div>
+          <h3 class="fn-title">SiBB × Berliner Sparkasse × <em>IBB Ventures.</em></h3>
+          <p>My first VC event in Berlin. The goal: bring people with experience together and create space to exchange ideas around fundraising and building startups.</p>
+          <p>What stayed with me was how <b>open and helpful everyone was</b>. New people, different perspectives, a step outside of my usual way of thinking. A good reminder that being around the right people can really shift how you see things.</p>
+          <p class="fn-thanks">Thanks to Christian Segal, Anne Biedermann, Marian Klee (brighter AI), Clemens Kabel, and Laura Möller. Looking forward to the next one.</p>
+        </article>
+
+        <article class="fn-card fn-card-lime">
+          <div class="fn-meta">
+            <span class="fn-tag">Venture Café #49</span>
+            <span class="fn-where">Innovation Campus, Berlin</span>
+          </div>
+          <h3 class="fn-title">Venture Café Berlin <em>did it again.</em></h3>
+          <p>Didn't expect to leave with more questions than answers. Went there with Gökçe Efe Kaplan — and this one stayed with us.</p>
+          <p>The <b>"Brutal Truth"</b> session by Erdinç Koç was brutal in the best way. Apparently, we needed that. The kind of slide you actually want to sit with.</p>
+          <p>Randomly ended up talking about public funding with Anaita Azizi. Went in knowing almost nothing, left thinking "okay, I've been sleeping on this." Walked out with new ideas, new people, and things we'll probably act on.</p>
+          <p class="fn-thanks">Still figuring things out, still learning — but that's the whole point.</p>
+        </article>
+
+      </div>
     </div>
   </div>
 </section>
@@ -411,10 +668,16 @@
         The kind of trips that don't fit on LinkedIn. New cities, old habits, occasionally a window seat that earns its keep.
       </p>
     </div>
-    <div class="coming">
-      <div class="coming-mark">// loading · photos en route</div>
+    <div class="coming travel">
+      <svg class="coming-svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 70 L46 60 L62 22 L72 24 L66 60 L94 50 L102 56 L74 74 L60 102 L52 102 L60 80 L36 84 L30 92 L24 90 Z" fill="#D4FF3D"/>
+        <circle cx="100" cy="34" r="3" fill="#4F32D8" stroke="none"/>
+        <circle cx="106" cy="46" r="2" fill="#4F32D8" stroke="none"/>
+        <path d="M14 108 Q 40 96, 70 108" stroke-dasharray="3 4"/>
+      </svg>
+      <div class="coming-mark">loading · photos en route</div>
       <h3>Travel album <em>incoming.</em></h3>
-      <p>Photos coming soon. The kind of "I'll send you the ones I like later" album, but actually delivered.</p>
+      <p>The kind of <em>"I'll send you the ones I like later"</em> album, but actually delivered. Window seats that earned their keep, cities that stuck, the ones I keep going back to.</p>
     </div>
   </div>
 </section>
@@ -431,10 +694,30 @@
         Two managers I never agreed to hire. Excellent at presence, mediocre at slack DMs, world-class at sitting on the keyboard during the wrong calls.
       </p>
     </div>
-    <div class="coming">
-      <div class="coming-mark">// loading · feline content pending</div>
-      <h3>Cat dossier <em>coming.</em></h3>
-      <p>Names, personalities, official portraits — the works. Stay tuned for the most important section of this page.</p>
+    <div class="coming cats">
+      <svg class="coming-svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <!-- cat body -->
+        <path d="M30 90 Q 30 56, 60 56 Q 90 56, 90 90 Z" fill="#fff"/>
+        <!-- ears -->
+        <path d="M34 60 L26 38 L44 52 Z" fill="#fff"/>
+        <path d="M86 60 L94 38 L76 52 Z" fill="#fff"/>
+        <!-- eyes -->
+        <circle cx="50" cy="74" r="2.5" fill="#0E0D14" stroke="none"/>
+        <circle cx="70" cy="74" r="2.5" fill="#0E0D14" stroke="none"/>
+        <!-- nose + mouth -->
+        <path d="M58 82 L60 84 L62 82" />
+        <path d="M60 84 Q 56 88, 54 84 M60 84 Q 64 88, 66 84"/>
+        <!-- whiskers -->
+        <path d="M40 80 L30 78 M40 84 L30 86 M80 80 L90 78 M80 84 L90 86"/>
+        <!-- tail -->
+        <path d="M90 88 Q 108 80, 102 60" fill="none"/>
+        <!-- heart sparkle -->
+        <path d="M16 28 L20 22 L24 28 L20 34 Z" fill="#D4FF3D" stroke="none"/>
+        <path d="M104 100 L108 94 L112 100 L108 106 Z" fill="#4F32D8" stroke="none"/>
+      </svg>
+      <div class="coming-mark">loading · feline content pending</div>
+      <h3>Cat dossier <em>incoming.</em></h3>
+      <p>Names, personalities, official portraits, the works. <em>The most important section of this page</em> — stay tuned.</p>
     </div>
   </div>
 </section>

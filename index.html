@@ -94,7 +94,8 @@
       top: 80px;
       right: 14px;
       font-size: 11px;
-      padding: 5px 11px 6px;
+      padding: 6px 12px 7px;
+      letter-spacing: .05em;
     }
   }
   /* Avoid double-tap zoom on touchable interactive elements */
@@ -174,19 +175,26 @@
     z-index: 3;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 7px 14px 8px;
-    background: var(--bone);
+    gap: 9px;
+    padding: 8px 16px 9px;
+    background: var(--ink);
     border: 1px solid var(--ink);
     border-radius: 999px;
     transform: rotate(3deg);
-    box-shadow: 3px 3px 0 0 var(--ink);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink);
+    box-shadow: 3px 3px 0 0 var(--lime);
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: lowercase;
+    color: var(--bone);
     pointer-events: none;
     animation: qaDrift 6s ease-in-out infinite;
+  }
+  .quietly-available em {
+    font-style: normal;
+    color: var(--bone);
   }
   @keyframes qaDrift {
     0%, 100% { transform: rotate(3deg) translateY(0); }
@@ -206,7 +214,7 @@
     100% { box-shadow: 0 0 0 0 rgba(212,255,61,0); }
   }
   @media (max-width: 760px) {
-    .quietly-available { right: 16px; top: 76px; font-size: 11px; padding: 5px 10px 6px; }
+    .quietly-available { right: 16px; top: 76px; font-size: 11px; padding: 6px 12px 7px; letter-spacing: .05em; }
     .qa-dot { width: 6px; height: 6px; }
   }
   @media (prefers-reduced-motion: reduce) {
