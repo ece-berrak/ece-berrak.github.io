@@ -456,6 +456,128 @@
     margin-top: .5rem !important;
   }
 
+  /* Travel section — extra playful */
+  .travel-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 92% 12%, rgba(79,50,216,.08), transparent 35%),
+      radial-gradient(circle at 6% 88%, rgba(212,255,61,.12), transparent 38%),
+      var(--bone);
+  }
+  .travel-section .section-title em::after {
+    content: "";
+    position: absolute;
+    left: 4%; right: 4%; bottom: 6%;
+    height: 12px;
+    background: var(--lime);
+    z-index: -1;
+    transform: skewX(-6deg);
+  }
+  .travel-section .section-title em { position: relative; display: inline-block; }
+
+  /* Floating decorations in travel */
+  .travel-deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .travel-deco.plane {
+    top: 8%;
+    right: 4%;
+    width: 90px;
+    color: var(--ink);
+    opacity: .55;
+    animation: planeDrift 9s ease-in-out infinite;
+  }
+  .travel-deco.compass {
+    bottom: 7%;
+    left: 2%;
+    width: 70px;
+    opacity: .35;
+    animation: compassSpin 28s linear infinite;
+  }
+  .travel-deco.palm {
+    top: 38%;
+    left: -10px;
+    width: 60px;
+    opacity: .4;
+    animation: palmSway 6s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .travel-deco.sun {
+    top: 45%;
+    right: 1%;
+    width: 64px;
+    opacity: .55;
+    animation: sunPulse 5s ease-in-out infinite;
+  }
+  @keyframes planeDrift {
+    0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+    50%      { transform: translate(-30px, 12px) rotate(-2deg); }
+  }
+  @keyframes compassSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes palmSway {
+    0%, 100% { transform: rotate(-3deg); }
+    50%      { transform: rotate(4deg); }
+  }
+  @keyframes sunPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: .55; }
+    50%      { transform: scale(1.06) rotate(15deg); opacity: .8; }
+  }
+  @media (max-width: 760px) {
+    .travel-deco.compass, .travel-deco.palm { display: none; }
+    .travel-deco.plane { width: 64px; top: 4%; }
+    .travel-deco.sun { width: 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .travel-deco { animation: none !important; }
+  }
+
+  /* Travel polaroids — fade-in on scroll */
+  .travel-section .g-item {
+    opacity: 0;
+    transform: translateY(24px) scale(.97);
+    transition: opacity .55s cubic-bezier(.2,.7,.2,1), transform .55s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+  }
+  .travel-section .g-item.is-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .travel-section .g-item:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .travel-section .g-item { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Dotted travel route — under section title */
+  .travel-route {
+    display: block;
+    margin: .75rem 0 0;
+    width: 220px;
+    height: 26px;
+    color: var(--violet);
+  }
+
+  /* Inline animated plane in title */
+  .title-plane {
+    display: inline-block;
+    width: .85em;
+    height: .85em;
+    vertical-align: -.06em;
+    margin-left: .3em;
+    color: var(--violet);
+    animation: titlePlane 4s ease-in-out infinite;
+  }
+  @keyframes titlePlane {
+    0%, 100% { transform: translate(0, 0) rotate(-12deg); }
+    50%      { transform: translate(6px, -4px) rotate(-4deg); }
+  }
+
   /* YouTube channel CTA — for the travel section */
   .yt-card {
     margin-bottom: clamp(2rem, 4vw, 3rem);
@@ -828,12 +950,47 @@
 </section>
 
 <!-- Travel -->
-<section class="section">
-  <div class="wrap">
+<section class="section travel-section">
+  <!-- floating decorations -->
+  <svg class="travel-deco plane" viewBox="0 0 90 60" fill="currentColor" aria-hidden="true">
+    <path d="M4 32 L34 24 L46 6 L54 8 L48 24 L78 18 L84 22 L60 36 L48 56 L42 56 L48 38 L24 42 L18 50 L12 48 L18 38 Z" stroke="currentColor" stroke-width=".5" stroke-linejoin="round"/>
+  </svg>
+  <svg class="travel-deco compass" viewBox="0 0 80 80" fill="none" stroke="#4F32D8" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <circle cx="40" cy="40" r="32"/>
+    <path d="M40 14 L46 40 L40 66 L34 40 Z" fill="#4F32D8" opacity=".4"/>
+    <circle cx="40" cy="40" r="3" fill="#4F32D8"/>
+    <text x="40" y="11" text-anchor="middle" fill="#4F32D8" stroke="none" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">N</text>
+  </svg>
+  <svg class="travel-deco palm" viewBox="0 0 60 100" fill="none" stroke="#0E0D14" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M30 100 L30 50" stroke-width="3"/>
+    <path d="M30 50 Q 14 38, 4 42 M30 50 Q 46 36, 56 40 M30 48 Q 18 26, 8 22 M30 48 Q 42 24, 52 18 M30 46 Q 30 28, 26 14"/>
+  </svg>
+  <svg class="travel-deco sun" viewBox="0 0 70 70" fill="#D4FF3D" stroke="#0E0D14" stroke-width="1.5" aria-hidden="true">
+    <circle cx="35" cy="35" r="14"/>
+    <g stroke="#0E0D14" stroke-linecap="round" stroke-width="2">
+      <line x1="35" y1="6" x2="35" y2="14"/>
+      <line x1="35" y1="56" x2="35" y2="64"/>
+      <line x1="6" y1="35" x2="14" y2="35"/>
+      <line x1="56" y1="35" x2="64" y2="35"/>
+      <line x1="14" y1="14" x2="20" y2="20"/>
+      <line x1="50" y1="50" x2="56" y2="56"/>
+      <line x1="14" y1="56" x2="20" y2="50"/>
+      <line x1="50" y1="20" x2="56" y2="14"/>
+    </g>
+  </svg>
+
+  <div class="wrap" style="position:relative;z-index:1;">
     <div class="section-head">
       <div>
         <div class="section-eyebrow">// 02 — travel</div>
-        <h2 class="section-title">Where I go to <em>reset.</em></h2>
+        <h2 class="section-title">Where I go to <em>reset.</em><svg class="title-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 19l19-7.5L2.5 4v6l13 1.5L2.5 13z"/></svg></h2>
+        <svg class="travel-route" viewBox="0 0 220 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 16 Q 40 4, 80 16 T 160 12 T 210 18" stroke-dasharray="2 5"/>
+          <circle cx="4" cy="16" r="3" fill="currentColor"/>
+          <circle cx="80" cy="16" r="2.5" fill="currentColor"/>
+          <circle cx="160" cy="12" r="2.5" fill="currentColor"/>
+          <path d="M204 14 L214 18 L204 22" fill="currentColor" stroke="none"/>
+        </svg>
       </div>
       <p class="section-deck">
         The kind of trips that don't fit on LinkedIn. New cities, old habits, the occasional window seat that earns its keep — and a strong bias for the Mediterranean.
@@ -1015,6 +1172,25 @@
       if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
       if (e.key === 'Escape') document.querySelectorAll('.g-item.is-open').forEach(function (i) { i.classList.remove('is-open'); });
     });
+  })();
+
+  // Travel section: staggered fade-in for polaroids
+  (function () {
+    var items = document.querySelectorAll('.travel-section .g-item');
+    if (!items.length || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var index = Array.prototype.indexOf.call(items, entry.target);
+          setTimeout(function () { entry.target.classList.add('is-in'); }, (index % 6) * 90);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
   })();
 </script>
 
