@@ -1,0 +1,74 @@
+/* VOLT — revenue intelligence brand system
+   Pure-white surface, electric lime, slate ink. Data-forward, no grain. */
+
+:root {
+  --v-paper:     #FFFFFF;
+  --v-paper-2:   #F5F5F2;
+  --v-paper-3:   #ECECE6;
+  --v-ink:       #11131A;
+  --v-ink-soft:  #2A2D38;
+  --v-lime:      #B5FF1F;
+  --v-lime-soft: #E4FFAE;
+  --v-coral:     #FF4D2E;
+  --v-sky:       #4F9CFF;
+  --v-steel:     #6A6F7C;
+
+  --v-ink-04:  rgba(17,19,26,0.04);
+  --v-ink-06:  rgba(17,19,26,0.06);
+  --v-ink-08:  rgba(17,19,26,0.08);
+  --v-ink-12:  rgba(17,19,26,0.12);
+  --v-ink-22:  rgba(17,19,26,0.22);
+  --v-ink-40:  rgba(17,19,26,0.40);
+  --v-paper-32: rgba(255,255,255,0.36);
+  --v-paper-60: rgba(255,255,255,0.65);
+}
+
+body.volt {
+  margin: 0;
+  background: #DCDCD3;
+  font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--v-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Type families */
+.v-display { font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight: 600; letter-spacing: -0.025em; }
+.v-sans    { font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif; }
+.v-mono    { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace; }
+
+/* Post shell */
+.v-post {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--v-paper);
+  color: var(--v-ink);
+  box-sizing: border-box;
+}
+.v-post.dark { background: var(--v-ink);  color: var(--v-paper); }
+.v-post.lime { background: var(--v-lime); color: var(--v-ink); }
+.v-post * { box-sizing: border-box; }
+
+.v-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Grid texture (data feel, very subtle) */
+.v-grid::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(var(--v-ink-04) 1px, transparent 1px), linear-gradient(90deg, var(--v-ink-04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.85;
+}
+.v-post.dark.v-grid::before {
+  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}

@@ -1408,12 +1408,29 @@
     background: var(--bone);
   }
 
+  /* Horizontal scroll for multiple brand cards — saga-style */
   .stratum-grid {
     margin-top: clamp(2rem, 4vw, 3rem);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(2rem, 4vw, 3rem);
+    margin-inline: calc(-1 * var(--pad));
+    padding-inline: var(--pad);
+    padding-bottom: 1rem;
+    display: flex;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad);
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
   }
+  .stratum-grid::-webkit-scrollbar { height: 6px; }
+  .stratum-grid::-webkit-scrollbar-track { background: transparent; }
+  .stratum-grid::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 999px; }
+  .stratum-grid::after {
+    content: "";
+    flex: 0 0 calc(var(--pad) - clamp(1.25rem, 2.5vw, 2rem));
+  }
+
   .stratum-feature {
     background: var(--bone);
     border: 1.5px solid var(--ink);
@@ -1422,6 +1439,13 @@
     padding: clamp(1.75rem, 3.5vw, 3rem);
     box-shadow: 8px 8px 0 0 var(--ink);
     transition: transform .25s ease, box-shadow .25s ease;
+    /* Card sizing for horizontal scroll */
+    flex: 0 0 min(88vw, 880px);
+    scroll-snap-align: start;
+    margin-block: 12px;
+  }
+  @media (min-width: 1200px) {
+    .stratum-feature { flex-basis: min(72vw, 920px); }
   }
   .stratum-feature:hover {
     transform: translate(-2px, -2px);
@@ -4435,7 +4459,7 @@
         <h2>Brands I'm <span class="italic">shaping.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Design systems I'm building from the ground up — logomark, palette, type, voice, and social surfaces driven by live canvases. More dropping in as they ship.</p>
+        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Design systems I'm building from the ground up — logomark, palette, type, voice, and social surfaces. <em style="font-style:italic;color:var(--violet);">Scroll right →</em> to see each one.</p>
       </div>
     </div>
 
@@ -4489,6 +4513,58 @@
         <div class="strat-foot">
           <span class="strat-meta">2026 — in development</span>
           <a class="strat-cta" href="projects/stratum/">Read the case study <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="stratum-feature">
+      <div class="strat-corners">
+        <span class="rc tl"></span><span class="rc tr"></span><span class="rc bl"></span><span class="rc br"></span>
+      </div>
+
+      <div class="strat-body">
+        <span class="strat-kicker">// 01 · the system</span>
+        <h3 class="strat-title">Volt.<br/><em>Pulse on every dollar.</em></h3>
+
+        <p class="strat-deck">
+          <b>Volt is a revenue intelligence platform I'm shaping for finance + GTM teams</b> — a live read on every dollar moving through the funnel, in the room where decisions actually get made.
+        </p>
+        <p class="strat-deck">
+          Where Stratum is quiet and structural, <b>Volt is electric and urgent.</b> Pure-white surface, electric lime, slate ink — a wordmark with a sparkline glyph, a tabular voice, zero grain. Built end-to-end as a brand-first launch: <b>14 social artboards</b> across blog, use cases, testimonials, updates, and email — tuned for the second a revenue number lands.
+        </p>
+
+        <div class="strat-specs">
+          <div class="strat-spec">
+            <span class="strat-spec-label">// palette</span>
+            <div class="strat-swatches">
+              <span class="strat-sw" style="background:#FFFFFF" title="paper"></span>
+              <span class="strat-sw" style="background:#11131A" title="ink"></span>
+              <span class="strat-sw" style="background:#B5FF1F" title="lime"></span>
+              <span class="strat-sw" style="background:#FF4D2E" title="coral"></span>
+              <span class="strat-sw" style="background:#4F9CFF" title="sky"></span>
+            </div>
+          </div>
+          <div class="strat-spec">
+            <span class="strat-spec-label">// type</span>
+            <div class="strat-fonts">
+              <span class="sf-display" style="font-family:'Bricolage Grotesque',sans-serif;">Bricolage Grotesque</span>
+              <span class="sf-sans" style="font-family:'DM Sans',sans-serif;">DM Sans</span>
+              <span class="sf-mono">JetBrains Mono</span>
+            </div>
+          </div>
+          <div class="strat-spec">
+            <span class="strat-spec-label">// surfaces</span>
+            <div class="strat-tags">
+              <span class="strat-tag">IG 1:1</span>
+              <span class="strat-tag">LinkedIn 1.91:1</span>
+              <span class="strat-tag">Email</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="strat-foot">
+          <span class="strat-meta">2026 — in development</span>
+          <a class="strat-cta" href="projects/volt/">Read the case study <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </article>
