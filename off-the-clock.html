@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ece berrak — off the clock</title>
+<meta name="description" content="What I do when I'm not shipping. Networking events, travel, cats. Uncensored." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<style>
+  :root {
+    --bone: #FAF8F1;
+    --bone-2: #F2EFE3;
+    --ink: #0E0D14;
+    --ink-2: #2A2735;
+    --ink-3: #5C5868;
+    --rule: #1f1c2a14;
+    --rule-strong: #1f1c2a26;
+    --violet: #4F32D8;
+    --violet-ink: #2d1a93;
+    --lime: #D4FF3D;
+    --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --maxw: 1240px;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px var(--pad);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bone);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar-brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: -.01em;
+  }
+  .topbar-back {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border: 1px solid var(--rule-strong);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .topbar-back:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+
+  /* Hero */
+  .hero {
+    padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin: 0 0 1.25rem;
+  }
+  .hero-title em { font-style: italic; color: var(--violet); }
+  .hero-deck {
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    max-width: 56ch;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .hero-deck b { color: var(--ink); font-weight: 600; }
+  .hero-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1.75rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    background: var(--bone-2);
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px dashed var(--rule-strong);
+  }
+  .hero-warning .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--lime);
+    border: 1px solid var(--ink);
+    display: inline-block;
+  }
+
+  /* Section header */
+  .section {
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    align-items: end;
+  }
+  @media (max-width: 760px) {
+    .section-head { grid-template-columns: 1fr; gap: 1.25rem; }
+  }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: .75rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .section-title em { font-style: italic; color: var(--violet); }
+  .section-deck {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  /* Masonry gallery using CSS columns */
+  .gallery {
+    column-count: 3;
+    column-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  }
+  @media (max-width: 1000px) { .gallery { column-count: 2; } }
+  @media (max-width: 560px) { .gallery { column-count: 1; } }
+
+  .g-item {
+    break-inside: avoid;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--rule-strong);
+    background: var(--bone-2);
+    cursor: zoom-in;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .g-item:hover {
+    transform: translateY(-3px) rotate(-.4deg);
+    box-shadow: 6px 8px 0 0 var(--ink);
+  }
+  .g-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .g-cap {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 14px 14px 12px;
+    background: linear-gradient(to top, rgba(14,13,20,.85), rgba(14,13,20,0));
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .g-item:hover .g-cap, .g-item:focus .g-cap { opacity: 1; transform: translateY(0); }
+  /* Always show on touch */
+  @media (hover: none) {
+    .g-cap { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Vibe note inserted between gallery items via separate card */
+  .vibe-note {
+    column-span: all;
+    margin: clamp(2rem, 4vw, 3rem) 0;
+    padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
+    background: var(--ink);
+    color: var(--bone);
+    border-radius: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    line-height: 1.35;
+    max-width: 60ch;
+    position: relative;
+  }
+  .vibe-note::before {
+    content: "//";
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 12px;
+    color: var(--lime);
+    letter-spacing: .12em;
+    display: block;
+    margin-bottom: .5rem;
+  }
+  .vibe-note b { color: var(--lime); font-weight: 400; }
+
+  /* Placeholder sections (travel, cats) */
+  .coming {
+    border: 1.5px dashed var(--rule-strong);
+    border-radius: 14px;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem);
+    text-align: center;
+    background: var(--bone-2);
+    position: relative;
+  }
+  .coming-mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 1rem;
+  }
+  .coming h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin: 0 0 .75rem;
+    line-height: 1.05;
+  }
+  .coming h3 em { font-style: italic; color: var(--violet); }
+  .coming p {
+    color: var(--ink-2);
+    max-width: 48ch;
+    margin: 0 auto;
+    font-size: 15px;
+  }
+
+  /* Footer */
+  .footer {
+    padding-block: 3rem;
+    text-align: center;
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+  }
+  .footer a { color: var(--violet); }
+
+  /* Lightbox */
+  .lb {
+    position: fixed; inset: 0; background: rgba(14,13,20,.92);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 24px;
+    cursor: zoom-out;
+  }
+  .lb.is-open { display: flex; }
+  .lb img {
+    max-width: 92vw; max-height: 88vh; border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  .lb-close {
+    position: absolute; top: 18px; right: 22px;
+    color: #fff; font-family: var(--mono); font-size: 13px;
+    background: transparent; border: 1px solid rgba(255,255,255,.3);
+    padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="topbar">
+  <a href="index.html" class="topbar-brand">ece berrak<em>.</em></a>
+  <a href="index.html" class="topbar-back">← back to portfolio</a>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">// off the clock · uncensored</div>
+    <h1 class="hero-title">The other<br/><em>50%.</em></h1>
+    <p class="hero-deck">
+      The CV says what I ship. This page says what fills the rest of the week.
+      <b>Networking events, travel, cats.</b> No filter, no positioning exercise — just what I actually like doing when I close the laptop.
+    </p>
+    <span class="hero-warning"><span class="dot"></span> warning: this page is a personality, not a portfolio</span>
+  </div>
+</section>
+
+<!-- Networking -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">// 01 — networking · berlin</div>
+        <h2 class="section-title">Rooms I <em>kept showing up to.</em></h2>
+      </div>
+      <p class="section-deck">
+        Tech talks, startup fireside chats, women-in-AI breakfasts, IHK and SiBB mixers, the occasional Google Berlin door.
+        The fastest way to learn a city's operating system is to walk into its rooms and see who's there.
+      </p>
+    </div>
+
+    <div class="gallery">
+
+      <figure class="g-item" data-full="uploads/networking/1775808958950.jpg">
+        <img src="uploads/networking/1775808958950.jpg" alt="Polaroid-style composite of two stage photos against the Innovation Campus Berlin sign" loading="lazy" />
+        <figcaption class="g-cap">Innovation Campus Berlin · stage time</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1761910916604.jpg">
+        <img src="uploads/networking/1761910916604.jpg" alt="At an IHK Berlin event with the Stark für die Berliner Wirtschaft banner" loading="lazy" />
+        <figcaption class="g-cap">IHK Berlin · Stark für die Berliner Wirtschaft</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1770918870552.jpg">
+        <img src="uploads/networking/1770918870552.jpg" alt="Three people laughing at a meetup" loading="lazy" />
+        <figcaption class="g-cap">people you keep running into</figcaption>
+      </figure>
+
+      <div class="vibe-note">
+        Cities run on rooms. <b>Berlin's are the kind you have to find.</b> Once you've found a few, the city stops being a map and starts being a network.
+      </div>
+
+      <figure class="g-item" data-full="uploads/networking/1771584995851.jpg">
+        <img src="uploads/networking/1771584995851.jpg" alt="Speaker presenting AI startup VC hub statistics at Dickes B Tech Talk" loading="lazy" />
+        <figcaption class="g-cap">Dickes B Tech Talk · AI startups on the rise</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1771584997040.jpg">
+        <img src="uploads/networking/1771584997040.jpg" alt="Willkommen bei Google Berlin banner at entrance" loading="lazy" />
+        <figcaption class="g-cap">Willkommen bei Google Berlin</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1771584997366.jpg">
+        <img src="uploads/networking/1771584997366.jpg" alt="Fireside chat at Start Berlin Road to Start Summit with Peec AI and Gründerszene" loading="lazy" />
+        <figcaption class="g-cap">Start Berlin · Road to Start Summit fireside</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1772014026194.jpg">
+        <img src="uploads/networking/1772014026194.jpg" alt="Women's AI Breakfast event with panel and full room" loading="lazy" />
+        <figcaption class="g-cap">Women's AI Breakfast</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1774256959387.jpg">
+        <img src="uploads/networking/1774256959387.jpg" alt="At SiBB Digitalverband Berlin-Brandenburg event" loading="lazy" />
+        <figcaption class="g-cap">SiBB · Digitalverband Berlin-Brandenburg</figcaption>
+      </figure>
+
+      <figure class="g-item" data-full="uploads/networking/1774256961143.jpg">
+        <img src="uploads/networking/1774256961143.jpg" alt="Speaker presenting US vs EU innovation slide with bubble chart" loading="lazy" />
+        <figcaption class="g-cap">US vs EU innovation · the catch-up question</figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- Travel placeholder -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">// 02 — travel</div>
+        <h2 class="section-title">Where I go to <em>reset.</em></h2>
+      </div>
+      <p class="section-deck">
+        The kind of trips that don't fit on LinkedIn. New cities, old habits, occasionally a window seat that earns its keep.
+      </p>
+    </div>
+    <div class="coming">
+      <div class="coming-mark">// loading · photos en route</div>
+      <h3>Travel album <em>incoming.</em></h3>
+      <p>Photos coming soon. The kind of "I'll send you the ones I like later" album, but actually delivered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Cats placeholder -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">// 03 — the cats</div>
+        <h2 class="section-title">My non-negotiable <em>co-workers.</em></h2>
+      </div>
+      <p class="section-deck">
+        Two managers I never agreed to hire. Excellent at presence, mediocre at slack DMs, world-class at sitting on the keyboard during the wrong calls.
+      </p>
+    </div>
+    <div class="coming">
+      <div class="coming-mark">// loading · feline content pending</div>
+      <h3>Cat dossier <em>coming.</em></h3>
+      <p>Names, personalities, official portraits — the works. Stay tuned for the most important section of this page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <a href="index.html">← back to portfolio</a> &nbsp;·&nbsp; ece berrak · berlin · uncensored edition
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button">close ✕</button>
+  <img id="lbImg" alt="" />
+</div>
+
+<script>
+  // Lightbox
+  (function () {
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    document.querySelectorAll('.g-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        const full = item.getAttribute('data-full');
+        if (!full) return;
+        lbImg.src = full;
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function close () {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === lbClose) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+  })();
+</script>
+
+</body>
+</html>
