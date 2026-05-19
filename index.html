@@ -217,6 +217,9 @@
     .quietly-available { right: 16px; top: 76px; font-size: 11px; padding: 6px 12px 7px; letter-spacing: .05em; }
     .qa-dot { width: 6px; height: 6px; }
   }
+  @media (max-width: 480px) {
+    .quietly-available { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .quietly-available, .qa-dot { animation: none; }
   }
