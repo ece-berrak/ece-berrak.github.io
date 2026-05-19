@@ -1357,21 +1357,56 @@
     .ns-tag, .ns-title, .ns-deck { grid-column: 1 / -1; }
   }
 
-  /* ===== Stratum brand section (07 — brand) ===== */
-  .stratum-section {
-    --strat-paper: #ECECE5;
-    --strat-paper-2: #DEDED5;
-    --strat-ink: #0F1014;
-    --strat-cobalt: #1F3FCA;
-    --strat-acid: #D9E84A;
-    --strat-rust: #C24528;
-    --strat-muted: #76766E;
-    background: var(--strat-paper);
-    border-block: 1px solid rgba(15,16,20,0.08);
+  /* Nautilida product video — featured above the social deck */
+  .nauti-product {
+    margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+    background: var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--lime);
+    transition: transform .25s ease, box-shadow .25s ease;
   }
-  .stratum-section .eyebrow { color: var(--strat-cobalt); }
-  .stratum-section h2 { color: var(--strat-ink); }
-  .stratum-section h2 .italic { color: var(--strat-rust); font-family: "Instrument Serif", Georgia, serif; }
+  .nauti-product:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 9px 9px 0 0 var(--lime);
+  }
+  .nauti-product video {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    display: block;
+    background: var(--ink);
+  }
+  .np-cap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 16px;
+    padding: 14px clamp(16px, 2vw, 20px) 16px;
+    background: var(--ink);
+    color: var(--bone);
+  }
+  .np-mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--lime);
+  }
+  .np-title {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--bone);
+    line-height: 1.25;
+  }
+  .np-title em { font-style: italic; color: var(--lime); }
+
+  /* ===== Brand systems section (06) — portfolio brand palette ===== */
+  .stratum-section {
+    background: var(--bone);
+  }
 
   .stratum-grid {
     margin-top: clamp(2rem, 4vw, 3rem);
@@ -1380,25 +1415,32 @@
     gap: clamp(2rem, 4vw, 3rem);
   }
   .stratum-feature {
-    background: #fff;
-    border: 1.5px solid var(--strat-ink);
+    background: var(--bone);
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
     position: relative;
     display: grid;
     grid-template-columns: 1.05fr 1fr;
     gap: clamp(1.25rem, 3vw, 2.5rem);
     padding: clamp(1.5rem, 3vw, 2.5rem);
-    box-shadow: 8px 8px 0 0 var(--strat-cobalt);
+    box-shadow: 8px 8px 0 0 var(--ink);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .stratum-feature:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 11px 11px 0 0 var(--ink);
   }
   @media (max-width: 860px) {
     .stratum-feature { grid-template-columns: 1fr; }
   }
 
-  /* Registration corners */
+  /* Registration corners — small ink ticks */
   .strat-corners .rc {
     position: absolute;
     width: 14px; height: 14px;
-    border: 1.5px solid var(--strat-ink);
+    border: 1.5px solid var(--ink);
     background: transparent;
+    pointer-events: none;
   }
   .strat-corners .rc.tl { top: -8px; left: -8px; border-right: none; border-bottom: none; }
   .strat-corners .rc.tr { top: -8px; right: -8px; border-left: none; border-bottom: none; }
@@ -1407,8 +1449,9 @@
 
   .strat-cover {
     position: relative;
-    background: var(--strat-paper-2);
-    border: 1px solid rgba(15,16,20,0.1);
+    background: var(--bone-2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 10px;
     aspect-ratio: 4/3;
     overflow: hidden;
   }
@@ -1419,46 +1462,48 @@
   .strat-mono {
     position: absolute;
     bottom: 10px; left: 12px;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 10px;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: var(--strat-muted);
-    background: rgba(236,236,229,0.92);
+    color: var(--ink-2);
+    background: rgba(250,248,241,0.95);
     padding: 4px 8px 5px;
+    border-radius: 4px;
   }
 
   .strat-body { display: flex; flex-direction: column; gap: 1.1rem; }
   .strat-kicker {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 11px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--strat-rust);
+    color: var(--violet);
   }
   .strat-title {
-    font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+    font-family: var(--serif);
     font-weight: 400;
     font-size: clamp(2.4rem, 4.5vw, 3.6rem);
     line-height: 1.0;
     margin: 0;
-    color: var(--strat-ink);
+    color: var(--ink);
     letter-spacing: -.015em;
   }
   .strat-title em {
     font-style: italic;
-    color: var(--strat-cobalt);
+    color: var(--violet);
   }
   .strat-deck {
-    color: var(--strat-ink);
+    color: var(--ink-2);
     font-size: 15.5px;
     line-height: 1.6;
     max-width: 56ch;
     margin: 0;
   }
   .strat-deck b {
-    font-weight: 700;
-    background: linear-gradient(transparent 62%, var(--strat-acid) 62%);
+    font-weight: 600;
+    color: var(--ink);
+    background: linear-gradient(transparent 62%, var(--lime) 62%);
     padding: 0 2px;
   }
 
@@ -1467,44 +1512,46 @@
     grid-template-columns: 1fr 1fr;
     gap: 14px 18px;
     padding-top: 1rem;
-    border-top: 1px dashed rgba(15,16,20,0.18);
+    border-top: 1px dashed var(--rule-strong);
   }
   @media (max-width: 480px) { .strat-specs { grid-template-columns: 1fr; } }
 
   .strat-spec { display: flex; flex-direction: column; gap: 6px; }
   .strat-spec-label {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 10px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--strat-muted);
+    color: var(--ink-3);
   }
   .strat-swatches { display: flex; gap: 4px; }
   .strat-sw {
     width: 22px; height: 22px;
-    border: 1px solid rgba(15,16,20,0.2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
     display: inline-block;
   }
-  .strat-fonts { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--strat-ink); }
+  .strat-fonts { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--ink); }
   .sf-display { font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 600; letter-spacing: -.02em; }
   .sf-sans { font-family: "Inter", system-ui, sans-serif; font-weight: 400; }
-  .sf-mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .04em; }
+  .sf-mono { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; }
   .strat-tags { display: flex; flex-wrap: wrap; gap: 5px; }
   .strat-tag {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 10px;
     letter-spacing: .08em;
     text-transform: uppercase;
     padding: 3px 8px 4px;
-    border: 1px solid var(--strat-ink);
+    border: 1px solid var(--ink);
     background: transparent;
-    color: var(--strat-ink);
+    color: var(--ink);
+    border-radius: 3px;
   }
 
   .strat-foot {
     margin-top: auto;
     padding-top: 1.25rem;
-    border-top: 1px solid rgba(15,16,20,0.12);
+    border-top: 1px solid var(--rule-strong);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1512,32 +1559,33 @@
     flex-wrap: wrap;
   }
   .strat-meta {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 11px;
     letter-spacing: .04em;
-    color: var(--strat-muted);
+    color: var(--ink-3);
   }
   .strat-cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--strat-ink);
-    color: var(--strat-paper);
+    background: var(--ink);
+    color: var(--bone);
     padding: 11px 16px 12px;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: var(--mono);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: .06em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid var(--strat-ink);
-    transition: background .2s, color .2s, transform .2s;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transition: background .2s, color .2s, transform .2s, box-shadow .2s;
   }
   .strat-cta:hover {
-    background: var(--strat-cobalt);
-    border-color: var(--strat-cobalt);
+    background: var(--violet);
+    border-color: var(--violet);
     transform: translateY(-2px);
-    box-shadow: 4px 4px 0 0 var(--strat-acid);
+    box-shadow: 4px 4px 0 0 var(--lime);
   }
   .strat-cta span { font-size: 14px; }
 
@@ -3594,7 +3642,7 @@
     <div class="nav-links">
       <a href="#work">Work</a>
       <a href="#writing">Writing</a>
-      <a href="#media" class="hide-sm">Media</a>
+      <a href="#brand" class="hide-sm">Brand</a>
       <a href="#stack" class="hide-sm">Stack</a>
       <a href="#contact">Contact</a>
     </div>
@@ -4095,10 +4143,26 @@
     <!-- Nautilida social posts — moved from media -->
     <div class="nauti-social">
       <div class="nauti-social-head">
-        <span class="ns-tag">// nautilida · social posts</span>
+        <span class="ns-tag">// nautilida · product + social</span>
         <h3 class="ns-title">From the launch deck.</h3>
-        <p class="ns-deck">Selected LinkedIn posts I designed and shipped for Nautilida — drag or use arrows to flip through.</p>
+        <p class="ns-deck">The product video I shipped for the launch — and a slider of LinkedIn posts I designed alongside it.</p>
       </div>
+
+      <!-- Product video — featured -->
+      <figure class="nauti-product">
+        <video src="uploads/nautilida-product.mp4"
+               muted loop playsinline preload="metadata"
+               controls
+               controlslist="nodownload noremoteplayback"
+               disablepictureinpicture
+               oncontextmenu="return false"
+               aria-label="Nautilida product video"></video>
+        <figcaption class="np-cap">
+          <span class="np-mark">// product video</span>
+          <span class="np-title">Nautilida — <em>what it does, in 60 seconds.</em></span>
+        </figcaption>
+      </figure>
+
       <div class="li-deck">
         <div class="li-deck-hint">← drag or use arrows to explore →</div>
         <div class="li-track" id="liTrack">
@@ -4340,288 +4404,12 @@
   </div>
 </section>
 
-<!-- ============ MEDIA ============ -->
-<section class="section" id="media" data-screen-label="Media">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="left">
-        <div class="eyebrow">// 06 — published</div>
-        <h2>Things I've <span class="italic">shipped public.</span></h2>
-      </div>
-      <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Social posts, blog announcements, use cases, testimonials, product updates, email templates. Tap a category to see the work. More dropping in soon.</p>
-      </div>
-    </div>
-
-    <!-- Category tabs -->
-    <div class="media-tabs" role="tablist">
-      <button type="button" class="media-tab is-active" role="tab" data-cat="blog" aria-selected="true">Blog announcements</button>
-      <button type="button" class="media-tab" role="tab" data-cat="usecases" aria-selected="false">Use cases</button>
-      <button type="button" class="media-tab" role="tab" data-cat="testimonials" aria-selected="false">Testimonials</button>
-      <button type="button" class="media-tab" role="tab" data-cat="updates" aria-selected="false">Product updates</button>
-      <button type="button" class="media-tab" role="tab" data-cat="email" aria-selected="false">Email templates</button>
-    </div>
-    </div>
-
-    <!-- Blog announcements -->
-    <div class="media-panel is-active" role="tabpanel" data-cat="blog">
-      <div class="media-sub-filters">
-        <div class="filter-row">
-          <span class="filter-label">// brand</span>
-          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
-          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
-            <span class="bt-head">
-              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
-              <span class="bt-tag">Playful · anti-corporate</span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Palette</span>
-              <span class="bt-colors">
-                <span class="bt-swatch" style="background:#FAF7EE"></span>
-                <span class="bt-swatch" style="background:#0E0D14"></span>
-                <span class="bt-swatch" style="background:#FFD93B"></span>
-                <span class="bt-swatch" style="background:#B6F542"></span>
-                <span class="bt-swatch" style="background:#FF5A4D"></span>
-              </span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Type</span>
-              <span class="bt-fonts">
-                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
-                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
-              </span>
-            </span>
-            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
-          </span></button>
-        </div>
-      </div>
-      <div class="media-design-grid">
-        <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-blog-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. blog announcement — square"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Use cases -->
-    <div class="media-panel" role="tabpanel" data-cat="usecases" hidden>
-      <div class="media-sub-filters">
-        <div class="filter-row">
-          <span class="filter-label">// brand</span>
-          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
-          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
-            <span class="bt-head">
-              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
-              <span class="bt-tag">Playful · anti-corporate</span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Palette</span>
-              <span class="bt-colors">
-                <span class="bt-swatch" style="background:#FAF7EE"></span>
-                <span class="bt-swatch" style="background:#0E0D14"></span>
-                <span class="bt-swatch" style="background:#FFD93B"></span>
-                <span class="bt-swatch" style="background:#B6F542"></span>
-                <span class="bt-swatch" style="background:#FF5A4D"></span>
-              </span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Type</span>
-              <span class="bt-fonts">
-                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
-                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
-              </span>
-            </span>
-            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
-          </span></button>
-        </div>
-      </div>
-      <div class="media-design-grid">
-        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
-          <video src="uploads/yap-usecase-landscape.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. use case — landscape"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-usecase-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. use case — portrait"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Testimonials -->
-    <div class="media-panel" role="tabpanel" data-cat="testimonials" hidden>
-      <div class="media-sub-filters">
-        <div class="filter-row">
-          <span class="filter-label">// brand</span>
-          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
-          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
-            <span class="bt-head">
-              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
-              <span class="bt-tag">Playful · anti-corporate</span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Palette</span>
-              <span class="bt-colors">
-                <span class="bt-swatch" style="background:#FAF7EE"></span>
-                <span class="bt-swatch" style="background:#0E0D14"></span>
-                <span class="bt-swatch" style="background:#FFD93B"></span>
-                <span class="bt-swatch" style="background:#B6F542"></span>
-                <span class="bt-swatch" style="background:#FF5A4D"></span>
-              </span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Type</span>
-              <span class="bt-fonts">
-                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
-                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
-              </span>
-            </span>
-            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
-          </span></button>
-        </div>
-      </div>
-      <div class="media-design-grid">
-        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
-          <img src="uploads/yap-testimonial-landscape.png" alt="Yap. testimonials — what teams are actually saying" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-testimonial-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. testimonial — portrait"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product updates -->
-    <div class="media-panel" role="tabpanel" data-cat="updates" hidden>
-      <div class="media-sub-filters">
-        <div class="filter-row">
-          <span class="filter-label">// brand</span>
-          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
-          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
-            <span class="bt-head">
-              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
-              <span class="bt-tag">Playful · anti-corporate</span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Palette</span>
-              <span class="bt-colors">
-                <span class="bt-swatch" style="background:#FAF7EE"></span>
-                <span class="bt-swatch" style="background:#0E0D14"></span>
-                <span class="bt-swatch" style="background:#FFD93B"></span>
-                <span class="bt-swatch" style="background:#B6F542"></span>
-                <span class="bt-swatch" style="background:#FF5A4D"></span>
-              </span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Type</span>
-              <span class="bt-fonts">
-                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
-                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
-              </span>
-            </span>
-            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
-          </span></button>
-        </div>
-      </div>
-      <div class="media-design-grid">
-        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <video src="uploads/yap-update-portrait.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — portrait"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="landscape">
-          <video src="uploads/yap-update-landscape.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — landscape"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-update-square.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — square"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="square">
-          <video src="uploads/yap-update-square-2.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Yap. product update — square (2)"></video>
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Email templates -->
-    <div class="media-panel" role="tabpanel" data-cat="email" hidden>
-      <div class="media-sub-filters">
-        <div class="filter-row">
-          <span class="filter-label">// brand</span>
-          <button type="button" class="media-sub-filter is-active" data-filter="brand" data-value="all">All</button>
-          <button type="button" class="media-sub-filter" data-filter="brand" data-value="yap">Yap.<span class="brand-tooltip" aria-hidden="true">
-            <span class="bt-head">
-              <span class="bt-name" style="font-family:Inter,sans-serif;font-style:normal;font-weight:700;text-transform:lowercase">yap<span style="color:#FF5A4D">.</span></span>
-              <span class="bt-tag">Playful · anti-corporate</span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Palette</span>
-              <span class="bt-colors">
-                <span class="bt-swatch" style="background:#FAF7EE"></span>
-                <span class="bt-swatch" style="background:#0E0D14"></span>
-                <span class="bt-swatch" style="background:#FFD93B"></span>
-                <span class="bt-swatch" style="background:#B6F542"></span>
-                <span class="bt-swatch" style="background:#FF5A4D"></span>
-              </span>
-            </span>
-            <span class="bt-row">
-              <span class="bt-label">Type</span>
-              <span class="bt-fonts">
-                <span class="bt-font" style="font-family:Inter,sans-serif;font-weight:800;text-transform:lowercase">Inter Black · sans display</span>
-                <span class="bt-font" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase">Mono · meta + caps</span>
-              </span>
-            </span>
-            <span class="bt-voice">"Chat that doesn't lie. Sized for actual humans."</span>
-          </span></button>
-        </div>
-      </div>
-      <div class="media-design-grid">
-        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <img src="uploads/yap-email-portrait.png" alt="Yap. welcome email — welcome to yap" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-        <div class="media-design is-filled" data-brand="yap" data-format="portrait">
-          <img src="uploads/yap-email-portrait-2.png" alt="Yap. weekly email — what we actually talked about this week" loading="lazy" onerror="this.closest('.media-design').style.display='none';" />
-          <div class="md-overlay">
-            <span class="md-brand-tag">Yap.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="media-disclaimer">
-      <span class="md-c">©</span> design portfolio — all work belongs to <em>ece berrak.</em> reuse without permission isn't cool.
-    </p>
-
-  </div>
-</section>
-
 <!-- ============ BRAND — STRATUM ============ -->
 <section class="section stratum-section" id="brand" data-screen-label="Brand">
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 07 — brand systems</div>
+        <div class="eyebrow">// 06 — brand systems</div>
         <h2>Brands I'm <span class="italic">shaping.</span></h2>
       </div>
       <div class="right">
@@ -4697,7 +4485,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 08 — stack</div>
+        <div class="eyebrow">// 07 — stack</div>
         <h2>Tools I actually <span class="italic">use.</span></h2>
       </div>
       <div class="right">
@@ -4773,7 +4561,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 09 — contact</div>
+        <div class="eyebrow">// 08 — contact</div>
         <div class="contact-headline-wrap">
           <h2>Let's <span class="italic">talk.</span></h2>
           <span class="stick violet contact-stick" aria-hidden="true">Replies &lt; 24h</span>
