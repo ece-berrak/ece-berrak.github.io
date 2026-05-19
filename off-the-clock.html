@@ -241,12 +241,8 @@
     border: 1px solid rgba(14,13,20,.08);
     overflow: visible;
   }
-  .g-item:nth-child(3n+1) { rotate: -1.2deg; }
-  .g-item:nth-child(3n+2) { rotate:  0.8deg; }
-  .g-item:nth-child(3n+3) { rotate: -.5deg; }
   .g-item:hover {
     transform: translateY(-6px) scale(1.015);
-    rotate: 0deg;
     box-shadow: 0 22px 38px rgba(14,13,20,.20), 0 2px 0 rgba(14,13,20,.08);
     z-index: 5;
   }
@@ -261,24 +257,23 @@
     height: auto;
     object-fit: cover;
   }
-  /* Subtle tape — single decoration, small, top-center, less obtrusive */
+  /* Subtle tape — single decoration, small, top-center, straight */
   .g-item::before {
     content: "";
     position: absolute;
-    top: -8px;
+    top: -7px;
     left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
+    transform: translateX(-50%);
     width: 56px;
-    height: 16px;
-    background: rgba(212,255,61,.55);
-    border-left: 1px dashed rgba(14,13,20,.18);
-    border-right: 1px dashed rgba(14,13,20,.18);
+    height: 14px;
+    background: rgba(212,255,61,.5);
+    border-left: 1px dashed rgba(14,13,20,.15);
+    border-right: 1px dashed rgba(14,13,20,.15);
     pointer-events: none;
     z-index: 3;
   }
   .g-item:nth-child(2n)::before {
-    background: rgba(79,50,216,.28);
-    transform: translateX(-50%) rotate(2deg);
+    background: rgba(79,50,216,.22);
   }
 
   /* Caption sits BELOW the image, in its own area */
@@ -642,8 +637,16 @@
     <div class="gallery">
 
       <figure class="g-item" data-full="uploads/networking/1771584995851.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1771584995851.jpg" alt="Alex, Head of Startups at Google, speaking on AI startups on the rise" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">talk · google berlin</span>Alex — <em>Head of Startups, Google</em></figcaption>
+        <div class="g-figwrap"><img src="uploads/networking/1771584995851.jpg" alt="Axel Täubert, Head of Startups at Google, presenting on AI startups on the rise in Europe" loading="lazy" /></div>
+        <figcaption class="g-cap"><span class="g-cap-mark">talk · Google Berlin</span>Axel Täubert — <em>Head of Startups, Google</em></figcaption>
+        <div class="g-popup" role="tooltip">
+          <span class="g-pop-tag">Google Berlin · talk</span>
+          <h4>AI in Europe is no longer a prediction.</h4>
+          <p>It is already showing up in the numbers.</p>
+          <p><b>Axel Täubert</b> (Head of Startups at Google) backed this up with data. AI adoption across European startups is no longer theoretical — the infrastructure, support, and knowledge are already there.</p>
+          <p><em>The question is not whether we can build. It is whether we choose to.</em></p>
+        </div>
+        <span class="g-pop-tap">tap for more</span>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1775808958950.jpg">
@@ -660,14 +663,15 @@
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1774256959387.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1774256959387.jpg" alt="At the SiBB × Sparkasse × IBB Ventures first VC event at Merantix Campus" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Merantix Campus</span>my <em>first VC event</em> in Berlin</figcaption>
+        <div class="g-figwrap"><img src="uploads/networking/1774256959387.jpg" alt="At the Women's AI Breakfast on High-Risk AI under the EU AI Act" loading="lazy" /></div>
+        <figcaption class="g-cap"><span class="g-cap-mark">Women's AI Breakfast</span>High-Risk AI under the <em>EU AI Act</em></figcaption>
         <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">First VC event · Merantix Campus</span>
-          <h4>SiBB × Sparkasse × IBB Ventures.</h4>
-          <p>Organized by SiBB (Digitalverband Berlin-Brandenburg) together with Berliner Sparkasse and IBB Ventures. My first VC event in Berlin — a really nice experience.</p>
-          <p>The goal: bring people with experience together and create space to exchange ideas around fundraising and building startups. <b>Open, helpful, and outside my usual way of thinking.</b></p>
-          <p><em>Thanks to Christian Segal, Anne Biedermann, Marian Klee (brighter AI), Clemens Kabel, and Laura Möller.</em></p>
+          <span class="g-pop-tag">Women's AI Breakfast</span>
+          <h4>Different industries. Same reality.</h4>
+          <p><em>How do you launch and scale when regulation is already embedded in your roadmap?</em></p>
+          <p>Spent the morning at the Women's AI Breakfast on High-Risk AI under the EU AI Act. Listened to <b>Franziska Weindauer</b> (TÜV AI.Lab) on the regulatory side, <b>Diana Heinrichs</b> (LINDERA) in healthcare, and <b>Gigi Laan</b> (Tesla) in manufacturing.</p>
+          <p>One thing got very clear: in high-risk AI, <em>how you build matters as much as what you build.</em> Compliance is not a checkpoint — it is part of the design from day one.</p>
+          <p>Great moderation by <b>Nicole Büttner</b>, strong community vibe. Glad I joined.</p>
         </div>
         <span class="g-pop-tap">tap for more</span>
       </figure>
@@ -683,7 +687,7 @@
         <div class="g-popup" role="tooltip">
           <span class="g-pop-tag">Venture Café #49 · Innovation Campus</span>
           <h4>The kind of room you don't forget.</h4>
-          <p>The bald guy in the middle: <b>Jan Oberhauser, n8n founder.</b> On my left: Gökçe Efe Kaplan. Random talk, real overlap.</p>
+          <p>In the middle: <b>Jan Oberhauser, founder of n8n.</b> On the left: Gökçe Efe Kaplan. Random talk, real overlap.</p>
           <p>Walking out with new ideas, new people, and things we'll <em>probably act on.</em></p>
         </div>
         <span class="g-pop-tap">tap for more</span>
@@ -702,6 +706,14 @@
       <figure class="g-item" data-full="uploads/networking/1771584997366.jpg">
         <div class="g-figwrap"><img src="uploads/networking/1771584997366.jpg" alt="Peec AI founder Marius Meiners in fireside chat at Road to Start Summit" loading="lazy" /></div>
         <figcaption class="g-cap"><span class="g-cap-mark">Road to Start Summit</span>Marius Meiners — <em>Peec AI founder</em> fireside</figcaption>
+        <div class="g-popup" role="tooltip">
+          <span class="g-pop-tag">Road to Start Summit · fireside</span>
+          <h4>Think bigger than what feels safe.</h4>
+          <p><b>Marius Meiners</b> from Peec AI shared both the product and the story behind it.</p>
+          <p>A good reminder that ecosystems are not driven by technology alone, but by <em>founders who decide to think bigger than what feels safe.</em></p>
+          <p>(Ambition in Germany is still a competitive advantage.)</p>
+        </div>
+        <span class="g-pop-tap">tap for more</span>
       </figure>
 
       <figure class="g-item" data-full="uploads/networking/1772014026194.jpg">
