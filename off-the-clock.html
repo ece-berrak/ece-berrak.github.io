@@ -456,6 +456,86 @@
     margin-top: .5rem !important;
   }
 
+  /* YouTube channel CTA — for the travel section */
+  .yt-card {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: var(--ink);
+    color: var(--bone);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    box-shadow: 6px 6px 0 0 var(--lime);
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .yt-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 9px 9px 0 0 var(--lime);
+  }
+  @media (max-width: 720px) {
+    .yt-card { grid-template-columns: 1fr; text-align: left; gap: 1rem; }
+  }
+  .yt-glyph {
+    width: 70px; height: 50px;
+    background: #FF0000;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transform: rotate(-2deg);
+  }
+  .yt-glyph svg { width: 24px; height: 24px; }
+  .yt-body { min-width: 0; }
+  .yt-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: .5rem;
+  }
+  .yt-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    line-height: 1.1;
+    margin: 0 0 .35rem;
+    color: var(--bone);
+  }
+  .yt-title em { font-style: italic; color: var(--lime); }
+  .yt-meta {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: rgba(250,248,241,.7);
+    letter-spacing: .02em;
+  }
+  .yt-meta b { color: var(--bone); font-weight: 600; }
+  .yt-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    background: var(--lime);
+    color: var(--ink);
+    padding: 11px 16px 12px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .yt-cta .arr { font-size: 14px; }
+
   /* Sticky-note aside — replaces the old dark quote block */
   .sticky-aside {
     column-span: all;
@@ -759,6 +839,19 @@
         The kind of trips that don't fit on LinkedIn. New cities, old habits, the occasional window seat that earns its keep — and a strong bias for the Mediterranean.
       </p>
     </div>
+
+    <!-- YouTube channel CTA -->
+    <a class="yt-card" href="https://www.youtube.com/@berlixiz" target="_blank" rel="noopener">
+      <span class="yt-glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+      <div class="yt-body">
+        <span class="yt-tag">// hobby channel · uncensored</span>
+        <h3 class="yt-title">We also <em>vlog</em> the trips.</h3>
+        <div class="yt-meta">@berlixiz · <b>~10k subscribers</b> · YouTube</div>
+      </div>
+      <span class="yt-cta">watch on YouTube <span class="arr">↗</span></span>
+    </a>
 
     <div class="gallery">
 
