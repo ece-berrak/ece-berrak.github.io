@@ -1312,23 +1312,234 @@
   }
   .thumb-7 .thumb-mono, .thumb-7 .thumb-num { z-index: 2; }
 
-  /* Stratum thumb — cool oat paper, matches the brand */
-  .thumb-stratum {
-    background: linear-gradient(180deg, #DEDED5 0%, #ECECE5 100%);
+  /* Nautilida social posts — rehoused under Work */
+  .nauti-social {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px dashed var(--rule-strong);
   }
-  .thumb-stratum .pipeline-img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
+  .nauti-social-head {
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: end;
   }
-  .thumb-stratum::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: radial-gradient(120% 60% at 50% 100%, rgba(15,16,20,.08) 0%, transparent 60%);
-    pointer-events: none;
+  @media (max-width: 720px) {
+    .nauti-social-head { grid-template-columns: 1fr; gap: .75rem; }
   }
-  .thumb-stratum .thumb-mono, .thumb-stratum .thumb-num { z-index: 2; }
+  .ns-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    grid-column: 1 / 2;
+  }
+  .ns-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.05;
+    margin: .25rem 0 0;
+    letter-spacing: -.01em;
+    grid-column: 1 / 2;
+  }
+  .ns-deck {
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 46ch;
+    margin: 0;
+    grid-column: 2 / 3;
+  }
+  @media (max-width: 720px) {
+    .ns-tag, .ns-title, .ns-deck { grid-column: 1 / -1; }
+  }
+
+  /* ===== Stratum brand section (07 — brand) ===== */
+  .stratum-section {
+    --strat-paper: #ECECE5;
+    --strat-paper-2: #DEDED5;
+    --strat-ink: #0F1014;
+    --strat-cobalt: #1F3FCA;
+    --strat-acid: #D9E84A;
+    --strat-rust: #C24528;
+    --strat-muted: #76766E;
+    background: var(--strat-paper);
+    border-block: 1px solid rgba(15,16,20,0.08);
+  }
+  .stratum-section .eyebrow { color: var(--strat-cobalt); }
+  .stratum-section h2 { color: var(--strat-ink); }
+  .stratum-section h2 .italic { color: var(--strat-rust); font-family: "Instrument Serif", Georgia, serif; }
+
+  .stratum-grid {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+  .stratum-feature {
+    background: #fff;
+    border: 1.5px solid var(--strat-ink);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: 8px 8px 0 0 var(--strat-cobalt);
+  }
+  @media (max-width: 860px) {
+    .stratum-feature { grid-template-columns: 1fr; }
+  }
+
+  /* Registration corners */
+  .strat-corners .rc {
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--strat-ink);
+    background: transparent;
+  }
+  .strat-corners .rc.tl { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+  .strat-corners .rc.tr { top: -8px; right: -8px; border-left: none; border-bottom: none; }
+  .strat-corners .rc.bl { bottom: -8px; left: -8px; border-right: none; border-top: none; }
+  .strat-corners .rc.br { bottom: -8px; right: -8px; border-left: none; border-top: none; }
+
+  .strat-cover {
+    position: relative;
+    background: var(--strat-paper-2);
+    border: 1px solid rgba(15,16,20,0.1);
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .strat-cover img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .strat-mono {
+    position: absolute;
+    bottom: 10px; left: 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--strat-muted);
+    background: rgba(236,236,229,0.92);
+    padding: 4px 8px 5px;
+  }
+
+  .strat-body { display: flex; flex-direction: column; gap: 1.1rem; }
+  .strat-kicker {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--strat-rust);
+  }
+  .strat-title {
+    font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    line-height: 1.0;
+    margin: 0;
+    color: var(--strat-ink);
+    letter-spacing: -.015em;
+  }
+  .strat-title em {
+    font-style: italic;
+    color: var(--strat-cobalt);
+  }
+  .strat-deck {
+    color: var(--strat-ink);
+    font-size: 15.5px;
+    line-height: 1.6;
+    max-width: 56ch;
+    margin: 0;
+  }
+  .strat-deck b {
+    font-weight: 700;
+    background: linear-gradient(transparent 62%, var(--strat-acid) 62%);
+    padding: 0 2px;
+  }
+
+  .strat-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(15,16,20,0.18);
+  }
+  @media (max-width: 480px) { .strat-specs { grid-template-columns: 1fr; } }
+
+  .strat-spec { display: flex; flex-direction: column; gap: 6px; }
+  .strat-spec-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--strat-muted);
+  }
+  .strat-swatches { display: flex; gap: 4px; }
+  .strat-sw {
+    width: 22px; height: 22px;
+    border: 1px solid rgba(15,16,20,0.2);
+    display: inline-block;
+  }
+  .strat-fonts { display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--strat-ink); }
+  .sf-display { font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 600; letter-spacing: -.02em; }
+  .sf-sans { font-family: "Inter", system-ui, sans-serif; font-weight: 400; }
+  .sf-mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .04em; }
+  .strat-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .strat-tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 8px 4px;
+    border: 1px solid var(--strat-ink);
+    background: transparent;
+    color: var(--strat-ink);
+  }
+
+  .strat-foot {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(15,16,20,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .strat-meta {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .04em;
+    color: var(--strat-muted);
+  }
+  .strat-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--strat-ink);
+    color: var(--strat-paper);
+    padding: 11px 16px 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--strat-ink);
+    transition: background .2s, color .2s, transform .2s;
+  }
+  .strat-cta:hover {
+    background: var(--strat-cobalt);
+    border-color: var(--strat-cobalt);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 0 var(--strat-acid);
+  }
+  .strat-cta span { font-size: 14px; }
 
   .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
   .card h3 { margin-top: -.25rem; }
@@ -3727,7 +3938,7 @@
         <h2>Things I designed, built, and <span class="italic">shipped.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Six projects that show what "marketing that ships" looks like in practice: brand systems, websites, automations, microsites, AI agents, and category content built end-to-end. Tap any card for the full story.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five projects that show what "marketing that ships" looks like in practice: websites, automations, microsites, AI agents, and category content built end-to-end. Tap any card for the full story.</p>
       </div>
     </div>
 
@@ -3739,7 +3950,7 @@
           <span class="grid-bg" aria-hidden="true"></span>
           <span class="thumb-mono">nautilida.ai</span>
           <div class="thumb-fig"><em>Marketing that ships</em><span class="thumb-sub">— site live in 3 weeks</span></div>
-          <span class="thumb-num">01 / 06</span>
+          <span class="thumb-num">01 / 05</span>
         </div>
         <div>
           <div class="kicker">WEBSITE · AEO/GEO · CONTENT</div>
@@ -3757,30 +3968,7 @@
         </div>
       </article>
 
-      <!-- Card 2 (feature, full width) — Stratum -->
-      <article class="card feature">
-        <div class="thumb thumb-stratum">
-          <img class="pipeline-img" src="uploads/stratum-cover.png" alt="Stratum brand cover — 'Work, in layers.' wordmark on cool oat paper, social system at a glance" />
-          <span class="thumb-mono" style="color:rgba(15,16,20,0.65);">stratum.so · social system</span>
-          <span class="thumb-num" style="color:rgba(15,16,20,0.65);border-color:rgba(15,16,20,0.25);">02 / 06</span>
-        </div>
-        <div>
-          <div class="kicker">BRAND · DESIGN SYSTEM · SOCIAL</div>
-          <h3 style="margin-top:.5rem;">Stratum — <span class="italic">Work, in layers.</span></h3>
-          <p class="card-desc" style="margin-top:1rem;">A complete social and brand system for Stratum — a new product category I'm shaping around layered, structural work. Built from scratch: logomark, palette (cool oat / jet / cobalt), typography (Space Grotesk + Geist + IBM Plex Mono), 14 social artboards across blog, use cases, testimonials, product updates, and email — all driven by a live tweaks panel so brand variables (accent, deep, highlight, grain) can be retuned in-browser.</p>
-          <ul class="outcomes">
-            <li>14 artboards · Instagram + LinkedIn + Email</li>
-            <li>Live design canvas with editable brand tokens</li>
-            <li>Structural visual language: registration corners, hairlines, mono labels</li>
-          </ul>
-          <div class="card-foot">
-            <span class="meta">2026 — in development</span>
-            <a class="linkish" href="projects/stratum/">Open the design canvas <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3 (feature, full width) -->
+      <!-- Card 2 (feature, full width) -->
       <article class="card feature">
         <div class="thumb thumb-2">
           <span class="thumb-mono">github.com/ece-berrak</span>
@@ -3792,7 +3980,7 @@
   notifyChat(payload);
 }
 // → 0 € infra · MIT</pre>
-          <span class="thumb-num">03 / 06</span>
+          <span class="thumb-num">02 / 05</span>
         </div>
         <div>
           <div class="kicker">AUTOMATION · OPEN SOURCE</div>
@@ -3810,7 +3998,7 @@
         </div>
       </article>
 
-      <!-- Card 4 (feature, full width) -->
+      <!-- Card 3 (feature, full width) -->
       <article class="card feature">
         <div class="thumb thumb-5">
           <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%;">
@@ -3837,7 +4025,7 @@
             </g>
           </svg>
           <span class="thumb-mono" style="color:rgba(255,255,255,0.7);">nautilida.ai/literacy</span>
-          <span class="thumb-num">04 / 06</span>
+          <span class="thumb-num">03 / 05</span>
         </div>
         <div>
           <div class="kicker">MICROSITE · LONG-FORM NARRATIVE</div>
@@ -3855,12 +4043,12 @@
         </div>
       </article>
 
-      <!-- Card 5 (feature, full width) -->
+      <!-- Card 4 (feature, full width) -->
       <article class="card feature">
         <div class="thumb thumb-6">
           <img class="pipeline-img" src="uploads/n8n-pipeline.png" alt="n8n workflow visualization — 12 nodes from Schedule Trigger through Notion read, Claude draft, Google Docs create, to Notion property update" />
           <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/aeo-content-pipeline</span>
-          <span class="thumb-num">05 / 06</span>
+          <span class="thumb-num">04 / 05</span>
         </div>
         <div>
           <div class="kicker">AUTOMATION · AI-NATIVE · OPEN SOURCE</div>
@@ -3879,12 +4067,12 @@
         </div>
       </article>
 
-      <!-- Card 6 (feature, full width) -->
+      <!-- Card 5 (feature, full width) -->
       <article class="card feature">
         <div class="thumb thumb-7">
           <img class="pipeline-img" src="uploads/n8n-research-agent.png" alt="n8n workflow visualization — Chat Trigger to AI Agent with Gemini 2.5 Flash, Simple Memory, Tavily web search, and Notion database write" />
           <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/n8n-research-agent</span>
-          <span class="thumb-num">06 / 06</span>
+          <span class="thumb-num">05 / 05</span>
         </div>
         <div>
           <div class="kicker">AI AGENT · AUTOMATION · OPEN SOURCE</div>
@@ -3903,7 +4091,105 @@
       </article>
 
     </div>
-  </div>
+  
+    <!-- Nautilida social posts — moved from media -->
+    <div class="nauti-social">
+      <div class="nauti-social-head">
+        <span class="ns-tag">// nautilida · social posts</span>
+        <h3 class="ns-title">From the launch deck.</h3>
+        <p class="ns-deck">Selected LinkedIn posts I designed and shipped for Nautilida — drag or use arrows to flip through.</p>
+      </div>
+      <div class="li-deck">
+        <div class="li-deck-hint">← drag or use arrows to explore →</div>
+        <div class="li-track" id="liTrack">
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-1.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 1"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-2.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 2"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-3.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 3"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-4.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 4"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-5.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 5"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-6.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 6"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
+            <div class="li-visual">
+              <video src="uploads/li-7.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 7"></video>
+            </div>
+            <div class="li-meta">
+              <span class="li-avatar li-avatar-nauti"></span>
+              <span class="li-name-mini">Nautilida</span>
+              <span class="li-cta-mini" aria-hidden="true">↗</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="li-deck-controls">
+          <button type="button" class="li-nav" id="liPrev" aria-label="Previous post">←</button>
+          <div class="li-counter" id="liCounter">01 / 07</div>
+          <button type="button" class="li-shuffle" id="liShuffle" aria-label="Random post">✦ shuffle</button>
+          <button type="button" class="li-nav" id="liNext" aria-label="Next post">→</button>
+      </div>
+    </div>
+</div>
 </section>
 
 <!-- ============ WRITING ============ -->
@@ -4069,111 +4355,16 @@
 
     <!-- Category tabs -->
     <div class="media-tabs" role="tablist">
-      <button type="button" class="media-tab is-active" role="tab" data-cat="nautilida" aria-selected="true">★ Nautilida</button>
-      <button type="button" class="media-tab" role="tab" data-cat="blog" aria-selected="false">Blog announcements</button>
+      <button type="button" class="media-tab is-active" role="tab" data-cat="blog" aria-selected="true">Blog announcements</button>
       <button type="button" class="media-tab" role="tab" data-cat="usecases" aria-selected="false">Use cases</button>
       <button type="button" class="media-tab" role="tab" data-cat="testimonials" aria-selected="false">Testimonials</button>
       <button type="button" class="media-tab" role="tab" data-cat="updates" aria-selected="false">Product updates</button>
       <button type="button" class="media-tab" role="tab" data-cat="email" aria-selected="false">Email templates</button>
     </div>
-
-    <!-- Nautilida panel — visual-first discovery deck -->
-    <div class="media-panel is-active" role="tabpanel" data-cat="nautilida">
-      <div class="li-deck">
-        <div class="li-deck-hint">← drag or use arrows to explore →</div>
-        <div class="li-track" id="liTrack">
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-1.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 1"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-2.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 2"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-3.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 3"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-4.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 4"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-5.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 5"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-6.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 6"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-          <a class="li-card li-card-visual" href="https://www.linkedin.com/company/nautilida/" target="_blank" rel="noopener">
-            <div class="li-visual">
-              <video src="uploads/li-7.mp4" autoplay muted loop playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" aria-label="Nautilida LinkedIn post 7"></video>
-            </div>
-            <div class="li-meta">
-              <span class="li-avatar li-avatar-nauti"></span>
-              <span class="li-name-mini">Nautilida</span>
-              <span class="li-cta-mini" aria-hidden="true">↗</span>
-            </div>
-          </a>
-
-        </div>
-
-        <div class="li-deck-controls">
-          <button type="button" class="li-nav" id="liPrev" aria-label="Previous post">←</button>
-          <div class="li-counter" id="liCounter">01 / 07</div>
-          <button type="button" class="li-shuffle" id="liShuffle" aria-label="Random post">✦ shuffle</button>
-          <button type="button" class="li-nav" id="liNext" aria-label="Next post">→</button>
-        </div>
-
-      </div>
     </div>
 
     <!-- Blog announcements -->
-    <div class="media-panel" role="tabpanel" data-cat="blog" hidden>
+    <div class="media-panel is-active" role="tabpanel" data-cat="blog">
       <div class="media-sub-filters">
         <div class="filter-row">
           <span class="filter-label">// brand</span>
@@ -4425,12 +4616,88 @@
   </div>
 </section>
 
+<!-- ============ BRAND — STRATUM ============ -->
+<section class="section stratum-section" id="brand" data-screen-label="Brand">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <div class="eyebrow">// 07 — brand systems</div>
+        <h2>Brands I'm <span class="italic">shaping.</span></h2>
+      </div>
+      <div class="right">
+        <p class="mono" style="max-width:44ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Design systems I'm building from the ground up — logomark, palette, type, voice, and social surfaces driven by live canvases. More dropping in as they ship.</p>
+      </div>
+    </div>
+
+    <div class="stratum-grid">
+
+    <article class="stratum-feature">
+      <div class="strat-corners">
+        <span class="rc tl"></span><span class="rc tr"></span><span class="rc bl"></span><span class="rc br"></span>
+      </div>
+
+      <div class="strat-cover">
+        <img src="uploads/stratum-cover.png" alt="Stratum brand cover — 'Work, in layers.' wordmark on cool oat paper, social system at a glance" />
+        <span class="strat-mono">stratum.so · social system · 14 boards</span>
+      </div>
+
+      <div class="strat-body">
+        <span class="strat-kicker">// 00 · the system</span>
+        <h3 class="strat-title">Stratum.<br/><em>Work, in layers.</em></h3>
+
+        <p class="strat-deck">
+          A complete brand and social system for <b>Stratum</b> — a new product category around layered, structural work.
+          Built from scratch in a live React canvas: logomark, palette, type, voice, and <b>14 social artboards</b> (Instagram, LinkedIn, email) driven by a tweaks panel so accent / deep / highlight / grain retune in-browser.
+        </p>
+
+        <div class="strat-specs">
+          <div class="strat-spec">
+            <span class="strat-spec-label">// palette</span>
+            <div class="strat-swatches">
+              <span class="strat-sw" style="background:#ECECE5" title="paper"></span>
+              <span class="strat-sw" style="background:#0F1014" title="ink"></span>
+              <span class="strat-sw" style="background:#1F3FCA" title="cobalt"></span>
+              <span class="strat-sw" style="background:#D9E84A" title="acid"></span>
+              <span class="strat-sw" style="background:#C24528" title="rust"></span>
+            </div>
+          </div>
+          <div class="strat-spec">
+            <span class="strat-spec-label">// type</span>
+            <div class="strat-fonts">
+              <span class="sf-display">Space Grotesk</span>
+              <span class="sf-sans">Geist</span>
+              <span class="sf-mono">IBM Plex Mono</span>
+            </div>
+          </div>
+          <div class="strat-spec">
+            <span class="strat-spec-label">// surfaces</span>
+            <div class="strat-tags">
+              <span class="strat-tag">IG 1:1</span>
+              <span class="strat-tag">LinkedIn 1.91:1</span>
+              <span class="strat-tag">Email</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="strat-foot">
+          <span class="strat-meta">2026 — in development</span>
+          <a class="strat-cta" href="projects/stratum/">Open the design canvas <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Future brand cards slot in here -->
+
+    </div>
+  </div>
+</section>
+
 <!-- ============ STACK ============ -->
 <section class="section" id="stack" data-screen-label="Stack">
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 07 — stack</div>
+        <div class="eyebrow">// 08 — stack</div>
         <h2>Tools I actually <span class="italic">use.</span></h2>
       </div>
       <div class="right">
@@ -4506,7 +4773,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="left">
-        <div class="eyebrow">// 08 — contact</div>
+        <div class="eyebrow">// 09 — contact</div>
         <div class="contact-headline-wrap">
           <h2>Let's <span class="italic">talk.</span></h2>
           <span class="stick violet contact-stick" aria-hidden="true">Replies &lt; 24h</span>
