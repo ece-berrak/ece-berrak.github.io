@@ -1,5 +1,4 @@
-/* global React, ReactDOM, DesignCanvas, DCSection, DCArtboard,
-   TweaksPanel, useTweaks, TweakSection, TweakColor, TweakText, TweakToggle, TweakRadio,
+/* global React, ReactDOM,
    CoverBoard,
    BlogIG_Editorial, BlogLI_TwoCol, BlogIG_Dark,
    UseIG_Stat, UseLI_Side, UseIG_Steps,
@@ -7,161 +6,187 @@
    UpdateIG_UI, UpdateLI_Changelog, UpdateIG_Big,
    EmailLaunch, EmailDigest, EmailWelcome */
 
-// Artboard sizes
-const IG = { w: 600, h: 600 };   // 1:1
-const LI = { w: 760, h: 398 };   // 1.91:1
-const EM = { w: 580, h: 760 };   // Email mock
+// ─────────────────────────────────────────────────────────────
+// Stratum case-study page — narrative chapters with the actual
+// artboard components rendered inline as framed, scaled cards.
+// ─────────────────────────────────────────────────────────────
 
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#1F3FCA",
-  "brandName": "Stratum",
-  "grain": true,
-  "deep": "#0F1014",
-  "highlight": "#D9E84A"
-}/*EDITMODE-END*/;
+// Per-format design dimensions
+const DESIGN = {
+  cover: { w: 760, h: 560 },
+  ig:    { w: 600, h: 600 },
+  li:    { w: 760, h: 398 },
+  email: { w: 580, h: 760 },
+};
+
+function Chapter({ num, title, story, vibe, children }) {
+  return (
+    <section className="chapter">
+      <div className="wrap">
+        <div className="chapter-head">
+          <div>
+            <div className="chapter-num">{num}</div>
+            <h2 className="chapter-title" dangerouslySetInnerHTML={{ __html: title }} />
+          </div>
+          <p className="chapter-story" dangerouslySetInnerHTML={{ __html: story }} />
+        </div>
+
+        <div className="ab-grid">{children}</div>
+
+        {vibe && <p className="vibe" dangerouslySetInnerHTML={{ __html: vibe }} />}
+      </div>
+    </section>
+  );
+}
+
+// Artboard — measures its frame width and scales the design-sized inner
+// post via transform so the natural fonts/paddings don't overflow.
+function Artboard({ format = "ig", mark, caption, children }) {
+  const frameRef = React.useRef(null);
+  const [scale, setScale] = React.useState(1);
+  const design = DESIGN[format] || DESIGN.ig;
+
+  React.useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    function update() {
+      const w = el.clientWidth || 0;
+      const s = w / design.w;
+      setScale(s);
+    }
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [design.w]);
+
+  return (
+    <div className={"ab " + format}>
+      <div className="ab-frame" ref={frameRef}>
+        <div
+          className="ab-inner"
+          style={{
+            width: design.w + "px",
+            height: design.h + "px",
+            transform: "scale(" + scale + ")",
+            transformOrigin: "top left",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        >
+          {children}
+        </div>
+      </div>
+      <div className="ab-cap">
+        <span className="ab-cap-mark">{mark}</span>
+        <span className="ab-cap-text" dangerouslySetInnerHTML={{ __html: caption }} />
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-
-  // Live CSS-var override based on tweaks
+  // Ensure body doesn't have the grain class (let the .post.grain children
+  // control their own texture)
   React.useEffect(() => {
-    const root = document.documentElement;
-    root.style.setProperty("--cobalt", t.accent);
-    root.style.setProperty("--ink", t.deep);
-    root.style.setProperty("--acid", t.highlight);
-    document.body.classList.toggle("no-grain", !t.grain);
-  }, [t.accent, t.deep, t.highlight, t.grain]);
-
-  // Swap brand name on the fly by exposing a global
-  React.useEffect(() => {
-    if (window.BRAND) window.BRAND.name = t.brandName;
-  }, [t.brandName]);
+    document.body.classList.remove("no-grain");
+  }, []);
 
   return (
     <React.Fragment>
-      <DesignCanvas
-        title="Stratum · the launch field guide"
-        subtitle="Notes from the maker — 14 surfaces a new brand has to live in, each made for a specific room it'll be scrolled in. Open any artboard to see what it does, and why it's the shape it is."
+
+      <Chapter
+        num="00 · the system"
+        title="The bones first. <em>Brand at a glance.</em>"
+        story="Before any social post, the system had to exist. <b>Wordmark, palette, type, voice.</b> Cool oat paper, jet ink, cobalt as the only loud signal — and a structural visual language: registration corners, hairlines, monospaced labels. The version of Stratum a designer hands the marketing team on day one."
       >
-        <DCSection
-          id="cover"
-          title="00 · the moment I started shaping it"
-          subtitle="Stratum's a productivity OS I'm building for product teams. Before any social post, the system: wordmark, palette, type, voice. The bones."
-        >
-          <DCArtboard id="cover" label="cover · what stratum actually is" width={760} height={560}>
-            <CoverBoard />
-          </DCArtboard>
-        </DCSection>
+        <Artboard format="cover" mark="cover · 760 × 560" caption="<em>The system at a glance</em> — wordmark, palette, type, scale.">
+          <CoverBoard />
+        </Artboard>
+      </Chapter>
 
-        <DCSection
-          id="blog"
-          title="01 · the launch post (three voices, one essay)"
-          subtitle="Same blog drop, three rooms — paper-grade for the editorial readers, byline-led for LinkedIn skimmers, dark numbered for the cut you need to land."
-        >
-          <DCArtboard id="blog-ig-editorial" label="IG · paper-grade announcement" width={IG.w} height={IG.h}>
-            <BlogIG_Editorial />
-          </DCArtboard>
-          <DCArtboard id="blog-li-twocol" label="LinkedIn · author-led byline" width={LI.w} height={LI.h}>
-            <BlogLI_TwoCol />
-          </DCArtboard>
-          <DCArtboard id="blog-ig-dark" label="IG · the dark cut" width={IG.w} height={IG.h}>
-            <BlogIG_Dark />
-          </DCArtboard>
-        </DCSection>
+      <Chapter
+        num="01 · the launch post"
+        title="Three voices, <em>one essay.</em>"
+        story="Same blog drop, three rooms. <b>Paper-grade</b> for the editorial reader who scrolls slowly. <b>Byline-led</b> for the LinkedIn skimmer who needs a face. <b>Dark numbered</b> for the cut you need to land — the one that has to stop the scroll cold."
+      >
+        <Artboard format="ig" mark="IG · 1:1 · paper-grade" caption="Editorial paper for the slow reader.">
+          <BlogIG_Editorial />
+        </Artboard>
+        <Artboard format="li" mark="LinkedIn · 1.91:1 · byline" caption="Author-led for the skimmer.">
+          <BlogLI_TwoCol />
+        </Artboard>
+        <Artboard format="ig" mark="IG · 1:1 · dark cut" caption="<em>The version that stops the scroll.</em>">
+          <BlogIG_Dark />
+        </Artboard>
+      </Chapter>
 
-        <DCSection
-          id="use"
-          title="02 · the proof (same story, three rooms)"
-          subtitle="One customer, one outcome — dressed for the scroll. Stat hero for the impact-first scan, profile + quote for the trust read, step-by-step for the curious."
-        >
-          <DCArtboard id="use-ig-stat" label="IG · the number that earned the post" width={IG.w} height={IG.h}>
-            <UseIG_Stat />
-          </DCArtboard>
-          <DCArtboard id="use-li-side" label="LinkedIn · the customer says it best" width={LI.w} height={LI.h}>
-            <UseLI_Side />
-          </DCArtboard>
-          <DCArtboard id="use-ig-steps" label="IG · how they actually ship it" width={IG.w} height={IG.h}>
-            <UseIG_Steps />
-          </DCArtboard>
-        </DCSection>
+      <Chapter
+        num="02 · the proof"
+        title="Same story, <em>three rooms.</em>"
+        story="One customer, one outcome — dressed for the scroll. The <b>stat hero</b> for the impact-first scan, the <b>profile + quote</b> for the trust read, the <b>how-they-ship</b> sequence for the curious. Same proof. Three different exits."
+      >
+        <Artboard format="ig" mark="IG · stat hero" caption="The number that earned the post.">
+          <UseIG_Stat />
+        </Artboard>
+        <Artboard format="li" mark="LinkedIn · profile + quote" caption="The customer says it best.">
+          <UseLI_Side />
+        </Artboard>
+        <Artboard format="ig" mark="IG · how they ship" caption="<em>How they actually use it.</em>">
+          <UseIG_Steps />
+        </Artboard>
+      </Chapter>
 
-        <DCSection
-          id="test"
-          title="03 · the voices (three shapes of trust)"
-          subtitle="Quotes from teams using Stratum. Same words, different scroll behavior — pull-quote for the slow-down, side card for the LinkedIn lurker, stacked for the social-proof wall."
-        >
-          <DCArtboard id="test-ig-pullquote" label="IG · the one you save" width={IG.w} height={IG.h}>
-            <TestIG_Pullquote />
-          </DCArtboard>
-          <DCArtboard id="test-li-side" label="LinkedIn · the side endorsement" width={LI.w} height={LI.h}>
-            <TestLI_Side />
-          </DCArtboard>
-          <DCArtboard id="test-ig-stack" label="IG · the trust stack" width={IG.w} height={IG.h}>
-            <TestIG_Stack />
-          </DCArtboard>
-        </DCSection>
+      <Chapter
+        num="03 · the voices"
+        title="Three shapes of <em>trust.</em>"
+        story="Quotes from teams using Stratum. Same words, different scroll behavior. <b>Pull-quote</b> for the slow-down. <b>Side card</b> for the LinkedIn lurker who's scanning for names. <b>Stacked</b> for the proof wall — when three lines beat one paragraph."
+      >
+        <Artboard format="ig" mark="IG · pull-quote" caption="The one you save.">
+          <TestIG_Pullquote />
+        </Artboard>
+        <Artboard format="li" mark="LinkedIn · side card" caption="The side endorsement.">
+          <TestLI_Side />
+        </Artboard>
+        <Artboard format="ig" mark="IG · stacked" caption="<em>The trust stack.</em>">
+          <TestIG_Stack />
+        </Artboard>
+      </Chapter>
 
-        <DCSection
-          id="update"
-          title="04 · the changelog (tiny ships, big ships)"
-          subtitle="Release moments. UI mock for the proof-it-works, LinkedIn changelog for the bullet-readers, big version for the milestone you want people to remember."
-        >
-          <DCArtboard id="update-ig-ui" label="IG · proof in the product" width={IG.w} height={IG.h}>
-            <UpdateIG_UI />
-          </DCArtboard>
-          <DCArtboard id="update-li-changelog" label="LinkedIn · what shipped this week" width={LI.w} height={LI.h}>
-            <UpdateLI_Changelog />
-          </DCArtboard>
-          <DCArtboard id="update-ig-big" label="IG · the version-bump moment" width={IG.w} height={IG.h}>
-            <UpdateIG_Big />
-          </DCArtboard>
-        </DCSection>
+      <Chapter
+        num="04 · the changelog"
+        title="Tiny ships, <em>big ships.</em>"
+        story="Release moments are a brand surface too. <b>UI mock</b> for the proof-it-works moment. <b>LinkedIn changelog</b> for bullet-readers. <b>Big version</b> for the milestone you want people to actually remember."
+      >
+        <Artboard format="ig" mark="IG · UI mock" caption="Proof, in the product.">
+          <UpdateIG_UI />
+        </Artboard>
+        <Artboard format="li" mark="LinkedIn · changelog" caption="What shipped this week.">
+          <UpdateLI_Changelog />
+        </Artboard>
+        <Artboard format="ig" mark="IG · version bump" caption="<em>The version-bump moment.</em>">
+          <UpdateIG_Big />
+        </Artboard>
+      </Chapter>
 
-        <DCSection
-          id="email"
-          title="05 · the follow-up (three emails that close the loop)"
-          subtitle="What lands in the inbox after the timeline scroll. A launch you can't miss, a digest that earns the open, a welcome that doesn't feel automated."
-        >
-          <DCArtboard id="email-launch"  label="launch · the one you actually open"  width={EM.w} height={EM.h}>
-            <EmailLaunch />
-          </DCArtboard>
-          <DCArtboard id="email-digest"  label="digest · the friday catch-up"   width={EM.w} height={EM.h}>
-            <EmailDigest />
-          </DCArtboard>
-          <DCArtboard id="email-welcome" label="welcome · the one that doesn't feel automated" width={EM.w} height={EM.h}>
-            <EmailWelcome />
-          </DCArtboard>
-        </DCSection>
-      </DesignCanvas>
+      <Chapter
+        num="05 · the follow-up"
+        title="Three emails that <em>close the loop.</em>"
+        story="What lands in the inbox after the timeline scroll. A <b>launch</b> you can't miss. A <b>weekly digest</b> that earns the open. A <b>welcome</b> that doesn't feel automated. The brand's quietest surface — and the one people actually read."
+        vibe="The system isn't 14 boards. It's <b>14 moments a new brand has to show up in</b> — and a voice that holds across all of them."
+      >
+        <Artboard format="email" mark="Email · product launch" caption="The one you actually open.">
+          <EmailLaunch />
+        </Artboard>
+        <Artboard format="email" mark="Email · weekly digest" caption="The Friday catch-up.">
+          <EmailDigest />
+        </Artboard>
+        <Artboard format="email" mark="Email · welcome" caption="<em>The one that doesn't feel automated.</em>">
+          <EmailWelcome />
+        </Artboard>
+      </Chapter>
 
-      <TweaksPanel title="Tweaks">
-        <TweakSection title="Brand">
-          <TweakText label="Brand name" value={t.brandName} onChange={v => setTweak("brandName", v)} />
-        </TweakSection>
-        <TweakSection title="Palette">
-          <TweakColor
-            label="Accent"
-            value={t.accent}
-            options={["#1F3FCA", "#0F1014", "#C24528", "#1F8A5B", "#7B4FE0"]}
-            onChange={v => setTweak("accent", v)}
-          />
-          <TweakColor
-            label="Highlight"
-            value={t.highlight}
-            options={["#D9E84A", "#F2C840", "#FF6B3D", "#A7E8C1", "#ECECE5"]}
-            onChange={v => setTweak("highlight", v)}
-          />
-          <TweakColor
-            label="Deep"
-            value={t.deep}
-            options={["#0F1014", "#16213A", "#2B1F1A", "#1F2620", "#2A1B36"]}
-            onChange={v => setTweak("deep", v)}
-          />
-        </TweakSection>
-        <TweakSection title="Finish">
-          <TweakToggle label="Paper grain" value={t.grain} onChange={v => setTweak("grain", v)} />
-        </TweakSection>
-      </TweaksPanel>
     </React.Fragment>
   );
 }

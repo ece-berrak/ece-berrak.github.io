@@ -1,25 +1,343 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stratum · Social System</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stratum — case study · ece berrak</title>
+<meta name="description" content="Stratum: brand identity + social launch system. A productivity OS I'm shaping for product teams, told as a field guide." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+<!-- Stratum artboard internals -->
 <link rel="stylesheet" href="styles.css" />
+
+<style>
+  /* ============ Portfolio chrome (matches main site brand) ============ */
+  :root {
+    --bone: #FAF8F1;
+    --bone-2: #F2EFE3;
+    --ink: #0E0D14;
+    --ink-2: #2A2735;
+    --ink-3: #5C5868;
+    --rule: #1f1c2a14;
+    --rule-strong: #1f1c2a26;
+    --violet: #4F32D8;
+    --lime: #D4FF3D;
+    --portfolio-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+    --portfolio-sans: "Inter", system-ui, -apple-system, sans-serif;
+    --portfolio-mono: "JetBrains Mono", ui-monospace, monospace;
+    --maxw: 1240px;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+  html, body {
+    background: var(--bone) !important;
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--portfolio-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px var(--pad);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bone);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .topbar-brand {
+    font-family: var(--portfolio-serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .topbar-back {
+    font-family: var(--portfolio-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border: 1px solid var(--rule-strong);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .topbar-back:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+
+  /* Hero */
+  .hero {
+    padding-block: clamp(3.5rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 88% 14%, rgba(212,255,61,.18), transparent 38%),
+      radial-gradient(circle at 6% 96%, rgba(79,50,216,.08), transparent 42%),
+      var(--bone);
+  }
+  .hero-eyebrow {
+    font-family: var(--portfolio-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--violet); }
+  .hero-title {
+    font-family: var(--portfolio-serif);
+    font-weight: 400;
+    font-size: clamp(3.2rem, 8.5vw, 6.4rem);
+    line-height: .96;
+    letter-spacing: -.02em;
+    margin: 0 0 1.5rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--violet);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-title em::after {
+    content: "";
+    position: absolute;
+    left: 4%; right: 4%; bottom: 6%;
+    height: 14px;
+    background: var(--lime);
+    z-index: -1;
+    transform: skewX(-6deg);
+  }
+  .hero-deck {
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    max-width: 64ch;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .hero-deck b { color: var(--ink); font-weight: 600; }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 4px; min-width: 110px; }
+  .hero-stat-num {
+    font-family: var(--portfolio-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: var(--portfolio-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* Chapter sections */
+  .chapter {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--rule);
+  }
+  .chapter-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    align-items: end;
+  }
+  @media (max-width: 760px) { .chapter-head { grid-template-columns: 1fr; gap: 1.25rem; } }
+  .chapter-num {
+    font-family: var(--portfolio-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: .75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chapter-num::before { content: ""; width: 28px; height: 1px; background: var(--violet); }
+  .chapter-title {
+    font-family: var(--portfolio-serif);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -.012em;
+    margin: 0;
+  }
+  .chapter-title em { font-style: italic; color: var(--violet); }
+  .chapter-story {
+    color: var(--ink-2);
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 52ch;
+  }
+  .chapter-story b { color: var(--ink); font-weight: 600; }
+  .chapter-story em { font-style: italic; color: var(--ink); }
+
+  /* Artboard wrapper — each one is a framed card with a caption */
+  .ab-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    align-items: flex-start;
+  }
+  .ab {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: transparent;
+    flex: 1 1 var(--ab-w, 480px);
+    min-width: 0;
+  }
+  .ab-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ab-aspect, 1 / 1);
+    background: #f0eee9;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px -22px rgba(14,13,20,.25);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .ab-frame:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 42px -22px rgba(14,13,20,.32);
+  }
+  /* The artboard component (.post) sits inside .ab-inner which is
+     transform-scaled by JS. The .post fills .ab-inner at its design size. */
+  .ab-inner > .post {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+  }
+  .ab-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 4px;
+  }
+  .ab-cap-mark {
+    font-family: var(--portfolio-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+  .ab-cap-text {
+    font-family: var(--portfolio-serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* Per-format sizing */
+  .ab.cover { --ab-aspect: 760 / 560; --ab-w: 100%; flex-basis: 100%; }
+  .ab.ig    { --ab-aspect: 1 / 1;     --ab-w: 460px; }
+  .ab.li    { --ab-aspect: 760 / 398; --ab-w: 580px; }
+  .ab.email { --ab-aspect: 580 / 760; --ab-w: 380px; }
+
+  /* Vibe note */
+  .vibe {
+    max-width: 60ch;
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+    text-align: center;
+    font-family: var(--portfolio-serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--ink-2);
+    line-height: 1.45;
+  }
+  .vibe::before {
+    content: "//";
+    display: block;
+    font-family: var(--portfolio-mono);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: var(--violet);
+    margin-bottom: .5rem;
+  }
+  .vibe b { font-weight: 500; color: var(--ink); font-style: normal; }
+
+  /* Footer */
+  .footer {
+    padding-block: 3.5rem;
+    text-align: center;
+    color: var(--ink-3);
+    font-family: var(--portfolio-mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .footer a { color: var(--violet); }
+</style>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<!-- Top bar -->
+<header class="topbar">
+  <a href="../../index.html" class="topbar-brand">ece berrak<em>.</em></a>
+  <a href="../../index.html#brand" class="topbar-back">← back to portfolio</a>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">case study · brand + launch system</div>
+    <h1 class="hero-title">Stratum.<br/><em>Work, in layers.</em></h1>
+    <p class="hero-deck">
+      <b>Stratum is a productivity OS I'm shaping for product teams</b> — a canvas where tasks, decisions, and docs stack on the same surface, so the context never leaves the work.
+      Before any product launch, the brand had to exist. This page is the field guide: identity, palette, type, voice, and 14 social surfaces — each made for the room it'll be scrolled in.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num">14</span><span class="hero-stat-label">artboards</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label">brand colors</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">type families</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">5</span><span class="hero-stat-label">chapters</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">solo</span><span class="hero-stat-label">designer + writer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- React renders all chapters into here -->
 <div id="root"></div>
 
-<script type="text/babel" src="design-canvas.jsx"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <a href="../../index.html#brand">← back to portfolio</a> &nbsp;·&nbsp; Stratum · brand + social launch system · 2026
+  </div>
+</footer>
+
 <script type="text/babel" src="brand.jsx"></script>
 <script type="text/babel" src="posts.jsx"></script>
 <script type="text/babel" src="emails.jsx"></script>
