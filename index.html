@@ -1419,10 +1419,7 @@
     border: 1.5px solid var(--ink);
     border-radius: 16px;
     position: relative;
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(1.75rem, 3.5vw, 3rem);
     box-shadow: 8px 8px 0 0 var(--ink);
     transition: transform .25s ease, box-shadow .25s ease;
   }
@@ -1430,8 +1427,32 @@
     transform: translate(-2px, -2px);
     box-shadow: 11px 11px 0 0 var(--ink);
   }
-  @media (max-width: 860px) {
-    .stratum-feature { grid-template-columns: 1fr; }
+  /* Soft decorative layers — visual cue for "Work, in layers" */
+  .stratum-feature::before {
+    content: "";
+    position: absolute;
+    top: 18px; right: 22px;
+    width: 96px;
+    height: 14px;
+    background: var(--lime);
+    opacity: .85;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .stratum-feature::after {
+    content: "";
+    position: absolute;
+    top: 38px; right: 40px;
+    width: 68px;
+    height: 12px;
+    background: var(--violet);
+    opacity: .85;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .strat-body { position: relative; z-index: 1; }
+  @media (max-width: 600px) {
+    .stratum-feature::before, .stratum-feature::after { display: none; }
   }
 
   /* Registration corners — small ink ticks */
@@ -1495,11 +1516,12 @@
   }
   .strat-deck {
     color: var(--ink-2);
-    font-size: 15.5px;
-    line-height: 1.6;
-    max-width: 56ch;
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 68ch;
     margin: 0;
   }
+  .strat-deck + .strat-deck { margin-top: -.25rem; }
   .strat-deck b {
     font-weight: 600;
     color: var(--ink);
@@ -4424,18 +4446,15 @@
         <span class="rc tl"></span><span class="rc tr"></span><span class="rc bl"></span><span class="rc br"></span>
       </div>
 
-      <div class="strat-cover">
-        <img src="uploads/stratum-cover.png" alt="Stratum brand cover — 'Work, in layers.' wordmark on cool oat paper, social system at a glance" />
-        <span class="strat-mono">stratum.so · social system · 14 boards</span>
-      </div>
-
       <div class="strat-body">
         <span class="strat-kicker">// 00 · the system</span>
         <h3 class="strat-title">Stratum.<br/><em>Work, in layers.</em></h3>
 
         <p class="strat-deck">
-          A complete brand and social system for <b>Stratum</b> — a new product category around layered, structural work.
-          Built from scratch in a live React canvas: logomark, palette, type, voice, and <b>14 social artboards</b> (Instagram, LinkedIn, email) driven by a tweaks panel so accent / deep / highlight / grain retune in-browser.
+          <b>Stratum is a productivity OS I'm shaping for product teams.</b> A canvas where tasks, decisions, and docs stack on the same surface — so the context never leaves the work.
+        </p>
+        <p class="strat-deck">
+          Built from scratch as a brand-first launch: logomark, palette, type, voice, and a <b>full social system of 14 artboards</b> (Instagram, LinkedIn, email) driven by a live tweaks panel — accent, deep, highlight, and grain retune in-browser. The visual language is structural and quiet: cool oat paper, jet ink, cobalt as the only loud signal.
         </p>
 
         <div class="strat-specs">
