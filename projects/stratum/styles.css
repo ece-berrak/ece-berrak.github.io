@@ -1,0 +1,96 @@
+/* Stratum — technical / structural visual system */
+
+:root {
+  /* Palette — cool oat + jet + cobalt */
+  --paper:    #ECECE5;   /* cool oat, NOT warm cream */
+  --paper-2:  #F4F4EE;
+  --paper-3:  #DEDED5;
+  --ink:      #0F1014;
+  --ink-soft: #232427;
+  --cobalt:   #1F3FCA;   /* primary accent */
+  --acid:     #D9E84A;   /* high-contrast highlight */
+  --rust:     #C24528;   /* secondary accent */
+  --muted:    #76766E;
+
+  /* Translucent helpers */
+  --ink-04:  rgba(15,16,20,0.04);
+  --ink-06:  rgba(15,16,20,0.06);
+  --ink-10:  rgba(15,16,20,0.10);
+  --ink-14:  rgba(15,16,20,0.14);
+  --ink-22:  rgba(15,16,20,0.22);
+  --ink-40:  rgba(15,16,20,0.40);
+  --paper-14: rgba(236,236,229,0.16);
+  --paper-32: rgba(236,236,229,0.36);
+  --paper-60: rgba(236,236,229,0.60);
+}
+
+html, body {
+  margin: 0;
+  background: #DCDCD3;
+  font-family: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Type families */
+.font-display { font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif; font-weight: 600; letter-spacing: -0.025em; }
+.font-sans    { font-family: "Geist", ui-sans-serif, system-ui, sans-serif; }
+.font-mono    { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+
+/* Post shell */
+.post {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+.post.dark   { background: var(--ink);    color: var(--paper); }
+.post.cobalt { background: var(--cobalt); color: var(--paper); }
+.post.acid   { background: var(--acid);   color: var(--ink); }
+.post * { box-sizing: border-box; }
+
+/* Footer brand row */
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Technical drawing — corner registration marks */
+.regmark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.regmark::before, .regmark::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  opacity: 0.55;
+}
+.regmark::before { left: 0; right: 0; top: 50%; height: 1px; }
+.regmark::after  { top: 0; bottom: 0; left: 50%; width: 1px; }
+.regmark.tl { top: 18px; left: 18px; }
+.regmark.tr { top: 18px; right: 18px; }
+.regmark.bl { bottom: 18px; left: 18px; }
+.regmark.br { bottom: 18px; right: 18px; }
+
+/* Subtle paper noise for warmth */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.85'/></svg>");
+}
+body.no-grain .grain::before { display: none; }

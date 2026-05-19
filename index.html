@@ -1312,6 +1312,24 @@
   }
   .thumb-7 .thumb-mono, .thumb-7 .thumb-num { z-index: 2; }
 
+  /* Stratum thumb — cool oat paper, matches the brand */
+  .thumb-stratum {
+    background: linear-gradient(180deg, #DEDED5 0%, #ECECE5 100%);
+  }
+  .thumb-stratum .pipeline-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .thumb-stratum::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(120% 60% at 50% 100%, rgba(15,16,20,.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .thumb-stratum .thumb-mono, .thumb-stratum .thumb-num { z-index: 2; }
+
   .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
   .card h3 { margin-top: -.25rem; }
   .card-desc { color: var(--ink-2); font-size: 0.97rem; line-height: 1.55; max-width: 56ch; }
@@ -3710,19 +3728,19 @@
         <h2>Things I designed, built, and <span class="italic">shipped.</span></h2>
       </div>
       <div class="right">
-        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Five projects that show what "marketing that ships" looks like in practice: websites, automations, microsites, AI agents, and category content built end-to-end. Tap any card for the full story.</p>
+        <p class="mono" style="max-width:42ch;color:var(--ink-2);text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.55;">Two brand systems shipped end-to-end — site, identity, social, and category narrative. Tap any card for the full story.</p>
       </div>
     </div>
 
     <div class="work-grid">
 
-      <!-- Card 1 (feature) -->
+      <!-- Card 1 (feature) — Nautilida -->
       <article class="card feature">
         <div class="thumb thumb-1">
           <span class="grid-bg" aria-hidden="true"></span>
           <span class="thumb-mono">nautilida.ai</span>
           <div class="thumb-fig"><em>Marketing that ships</em><span class="thumb-sub">— site live in 3 weeks</span></div>
-          <span class="thumb-num">01 / 05</span>
+          <span class="thumb-num">01 / 02</span>
         </div>
         <div>
           <div class="kicker">WEBSITE · AEO/GEO · CONTENT</div>
@@ -3740,124 +3758,25 @@
         </div>
       </article>
 
-      <!-- Card 2 (feature, full width) -->
+      <!-- Card 2 (feature, full width) — Stratum -->
       <article class="card feature">
-        <div class="thumb thumb-2">
-          <span class="thumb-mono">github.com/ece-berrak</span>
-          <pre class="ascii" aria-hidden="true">function onFormSubmit(e) {
-  const payload = parse(e);
-  enrichApollo(payload);
-  pushHubspot(payload);
-  logSheet(payload);
-  notifyChat(payload);
-}
-// → 0 € infra · MIT</pre>
-          <span class="thumb-num">02 / 05</span>
+        <div class="thumb thumb-stratum">
+          <img class="pipeline-img" src="uploads/stratum-cover.png" alt="Stratum brand cover — 'Work, in layers.' wordmark on cool oat paper, social system at a glance" />
+          <span class="thumb-mono" style="color:rgba(15,16,20,0.65);">stratum.so · social system</span>
+          <span class="thumb-num" style="color:rgba(15,16,20,0.65);border-color:rgba(15,16,20,0.25);">02 / 02</span>
         </div>
         <div>
-          <div class="kicker">AUTOMATION · OPEN SOURCE</div>
-          <h3 style="margin-top:.5rem;">Inbound lead automation, <span class="italic">Apps Script edition</span></h3>
-          <p class="card-desc" style="margin-top:1rem;">A zero-infrastructure pipeline behind a B2B contact form. One Apps Script webhook fans each submission out to Apollo.io enrichment, HubSpot contact creation, Google Sheets logging, and a Google Chat card with a ready-to-paste ChatGPT prompt for outreach.</p>
+          <div class="kicker">BRAND · DESIGN SYSTEM · SOCIAL</div>
+          <h3 style="margin-top:.5rem;">Stratum — <span class="italic">Work, in layers.</span></h3>
+          <p class="card-desc" style="margin-top:1rem;">A complete social and brand system for Stratum — a new product category I'm shaping around layered, structural work. Built from scratch: logomark, palette (cool oat / jet / cobalt), typography (Space Grotesk + Geist + IBM Plex Mono), 14 social artboards across blog, use cases, testimonials, product updates, and email — all driven by a live tweaks panel so brand variables (accent, deep, highlight, grain) can be retuned in-browser.</p>
           <ul class="outcomes">
-            <li>0 € infrastructure cost</li>
-            <li>Open-sourced under MIT</li>
-            <li>Drop-in guides for WordPress (4 plugins), Webflow, Tally</li>
+            <li>14 artboards · Instagram + LinkedIn + Email</li>
+            <li>Live design canvas with editable brand tokens</li>
+            <li>Structural visual language: registration corners, hairlines, mono labels</li>
           </ul>
           <div class="card-foot">
-            <span class="meta">Open source</span>
-            <a class="linkish" href="https://github.com/ece-berrak/apps-script-lead-automation" target="_blank" rel="noopener">github.com/ece-berrak <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3 (feature, full width) -->
-      <article class="card feature">
-        <div class="thumb thumb-5">
-          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%;">
-            <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="1">
-              <text x="30" y="48">CH. 01 — WHY AI-NATIVE SALES</text>
-              <text x="30" y="92">CH. 02 — THE OLD STACK BREAKS</text>
-              <text x="30" y="136">CH. 03 — AGENTS, NOT SEATS</text>
-              <text x="30" y="180">CH. 04 — DATA AS DESTINY</text>
-              <text x="30" y="224">CH. 05 — TRUST AT SCALE</text>
-              <text x="30" y="268">CH. 06 — THE NEW METRICS</text>
-              <text x="30" y="312">CH. 07 — WHAT COMES NEXT</text>
-            </g>
-            <g stroke="rgba(255,255,255,0.18)">
-              <line x1="20" y1="62" x2="480" y2="62"/>
-              <line x1="20" y1="106" x2="480" y2="106"/>
-              <line x1="20" y1="150" x2="480" y2="150"/>
-              <line x1="20" y1="194" x2="480" y2="194"/>
-              <line x1="20" y1="238" x2="480" y2="238"/>
-              <line x1="20" y1="282" x2="480" y2="282"/>
-              <line x1="20" y1="326" x2="480" y2="326"/>
-            </g>
-            <g font-family="Instrument Serif, serif" font-style="italic" fill="#fff">
-              <text x="280" y="220" font-size="44">literacy.</text>
-            </g>
-          </svg>
-          <span class="thumb-mono" style="color:rgba(255,255,255,0.7);">nautilida.ai/literacy</span>
-          <span class="thumb-num">03 / 05</span>
-        </div>
-        <div>
-          <div class="kicker">MICROSITE · LONG-FORM NARRATIVE</div>
-          <h3 style="margin-top:.5rem;">Nautilida Literacy — <span class="italic">7-chapter category primer</span></h3>
-          <p class="card-desc" style="margin-top:1rem;">A separate microsite explaining the AI-native sales category to VCs and buyers. Built as a long-form, navigable narrative rather than a product brochure.</p>
-          <ul class="outcomes">
-            <li>7 chapters</li>
-            <li>Designed and written solo</li>
-            <li>Used in fundraising conversations</li>
-          </ul>
-          <div class="card-foot">
-            <span class="meta">2026</span>
-            <a class="linkish" href="writing/literacy.html">Open the literacy microsite <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 5 (feature, full width) -->
-      <article class="card feature">
-        <div class="thumb thumb-6">
-          <img class="pipeline-img" src="uploads/n8n-pipeline.png" alt="n8n workflow visualization — 12 nodes from Schedule Trigger through Notion read, Claude draft, Google Docs create, to Notion property update" />
-          <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/aeo-content-pipeline</span>
-          <span class="thumb-num">04 / 05</span>
-        </div>
-        <div>
-          <div class="kicker">AUTOMATION · AI-NATIVE · OPEN SOURCE</div>
-          <h3 style="margin-top:.5rem;">Brand-aware content draft generator, <span class="italic">Notion + n8n + Claude</span></h3>
-          <p class="card-desc" style="margin-top:1rem;">A Notion-driven, n8n-orchestrated pipeline that turns a single keyword ticket into a fully drafted, voice-aligned long-form blog (or LinkedIn post, X thread, glossary entry) inside a Google Doc — ready for human review and manual publishing. Reads a 16-section Brand Context page, calls Claude Sonnet 4.6 with prompt caching enabled, drops the draft into Drive and writes the link back to the Notion ticket.</p>
-          <ul class="outcomes">
-            <li>~$0.02 per draft with prompt caching (90% input cost reduction)</li>
-            <li>12-node n8n flow, 3 APIs (Notion, Anthropic, Google Docs)</li>
-            <li>10 content formats supported via Brand Context format specs</li>
-            <li>Open-sourced under MIT</li>
-          </ul>
-          <div class="card-foot">
-            <span class="meta">Open source</span>
-            <a class="linkish" href="https://github.com/ece-berrak/aeo-content-pipeline" target="_blank" rel="noopener">github.com/ece-berrak/aeo-content-pipeline <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 5 (feature, full width) -->
-      <article class="card feature">
-        <div class="thumb thumb-7">
-          <img class="pipeline-img" src="uploads/n8n-research-agent.png" alt="n8n workflow visualization — Chat Trigger to AI Agent with Gemini 2.5 Flash, Simple Memory, Tavily web search, and Notion database write" />
-          <span class="thumb-mono" style="color:rgba(255,255,255,0.85);">github.com/ece-berrak/n8n-research-agent</span>
-          <span class="thumb-num">05 / 05</span>
-        </div>
-        <div>
-          <div class="kicker">AI AGENT · AUTOMATION · OPEN SOURCE</div>
-          <h3 style="margin-top:.5rem;">Research agent on n8n, <span class="italic">$0/month</span></h3>
-          <p class="card-desc" style="margin-top:1rem;">An end-to-end AI research agent built on n8n Cloud. Surfaces fresh findings from the web via Tavily, structures them with Gemini 2.5 Flash, and saves the result to a Notion database — all from a single chat surface. MVP shipped; v2 adds an external chat interface so the agent becomes reachable day-to-day.</p>
-          <ul class="outcomes">
-            <li>$0/month — runs entirely on free tiers (n8n, Gemini, Tavily, Notion)</li>
-            <li>Generic SOUL template — fork and customize for any vertical</li>
-            <li>Open-sourced under MIT</li>
-          </ul>
-          <div class="card-foot">
-            <span class="meta">Open source</span>
-            <a class="linkish" href="https://github.com/ece-berrak/n8n-research-agent" target="_blank" rel="noopener">github.com/ece-berrak/n8n-research-agent <span class="arr" aria-hidden="true">→</span></a>
+            <span class="meta">2026 — in development</span>
+            <a class="linkish" href="projects/stratum/">Open the design canvas <span class="arr" aria-hidden="true">→</span></a>
           </div>
         </div>
       </article>
