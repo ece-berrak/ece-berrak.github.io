@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Google tag (gtag.js) + Consent Mode v2 default deny -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    analytics_storage:    'denied',
+    ad_storage:           'denied',
+    ad_user_data:         'denied',
+    ad_personalization:   'denied',
+    functionality_storage:'granted',
+    security_storage:     'granted',
+    wait_for_update:      500
+  });
+  gtag('js', new Date());
+  gtag('config', 'G-50KRVTC4H7', { anonymize_ip: true });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-50KRVTC4H7"></script>
+
+<title>Nautilida Literacy · First Edition — for VCs and buyers</title>
+<meta name="description" content="A short course on the AI team lead category — for VCs evaluating the space, buyers considering adoption, and founders building toward it. Seven chapters, ~40 minutes." />
+<meta name="keywords" content="AI team lead, AI for sales, sales coordination, revenue operations, VC, venture capital, B2B SaaS, AI buyers, AI category, Nautilida, sales AI, weekly loop, revenue memory" />
+<meta name="author" content="Nautilida" />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/jpeg" href="uploads/nautilida-logo.jpg" />
+<link rel="apple-touch-icon" href="uploads/nautilida-logo.jpg" />
+
+<meta property="og:type"        content="website" />
+<meta property="og:title"       content="Nautilida Literacy · For VCs and buyers evaluating the AI team lead category" />
+<meta property="og:description" content="A short course on the AI team lead category — for VCs evaluating the space, buyers considering adoption, and founders building toward it. Seven chapters, ~40 minutes." />
+<meta property="og:image"       content="uploads/nautilida-logo.jpg" />
+<meta property="og:site_name"   content="Nautilida Literacy" />
+
+<meta name="twitter:card"        content="summary" />
+<meta name="twitter:title"       content="Nautilida Literacy · For VCs and buyers" />
+<meta name="twitter:description" content="A short course on the AI team lead category — for VCs evaluating the space, buyers considering adoption, and founders building toward it. Seven chapters, ~40 minutes." />
+<meta name="twitter:image"       content="uploads/nautilida-logo.jpg" />
+
+<!-- Canonical URL — single SPA root; chapter hashes resolve to this for crawlers -->
+<link rel="canonical" href="https://ece-berrak.github.io/literacy/" />
+
+<!-- Schema.org · Organization (sitewide) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Nautilida","alternateName":"Nauti","url":"https://nautilida.ai","logo":"https://ece-berrak.github.io/literacy/uploads/nautilida-logo.jpg","sameAs":["https://de.linkedin.com/company/nautilida"]}
+</script>
+<!-- Schema.org · Course (the literacy itself) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":"Nautilida Literacy · First Edition","description":"A short course on the AI team lead category — for VCs evaluating the space, buyers considering adoption, and founders building toward it. Seven chapters, ~40 minutes.","provider":{"@type":"Organization","name":"Nautilida","sameAs":"https://nautilida.ai"},"url":"https://ece-berrak.github.io/literacy/","educationalLevel":"Introductory","educationalCredentialAwarded":"Conceptual literacy","numberOfCredits":7,"hasCourseInstance":{"@type":"CourseInstance","courseMode":"Online","courseWorkload":"PT40M"},"audience":{"@type":"Audience","audienceType":"VCs, founders, and revenue buyers"},"inLanguage":"en"}
+</script>
+<!-- Schema.org · per-chapter page (updated dynamically by app.jsx on hash change) -->
+<script type="application/ld+json" id="page-jsonld">
+{"@context":"https://schema.org","@type":"WebPage","name":"Nautilida Literacy · First Edition","url":"https://ece-berrak.github.io/literacy/"}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bone:#ECE6D8;
+    --bone-2:#E2DBC9;
+    --bone-3:#F4EFE2;
+    --ink:#0E0D14;
+    --ink-soft:rgba(14,13,20,.66);
+    --ink-quiet:rgba(14,13,20,.45);
+    --ink-line:rgba(14,13,20,.10);
+    --ink-line-2:rgba(14,13,20,.18);
+    --violet:#5B3FE6;
+    --violet-2:#7558FF;
+    --violet-soft:#E2DAFB;
+    --violet-deep:#2D1F70;
+    --lime:#D4FF3D;
+    --lime-2:#E4FF7A;
+    --lime-soft:#F0FFC4;
+    --rose:#FF5F77;
+    --shell:#FAF8F1;
+    --lilac:#E2DAFB;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  html,body{margin:0;padding:0;background:var(--bone);color:var(--ink);
+    font-family:"Geist",ui-sans-serif,system-ui,-apple-system,sans-serif;
+    font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;overflow-x:hidden;
+  }
+  ::selection{background:var(--ink);color:var(--lime)}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+
+  .display{font-family:"Archivo Black","Geist",ui-sans-serif,system-ui,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.0;text-transform:uppercase}
+  .serif{font-family:"Instrument Serif",ui-serif,Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .container{max-width:1080px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-quiet);font-weight:500}
+  .hairline{border:0;border-top:.5px solid var(--ink-line);margin:0}
+  .stick{
+    background:var(--lime);color:var(--ink);
+    padding:.06em .22em .14em;border-radius:6px;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
+    line-height:1.05;
+  }
+  .stick-violet{background:var(--violet);color:var(--lime)}
+  .stick-ink{background:var(--ink);color:var(--lime)}
+  .serif-grad{
+    font-family:"Instrument Serif", ui-serif, Georgia, serif;
+    font-style:italic;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;
+    background:linear-gradient(135deg, #4F32D8 0%, #6B3FF0 45%, #8A66FF 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+  }
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;
+    border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    font-size:14px;font-weight:500;letter-spacing:.01em;cursor:pointer;
+    transition:transform .15s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .35s ease;}
+  .btn:hover{background:var(--ink);color:var(--bone);
+    box-shadow: 0 0 0 5px rgba(226,218,251,.40), 0 0 22px rgba(212,255,61,.40);}
+  .btn-primary{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+  .btn-primary:hover{background:var(--violet);color:var(--shell);border-color:var(--violet);
+    box-shadow: 0 0 0 5px rgba(226,218,251,.50), 0 0 26px rgba(212,255,61,.50);}
+  .btn .arrow{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Scroll progress bar (horizontal at top) */
+  #progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:rgba(14,13,20,.06)}
+  #progress > div{height:100%;background:var(--violet);transform-origin:0 50%;transform:scaleX(0);transition:transform .15s ease-out}
+
+  /* Splash */
+  #splash{position:fixed;inset:0;background:var(--bone);display:flex;align-items:center;justify-content:center;
+    z-index:9999;transition:opacity .6s ease;}
+  #splash.hide{opacity:0;pointer-events:none}
+  #splash.gone{display:none}
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .container { padding: 0 18px !important; }
+    .row-2 { grid-template-columns: 1fr !important; gap: 32px !important; align-items: start !important; }
+    .compare-3 { grid-template-columns: 1fr !important; gap: 14px !important; }
+    .toc-grid { grid-template-columns: 1fr !important; }
+    section { padding-top: 64px !important; padding-bottom: 64px !important; }
+    .topbar-meta { display: none !important; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 14px !important; }
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="splash">
+  <div style="width:288px;height:66px;position:relative;overflow:hidden;">
+    <img src="uploads/nautilida-wordmark-tr.png" alt="nautilida"
+      style="position:absolute;width:283px;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);filter:brightness(0);"/>
+  </div>
+</div>
+
+<div id="progress"><div></div></div>
+<div id="root"></div>
+
+<script type="text/babel" src="components/cookie-consent.jsx"></script>
+<script type="text/babel" src="components/shell.jsx"></script>
+<script type="text/babel" src="components/primitives.jsx"></script>
+<script type="text/babel" src="components/visuals.jsx"></script>
+<script type="text/babel" src="components/layout.jsx"></script>
+<script type="text/babel" src="chapters/home.jsx"></script>
+<script type="text/babel" src="chapters/ch01.jsx"></script>
+<script type="text/babel" src="chapters/ch02.jsx"></script>
+<script type="text/babel" src="chapters/ch03.jsx"></script>
+<script type="text/babel" src="chapters/ch04.jsx"></script>
+<script type="text/babel" src="chapters/ch05.jsx"></script>
+<script type="text/babel" src="chapters/ch06.jsx"></script>
+<script type="text/babel" src="chapters/ch07.jsx"></script>
+<script type="text/babel" src="chapters/finish.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+</body>
+</html>
