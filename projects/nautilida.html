@@ -73,6 +73,18 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
   transition: transform .2s, box-shadow .2s;
 }
 .live-link:hover { transform: translateY(-1px); box-shadow: 3px 3px 0 0 var(--ink); }
+.open-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px;
+  font-family: var(--mono); font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--violet);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--violet-soft);
+  padding-bottom: 2px;
+  transition: border-color .2s, color .2s;
+}
+.open-link:hover { color: var(--ink); border-color: var(--ink); }
 
 /* Hero */
 .hero {
@@ -517,6 +529,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
         <li><span class="n">05</span><span class="t"><strong>Comparison teaser</strong> — Quick-glance differentiators vs Gong, Clari, Gainsight.</span></li>
         <li><span class="n">06</span><span class="t"><strong>Footer</strong> — Quick links, contact, llms.txt reference, schema.</span></li>
       </ul>
+      <a class="open-link" href="https://nautilida.ai/" target="_blank" rel="noopener">Open nautilida.ai <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
@@ -540,6 +553,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
         <li><span class="n">03</span><span class="t"><strong>/compare/gainsight</strong> — CS platform vs cross-functional revenue coordination.</span></li>
         <li><span class="n">04</span><span class="t"><strong>/compare/{outreach,salesloft,hubspot,...}</strong> — Plus nine more, same pattern, different category.</span></li>
       </ul>
+      <a class="open-link" href="https://nautilida.ai/#/compare" target="_blank" rel="noopener">Open the comparison pages <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
@@ -560,6 +574,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
         <li><span class="n">02</span><span class="t"><strong>/use-cases/catering</strong> — B2B kitchens with repeat customers, office and event programs, deep account memory.</span></li>
       </ul>
       <p>Each page is structured the same: the industry's recurring-revenue pattern, three concrete coordination problems, how Nautilida's weekly loop addresses each, and a section-specific contact CTA.</p>
+      <a class="open-link" href="https://nautilida.ai/#/use-cases" target="_blank" rel="noopener">Open the use cases <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
@@ -576,6 +591,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
       <h3>The category dictionary.</h3>
       <p class="purpose">When a buyer or a search engine asks "what is an AI team lead for sales?" — there is a clean, schema-marked definition page ready to answer.</p>
       <p>Every glossary entry follows the same anatomy: <strong>short answer</strong> (1–2 sentences, AI-extractable), <strong>longer explanation</strong>, <strong>related terms</strong>, and <strong>FAQPage / DefinedTerm schema</strong> embedded inline. Definitions cover the entire category surface — coordination layer, weekly loop, AI team lead, revenue book memory, and more.</p>
+      <a class="open-link" href="https://nautilida.ai/#/blog#glossary" target="_blank" rel="noopener">Open the glossary <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
@@ -598,6 +614,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
         <li><span class="n">03</span><span class="t"><strong>Revenue intelligence vs Nautilida.</strong> Comparison narrative, complementary positioning. 6 min read.</span></li>
       </ul>
       <p>Each post has the AEO pattern: short answer at the top, narrative body, key takeaways, FAQs with schema.</p>
+      <a class="open-link" href="https://nautilida.ai/#/blog" target="_blank" rel="noopener">Open the blog <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
@@ -623,6 +640,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
         <li><span class="n">07</span><span class="t"><strong>What Comes Next</strong> — The trajectory of the category, and what to bet on.</span></li>
       </ul>
       <p>Written and designed solo. Used in live fundraising conversations with VCs and design-partner intros.</p>
+      <a class="open-link" href="../literacy/" target="_blank" rel="noopener">Open the literacy microsite <span aria-hidden="true">↗</span></a>
     </div>
   </article>
 
