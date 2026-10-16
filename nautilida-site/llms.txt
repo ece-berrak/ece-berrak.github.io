@@ -1,0 +1,59 @@
+# Nautilida
+
+> AI team lead for sales — a coordination layer that runs the weekly revenue rhythm, carries cross-stack memory across CRM, email, and chat, and routes priorities to the right owners. Built for revenue teams on recurring accounts. Distinct from AI assistants (ChatGPT, Claude) and chatbots (Intercom Fin, Drift) and revenue intelligence tools (Gong, Clari).
+
+## Core
+
+- [Home](https://nautilida.ai/): What Nautilida is, who it's for, how the weekly loop works
+- [About](https://nautilida.ai/#/about): Team in Berlin, beliefs, manifesto
+- [Nautilida Literacy](https://nautilida.ai/literacy/): A short course on the AI team lead category for VCs, buyers, and builders. Seven chapters, ~40 minutes.
+
+## Blog (full long-form posts)
+
+- [The weekly revenue coordination loop, explained](https://nautilida.ai/#/blog/weekly-loop): Monday brief, mid-week priorities, Friday recap, compounding memory. The operating rhythm that replaces dashboard anxiety with direction.
+- [What is an AI team lead for sales?](https://nautilida.ai/#/blog/ai-team-lead): A short definition. How it differs from AI assistants and dashboards. What it does for revenue teams on recurring accounts.
+
+## Comparisons (different layers of the stack, complementary in most teams; indexed as Article + FAQPage)
+
+- [Comparisons hub](https://nautilida.ai/#/compare): Index of all head-to-head comparisons. Three honest, stance-taking pages on Nautilida vs Gong, Clari, and Gainsight.
+- [Nautilida vs Gong](https://nautilida.ai/#/compare/gong): Conversation visibility vs cross-stack synthesis. Gong is a signal source for the call layer; Nautilida is the signal interpreter above all silos. Most stacks keep both — Gong feeds Nautilida.
+- [Nautilida vs Clari](https://nautilida.ai/#/compare/clari): Forecast layer vs coordination layer. Clari rolls pipeline up to a defensible commit; Nautilida reads pipeline alongside email, chat, and CRM to produce the weekly rhythm. Different jobs, complementary.
+- [Nautilida vs Gainsight](https://nautilida.ai/#/compare/gainsight): CS workflow layer vs cross-functional coordination layer. Gainsight runs CSM playbooks; Nautilida coordinates sales + CS + leadership and synthesizes across the whole revenue function.
+
+## Use cases (sector-specific landing pages for Heads of Sales, AMs, CROs, CEOs; indexed as Article + FAQPage with Audience schema)
+
+- [Use cases hub](https://nautilida.ai/#/use-cases): Index of all sector deep-dives. Manufacturing and B2B catering live; more sectors coming.
+- [Nautilida for manufacturing](https://nautilida.ai/#/use-cases/manufacturing): For industrial distributors, parts suppliers, and equipment manufacturers. Long sales cycles, channel-partner complexity, RFQs, reorder rhythms that vary by account. Sector-specific signals — quote-to-order conversion, spec drift, channel partner activation, engagement decay on procurement and engineering contacts.
+- [Nautilida for B2B catering](https://nautilida.ai/#/use-cases/catering): For catering firms, corporate event companies, and hospitality providers. Office reorders, one-off events, hybrid bookings in the same memory. Sector-specific signals — skip signals on office accounts, day-of-week shifts, destination classification by order content when HubSpot tags are missing, event re-booking patterns.
+
+## Glossary (definitional reference, indexed as DefinedTermSet)
+
+- [Glossary index](https://nautilida.ai/#/blog#glossary): Ten defined terms covering the AI team lead category and the weekly revenue coordination loop.
+- [AI team lead](https://nautilida.ai/#/blog#glossary-ai-team-lead): Coordination layer that runs the weekly revenue rhythm and carries cross-stack memory. Distinct from AI assistants and revenue intelligence tools.
+- [Weekly revenue loop](https://nautilida.ai/#/blog#glossary-weekly-revenue-loop): Four-part operating rhythm — Monday brief, mid-week priorities, Friday recap, compounding memory.
+- [Cross-stack memory](https://nautilida.ai/#/blog#glossary-cross-stack-memory): Single account memory across CRM, chat, and email — opposite of per-tool history.
+- [Monday brief](https://nautilida.ai/#/blog#glossary-monday-brief): Leadership artifact: three accounts most likely to slip, two opportunities most likely to move, one pattern that changed.
+- [Friday recap](https://nautilida.ai/#/blog#glossary-friday-recap): Weekly written close — what moved, why, what carries forward, narrative not numbers.
+- [Account handover](https://nautilida.ai/#/blog#glossary-account-handover): Context travels with the account, not the rep, so months of compounded knowledge survive a rotation.
+- [Reorder pattern](https://nautilida.ai/#/blog#glossary-reorder-pattern): Shape of a B2B account's recurring purchases — primary signal for predicting health on non-subscription revenue.
+- [At-risk signal](https://nautilida.ai/#/blog#glossary-at-risk-signal): Behavioral or transactional indicator that a recurring account may lapse — composite signals over single ones.
+- [Compounding memory](https://nautilida.ai/#/blog#glossary-compounding-memory): Memory that sharpens week over week — months of history present in every brief and answer.
+- [Coordination layer](https://nautilida.ai/#/blog#glossary-coordination-layer): The system that decides who does what, with what context, this week — separate from dashboards and revenue intelligence.
+
+## Literacy course (definitional, written for VCs and buyers)
+
+- [Chapter 01 — What is an AI team lead?](https://nautilida.ai/literacy/#/01-what-is-an-ai-team-lead): Category definition. Distinguishes from AI assistants and AI chatbots.
+- [Chapter 02 — The shift: visibility → coordination](https://nautilida.ai/literacy/#/02-visibility-to-coordination): Why dashboards aren't enough; the thesis behind the category.
+- [Chapter 03 — Anatomy of the weekly loop](https://nautilida.ai/literacy/#/03-anatomy-of-the-loop): Mon brief, mid-week priorities, Fri recap, memory. Plus chat on demand.
+- [Chapter 04 — Memory: the layer that compounds](https://nautilida.ai/literacy/#/04-memory-the-compound-layer): Three layers — conversation, pattern, loop-fed.
+- [Chapter 05 — Where it fits in your stack](https://nautilida.ai/literacy/#/05-where-it-fits): Honest comparisons. Nauti vs ChatGPT, Claude, Gong, Clari, CRM AI.
+- [Chapter 06 — The hard questions](https://nautilida.ai/literacy/#/06-the-hard-questions): Objections answered without dodging — GDPR, hallucinations, "can't Claude do this?", moat, incumbents, agent-takeover.
+- [Chapter 07 — Where we're going](https://nautilida.ai/literacy/#/07-where-were-going): Today the brain, tomorrow the senses. Roadmap and deliberate exclusions.
+
+## Optional
+
+- [Waitlist](https://nautilida.ai/#/waitlist): Design partner program — small first cohort
+- [Contact](https://nautilida.ai/#/contact): hello@nautilida.ai
+- [Privacy Policy](https://nautilida.ai/#/privacy)
+- [Terms of Service](https://nautilida.ai/#/terms)
+- [LinkedIn](https://de.linkedin.com/company/nautilida)

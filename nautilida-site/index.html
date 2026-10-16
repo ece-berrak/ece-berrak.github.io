@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<!-- Google Analytics (GA4) — Consent Mode v2 default deny set in gtag-init.js
+     before gtag.js processes the dataLayer. -->
+<script src="gtag-init.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-50KRVTC4H7"></script>
+
+<!-- Leadsy (visitor tracking) loads dynamically from cookie-consent.jsx ONLY
+     if the user opts in to the marketing category. -->
+
+
+<title>Nautilida — AI Team Lead for Sales (archived snapshot)</title>
+<meta name="description" content="Archived snapshot of nautilida.ai, preserved on Ece Berrak's portfolio. Revenue memory — the AI team lead for sales." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" type="image/png" href="uploads/nautilus-icon.png" />
+<link rel="apple-touch-icon" href="uploads/nautilus-icon.png" />
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website" />
+<meta property="og:title"       content="Nautilida — AI Team Lead for Sales (archived snapshot)" />
+<meta property="og:description" content="Archived snapshot of nautilida.ai, preserved on Ece Berrak's portfolio." />
+<meta property="og:image"       content="uploads/nautilus-icon.png" />
+<meta property="og:url"         content="https://ece-berrak.github.io/nautilida-site/" />
+<meta property="og:site_name"   content="Nautilida" />
+
+<!-- Twitter -->
+<meta name="twitter:card"        content="summary" />
+<meta name="twitter:title"       content="Nautilida — AI Team Lead for Sales (archived snapshot)" />
+<meta name="twitter:description" content="Archived snapshot of nautilida.ai, preserved on Ece Berrak's portfolio." />
+<meta name="twitter:image"       content="uploads/nautilus-icon.png" />
+
+<!-- Canonical URL — this is an archived mirror hosted on the portfolio, not the live product domain -->
+<link rel="canonical" href="https://ece-berrak.github.io/nautilida-site/" />
+
+<!-- Schema.org · Organization (sitewide) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Nautilida","alternateName":"Nauti","url":"https://nautilida.ai","logo":"https://ece-berrak.github.io/nautilida-site/uploads/nautilus-icon.png","description":"AI team lead for sales — coordination layer for revenue teams. Cross-stack memory, weekly rhythm, direction over dashboards.","sameAs":["https://de.linkedin.com/company/nautilida"],"foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressLocality":"Berlin","addressCountry":"DE"}}}
+</script>
+<!-- Schema.org · WebSite (sitewide) -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Nautilida","url":"https://ece-berrak.github.io/nautilida-site/","publisher":{"@type":"Organization","name":"Nautilida"},"inLanguage":"en"}
+</script>
+<!-- Schema.org · per-route page (updated dynamically by app.jsx on hash change) -->
+<script type="application/ld+json" id="page-jsonld">
+{"@context":"https://schema.org","@type":"WebPage","name":"Nautilida — AI Team Lead for Sales","url":"https://ece-berrak.github.io/nautilida-site/"}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* Cream-on-paper foundation */
+    --bone:#ECE6D8;        /* page bg — warm cream */
+    --bone-2:#E2DBC9;      /* subtle band variation */
+    --bone-3:#F4EFE2;      /* lightest cream */
+    --ink:#0E0D14;         /* primary type / black blocks */
+    --ink-soft:rgba(14,13,20,.66);
+    --ink-quiet:rgba(14,13,20,.45);
+    --ink-line:rgba(14,13,20,.10);
+    --ink-line-2:rgba(14,13,20,.18);
+    /* Accents — used sparingly */
+    --violet:#5B3FE6;      /* secondary accent */
+    --violet-2:#7558FF;
+    --violet-soft:#E2DAFB;
+    --lime:#D4FF3D;        /* primary accent — sticker green */
+    --lime-2:#E4FF7A;
+    --lime-soft:#F0FFC4;
+    --rose:#FF5F77;        /* risk */
+    --amber:#F4B942;       /* watch */
+    --paper:#F4F0E5;       /* security card cream variant */
+    --shell:#FAF8F1;
+    --lilac:#E2DAFB;       /* light lavender — used as splash/canvas */
+    --lilac-2:#D4C7F8;
+    --violet-deep:#2D1F70;
+    /* legacy aliases — keep so older component CSS keeps compiling */
+    --ink-2:var(--ink);
+    --ink-3:var(--ink);
+    --bone-ink:var(--ink);
+    --line:var(--ink-line);
+    --line-2:var(--ink-line-2);
+    --fog:var(--ink-quiet);
+    --fog-2:var(--ink-soft);
+    --paper-2:#E8E2D2;
+    --violet-3:var(--violet-2);
+    --cyan:var(--lime);
+    --cyan-2:var(--lime-2);
+    --cyan-3:var(--lime-soft);
+    --leaf:var(--lime);
+    --leaf-2:var(--lime-2);
+    --kelp:var(--lime);
+    --coral:var(--rose);
+    --gold:var(--amber);
+    --tide:var(--violet);
+    --ember:var(--violet);
+    --ember-2:var(--violet-2);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  html,body{margin:0;padding:0;background:var(--bone);color:var(--ink);
+    font-family:"Geist",ui-sans-serif,system-ui,-apple-system,sans-serif;
+    font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;overflow-x:hidden;
+  }
+  ::selection{background:var(--ink);color:var(--lime)}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+
+  /* Type families */
+  .display{font-family:"Archivo Black","Geist",ui-sans-serif,system-ui,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.0;text-transform:uppercase}
+  .serif{font-family:"Instrument Serif",ui-serif,Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+  .wordmark{font-family:"Geist",ui-sans-serif,system-ui,sans-serif;font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--ink)}
+
+  /* Shared layout */
+  .container{max-width:1240px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-quiet);font-weight:500}
+  .hairline{border:0;border-top:.5px solid var(--ink-line);margin:0}
+
+  /* Lime sticker / highlight pill — applied to a span to "tape over" key words */
+  .stick{
+    background:var(--lime);color:var(--ink);
+    padding:.06em .22em .14em;border-radius:6px;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
+    line-height:1.05;
+  }
+  .stick-violet{background:var(--violet);color:var(--lime)}
+  .stick-ink{background:var(--ink);color:var(--lime)}
+
+  /* Serif italic with violet gradient — used for the headline tail in hero + CTA */
+  .serif-grad{
+    font-family:"Instrument Serif", ui-serif, Georgia, serif;
+    font-style:italic;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;
+    background:linear-gradient(135deg, #4F32D8 0%, #6B3FF0 45%, #8A66FF 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+  }
+
+  /* Per-word stacked sticker — for big display headlines so each word
+     gets its own pill on its own line, with controlled gap (no overlap). */
+  .stick-stack{display:flex;flex-direction:column;align-items:flex-start;gap:.18em}
+  .stick-stack .stick{display:inline-block;line-height:1;padding:.12em .28em .18em;border-radius:8px}
+  .stick-stack .stick.shift-1{margin-left:.45em}
+  .stick-stack .stick.shift-2{margin-left:.85em}
+  .stick-stack .stick.shift-3{margin-left:1.2em}
+
+  /* Hover-tile: slight rotation + lift on hover — used on tile grids */
+  .tile-hover{transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease}
+  .tile-hover:hover{transform:translateY(-4px) rotate(-.8deg)}
+  .tile-hover.right:hover{transform:translateY(-4px) rotate(.8deg)}
+
+  /* Deck card hover: straighten + lift */
+  .deck-card{transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease}
+  .deck-card:hover{transform:rotate(0deg) translateY(-3px)!important;z-index:30!important}
+
+  /* Hero product video frame */
+  .hv{
+    position:relative;width:100%;max-width:520px;aspect-ratio:1 / 1.05;
+    border:1.5px solid var(--ink);border-radius:14px;overflow:hidden;cursor:pointer;
+    background:var(--ink);
+    box-shadow:10px 10px 0 var(--violet);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  }
+  .hv-wide{max-width:none;aspect-ratio:21 / 9;border-radius:18px;box-shadow:14px 14px 0 var(--violet);
+    transition:aspect-ratio .55s cubic-bezier(.2,.7,.2,1), transform .35s, box-shadow .35s}
+  .hv-wide:hover{transform:translate(-4px,-4px);box-shadow:18px 18px 0 var(--violet);
+    aspect-ratio:var(--vid-aspect, 16 / 9);background:var(--ink)}
+  .hv-wide .hv-play{width:96px;height:96px;font-size:32px}
+  .hv-wide .hv-overlay{padding:36px}
+  /* On hover the video shows full content (no crop), letterboxing into the morphed frame. */
+  .hv-wide:hover .hv-video{object-fit:contain}
+  .hv:hover{transform:translate(-3px,-3px);box-shadow:14px 14px 0 var(--violet)}
+  .hv-blur{position:absolute;inset:0;filter:blur(8px) saturate(120%);transition:filter .45s ease, transform .6s ease;will-change:filter,transform}
+  .hv:hover .hv-blur{filter:blur(0px) saturate(100%);transform:scale(1.03)}
+  .hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:blur(10px) saturate(120%);transform:scale(1.06);
+    transition:filter .45s ease, transform .6s ease;will-change:filter,transform;background:#0E0D14}
+  .hv:hover .hv-video{filter:blur(0) saturate(100%);transform:scale(1)}
+  .hv-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(180deg, rgba(14,13,20,.0) 40%, rgba(14,13,20,.85) 100%);
+    padding:22px;color:var(--bone);transition:opacity .35s ease}
+  .hv:hover .hv-overlay{opacity:0}
+  .hv-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:80px;height:80px;border-radius:999px;background:var(--lime);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-size:28px;
+    border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);
+    transition:transform .25s ease, opacity .25s ease}
+  .hv:hover .hv-play{transform:translate(-50%,-50%) scale(.85);opacity:0}
+  .hv-now{position:absolute;top:14px;left:14px;background:var(--lime);color:var(--ink);
+    padding:5px 10px;border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.14em;border:1px solid var(--ink);
+    opacity:0;transition:opacity .25s ease}
+  .hv:hover .hv-now{opacity:1}
+  /* Live "now playing" pulse bars while hovering */
+  .hv-bars{display:inline-flex;gap:2px;margin-right:8px;align-items:flex-end}
+  .hv-bars span{width:2px;height:8px;background:var(--ink);animation:hvbar 1.1s ease-in-out infinite}
+  .hv-bars span:nth-child(2){animation-delay:.2s}
+  .hv-bars span:nth-child(3){animation-delay:.4s}
+  @keyframes hvbar{0%,100%{height:3px}50%{height:9px}}
+
+  /* Black card module — used for Ask Nauti, integration tiles, evidence rows */
+  .card-ink{background:var(--ink);color:var(--shell);border-radius:14px;border:.5px solid var(--ink)}
+  .card-cream{background:var(--bone-3);color:var(--ink);border-radius:14px;border:.5px solid var(--ink-line)}
+  .card-lime{background:var(--lime);color:var(--ink);border-radius:14px;border:.5px solid var(--ink)}
+  .card-violet{background:var(--violet);color:var(--shell);border-radius:14px;border:.5px solid var(--ink)}
+
+  /* Body splash off — page is bone now, no fixed bg gradient */
+  body::before{content:none}
+
+  /* shared motion utilities */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .lift{transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, border-color .25s ease}
+  .lift:hover{transform:translateY(-3px)}
+  /* marquee */
+  @keyframes marquee{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+  .marquee-track{display:inline-flex;gap:48px;align-items:center;animation:marquee 38s linear infinite;will-change:transform}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;
+    border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    font-size:14px;font-weight:500;letter-spacing:.01em;cursor:pointer;
+    transition:transform .15s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .35s ease;}
+  .btn:hover{background:var(--ink);color:var(--bone);
+    box-shadow: 0 0 0 5px rgba(226,218,251,.40), 0 0 22px rgba(212,255,61,.40);}
+  .btn-primary{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+  .btn-primary:hover{background:var(--violet);color:var(--shell);border-color:var(--violet);
+    box-shadow: 0 0 0 5px rgba(226,218,251,.50), 0 0 26px rgba(212,255,61,.50);}
+  .btn-lime{background:var(--lime);color:var(--ink);border-color:var(--ink)}
+  .btn-lime:hover{background:var(--ink);color:var(--lime);border-color:var(--ink);
+    box-shadow: 0 0 0 5px rgba(212,255,61,.45), 0 0 22px rgba(91,63,230,.40);}
+  .btn .arrow{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* Splash */
+  #splash{position:fixed;inset:0;background:var(--bone);display:flex;align-items:center;justify-content:center;
+    z-index:9999;transition:opacity .6s ease;}
+  #splash.hide{opacity:0;pointer-events:none}
+  #splash.gone{display:none}
+
+  /* ============= Mobile responsiveness ============= */
+  @media (max-width: 720px) {
+    .container { padding: 0 18px !important; }
+
+    /* Nav: hide secondary links on small screens, keep logo + waitlist CTA */
+    .nav-section-links,
+    .nav-signin { display: none !important; }
+
+    /* The Week deck cards — stack the 5-col grid into single column */
+    .deck-card > div {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+      padding: 18px 20px !important;
+    }
+    .deck-card > div > .deck-stat { font-size: 30px !important; }
+
+    /* Generic 2-col → 1-col on mobile */
+    .row-2 {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+      align-items: start !important;
+    }
+    /* Comparison table 3-col → single column on mobile (each cell stacks, borders adjust) */
+    .row-3-collapse {
+      grid-template-columns: 1fr !important;
+    }
+    .row-3-collapse > * {
+      border-left: none !important;
+      border-top: 1px solid var(--ink-line) !important;
+    }
+    .row-3-collapse > *:first-child {
+      border-top: none !important;
+    }
+    /* Security 3-col facts → 2-col on mobile */
+    .facts-3 { grid-template-columns: 1fr 1fr !important; }
+    /* Security card padding tighter */
+    .security-card { padding: 44px 24px !important; }
+
+    /* Memory accordion header — restructure: number + label + arrow on top, tagline below */
+    .acc-head {
+      grid-template-columns: 48px 1fr 24px !important;
+      grid-template-areas: 'num label arrow' 'tag tag tag' !important;
+      gap: 6px 14px !important;
+    }
+    .acc-head > .acc-num    { grid-area: num !important; }
+    .acc-head > .acc-label  { grid-area: label !important; }
+    .acc-head > .acc-tag    { grid-area: tag !important; }
+    .acc-head > .acc-arrow  { grid-area: arrow !important; }
+
+    /* "Open a sample brief" CTA + leader preview block — hover-only UX, no value on touch */
+    .brief-cta-col,
+    .leader-preview { display: none !important; }
+
+    /* Hero video frame — slightly tighter aspect on phones */
+    .hv-wide { aspect-ratio: 16/10 !important; }
+
+    /* Section padding tighter */
+    section { padding-top: 80px !important; padding-bottom: 80px !important; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 0 14px !important; }
+
+    /* PostCard pill tighter on phones */
+    .deck-card > div { padding: 16px 16px !important; }
+
+    section { padding-top: 64px !important; padding-bottom: 64px !important; }
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div style="position:relative;z-index:999999;background:#0E0D14;color:#ECE6D8;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.5;padding:10px 20px;text-align:center;letter-spacing:.01em;">
+  Archived snapshot — Nautilida's build wrapped, so this isn't live at nautilida.ai anymore. Preserved here, fully browsable, from
+  <a href="../projects/nautilida.html" style="color:#D4FF3D;text-decoration:underline;">the case study</a> on
+  <a href="../index.html" style="color:#D4FF3D;text-decoration:underline;">Ece Berrak's portfolio</a>.
+</div>
+
+<div id="splash">
+  <div style="width:288px;height:66px;position:relative;overflow:hidden;">
+    <img src="uploads/nautilida-wordmark-tr.png" alt="nautilida"
+      style="position:absolute;width:283px;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);filter:brightness(0);"/>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<script type="text/babel" src="components/motion.jsx"></script>
+<script type="text/babel" src="components/shell.jsx"></script>
+<script type="text/babel" src="components/hero.jsx"></script>
+<script type="text/babel" src="components/brief.jsx"></script>
+<script type="text/babel" src="components/evidence.jsx"></script>
+<script type="text/babel" src="components/dashboards.jsx"></script>
+<script type="text/babel" src="components/memory.jsx"></script>
+<script type="text/babel" src="components/integrations.jsx"></script>
+<script type="text/babel" src="components/security.jsx"></script>
+<script type="text/babel" src="components/whatsnext.jsx"></script>
+<script type="text/babel" src="components/cta.jsx"></script>
+<script type="text/babel" src="components/footer.jsx"></script>
+<script type="text/babel" src="components/signin.jsx"></script>
+<script type="text/babel" src="components/waitlist.jsx"></script>
+<script type="text/babel" src="components/contact.jsx"></script>
+<script type="text/babel" src="components/about.jsx"></script>
+<script type="text/babel" src="components/legal.jsx"></script>
+<script type="text/babel" src="components/blog.jsx"></script>
+<script type="text/babel" src="components/post-weekly-loop.jsx"></script>
+<script type="text/babel" src="components/post-ai-team-lead.jsx"></script>
+<script type="text/babel" src="components/post-revenue-intel.jsx"></script>
+<script type="text/babel" src="components/compare.jsx"></script>
+<script type="text/babel" src="components/use-cases.jsx"></script>
+<script type="text/babel" src="components/cookie-consent.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+</body>
+</html>

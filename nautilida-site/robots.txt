@@ -1,0 +1,66 @@
+# Nautilida — robots.txt
+# Default: allow everything to be crawled and indexed.
+
+User-agent: *
+Allow: /
+
+# Major search engines — explicit allow
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# AI / Answer engines — explicit allow so the AI team lead category content
+# can surface in ChatGPT, Claude, Perplexity, Google AI Overviews, etc.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# LLM-readable directory of structured content
+# https://llmstxt.org
+Sitemap: https://nautilida.ai/sitemap.xml

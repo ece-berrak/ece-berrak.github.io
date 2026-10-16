@@ -82,9 +82,9 @@ function App(){
 
     // Schema.org per-chapter JSON-LD — Article (or LearningResource) pointing at the parent Course.
     // For Chapter 06 (the hard questions) we also emit FAQPage so the Q&As surface in AI answers.
-    const SITE = 'https://ece-berrak.github.io/literacy';
+    const SITE = 'https://ece-berrak.github.io/nautilida-site/literacy';
     const ORG  = {"@type":"Organization","name":"Nautilida","sameAs":"https://nautilida.ai"};
-    const COURSE = {"@type":"Course","name":"Nautilida Literacy · First Edition","url":"https://ece-berrak.github.io/literacy/"};
+    const COURSE = {"@type":"Course","name":"Nautilida Literacy · First Edition","url":"https://ece-berrak.github.io/nautilida-site/literacy/"};
     let jsonld;
     const chMatch = route.match(/^#\/(\d{2})-/);
     if (chMatch){
