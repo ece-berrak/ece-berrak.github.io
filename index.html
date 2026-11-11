@@ -189,6 +189,15 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .edu .rows span{color:var(--ink-2)}
 .edu .rows .certs{display:flex;flex-wrap:wrap;gap:8px;border:0;padding-top:20px}
 
+/* kind words, compact */
+.kw{display:grid;grid-template-columns:150px 1fr;gap:32px;align-items:baseline;padding:56px 0}
+.kw blockquote{font-family:"Instrument Serif",serif;font-style:italic;font-size:clamp(22px,2.2vw,30px);line-height:1.2;color:var(--ink)}
+.kw mark{background:linear-gradient(var(--y),var(--y)) no-repeat 0 88%/0% 40%;color:inherit;transition:background-size 1s .4s cubic-bezier(.7,0,.2,1)}
+.kw.in mark{background-size:100% 40%}
+.kw figcaption{margin-top:10px}
+.job li.refli{padding-left:0}.job li.refli::before{display:none}
+.chip.refchip{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.refchip:hover{background:var(--y);color:var(--ink)}
 /* work */
 .proj{display:grid;grid-template-columns:60px 1fr 1.6fr 140px;gap:32px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line);position:relative;transition:padding .3s}
 .proj:last-child{border-bottom:1px solid var(--line)}
@@ -424,7 +433,7 @@ footer .secret .ul{color:var(--ink)}
   .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
-  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
+  .kw{grid-template-columns:1fr;gap:10px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
@@ -537,6 +546,7 @@ footer .secret .ul{color:var(--ink)}
           <li>Improved user flows, discoverability and usability across software products through UX, SEO and content work.</li>
           <li>Supported HR marketing and employer branding, including career pages and recruitment content.</li>
           <li>Designed user journeys and research frameworks in Miro, aligning UX thinking with performance goals.</li>
+          <li class="refli"><a class="chip refchip" href="#kind-words">★ reference</a></li>
         </ul>
       </div></div>
     </details>
@@ -638,6 +648,15 @@ footer .secret .ul{color:var(--ink)}
     <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>The <span class="hl">pegboard.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't. Yellow tags hang on the trunk: the ones I live in.</p></div>
     <div class="board rv" id="board"></div>
     <div class="usebar rv" aria-live="polite"><span class="mono">used for →</span><b id="useT">Hover a tag</b><span id="useD">to see what I use it for.</span></div>
+  </section>
+
+  <!-- KIND WORDS (compact) -->
+  <section id="kind-words" class="kw rv">
+    <span class="mono">kind words</span>
+    <figure>
+      <blockquote>“Working with Ece means knowing that a project is <mark>in capable hands.</mark>”</blockquote>
+      <figcaption class="mono">Kübra Demir · Corporate Reputation Executive, TürkNet · my manager at CRS Soft</figcaption>
+    </figure>
   </section>
 </div>
 
