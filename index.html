@@ -262,10 +262,27 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .spine.post{background:var(--ink);color:#fff}.spine.newsletter{background:var(--y)}
 .spine.post .band,.spine.newsletter .band{background:currentColor;opacity:.25}
 
-/* stack */
-.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-.stack h4{font-weight:500;font-size:15px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
-.stack ul{list-style:none;display:flex;flex-direction:column;gap:6px;color:var(--ink-2);font-size:15px}
+/* stack: pegboard */
+.board{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1.5px solid var(--ink);border-radius:10px;background-color:var(--paper);
+  background-image:radial-gradient(circle,var(--line) 2.2px,transparent 2.6px);background-size:28px 28px;background-position:14px 14px;overflow:hidden}
+.zone{padding:22px 18px 30px;border-right:1px solid var(--line);min-height:380px}
+.zone:last-child{border-right:0}
+.zone h4{display:inline-block;font:400 11px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 9px;border-radius:4px;margin-bottom:34px}
+.tags{display:flex;flex-wrap:wrap;gap:30px 10px}
+.tag{position:relative;display:inline-flex;align-items:center;gap:8px;padding:8px 12px 8px 10px;background:var(--paper);border:1.5px solid var(--ink);border-radius:6px 6px 10px 10px;font-weight:500;font-size:14px;line-height:1.1;cursor:default;
+  transform-origin:50% -18px;transform:rotate(var(--r)) translateY(-140%);opacity:0;transition:transform .7s cubic-bezier(.2,1.6,.4,1),opacity .3s,background .2s}
+.tag::before{content:"";position:absolute;left:50%;top:-18px;width:1.5px;height:18px;background:var(--ink)}
+.tag::after{content:"";position:absolute;left:calc(50% - 4px);top:-23px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.tag i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--ink);flex:none;background:var(--bg)}
+.tag.tr{background:var(--y)}
+.board.in .tag{transform:rotate(var(--r));opacity:1}
+.board.in .tag.swing{animation:swing 1.3s cubic-bezier(.3,0,.2,1)}
+.board.in .tag:hover,.board.in .tag:focus-visible{background:var(--ink);color:#fff;outline:none}
+.board.in .tag:hover i,.board.in .tag:focus-visible i{border-color:#fff;background:var(--ink)}
+@keyframes swing{0%{transform:rotate(var(--r))}20%{transform:rotate(14deg)}40%{transform:rotate(-9deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-2deg)}100%{transform:rotate(var(--r))}}
+.usebar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:18px 0;border-bottom:1px solid var(--ink);min-height:62px}
+.usebar b{font-weight:500;font-size:20px;letter-spacing:-.02em}
+.usebar #useD{color:var(--ink-2)}
 
 /* contact */
 footer{padding:140px 0 48px}
@@ -309,12 +326,12 @@ footer .say span{position:relative}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
   .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
-  .stack{grid-template-columns:1fr 1fr}
+  .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts{grid-template-columns:1fr}.contacts a,.contacts a+a{padding:20px 0;border-left:0;border-top:1px solid var(--line)}
   .legal{flex-direction:column;gap:8px}
   section{padding:88px 0}
 }
-@media (max-width:560px){nav .links a:not(:last-child){display:none}.stats b{font-size:30px}.stack{grid-template-columns:1fr}}
+@media (max-width:560px){nav .links a:not(:last-child){display:none}.stats b{font-size:30px}.board{grid-template-columns:1fr}}
 @media (hover:none){.peek{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 </style>
@@ -504,13 +521,9 @@ footer .say span{position:relative}
 
   <!-- STACK -->
   <section id="stack">
-    <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>What I <span class="hl">work with.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't.</p></div>
-    <div class="stack rv">
-      <div><h4>Lifecycle &amp; CRM</h4><ul><li>HubSpot</li><li>Apollo.io</li><li>Instantly</li><li>Clay</li><li>Google Analytics 4</li><li>Search Console</li></ul></div>
-      <div><h4>Content &amp; web</h4><ul><li>Figma</li><li>Canva</li><li>Webflow</li><li>Framer</li><li>WordPress</li><li>HTML / CSS / JS</li></ul></div>
-      <div><h4>Ops &amp; automation</h4><ul><li>n8n</li><li>Zapier</li><li>Apps Script</li><li>Notion</li><li>Airtable</li><li>Asana</li></ul></div>
-      <div><h4>AI &amp; data</h4><ul><li>Claude &amp; Claude Code</li><li>ChatGPT</li><li>Perplexity</li><li>Dataiku</li><li>Google Ads</li><li>Schema.org · llms.txt</li></ul></div>
-    </div>
+    <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>The <span class="hl">pegboard.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't. Yellow tags hang on the trunk: the ones I live in.</p></div>
+    <div class="board rv" id="board"></div>
+    <div class="usebar rv" aria-live="polite"><span class="mono">used for →</span><b id="useT">Hover a tag</b><span id="useD">to see what I use it for.</span></div>
   </section>
 </div>
 
@@ -635,6 +648,22 @@ footer .say span{position:relative}
   const setCount=n=>document.getElementById('shelfcount').textContent=n+' on the shelf · room for more';
   [300,350,280].forEach((hh,g)=>{const d=document.createElement('div');d.className='ghost';d.setAttribute('aria-hidden','true');d.style.setProperty('--h',hh+'px');d.style.transitionDelay=(0.8+g*0.08)+'s';d.textContent='soon';shelf.append(d)});
   setCount(WRITING.length);preview(0);
+  // pegboard: add a tool by adding [name, what I use it for] to a zone. tr:true = trunk (lifecycle) zone
+  const TOOLS=[
+    {z:'Lifecycle & CRM',tr:true,t:[['HubSpot','Lifecycle emails, segments, in‑product messaging and reporting.'],['ActiveCampaign','Automated email journeys and behaviour‑based flows.'],['Apollo.io','Prospect data and enrichment.'],['Clay','List building and enrichment workflows.'],['Instantly','Outbound sequences.']]},
+    {z:'SEO & analytics',t:[['Semrush','Keyword, content gap and competitor research.'],['Google Analytics 4','Site and funnel analytics.'],['Search Console','Search performance and indexing.'],['Google Ads','Paid search campaigns.'],['Schema.org','Structured data so search and AI engines understand the page.'],['llms.txt','Making a site readable for AI answer engines.']]},
+    {z:'Content & web',t:[['Figma','Design, from social assets to site layouts.'],['Canva','Fast campaign and social assets.'],['CapCut','Short video for posts.'],['Webflow','Marketing sites.'],['Framer','Landing pages and prototypes.'],['WordPress','Content sites and blogs.'],['HTML / CSS / JS','Building pages myself, this one included.']]},
+    {z:'Ops & automation',t:[['n8n','Workflows and research agents.'],['Zapier','Glue between tools.'],['Apps Script','Zero‑infrastructure automations.'],['Notion','Docs, content ops and briefs.'],['Airtable','Lightweight databases.'],['Asana','Project tracking.'],['Tally','Forms.']]},
+    {z:'AI & data',t:[['Claude & Claude Code','Writing, research and shipping code.'],['ChatGPT','Drafting and ideation.'],['Perplexity','Research with sources.'],['Dataiku','Data prep and analytics.']]},
+  ];
+  const board=document.getElementById('board'),useT=document.getElementById('useT'),useD=document.getElementById('useD');let ti=0;
+  TOOLS.forEach(zz=>{const z=document.createElement('div');z.className='zone';z.innerHTML='<h4></h4><div class="tags"></div>';z.querySelector('h4').textContent=zz.z;
+    zz.t.forEach(([n,u])=>{const t=document.createElement('span');t.className='tag'+(zz.tr?' tr':'');t.tabIndex=0;t.innerHTML='<i></i>';t.append(n);
+      t.style.setProperty('--r',((Math.sin(ti*7.3)*4)).toFixed(1)+'deg');t.style.transitionDelay=(0.15+ti*0.035)+'s';ti++;
+      const on=()=>{useT.textContent=n;useD.textContent=u;t.classList.remove('swing');void t.offsetWidth;t.classList.add('swing')};
+      t.addEventListener('mouseenter',on);t.addEventListener('focus',on);t.addEventListener('click',on);z.querySelector('.tags').append(t)});
+    board.append(z)});
+  setTimeout(()=>board.querySelectorAll('.tag').forEach(t=>t.style.transitionDelay=''),3000);
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
