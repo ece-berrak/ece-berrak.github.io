@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero 3 — Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f6f3;--ink:#0a0a0a;--mute:#7a7a7a;--line:#dcdcd6;--y:#ffe14d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font:400 12px/1.4 "JetBrains Mono",monospace;letter-spacing:.03em;color:var(--mute)}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+nav .links{display:flex;gap:28px;font-size:15px}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 74px);border-bottom:1px solid var(--line)}
+.left{padding:72px 56px 56px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+h1{font-weight:500;font-size:clamp(44px,5.4vw,80px);line-height:1;letter-spacing:-.045em}
+h1 em{font-family:"Instrument Serif",serif;font-weight:400;letter-spacing:-.01em}
+.word{display:inline-block;opacity:0;transform:translateY(.4em);animation:up .7s cubic-bezier(.2,.8,.2,1) forwards}
+.under{position:relative}
+.under svg{position:absolute;left:-4%;bottom:-.12em;width:108%;height:.35em;overflow:visible}
+.under path{fill:none;stroke:var(--y);stroke-width:10;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1s 1.3s cubic-bezier(.7,0,.2,1) forwards}
+.under span{position:relative}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:56px}
+.stats div{padding:24px 0}
+.stats div+div{padding-left:24px;border-left:1px solid var(--line)}
+.stats b{display:block;font-weight:500;font-size:44px;letter-spacing:-.04em;line-height:1.1}
+.right{position:relative;overflow:hidden;background:#111}
+.right img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transform:scale(1.15);animation:zoom 1.8s cubic-bezier(.2,.8,.2,1) forwards;transition:filter .6s}
+.right:hover img{filter:grayscale(0)}
+.badge{position:absolute;right:32px;bottom:32px;width:132px;height:132px;border-radius:50%;background:var(--y);display:grid;place-items:center;opacity:0;animation:pop .6s 1.4s cubic-bezier(.2,1.4,.4,1) forwards}
+.badge svg{position:absolute;inset:0;animation:spin 14s linear infinite}
+.badge text{font:500 10.5px "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase}
+.badge .arr{font-size:30px;transition:transform .3s}
+.badge:hover .arr{transform:rotate(-45deg)}
+.tag{position:absolute;left:32px;top:32px;background:var(--bg);padding:8px 12px;border-radius:6px}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes zoom{to{transform:scale(1)}}
+@keyframes pop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.left{border:0;padding:48px 0}.right{height:420px}nav .links{display:none}.wrap{padding:0 20px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav><b>ece berrak</b><div class="links"><a href="#">Work</a><a href="#">Experience</a><a href="#">Writing</a><a href="#">Contact</a></div></nav>
+  <header class="hero">
+    <div class="left">
+      <div>
+        <span class="mono">( growth marketer · berlin )</span>
+        <h1 id="h" style="margin-top:28px">I turn products into <em>stories</em> — and <span class="under"><span>ship them</span><svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M2 14 C 50 4, 120 4, 198 12"/></svg></span> myself.</h1>
+        <p style="margin-top:32px;max-width:480px;color:#444;font-size:19px">Lifecycle and user communication for B2B/SaaS. Websites, automations and AI agents when the job needs them.</p>
+      </div>
+      <div class="stats">
+        <div><b data-n="5">0</b><span class="mono">years in B2B SaaS</span></div>
+        <div><b data-n="3" data-s=" wks">0</b><span class="mono">idea → live site</span></div>
+        <div><b data-n="0" data-p="€">0</b><span class="mono">lead pipeline infra</span></div>
+      </div>
+    </div>
+    <div class="right">
+      <img src="../assets/ece.jpg" alt="Ece Berrak">
+      <span class="tag mono" style="color:var(--ink)">Ex‑Dataiku · Co‑founder, Nautilida</span>
+      <a class="badge" href="#"><svg viewBox="0 0 132 132"><defs><path id="c" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs><text><textPath href="#c">available for work · say hello · </textPath></text></svg><span class="arr">→</span></a>
+    </div>
+  </header>
+</div>
+<script>
+// split headline into animated words (keeps inner markup)
+const h=document.getElementById('h');let d=0;
+h.childNodes.forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(t=>{if(!t.trim()){f.append(t);return}const s=document.createElement('span');s.className='word';s.style.animationDelay=(d++*0.06+.2)+'s';s.textContent=t;f.append(s)});n.replaceWith(f)}else{n.classList.add('word');n.style.animationDelay=(d++*0.06+.2)+'s'}});
+// count-up stats
+document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s||'',p=el.dataset.p||'';let t0;const run=t=>{t0??=t;const k=Math.min((t-t0)/1200,1);el.textContent=p+Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(run)};setTimeout(()=>requestAnimationFrame(run),900)});
+</script>
+</body>
+</html>
