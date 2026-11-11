@@ -192,9 +192,20 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .kw mark{background:linear-gradient(var(--y),var(--y)) no-repeat 0 88%/0% 40%;color:inherit;transition:background-size 1s .4s cubic-bezier(.7,0,.2,1)}
 .kw.in mark{background-size:100% 40%}
 .kw figcaption{margin-top:10px}
-.kwq{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.kwq{display:grid;max-width:860px}
+.kwq figure{grid-area:1/1;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.kwq figure.on{opacity:1;transform:none;pointer-events:auto}
+.kwq figure mark{background-size:0% 40%!important}
+.kwq figure.on.lit mark{background-size:100% 40%!important}
+.kwnav{display:flex;align-items:center;gap:14px;margin-top:22px}
+.kwnav button{position:relative;width:34px;height:4px;border:0;border-radius:99px;background:var(--line);cursor:pointer;overflow:hidden;padding:0}
+.kwnav button::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.kwnav button.on::after{animation:kwfill var(--kwd,7s) linear forwards}
+.kw.paused .kwnav button.on::after{animation-play-state:paused}
+.kwnav .mono{margin-left:6px}
+@keyframes kwfill{to{transform:scaleX(1)}}
 .kw .nm{color:var(--ink)}
-.kwq blockquote{font-size:clamp(20px,1.8vw,26px)}
+.kwq blockquote{font-size:clamp(22px,2.2vw,30px)}
 .kw figcaption a{color:var(--ink)}
 .job li.refli{padding-left:0}.job li.refli::before{display:none}
 .chip.refchip{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -451,7 +462,7 @@ footer .secret .ul{color:var(--ink)}
   .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
-  .kw{grid-template-columns:1fr;gap:10px}.kwq{grid-template-columns:1fr;gap:28px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
+  .kw{grid-template-columns:1fr;gap:10px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
@@ -704,7 +715,8 @@ footer .secret .ul{color:var(--ink)}
   <!-- KIND WORDS (compact) -->
   <section id="kind-words" class="kw rv">
     <span class="mono">kind words</span>
-    <div class="kwq">
+    <div>
+    <div class="kwq" id="kwq" aria-live="polite">
       <figure>
         <blockquote>“Ece is both a dedicated professional and <mark>a great energy to have in the room</mark>, always nice to work with, and gets the job done.”</blockquote>
         <figcaption class="mono"><span class="nm">Alivia Smith</span> · my manager at Dataiku, Senior Director of Online Experience &amp; User Lifecycle Marketing · <a class="ul" href="https://www.linkedin.com/in/eceberrak/details/recommendations/" target="_blank" rel="noopener">via LinkedIn ↗</a></figcaption>
@@ -717,6 +729,8 @@ footer .secret .ul{color:var(--ink)}
         <blockquote>“Ece distinguished herself as someone who contributed <mark>not as an intern, but as a fully engaged member</mark> of the team.”</blockquote>
         <figcaption class="mono"><a class="ul" data-li="ekim">Ekim Yurtsever</a> · HR Business Partner for the Creative team at CRS Soft</figcaption>
       </figure>
+    </div>
+    <div class="kwnav" id="kwnav" aria-label="Choose a quote"></div>
     </div>
   </section>
 </div>
@@ -921,6 +935,18 @@ footer .secret .ul{color:var(--ink)}
   addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,textarea,[contenteditable]'))return;if(e.key.length!==1)return;buf=(buf+e.key.toLowerCase()).slice(-4);if(buf==='cats'){buf='';catsGo()}});
   document.querySelector('nav .me').addEventListener('click',e=>{taps++;clearTimeout(tapT);tapT=setTimeout(()=>taps=0,1600);if(taps>=5){e.preventDefault();taps=0;catsGo()}else if(taps>1)e.preventDefault()});
   try{console.log('%c hi, curious one. ','background:#ffe14d;color:#0a0a0a;font:600 14px sans-serif;padding:4px 2px;border-radius:4px');console.log('You opened the console, so you get a hint: type "cats" anywhere on the page. And if you are hiring for someone who reads the source, say hello: ece@nautilida.ai')}catch(_){}
+  // kind words: one quote at a time, auto-rotating, pause on hover/focus
+  (()=>{const kw=document.getElementById('kind-words'),figs=[...document.querySelectorAll('#kwq figure')],nav=document.getElementById('kwnav');if(!figs.length)return;
+    const D=7000;let i=0,t,paused=false;kw.style.setProperty('--kwd',D+'ms');
+    const btns=figs.map((f,k)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Quote '+(k+1)+' of '+figs.length);b.addEventListener('click',()=>{show(k);restart()});nav.append(b);return b});
+    const lab=document.createElement('span');lab.className='mono';nav.append(lab);
+    function show(k){i=k;figs.forEach((f,j)=>{f.classList.toggle('on',j===k);f.classList.remove('lit');f.setAttribute('aria-hidden',j!==k)});
+      btns.forEach((b,j)=>{b.classList.remove('on');void b.offsetWidth;b.classList.toggle('on',j===k)});lab.textContent=(k+1)+' / '+figs.length;
+      setTimeout(()=>figs[k].classList.add('lit'),350)}
+    function restart(){clearInterval(t);if(!reduce)t=setInterval(()=>{if(!paused)show((i+1)%figs.length)},D)}
+    kw.addEventListener('mouseenter',()=>{paused=true;kw.classList.add('paused')});kw.addEventListener('mouseleave',()=>{paused=false;kw.classList.remove('paused')});
+    kw.addEventListener('focusin',()=>{paused=true;kw.classList.add('paused')});kw.addEventListener('focusout',()=>{paused=false;kw.classList.remove('paused')});
+    show(0);restart()})();
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
