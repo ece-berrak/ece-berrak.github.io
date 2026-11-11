@@ -56,7 +56,7 @@ h1 em{font-family:"Instrument Serif",serif;font-weight:400;letter-spacing:-.01em
       <div>
         <span class="mono">( t‑shaped marketer · berlin )</span>
         <h1 id="h" style="margin-top:28px">Broad across the <em>funnel</em>. Deep <span class="under"><span>where users live.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M2 14 C 50 4, 120 4, 198 12"/></svg></span></h1>
-        <p style="margin-top:32px;max-width:470px;color:#444;font-size:19px">User communication, engagement and retention are my home turf. I work with a customer‑success mindset — no quota, just making sure users solve the problem they came with. Product thinking is the root.</p>
+        <p style="margin-top:32px;max-width:470px;color:#444;font-size:19px">User communication, engagement and retention are my home turf. Whatever the role, the goal stays the same: the user's problem, actually solved. Product thinking is the root.</p>
       </div>
       <div class="stats">
         <div><b data-n="5" data-s=" yrs">0</b><span class="mono">B2B SaaS</span></div>
@@ -101,7 +101,7 @@ h.childNodes.forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragm
 document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s||'';let t0;const run=t=>{t0??=t;const k=Math.min((t-t0)/1200,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(run)};setTimeout(()=>requestAnimationFrame(run),900)});
 // tree
 const NS='http://www.w3.org/2000/svg',mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
-const ticks=[['user communication',415],['customer success',375],['onboarding',335],['engagement',295],['retention',255],['lifecycle',215]];
+const ticks=[['user communication',415],['onboarding',375],['adoption',335],['engagement',295],['retention',255],['lifecycle',215]];
 const tg=document.getElementById('ticks');
 ticks.forEach(([s,y],i)=>{const g=mk('g',{class:'tick'});g.style.animationDelay=(.8+i*.12)+'s';g.append(mk('line',{x1:296,x2:316,y1:y,y2:y,stroke:'#0a0a0a','stroke-width':1}));const t=mk('text',{x:322,y:y+4});t.textContent=s;g.append(t);tg.append(g)});
 const leaves=[['Brand',130,150],['Content',430,140],['SEO',200,80],['Campaigns',360,80],['Community',280,52],['Paid',70,110],['Events',490,100],['Partners',140,40],['Positioning',420,36]];
