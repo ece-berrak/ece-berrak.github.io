@@ -90,13 +90,31 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .kick{display:block;margin-bottom:18px}
 
 /* approach */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
-.step{padding:32px 32px 8px 0}
-.step+.step{padding-left:32px;border-left:1px solid var(--line)}
-.step .n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);font:400 12px "JetBrains Mono",monospace;transition:background .3s}
-.step:hover .n{background:var(--y)}
-.step h3{font-weight:500;font-size:26px;letter-spacing:-.02em;margin:22px 0 10px}
+.loop{position:relative;margin-top:8px}
+.track{position:relative;height:34px;margin-bottom:8px}
+.track .ln{position:absolute;left:17px;right:17px;top:16px;height:2px;background:var(--line);overflow:hidden}
+.track .ln::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 1.4s .2s cubic-bezier(.6,0,.2,1)}
+.loop.in .track .ln::before{transform:scaleX(1)}
+.track .dot{position:absolute;top:10px;left:17px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--y);box-shadow:0 0 0 4px rgba(255,225,77,.35);opacity:0;transition:left .9s cubic-bezier(.6,0,.2,1),opacity .4s}
+.loop.go .track .dot{opacity:1}
+.steps{display:grid;grid-template-columns:repeat(3,1fr)}
+.step{padding:0 32px 8px 0;position:relative}
+.step+.step{padding-left:32px}
+.step .n{position:absolute;top:-42px;left:0;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);background:var(--bg);font:400 12px "JetBrains Mono",monospace;transform:scale(0);transition:transform .5s cubic-bezier(.2,1.4,.4,1),background .4s;z-index:1}
+.step+.step .n{left:32px}
+.loop.in .step .n{transform:none}
+.loop.in .step:nth-child(2) .n{transition-delay:.6s,0s}.loop.in .step:nth-child(3) .n{transition-delay:1.2s,0s}
+.step.on .n{background:var(--y)}
+.step h3{font-weight:500;font-size:28px;letter-spacing:-.03em;margin:24px 0 10px;transition:transform .4s}
+.step.on h3{transform:translateX(4px)}
 .step p{color:var(--ink-2)}
+.step .eg{display:block;margin-top:20px;padding:14px 16px;border-left:3px solid var(--line);background:var(--paper);font-size:15px;color:var(--ink-2);transition:border-color .4s}
+.step .eg b{display:block;font:400 11px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:4px;font-weight:400}
+.step.on .eg{border-left-color:var(--y)}
+.back{display:flex;align-items:center;gap:10px;margin-top:36px}
+.back svg{width:22px;height:22px;transition:transform .9s}
+.loop.go .back svg{animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(-360deg)}}
 
 /* experience */
 .job{border-top:1px solid var(--line)}
@@ -192,7 +210,7 @@ footer .say span{position:relative}
   .hero .left{border-right:0;padding:56px 0 24px}
   .hero .right{padding:8px 0 48px}
   .sh{grid-template-columns:1fr;gap:20px}.sh p{justify-self:start}
-  .steps{grid-template-columns:1fr}.step,.step+.step{padding:28px 0;border-left:0;border-top:1px solid var(--line)}
+  .track{display:none}.steps{grid-template-columns:1fr;gap:40px}.step,.step+.step{padding:0 0 0 52px}.step .n,.step+.step .n{top:0;left:0}.step h3{margin-top:2px}
   .job summary{grid-template-columns:1fr 32px;gap:8px 16px}
   .job summary .y{grid-column:1/-1}
   .job summary .one{grid-column:1/-1;grid-row:3}
@@ -261,17 +279,21 @@ footer .say span{position:relative}
 
   <!-- APPROACH -->
   <section id="approach">
-    <div class="sh rv"><div><span class="mono kick">01 — how i work</span><h2>Start with the user. <span class="hl">Work outward.</span></h2></div><p>The same loop whether it's an onboarding email, a website or a sales deck.</p></div>
-    <div class="steps">
-      <div class="step rv"><span class="n">01</span><h3>Listen</h3><p>Talk to the people using the product — support threads, calls, events, in‑product signals. Find the problem they actually came with.</p></div>
-      <div class="step rv"><span class="n">02</span><h3>Shape</h3><p>Think like a product person: what needs to change in the message, the journey or the product itself so that problem gets solved?</p></div>
-      <div class="step rv"><span class="n">03</span><h3>Carry it through</h3><p>Take it across the funnel — lifecycle, content, web, campaigns — and back to the teams who need to hear it.</p></div>
+    <div class="sh rv"><div><span class="mono kick">01 · how i work</span><h2>Start with the user. <span class="hl">Work outward.</span></h2></div><p>The same loop every time, whether it ends up as an onboarding email, a web page or a sales deck.</p></div>
+    <div class="loop rv" id="loop">
+      <div class="track" aria-hidden="true"><span class="ln"></span><span class="dot" id="dot"></span></div>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><h3>Listen</h3><p>Talk to the people using the product. Support threads, onboarding calls, events, in‑product signals. Find the problem they actually came with.</p><span class="eg"><b>at dataiku</b>Answering setup questions myself is where most of our use cases and success stories came from.</span></div>
+        <div class="step"><span class="n">02</span><h3>Shape</h3><p>Think like a product person. What needs to change in the message, the journey or the product itself so that problem gets solved?</p><span class="eg"><b>at dataiku</b>New users and advanced champions had different problems, so they got two different journeys.</span></div>
+        <div class="step"><span class="n">03</span><h3>Carry it through</h3><p>Take it across the funnel: lifecycle, content, web, campaigns, sales material. Then bring it back to the teams who need to hear it.</p><span class="eg"><b>at nautilida</b>The questions buyers kept asking shaped the website, the comparison pages and the sales deck.</span></div>
+      </div>
+      <div class="back mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>and back to listening</div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="sh rv"><div><span class="mono kick">02 — experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Three years in B2B SaaS — enterprise to pre‑seed — on top of partnerships, community and content before that. Open any role for the detail.</p></div>
+    <div class="sh rv"><div><span class="mono kick">02 · experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Three years in B2B SaaS — enterprise to pre‑seed — on top of partnerships, community and content before that. Open any role for the detail.</p></div>
 
     <details class="job rv" open>
       <summary><span class="mono y">2025 — now</span><span class="co">Nautilida<small>Co‑founder &amp; CEO · Berlin</small></span><span class="one">Built go‑to‑market from an empty page for an AI‑native sales platform.</span><span class="tg" aria-hidden="true"></span></summary>
@@ -351,7 +373,7 @@ footer .say span{position:relative}
 
   <!-- WORK -->
   <section id="work">
-    <div class="sh rv"><div><span class="mono kick">03 — selected work</span><h2>Things I designed, built <span class="hl">and shipped.</span></h2></div><p>When something needed to exist, I built it — sites, narratives, workflows, brand systems.</p></div>
+    <div class="sh rv"><div><span class="mono kick">03 · selected work</span><h2>Things I designed, built <span class="hl">and shipped.</span></h2></div><p>When something needed to exist, I built it — sites, narratives, workflows, brand systems.</p></div>
     <div class="work-list">
       <a class="proj rv" href="projects/nautilida.html" data-peek="uploads/nautilida-product.mp4"><span class="n">01</span><h3>Nautilida.ai<span class="arr">→</span></h3><p>Marketing site designed and shipped end‑to‑end in <b>3 weeks</b> — comparison pages, glossary and structured data so AI answer engines cite the product by name.</p><span class="mono t">website · aeo · content</span></a>
       <a class="proj rv" href="nautilida-site/literacy/" data-peek-text="literacy." ><span class="n">02</span><h3>Literacy microsite<span class="arr">→</span></h3><p>A <b>7‑chapter</b> category primer for VCs and buyers — a long‑form narrative instead of a brochure. Written and designed solo.</p><span class="mono t">narrative · microsite</span></a>
@@ -364,7 +386,7 @@ footer .say span{position:relative}
 
   <!-- WRITING -->
   <section id="writing">
-    <div class="sh rv"><div><span class="mono kick">04 — writing</span><h2>Long‑form <span class="hl">I wrote.</span></h2></div><p>A manifesto, a category definition and a comparison note, written for Nautilida. Each opens in its own reader.</p></div>
+    <div class="sh rv"><div><span class="mono kick">04 · writing</span><h2>Long‑form <span class="hl">I wrote.</span></h2></div><p>A manifesto, a category definition and a comparison note, written for Nautilida. Each opens in its own reader.</p></div>
     <div class="reads">
       <a class="read rv" href="writing/weekly-loop.html"><div><span class="mono">manifesto · 9 min</span><h3>The weekly revenue coordination loop, explained.</h3><p>Monday brief, mid‑week execution, Friday recap, compounding memory — an operating rhythm that replaces dashboard anxiety with direction.</p></div><span class="go">Read <i>→</i></span></a>
       <a class="read rv" href="writing/ai-team-lead.html"><div><span class="mono">definition · 7 min</span><h3>What is an AI team lead for sales?</h3><p>How it differs from assistants and dashboards, and what it does for teams that live on recurring accounts.</p></div><span class="go">Read <i>→</i></span></a>
@@ -375,7 +397,7 @@ footer .say span{position:relative}
 
   <!-- STACK -->
   <section id="stack">
-    <div class="sh rv"><div><span class="mono kick">05 — toolbox</span><h2>What I <span class="hl">work with.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't.</p></div>
+    <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>What I <span class="hl">work with.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't.</p></div>
     <div class="stack rv">
       <div><h4>Lifecycle &amp; CRM</h4><ul><li>HubSpot</li><li>Apollo.io</li><li>Instantly</li><li>Clay</li><li>Google Analytics 4</li><li>Search Console</li></ul></div>
       <div><h4>Content &amp; web</h4><ul><li>Figma</li><li>Canva</li><li>Webflow</li><li>Framer</li><li>WordPress</li><li>HTML / CSS / JS</li></ul></div>
@@ -387,7 +409,7 @@ footer .say span{position:relative}
 
 <footer id="contact">
   <div class="wrap">
-    <span class="mono kick">06 — contact</span>
+    <span class="mono kick">06 · contact</span>
     <h2>Always happy<br>to <span class="say"><span>say hello.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C 60 4, 130 4, 198 10"/></svg></span></h2>
     <div class="contacts">
       <a href="mailto:ece@nautilida.ai"><span>Email<span class="mono">ece@nautilida.ai</span></span><span>↗</span></a>
@@ -450,6 +472,13 @@ footer .say span{position:relative}
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.rv, footer').forEach((el,i)=>{io.observe(el)});
   document.querySelectorAll('.steps .rv,.work-list .rv,.reads .rv').forEach((el,i)=>el.style.transitionDelay=(i%6)*0.07+'s');
+  // how-i-work loop
+  const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
+  let li=0,loopTimer;
+  const place=i=>{steps.forEach((st,k)=>st.classList.toggle('on',k===i));const tr=dot.parentElement.getBoundingClientRect(),n=steps[i].querySelector('.n').getBoundingClientRect();dot.style.left=(n.left+n.width/2-tr.left)+'px'};
+  const lo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!loopTimer){loopTimer=1;setTimeout(()=>{loopEl.classList.add('go');place(0);loopTimer=setInterval(()=>{li=(li+1)%3;place(li)},reduce?6000:3200)},1600)}}),{threshold:.3});
+  lo.observe(loopEl);addEventListener('resize',()=>place(li));
+  steps.forEach((st,k)=>st.addEventListener('mouseenter',()=>{li=k;place(k)}));
   // active nav
   const links=[...document.querySelectorAll('nav .links a')];
   const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
