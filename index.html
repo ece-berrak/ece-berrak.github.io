@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ece Berrak · GTM generalist</title>
 <meta name="description" content="Ece Berrak, T-shaped GTM generalist in Berlin. Deep in user communication, engagement and retention; fluent across the full funnel.">
-<meta property="og:title" content="Ece Berrak · GTM generalist">
-<meta property="og:description" content="Broad across the funnel. Deep where users live.">
-<meta property="og:image" content="assets/ece.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -195,6 +192,10 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .kw mark{background:linear-gradient(var(--y),var(--y)) no-repeat 0 88%/0% 40%;color:inherit;transition:background-size 1s .4s cubic-bezier(.7,0,.2,1)}
 .kw.in mark{background-size:100% 40%}
 .kw figcaption{margin-top:10px}
+.kwq{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.kw .nm{color:var(--ink)}
+.kwq blockquote{font-size:clamp(20px,1.8vw,26px)}
+.kw figcaption a{color:var(--ink)}
 .job li.refli{padding-left:0}.job li.refli::before{display:none}
 .chip.refchip{background:var(--ink);color:#fff;border-color:var(--ink)}
 .chip.refchip:hover{background:var(--y);color:var(--ink)}
@@ -365,6 +366,23 @@ footer:hover .sprout .l3{animation:sway 2.4s ease-in-out infinite}
 .legal b{font-weight:400;color:#fff}
 footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.hint4{margin-top:36px;opacity:.75}.hint4 b{background:var(--ink);color:var(--y);padding:1px 6px;border-radius:4px;font-weight:400}
+.parade{position:fixed;left:0;right:0;bottom:0;height:110px;pointer-events:none;z-index:60;display:none}
+.parade.go{display:block}
+.parade span{position:absolute;bottom:6px;left:0;width:120px;transform:translateX(-160px);animation:walk 6.5s linear forwards}
+.parade .pc2{width:84px;bottom:4px;animation-delay:.7s}
+.parade svg{width:100%;display:block;animation:bob4 .45s ease-in-out infinite}
+.parade .lg{transform-box:fill-box;transform-origin:top center;animation:step .45s ease-in-out infinite alternate}
+.parade .l2,.parade .l4{animation-direction:alternate-reverse}
+.parade .tl{transform-box:fill-box;transform-origin:left bottom;animation:wag .6s ease-in-out infinite alternate}
+@keyframes walk{to{transform:translateX(calc(100vw + 40px))}}
+@keyframes bob4{50%{transform:translateY(-3px)}}
+@keyframes step{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+@keyframes wag{to{transform:rotate(-18deg)}}
+.toast4{position:fixed;left:50%;top:84px;z-index:61;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:99px;font:400 13px "JetBrains Mono",monospace;transition:opacity .3s,transform .4s cubic-bezier(.2,1.4,.4,1);pointer-events:none;max-width:calc(100% - 32px);text-align:center;line-height:1.4}
+.toast4 b{color:var(--y);font-weight:400}
+.toast4.on{opacity:1;transform:translate(-50%,0)}
 /* secret */
 .psst{margin-top:48px;text-align:center;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(6px)}}
@@ -433,7 +451,7 @@ footer .secret .ul{color:var(--ink)}
   .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
-  .kw{grid-template-columns:1fr;gap:10px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
+  .kw{grid-template-columns:1fr;gap:10px}.kwq{grid-template-columns:1fr;gap:28px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
@@ -444,6 +462,26 @@ footer .secret .ul{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
+<!-- seo -->
+<link rel="canonical" href="https://ece-berrak.github.io/">
+<meta name="author" content="Ece Berrak">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#ffe14d">
+<link rel="icon" href="https://ece-berrak.github.io/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://ece-berrak.github.io/assets/apple-touch-icon.png">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Ece Berrak">
+<meta property="og:title" content="Ece Berrak · GTM generalist">
+<meta property="og:description" content="Ece Berrak, T-shaped GTM generalist in Berlin. Deep in user communication, engagement and retention; fluent across the full funnel.">
+<meta property="og:url" content="https://ece-berrak.github.io/">
+<meta property="og:image" content="https://ece-berrak.github.io/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ece Berrak · GTM generalist">
+<meta name="twitter:description" content="Ece Berrak, T-shaped GTM generalist in Berlin. Deep in user communication, engagement and retention; fluent across the full funnel.">
+<meta name="twitter:image" content="https://ece-berrak.github.io/assets/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfilePage","@id":"https://ece-berrak.github.io/#page","url":"https://ece-berrak.github.io/","name":"Ece Berrak · GTM generalist","description":"Ece Berrak, T-shaped GTM generalist in Berlin. Deep in user communication, engagement and retention; fluent across the full funnel.","mainEntity":{"@id":"https://ece-berrak.github.io/#ece"},"dateModified":"2026-11-11","inLanguage":"en"},{"@type":"Person","@id":"https://ece-berrak.github.io/#ece","name":"Ece Berrak","givenName":"Ece","familyName":"Berrak","jobTitle":"GTM Generalist","description":"T-shaped go-to-market generalist in Berlin. Deep in user communication, engagement and retention; fluent across the full funnel, with product thinking at the root.","url":"https://ece-berrak.github.io/","image":"https://ece-berrak.github.io/assets/ece.jpg","address":{"@type":"PostalAddress","addressLocality":"Berlin","addressCountry":"DE"},"knowsAbout":["User communication","Lifecycle marketing","Customer engagement","Retention","User onboarding","Product thinking","Go-to-market strategy","Sales enablement","Brand marketing","Content marketing","SEO","Answer engine optimization (AEO)","HubSpot","ActiveCampaign","Marketing automation"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"HWR Berlin (Berlin School of Economics and Law)"},{"@type":"CollegeOrUniversity","name":"Istanbul Bilgi University"},{"@type":"CollegeOrUniversity","name":"Anadolu University"}],"knowsLanguage":["English","Turkish","German"],"sameAs":["https://www.linkedin.com/in/eceberrak","https://github.com/ece-berrak","https://www.youtube.com/@berlixiz"]},{"@type":"WebSite","@id":"https://ece-berrak.github.io/#site","url":"https://ece-berrak.github.io/","name":"Ece Berrak","publisher":{"@id":"https://ece-berrak.github.io/#ece"},"inLanguage":"en"}]}</script>
 </head>
 <body>
 
@@ -486,6 +524,7 @@ footer .secret .ul{color:var(--ink)}
         <text class="lab" x="300" y="460" style="animation-delay:1.4s">trunk · user communication</text>
         <g id="leaves"></g>
       </svg>
+      <p class="sr-only">A tree diagram: the roots are product thinking. The trunk is user communication: support questions, onboarding, in-product messages, lifecycle email, engagement and retention. The trunk feeds every branch of the full funnel: positioning, brand, outbound, SEO, content, website, campaigns, events, paid, sales enablement and community.</p>
       <div class="lens" id="lens" aria-live="polite"><span class="mono">the same funnel, through the user lens</span><div class="lens-row"><b id="lensT">&nbsp;</b><p id="lensP">&nbsp;</p></div></div>
       </div>
     </div>
@@ -639,6 +678,17 @@ footer .secret .ul{color:var(--ink)}
   <section id="shelf-sec">
     <div class="sh rv"><div><span class="mono kick">04 · shelf</span><h2>The <span class="hl">shelf.</span></h2></div><p>Long‑form writing, from manifestos to comparisons. Pull a spine off the shelf to read it.</p></div>
     <div class="library rv">
+      <ul class="sr-only">
+        <li><a href="writing/weekly-loop.html">The weekly revenue coordination loop, explained</a></li>
+        <li><a href="writing/ai-team-lead.html">What is an AI team lead for sales?</a></li>
+        <li><a href="writing/literacy.html">AI Team Lead Literacy</a></li>
+        <li><a href="writing/revenue-intelligence-vs.html">Revenue intelligence vs Nautilida</a></li>
+        <li><a href="writing/vs-gong.html">Nautilida vs Gong</a></li>
+        <li><a href="writing/vs-clari.html">Nautilida vs Clari</a></li>
+        <li><a href="writing/vs-gainsight.html">Nautilida vs Gainsight</a></li>
+        <li><a href="writing/manufacturing.html">Nautilida for manufacturing</a></li>
+        <li><a href="writing/catering.html">Nautilida for B2B catering</a></li>
+      </ul>
       <div class="shelfwrap"><div class="shelf" id="shelf" role="list"></div><div class="plank"><span class="mono" id="shelfcount"></span></div></div>
     </div>
   </section>
@@ -646,6 +696,7 @@ footer .secret .ul{color:var(--ink)}
   <!-- STACK -->
   <section id="stack">
     <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>The <span class="hl">pegboard.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't. Yellow tags hang on the trunk: the ones I live in.</p></div>
+    <p class="sr-only">Tools: HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Schema.org, llms.txt, Figma, Canva, CapCut, Webflow, Framer, WordPress, HTML, CSS and JavaScript, n8n, Zapier, Apps Script, Notion, Airtable, Asana, Tally, Claude and Claude Code, ChatGPT, Perplexity, Dataiku.</p>
     <div class="board rv" id="board"></div>
     <div class="usebar rv" aria-live="polite"><span class="mono">used for →</span><b id="useT">Hover a tag</b><span id="useD">to see what I use it for.</span></div>
   </section>
@@ -653,10 +704,20 @@ footer .secret .ul{color:var(--ink)}
   <!-- KIND WORDS (compact) -->
   <section id="kind-words" class="kw rv">
     <span class="mono">kind words</span>
-    <figure>
-      <blockquote>“Working with Ece means knowing that a project is <mark>in capable hands.</mark>”</blockquote>
-      <figcaption class="mono">Kübra Demir · Corporate Reputation Executive, TürkNet · my manager at CRS Soft</figcaption>
-    </figure>
+    <div class="kwq">
+      <figure>
+        <blockquote>“Ece is both a dedicated professional and <mark>a great energy to have in the room</mark>, always nice to work with, and gets the job done.”</blockquote>
+        <figcaption class="mono"><span class="nm">Alivia Smith</span> · Senior Director of Online Experience &amp; User Lifecycle Marketing · managed me directly · <a class="ul" href="https://www.linkedin.com/in/eceberrak/details/recommendations/" target="_blank" rel="noopener">via LinkedIn ↗</a></figcaption>
+      </figure>
+      <figure>
+        <blockquote>“She is one of the few people I have worked with who <mark>genuinely enjoy what they do</mark> while consistently pushing creative boundaries.”</blockquote>
+        <figcaption class="mono"><a class="ul" data-li="kubra">Kübra Demir</a> · my manager at CRS Soft, now Corporate Reputation Executive at TürkNet</figcaption>
+      </figure>
+      <figure>
+        <blockquote>“Ece distinguished herself as someone who contributed <mark>not as an intern, but as a fully engaged member</mark> of the team.”</blockquote>
+        <figcaption class="mono"><a class="ul" data-li="ekim">Ekim Yurtsever</a> · HR Business Partner for the Creative team at CRS Soft</figcaption>
+      </figure>
+    </div>
   </section>
 </div>
 
@@ -711,11 +772,14 @@ footer .secret .ul{color:var(--ink)}
           </span>
         </button>
       </div>
+      <p class="hint4 mono">psst. there is one more secret on this page. type <b>c a t s</b> anywhere, or tap my photo in the top bar five times.</p>
       <a class="more-ot ul" href="off-the-clock.html">The full, uncensored page →</a>
     </div>
   </section>
 </footer>
 
+<div class="parade" id="parade" aria-hidden="true"><span class="pc1"><svg viewBox="0 0 120 90" aria-hidden="true"><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span class="pc2"><svg viewBox="0 0 120 90" aria-hidden="true"><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span></div>
+<div class="toast4" id="toast4" role="status" aria-live="polite"></div>
 <div class="peek" id="peek" aria-hidden="true"></div>
 
 <script>
@@ -849,6 +913,14 @@ footer .secret .ul{color:var(--ink)}
       capsEl.append(c);setTimeout(()=>c.remove(),3200)}})};
   let tossed=false;new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting&&!tossed){tossed=true;setTimeout(()=>toss(),700);o.disconnect()}}),{threshold:.35}).observe(school.querySelector('.yb'));
   school.querySelectorAll('.ybc').forEach(c=>c.addEventListener('click',()=>toss(c)));
+  // secret #04: type "cats" (or tap the avatar 5x) for a cat parade; plus a note for the curious in the console
+  const parade=document.getElementById('parade'),toast4=document.getElementById('toast4');let found4=0,buf='',taps=0,tapT;
+  const showToast=m=>{toast4.innerHTML=m;toast4.classList.add('on');clearTimeout(toast4._t);toast4._t=setTimeout(()=>toast4.classList.remove('on'),3800)};
+  const catsGo=()=>{found4++;showToast(found4===1?'<b>secret #04 unlocked</b> · the managers are doing their rounds':'<b>again?</b> they love the attention');
+    if(reduce)return;parade.classList.remove('go');void parade.offsetWidth;parade.classList.add('go');clearTimeout(parade._t);parade._t=setTimeout(()=>parade.classList.remove('go'),7800)};
+  addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,textarea,[contenteditable]'))return;if(e.key.length!==1)return;buf=(buf+e.key.toLowerCase()).slice(-4);if(buf==='cats'){buf='';catsGo()}});
+  document.querySelector('nav .me').addEventListener('click',e=>{taps++;clearTimeout(tapT);tapT=setTimeout(()=>taps=0,1600);if(taps>=5){e.preventDefault();taps=0;catsGo()}else if(taps>1)e.preventDefault()});
+  try{console.log('%c hi, curious one. ','background:#ffe14d;color:#0a0a0a;font:600 14px sans-serif;padding:4px 2px;border-radius:4px');console.log('You opened the console, so you get a hint: type "cats" anywhere on the page. And if you are hiring for someone who reads the source, say hello: ece@nautilida.ai')}catch(_){}
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
