@@ -128,13 +128,22 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .job .tg{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink);align-self:center;transition:transform .35s,background .3s}
 .job .tg::before{content:"+";font-size:18px;line-height:1}
 .job[open] .tg{transform:rotate(45deg);background:var(--y)}
-.job .body{display:grid;grid-template-columns:150px 1.1fr 1.4fr 32px;gap:32px;padding:0 0 36px}
-.job .chips{grid-column:2;display:flex;flex-wrap:wrap;gap:8px;align-content:start}
+.job .body{overflow:hidden}
+.job .inner{display:grid;grid-template-columns:150px 1.1fr 1.4fr 32px;gap:32px;padding:0 0 36px}
+.job .tree-tags{grid-column:2}
+.job .tree-tags .mono{display:block;margin-bottom:10px}
+.job .chips{display:flex;flex-wrap:wrap;gap:8px;align-content:start}
+.chip.tr{background:var(--y);border-color:var(--y)}
+.job .chip{opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.job.shown .chip{opacity:1;transform:none}
+.legend{display:flex;gap:24px;margin:-24px 0 24px}
+.legend span{display:flex;align-items:center;gap:8px}
+.sw{display:inline-block;width:14px;height:14px;border-radius:99px;border:1px solid var(--line);background:var(--paper)}
+.sw.tr{background:var(--y);border-color:var(--y)}
 .chip{font:400 12px "JetBrains Mono",monospace;padding:6px 10px;border:1px solid var(--line);border-radius:99px;background:var(--paper)}
 .job ul{grid-column:3;list-style:none;display:flex;flex-direction:column;gap:10px}
 .job li{position:relative;padding-left:20px;color:var(--ink-2)}
 .job li::before{content:"";position:absolute;left:0;top:.65em;width:8px;height:8px;background:var(--y);border-radius:50%}
-.job[open] .body{animation:up .5s cubic-bezier(.2,.8,.2,1)}
 .edu{display:grid;grid-template-columns:150px 1fr;gap:32px;margin-top:72px}
 .edu .rows div{display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;padding:16px 0;border-top:1px solid var(--line)}
 .edu .rows b{font-weight:500}
@@ -215,7 +224,7 @@ footer .say span{position:relative}
   .job summary .y{grid-column:1/-1}
   .job summary .one{grid-column:1/-1;grid-row:3}
   .job summary .tg{grid-column:2;grid-row:2}
-  .job .body{grid-template-columns:1fr;gap:20px}.job .chips,.job ul{grid-column:1}
+  .job .inner{grid-template-columns:1fr;gap:20px}.job .inner>span{display:none}.job .tree-tags,.job ul{grid-column:1}.legend{flex-direction:column;gap:8px;margin-top:-16px}
   .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
@@ -293,80 +302,76 @@ footer .say span{position:relative}
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="sh rv"><div><span class="mono kick">02 · experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Three years in B2B SaaS — enterprise to pre‑seed — on top of partnerships, community and content before that. Open any role for the detail.</p></div>
-
+    <div class="sh rv"><div><span class="mono kick">02 · experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Three years in B2B SaaS, from enterprise to pre‑seed, on top of partnerships, community and content before that. Open any role for the detail.</p></div>
+    <div class="legend rv mono"><span><i class="sw tr"></i>trunk · user communication</span><span><i class="sw"></i>branches · full funnel</span></div>
     <details class="job rv" open>
-      <summary><span class="mono y">2025 — now</span><span class="co">Nautilida<small>Co‑founder &amp; CEO · Berlin</small></span><span class="one">Built go‑to‑market from an empty page for an AI‑native sales platform.</span><span class="tg" aria-hidden="true"></span></summary>
-      <div class="body"><span></span>
-        <div class="chips"><span class="chip">Sales enablement</span><span class="chip">First LOIs secured</span><span class="chip">1st design partner</span></div>
+      <summary><span class="mono y">2025 → now</span><span class="co">Nautilida<small>Co‑founder &amp; CEO · Berlin</small></span><span class="one">Built go‑to‑market from an empty page for an AI‑native sales platform.</span><span class="tg" aria-hidden="true"></span></summary>
+      <div class="body"><div class="inner"><span></span>
+        <div class="tree-tags"><span class="mono">on the tree</span><div class="chips"><span class="chip tr">Onboarding</span><span class="chip">Positioning</span><span class="chip">Website</span><span class="chip">Content</span><span class="chip">Outbound</span><span class="chip">Sales enablement</span></div></div>
         <ul>
-          <li>Built positioning, messaging, website and the competitor and market research behind them.</li>
-          <li>Built the sales enablement kit from scratch — pitch deck, one‑pagers, use cases, objection handling — and tested every piece in founder‑led conversations with prospects.</li>
+          <li>Built positioning, messaging and the website, plus the competitor and market research behind them.</li>
+          <li>Built the sales enablement kit from scratch: pitch deck, one‑pagers, use cases and objection handling. Tested every piece in founder‑led conversations with prospects.</li>
           <li>Ran outbound end to end with Apollo, Clay and Instantly.</li>
-          <li>Secured a design partnership with a German catering company, signed LOIs across FMCG and manufacturing, and progressed conversations with an enterprise bank.</li>
-          <li>Built the automations that made a one‑person operation survivable — and open‑sourced the inbound lead workflow.</li>
+          <li>Secured a design partnership with a German catering company and signed LOIs across FMCG and manufacturing.</li>
+          <li>Built the automations that made a one‑person operation survivable, and open‑sourced the inbound lead workflow.</li>
           <li>Produced all investor materials and the research behind them.</li>
         </ul>
-      </div>
+      </div></div>
     </details>
-
     <details class="job rv">
-      <summary><span class="mono y">2024 — 2025</span><span class="co">Dataiku<small>Growth Marketing · Berlin</small></span><span class="one">Owned user communication for an AI &amp; analytics platform — two segments, one engine.</span><span class="tg" aria-hidden="true"></span></summary>
-      <div class="body"><span></span>
-        <div class="chips"><span class="chip">HubSpot email + in‑product</span><span class="chip">Freemium → paid lifecycle</span><span class="chip">5 teams in the loop</span></div>
+      <summary><span class="mono y">2024 → 2025</span><span class="co">Dataiku<small>Growth Marketing · Berlin</small></span><span class="one">Owned user communication for an AI and analytics platform. Two segments, one engine.</span><span class="tg" aria-hidden="true"></span></summary>
+      <div class="body"><div class="inner"><span></span>
+        <div class="tree-tags"><span class="mono">on the tree</span><div class="chips"><span class="chip tr">Support questions</span><span class="chip tr">Onboarding</span><span class="chip tr">In‑product messages</span><span class="chip tr">Lifecycle email</span><span class="chip tr">Engagement</span><span class="chip tr">Retention</span><span class="chip">Events</span><span class="chip">Community</span><span class="chip">Content</span></div></div>
         <ul>
           <li>Owned lifecycle communication in HubSpot and in‑product messaging for two very different segments: newly onboarded users and advanced champions.</li>
           <li>Built the engagement, adoption and retention side, using engagement signals to decide who needed what and when.</li>
-          <li>Answered user questions directly, including provisioning and setup — which is where most of our use cases and success stories actually came from.</li>
-          <li>Drove participation in webinars, events and the global user group, and turned those into content and customer stories.</li>
-          <li>Reported on engagement and adoption, working across Product, Customer Success, Technical, Content and Events.</li>
+          <li>Answered user questions directly, including provisioning and setup. That is where most of our use cases and success stories actually came from.</li>
+          <li>Drove participation in webinars, events and the global user group, and turned them into content and customer stories.</li>
+          <li>Reported on engagement and adoption, working with Product, Customer Success, Technical, Content and Events.</li>
         </ul>
-      </div>
+      </div></div>
     </details>
-
     <details class="job rv">
-      <summary><span class="mono y">2022</span><span class="co">CRS Soft<small>Creative Marketing · Istanbul</small></span><span class="one">UX, SEO and content for B2B software — where marketing and product overlap.</span><span class="tg" aria-hidden="true"></span></summary>
-      <div class="body"><span></span>
-        <div class="chips"><span class="chip">UX + SEO</span><span class="chip">Employer branding</span><span class="chip">Miro research</span></div>
+      <summary><span class="mono y">2022</span><span class="co">CRS Soft<small>Creative Marketing · Istanbul</small></span><span class="one">UX, SEO and content for B2B software, where marketing and product overlap.</span><span class="tg" aria-hidden="true"></span></summary>
+      <div class="body"><div class="inner"><span></span>
+        <div class="tree-tags"><span class="mono">on the tree</span><div class="chips"><span class="chip">SEO</span><span class="chip">Content</span><span class="chip">Website</span><span class="chip">Brand</span></div></div>
         <ul>
           <li>Improved user flows, discoverability and usability across software products through UX, SEO and content work.</li>
           <li>Supported HR marketing and employer branding, including career pages and recruitment content.</li>
           <li>Designed user journeys and research frameworks in Miro, aligning UX thinking with performance goals.</li>
         </ul>
-      </div>
+      </div></div>
     </details>
-
     <details class="job rv">
-      <summary><span class="mono y">2020 — 2022</span><span class="co">Plandy<small>Affiliate &amp; Partnerships · Remote</small></span><span class="one">Built a creator affiliate network from scratch — while studying full time.</span><span class="tg" aria-hidden="true"></span></summary>
-      <div class="body"><span></span>
-        <div class="chips"><span class="chip">Creator network</span><span class="chip">Multi‑brand events</span><span class="chip">Fully remote</span></div>
+      <summary><span class="mono y">2020 → 2022</span><span class="co">Plandy<small>Affiliate &amp; Partnerships · Remote</small></span><span class="one">Built a creator affiliate network from scratch while studying full time.</span><span class="tg" aria-hidden="true"></span></summary>
+      <div class="body"><div class="inner"><span></span>
+        <div class="tree-tags"><span class="mono">on the tree</span><div class="chips"><span class="chip">Partners</span><span class="chip">Events</span><span class="chip">Community</span></div></div>
         <ul>
           <li>Recruited, onboarded and briefed creators, and kept them active over months.</li>
           <li>Managed several brands, partners and events in parallel.</li>
           <li>Represented the platform in person, talking to organisers and attendees directly.</li>
         </ul>
-      </div>
+      </div></div>
     </details>
-
     <details class="job rv">
-      <summary><span class="mono y">2019 — 2022</span><span class="co">Community Bilgi<small>Marketing Content Manager · Istanbul</small></span><span class="one">The first brand I owned publicly — social, voice and in‑person presence.</span><span class="tg" aria-hidden="true"></span></summary>
-      <div class="body"><span></span>
-        <div class="chips"><span class="chip">Social ownership</span><span class="chip">Events</span><span class="chip">Brand voice</span></div>
+      <summary><span class="mono y">2019 → 2022</span><span class="co">Community Bilgi<small>Marketing Content Manager · Istanbul</small></span><span class="one">The first brand I owned publicly: social, voice and in‑person presence.</span><span class="tg" aria-hidden="true"></span></summary>
+      <div class="body"><div class="inner"><span></span>
+        <div class="tree-tags"><span class="mono">on the tree</span><div class="chips"><span class="chip">Brand</span><span class="chip">Content</span><span class="chip">Events</span><span class="chip">Community</span></div></div>
         <ul>
           <li>Owned the content calendar, copy, visuals and posting rhythm across the community's channels.</li>
           <li>Represented the community at campus events and built relationships with students and partners.</li>
           <li>Turned event energy into recurring storylines that kept the brand alive between activations.</li>
         </ul>
-      </div>
+      </div></div>
     </details>
 
     <div class="edu rv">
       <span class="mono">education</span>
       <div class="rows">
-        <div><b>M.A. Political Economy — HWR Berlin</b><span>2023 — 2025 · Thesis on digitalization in retail chains and its labor‑market impact (USA / Germany).</span></div>
-        <div><b>B.A. International Relations &amp; PR — Istanbul Bilgi University</b><span>2019 — 2023 · Marketing minor. Where I learned how stories travel.</span></div>
-        <div><b>Social Media Management — Anadolu University</b><span>2020 — 2022 · Associate programme, taken in parallel.</span></div>
-        <div class="certs"><span class="chip">HubSpot Sales Hub</span><span class="chip">HubSpot Reporting</span><span class="chip">HubSpot Email Marketing</span><span class="chip">Google Ads</span><span class="chip">Google Digital Marketing &amp; E‑commerce</span><span class="chip">Dataiku Core Designer</span><span class="chip">IDEO.org — Human‑Centered Design</span></div>
+        <div><b>M.A. Political Economy · HWR Berlin</b><span>2023 → 2025. Thesis on digitalization in retail chains and its labor‑market impact, comparing the USA and Germany.</span></div>
+        <div><b>B.A. International Relations &amp; PR · Istanbul Bilgi University</b><span>2019 → 2023. Marketing minor. Where I learned how stories travel.</span></div>
+        <div><b>Social Media Management · Anadolu University</b><span>2020 → 2022. Associate programme, taken in parallel.</span></div>
+        <div class="certs"><span class="chip">HubSpot Sales Hub</span><span class="chip">HubSpot Reporting</span><span class="chip">HubSpot Email Marketing</span><span class="chip">Google Ads</span><span class="chip">Google Digital Marketing &amp; E‑commerce</span><span class="chip">Dataiku Core Designer</span><span class="chip">IDEO.org Human‑Centered Design</span></div>
       </div>
     </div>
   </section>
@@ -472,6 +477,17 @@ footer .say span{position:relative}
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.rv, footer').forEach((el,i)=>{io.observe(el)});
   document.querySelectorAll('.steps .rv,.work-list .rv,.reads .rv').forEach((el,i)=>el.style.transitionDelay=(i%6)*0.07+'s');
+  // experience accordion: smooth open/close + staggered chips
+  document.querySelectorAll('.job').forEach(d=>{
+    const body=d.querySelector('.body'),chips=[...d.querySelectorAll('.chip')];
+    chips.forEach((c,i)=>c.style.transitionDelay=(i*0.04)+'s');
+    if(d.open)d.classList.add('shown');
+    d.querySelector('summary').addEventListener('click',e=>{
+      e.preventDefault();if(reduce){d.open=!d.open;d.classList.toggle('shown',d.open);return}
+      if(!d.open){d.open=true;const h=body.scrollHeight;body.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:450,easing:'cubic-bezier(.2,.8,.2,1)'});requestAnimationFrame(()=>d.classList.add('shown'))}
+      else{d.classList.remove('shown');const h=body.scrollHeight;const an=body.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:350,easing:'cubic-bezier(.6,0,.4,1)'});an.onfinish=()=>d.open=false}
+    });
+  });
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
