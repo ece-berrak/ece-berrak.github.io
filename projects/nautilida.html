@@ -7,14 +7,14 @@
 <meta name="description" content="A case study of nautilida.ai: marketing surfaces, comparison pages, glossary, and a 7-chapter literacy microsite — designed and shipped end-to-end in Claude Code. Optimized for SEO, AEO, and GEO." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <style>
 :root {
-  --bone:#F4EFE4; --ink:#0E0D14; --ink-2:#3a3744; --ink-3:#7c7686;
-  --rule:#e6dfd0; --rule-strong:#1a1922;
-  --violet:#4F32D8; --violet-soft:#a78bfa; --lime:#D4FF3D;
-  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --bone:#f6f6f3; --ink:#0a0a0a; --ink-2:#3a3a3a; --ink-3:#7a7a7a;
+  --rule:#dcdcd6; --rule-strong:#0a0a0a;
+  --violet:#0a0a0a; --violet-soft:#7a7a7a; --lime:#ffe14d;
+  --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
   --serif:'Instrument Serif',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --pad: clamp(20px, 4vw, 56px);
@@ -37,7 +37,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 /* Top bar */
 .top {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(244,239,228,0.92);
+  background: rgba(246,246,243,0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
@@ -368,7 +368,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .outcome-card .label {
   font-family: var(--mono); font-size: 11px;
   letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(244,239,228,0.7);
+  color: rgba(246,246,243,0.7);
 }
 
 /* JSON block */
@@ -424,6 +424,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+::selection{background:#ffe14d;color:#0a0a0a}
 </style>
 </head>
 <body>
@@ -441,9 +442,9 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 <!-- Hero -->
 <section class="hero reveal">
-  <div class="kicker">// case study · 2025 — 2026</div>
+  <div class="kicker">// case study · 2025 → 2026</div>
   <h1>Nautilida<br/><em>marketing site, end-to-end.</em></h1>
-  <p class="hero-deck">A complete B2B marketing presence — designed, written, and shipped in Claude Code as a co-founder. Optimized for SEO, AEO, and GEO so AI answer engines cite the product by name.</p>
+  <p class="hero-deck">A complete B2B marketing presence, designed, written, and shipped in Claude Code as a co-founder. Optimized for SEO, AEO, and GEO so AI answer engines cite the product by name.</p>
   <div class="hero-meta">
     <span><strong>Role</strong> · Co-founder & CEO · marketing lead</span>
     <span><strong>Scope</strong> · Marketing site + microsite + content system</span>
@@ -456,10 +457,10 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 <section class="sitemap reveal" id="sitemap">
   <div class="sitemap-head">
     <div>
-      <div class="section-num">// 01 — site map</div>
+      <div class="section-num">01 · site map</div>
       <h2 class="section-h2">What lives at <em>nautilida.ai</em>.</h2>
     </div>
-    <p class="section-deck">A snapshot of every surface I designed and shipped — main site, comparison pages, use cases, glossary, blog, and the 7-chapter literacy microsite.</p>
+    <p class="section-deck">A snapshot of every surface I designed and shipped, main site, comparison pages, use cases, glossary, blog, and the 7-chapter literacy microsite.</p>
   </div>
 
   <div class="sitemap-grid">
@@ -472,19 +473,19 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
     <a class="sitemap-card" href="#page-compare">
       <div class="url">/compare/{gong,clari,gainsight,...}</div>
       <h3>Comparison pages (×12)</h3>
-      <p>Head-to-head explainers built for AI-search citation — Gong, Clari, Gainsight, and nine more.</p>
+      <p>Head-to-head explainers built for AI-search citation, Gong, Clari, Gainsight, and nine more.</p>
       <div class="arr">View breakdown →</div>
     </a>
     <a class="sitemap-card" href="#page-usecases">
       <div class="url">/use-cases/{manufacturing,catering}</div>
       <h3>Use cases</h3>
-      <p>Industry-specific framing for recurring-account B2B teams — manufacturing and catering.</p>
+      <p>Industry-specific framing for recurring-account B2B teams, manufacturing and catering.</p>
       <div class="arr">View breakdown →</div>
     </a>
     <a class="sitemap-card" href="#page-glossary">
       <div class="url">/glossary</div>
       <h3>Glossary</h3>
-      <p>Plain-English definitions of category terms — AEO-friendly definition pages with schema.</p>
+      <p>Plain-English definitions of category terms, AEO-friendly definition pages with schema.</p>
       <div class="arr">View breakdown →</div>
     </a>
     <a class="sitemap-card" href="#page-blog">
@@ -504,7 +505,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 <!-- Page breakdowns -->
 <section class="pages">
-  <div class="section-num" style="margin-bottom:12px;">// 02 — page breakdowns</div>
+  <div class="section-num" style="margin-bottom:12px;">02 · page breakdowns</div>
   <h2 class="section-h2" style="margin-bottom:48px;">Where what is, and <em>why.</em></h2>
 
   <!-- Home -->
@@ -522,12 +523,12 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
       <p>The home page does three jobs at once: positions Nautilida as the <strong>AI Team Lead for Sales</strong> category (not another assistant, not another dashboard), frames the problem in operator language (revenue coordination, not "AI productivity"), and gets a qualified visitor into either a comparison page or the contact flow.</p>
       <p>Structured data (Organization, Product, FAQ) is embedded inline; <code>llms.txt</code> at the root tells AI crawlers exactly which pages to cite for which intents.</p>
       <ul class="sections-list">
-        <li><span class="n">01</span><span class="t"><strong>Hero</strong> — Headline + sub + dual CTA (book a call, see how it works).</span></li>
-        <li><span class="n">02</span><span class="t"><strong>Problem framing</strong> — What revenue teams actually run on, and where the breaks are.</span></li>
-        <li><span class="n">03</span><span class="t"><strong>The weekly loop</strong> — Monday brief, mid-week priorities, Friday recap, compounding memory.</span></li>
-        <li><span class="n">04</span><span class="t"><strong>Product surfaces</strong> — Three concrete capabilities with visual examples.</span></li>
-        <li><span class="n">05</span><span class="t"><strong>Comparison teaser</strong> — Quick-glance differentiators vs Gong, Clari, Gainsight.</span></li>
-        <li><span class="n">06</span><span class="t"><strong>Footer</strong> — Quick links, contact, llms.txt reference, schema.</span></li>
+        <li><span class="n">01</span><span class="t"><strong>Hero</strong>: Headline + sub + dual CTA (book a call, see how it works).</span></li>
+        <li><span class="n">02</span><span class="t"><strong>Problem framing</strong>: What revenue teams actually run on, and where the breaks are.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>The weekly loop</strong>: Monday brief, mid-week priorities, Friday recap, compounding memory.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>Product surfaces</strong>: Three concrete capabilities with visual examples.</span></li>
+        <li><span class="n">05</span><span class="t"><strong>Comparison teaser</strong>: Quick-glance differentiators vs Gong, Clari, Gainsight.</span></li>
+        <li><span class="n">06</span><span class="t"><strong>Footer</strong>: Quick links, contact, llms.txt reference, schema.</span></li>
       </ul>
       <a class="open-link" href="../nautilida-site/" target="_blank" rel="noopener">Open the site <span aria-hidden="true">↗</span></a>
     </div>
@@ -544,14 +545,14 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
     </aside>
     <div class="page-main">
       <h3>Twelve comparison pages, <em>each built for AI-search.</em></h3>
-      <p class="purpose">When a buyer asks "Nautilida vs Gong?" in ChatGPT, Perplexity, or Claude — there's a page sitting there ready to be cited.</p>
+      <p class="purpose">When a buyer asks "Nautilida vs Gong?" in ChatGPT, Perplexity, or Claude, there's a page sitting there ready to be cited.</p>
       <p>Each comparison page follows a strict editorial pattern: a <strong>short answer</strong> at the top (extractable by AI), a <strong>differentiator table</strong> in the middle, <strong>category clarification</strong> for buyers who think the two tools are alternatives (often they're complementary), and <strong>FAQs with schema</strong> at the bottom.</p>
       <p>Examples shipped:</p>
       <ul class="sections-list">
-        <li><span class="n">01</span><span class="t"><strong>/compare/gong</strong> — Revenue intelligence vs coordination layer.</span></li>
-        <li><span class="n">02</span><span class="t"><strong>/compare/clari</strong> — Forecasting platform vs operating rhythm.</span></li>
-        <li><span class="n">03</span><span class="t"><strong>/compare/gainsight</strong> — CS platform vs cross-functional revenue coordination.</span></li>
-        <li><span class="n">04</span><span class="t"><strong>/compare/{outreach,salesloft,hubspot,...}</strong> — Plus nine more, same pattern, different category.</span></li>
+        <li><span class="n">01</span><span class="t"><strong>/compare/gong</strong>: Revenue intelligence vs coordination layer.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>/compare/clari</strong>: Forecasting platform vs operating rhythm.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>/compare/gainsight</strong>: CS platform vs cross-functional revenue coordination.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>/compare/{outreach,salesloft,hubspot,...}</strong>: Plus nine more, same pattern, different category.</span></li>
       </ul>
       <a class="open-link" href="../nautilida-site/#/compare" target="_blank" rel="noopener">Open the comparison pages <span aria-hidden="true">↗</span></a>
     </div>
@@ -570,8 +571,8 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
       <h3>Where the category clicks: <em>industries with recurring revenue.</em></h3>
       <p class="purpose">Vertical pages exist because the buyer's "is this for me?" question is faster to answer with their own industry than with abstract category language.</p>
       <ul class="sections-list">
-        <li><span class="n">01</span><span class="t"><strong>/use-cases/manufacturing</strong> — Named accounts, predictable reorder cadence, AM-coordinated revenue.</span></li>
-        <li><span class="n">02</span><span class="t"><strong>/use-cases/catering</strong> — B2B kitchens with repeat customers, office and event programs, deep account memory.</span></li>
+        <li><span class="n">01</span><span class="t"><strong>/use-cases/manufacturing</strong>: Named accounts, predictable reorder cadence, AM-coordinated revenue.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>/use-cases/catering</strong>: B2B kitchens with repeat customers, office and event programs, deep account memory.</span></li>
       </ul>
       <p>Each page is structured the same: the industry's recurring-revenue pattern, three concrete coordination problems, how Nautilida's weekly loop addresses each, and a section-specific contact CTA.</p>
       <a class="open-link" href="../nautilida-site/#/use-cases" target="_blank" rel="noopener">Open the use cases <span aria-hidden="true">↗</span></a>
@@ -589,8 +590,8 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
     </aside>
     <div class="page-main">
       <h3>The category dictionary.</h3>
-      <p class="purpose">When a buyer or a search engine asks "what is an AI team lead for sales?" — there is a clean, schema-marked definition page ready to answer.</p>
-      <p>Every glossary entry follows the same anatomy: <strong>short answer</strong> (1–2 sentences, AI-extractable), <strong>longer explanation</strong>, <strong>related terms</strong>, and <strong>FAQPage / DefinedTerm schema</strong> embedded inline. Definitions cover the entire category surface — coordination layer, weekly loop, AI team lead, revenue book memory, and more.</p>
+      <p class="purpose">When a buyer or a search engine asks "what is an AI team lead for sales?", there is a clean, schema-marked definition page ready to answer.</p>
+      <p>Every glossary entry follows the same anatomy: <strong>short answer</strong> (1 to 2 sentences, AI-extractable), <strong>longer explanation</strong>, <strong>related terms</strong>, and <strong>FAQPage / DefinedTerm schema</strong> embedded inline. Definitions cover the entire category surface, coordination layer, weekly loop, AI team lead, revenue book memory, and more.</p>
       <a class="open-link" href="../nautilida-site/#/blog#glossary" target="_blank" rel="noopener">Open the glossary <span aria-hidden="true">↗</span></a>
     </div>
   </article>
@@ -628,16 +629,16 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
       </div>
     </aside>
     <div class="page-main">
-      <h3>The Literacy microsite — <em>7-chapter category primer.</em></h3>
+      <h3>The Literacy microsite, <em>7-chapter category primer.</em></h3>
       <p class="purpose">A separate microsite that exists to explain the AI-native sales category to VCs and B2B buyers before any product pitch happens. Long-form, navigable, designed to be opened in fundraising conversations.</p>
       <ul class="sections-list">
-        <li><span class="n">01</span><span class="t"><strong>Why AI-Native Sales</strong> — Why the category exists now and why it didn't before.</span></li>
-        <li><span class="n">02</span><span class="t"><strong>The Old Stack Breaks</strong> — Where the existing revenue tooling falls short.</span></li>
-        <li><span class="n">03</span><span class="t"><strong>Agents, Not Seats</strong> — From software-as-tool to software-as-team-member.</span></li>
-        <li><span class="n">04</span><span class="t"><strong>Data as Destiny</strong> — Why cross-stack memory is the real moat.</span></li>
-        <li><span class="n">05</span><span class="t"><strong>Trust at Scale</strong> — How AI earns the right to act on revenue data.</span></li>
-        <li><span class="n">06</span><span class="t"><strong>The New Metrics</strong> — What you measure when coordination is the moat.</span></li>
-        <li><span class="n">07</span><span class="t"><strong>What Comes Next</strong> — The trajectory of the category, and what to bet on.</span></li>
+        <li><span class="n">01</span><span class="t"><strong>Why AI-Native Sales</strong>: Why the category exists now and why it didn't before.</span></li>
+        <li><span class="n">02</span><span class="t"><strong>The Old Stack Breaks</strong>: Where the existing revenue tooling falls short.</span></li>
+        <li><span class="n">03</span><span class="t"><strong>Agents, Not Seats</strong>: From software-as-tool to software-as-team-member.</span></li>
+        <li><span class="n">04</span><span class="t"><strong>Data as Destiny</strong>: Why cross-stack memory is the real moat.</span></li>
+        <li><span class="n">05</span><span class="t"><strong>Trust at Scale</strong>: How AI earns the right to act on revenue data.</span></li>
+        <li><span class="n">06</span><span class="t"><strong>The New Metrics</strong>: What you measure when coordination is the moat.</span></li>
+        <li><span class="n">07</span><span class="t"><strong>What Comes Next</strong>: The trajectory of the category, and what to bet on.</span></li>
       </ul>
       <p>Written and designed solo. Used in live fundraising conversations with VCs and design-partner intros.</p>
       <a class="open-link" href="../nautilida-site/literacy/" target="_blank" rel="noopener">Open the literacy microsite <span aria-hidden="true">↗</span></a>
@@ -648,7 +649,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 <!-- Design system -->
 <section class="design reveal" id="design-system">
-  <div class="section-num">// 03 — design system</div>
+  <div class="section-num">03 · design system</div>
   <h2 class="section-h2">A small, opinionated <em>system.</em></h2>
   <p class="section-deck">Tokens chosen for legibility, AEO-cited copy, and a recognizable look across surfaces.</p>
 
@@ -687,14 +688,14 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
     <div class="design-tile">
       <div class="label">// tooling</div>
       <h4>Claude Code, end-to-end</h4>
-      <p>Site designed and shipped entirely in Claude Code. No agency, no developer handoff — copy, layout, schema, and deploy all inside the same loop.</p>
+      <p>Site designed and shipped entirely in Claude Code. No agency, no developer handoff, copy, layout, schema, and deploy all inside the same loop.</p>
     </div>
   </div>
 </section>
 
 <!-- Outcomes -->
 <section class="outcomes-section reveal">
-  <div class="section-num">// 04 — outcomes</div>
+  <div class="section-num">04 · outcomes</div>
   <h2 class="section-h2">What this <em>shipped.</em></h2>
 
   <div class="outcomes-grid">
@@ -719,12 +720,12 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
 <!-- JSON data block -->
 <section class="json-block reveal" id="json">
-  <div class="section-num">// 05 — design data</div>
+  <div class="section-num">05 · design data</div>
   <h2 class="section-h2">JSON, for <em>rebuild and reference.</em></h2>
   <p class="section-deck">All the structure on this page lives as JSON, so a designer or another model can rebuild the entire case study from it.</p>
 
   <pre class="json-frame" id="json-out"></pre>
-  <p class="json-note">Also embedded as <code>&lt;script type="application/json" id="nautilida-project-data"&gt;</code> below — copy-paste friendly.</p>
+  <p class="json-note">Also embedded as <code>&lt;script type="application/json" id="nautilida-project-data"&gt;</code> below, copy-paste friendly.</p>
 </section>
 
 <!-- Footer -->

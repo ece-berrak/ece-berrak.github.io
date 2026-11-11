@@ -1,1202 +1,209 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ece berrak — off the clock</title>
-<meta name="description" content="What I do when I'm not shipping. Networking events, travel, cats. Uncensored." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Off the clock · Ece Berrak</title>
+<meta name="description" content="The other 50%: the rooms I keep showing up to in Berlin, the trips we vlog, and two cats. Uncensored.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bone: #FAF8F1;
-    --bone-2: #F2EFE3;
-    --ink: #0E0D14;
-    --ink-2: #2A2735;
-    --ink-3: #5C5868;
-    --rule: #1f1c2a14;
-    --rule-strong: #1f1c2a26;
-    --violet: #4F32D8;
-    --violet-ink: #2d1a93;
-    --lime: #D4FF3D;
-    --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
-    --sans: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-    --maxw: 1240px;
-    --pad: clamp(20px, 4vw, 56px);
-  }
+:root{--bg:#f6f6f3;--paper:#fff;--ink:#0a0a0a;--ink-2:#3a3a3a;--mute:#7a7a7a;--line:#dcdcd6;--y:#ffe14d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--y)}
+.mono{font:400 12px/1.5 "JetBrains Mono",monospace;letter-spacing:.03em;color:var(--mute)}
+em.s{font-family:"Instrument Serif",serif;font-weight:400}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+nav .me{display:flex;align-items:center;gap:10px;font-weight:500}
+nav .me img{width:30px;height:30px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--ink);border-radius:99px;font:400 12px "JetBrains Mono",monospace;transition:background .25s}
+.pill:hover{background:var(--y)}
 
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bone);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
+/* hero */
+.hero{padding:110px 0 90px;border-bottom:1px solid var(--line)}
+.hero h1{font-weight:500;font-size:clamp(64px,12vw,190px);line-height:.86;letter-spacing:-.065em;margin-top:24px}
+.hero h1 .hl{position:relative;display:inline-block}
+.hero h1 .hl::before{content:"";position:absolute;left:-.04em;right:-.04em;top:.22em;bottom:.04em;background:var(--y);z-index:-1;transform:scaleX(0);transform-origin:left;animation:swipe .8s .5s cubic-bezier(.7,0,.2,1) forwards}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.3em);animation:up .8s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .w:nth-child(2){animation-delay:.12s}
+.hero .deck{margin-top:40px;max-width:620px;font-size:21px;color:var(--ink-2);opacity:0;animation:up .8s .5s forwards}
+.hero .deck b{font-weight:500;color:var(--ink)}
+.warn{display:inline-flex;align-items:center;gap:10px;margin-top:32px;padding:8px 14px;background:var(--ink);color:#fff;border-radius:99px;font:400 12px "JetBrains Mono",monospace;opacity:0;animation:up .8s .7s forwards}
+.warn i{width:8px;height:8px;border-radius:50%;background:var(--y);animation:ping 2s infinite}
 
-  a { color: inherit; text-decoration: none; }
+section{padding:110px 0;border-bottom:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:56px}
+.sh h2{font-weight:500;font-size:clamp(38px,4.6vw,68px);line-height:1;letter-spacing:-.045em;margin-top:16px}
+.sh h2 .hl{background:linear-gradient(var(--y),var(--y)) no-repeat 0 85%/0% 38%;transition:background-size .9s .2s cubic-bezier(.7,0,.2,1)}
+.sh.in h2 .hl{background-size:100% 38%}
+.sh p{color:var(--ink-2);max-width:480px;justify-self:end}
 
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+/* rooms: polaroid wall */
+.wall{columns:4 240px;column-gap:28px}
+.pol{break-inside:avoid;display:block;width:100%;margin:0 0 34px;background:#fff;padding:10px 10px 16px;border:0;box-shadow:0 14px 30px -18px rgba(0,0,0,.45);cursor:pointer;text-align:left;font:inherit;color:inherit;
+  transform:rotate(var(--r)) translateY(30px);opacity:0;transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .5s,box-shadow .3s}
+.pol.in{transform:rotate(var(--r));opacity:1}
+.pol:hover,.pol:focus-visible{transform:rotate(0) scale(1.03);box-shadow:0 24px 40px -20px rgba(0,0,0,.5);outline:none;z-index:2;position:relative}
+.pol img{display:block;width:100%;height:auto;filter:grayscale(.15)}
+.pol .tag{display:block;margin-top:12px;font:400 11px "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+.pol b{display:block;font-weight:500;font-size:17px;letter-spacing:-.02em;line-height:1.2;margin-top:4px}
+.pol .more{display:inline-block;margin-top:10px;font:400 11px "JetBrains Mono",monospace;background:var(--y);padding:3px 8px;border-radius:99px}
+.note{break-inside:avoid;margin:0 0 34px;padding:22px;background:var(--y);transform:rotate(1.5deg);font-family:"Instrument Serif",serif;font-style:italic;font-size:24px;line-height:1.2;box-shadow:0 14px 30px -18px rgba(0,0,0,.4)}
+.note .mono{display:block;font-style:normal;color:#5a5000;margin-bottom:8px}
 
-  /* Top bar */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px var(--pad);
-    border-bottom: 1px solid var(--rule);
-    background: var(--bone);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .topbar-brand {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 22px;
-    letter-spacing: -.01em;
-  }
-  .topbar-back {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    border: 1px solid var(--rule-strong);
-    padding: 8px 14px;
-    border-radius: 999px;
-    transition: background .2s, color .2s, border-color .2s;
-  }
-  .topbar-back:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+/* dialog */
+dialog{margin:auto;border:0;padding:0;max-width:900px;width:calc(100% - 32px);background:var(--paper);border-radius:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(10,10,10,.6);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,1.3,.4,1)}
+.dlg{display:grid;grid-template-columns:1fr 1.1fr}
+.dlg img{width:100%;height:100%;max-height:80vh;object-fit:cover;border-radius:14px 0 0 14px}
+.dlg .tx{padding:36px;overflow:auto;max-height:80vh}
+.dlg h3{font-weight:500;font-size:30px;letter-spacing:-.03em;line-height:1.1;margin:12px 0 18px}
+.dlg p{color:var(--ink-2);margin-bottom:12px;font-size:16px}
+.dlg p b{color:var(--ink);font-weight:500}
+.dlg p em{font-family:"Instrument Serif",serif;font-size:1.15em}
+.close{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);cursor:pointer;font-size:18px}
+.close:hover{background:var(--y)}
 
-  /* Hero */
-  .hero {
-    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(2.5rem, 5vw, 4rem);
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 88% 18%, rgba(212,255,61,.25), transparent 38%),
-      radial-gradient(circle at 8% 92%, rgba(79,50,216,.10), transparent 42%),
-      var(--bone);
-  }
-  /* Floating doodles */
-  .hero-doodle {
-    position: absolute;
-    pointer-events: none;
-    opacity: .9;
-  }
-  .hero-doodle.d-1 { top: 14%; right: 8%; rotate: -8deg; }
-  .hero-doodle.d-2 { bottom: 18%; right: 22%; rotate: 14deg; }
-  .hero-doodle.d-3 { top: 22%; right: 28%; rotate: -3deg; }
-  @media (max-width: 760px) { .hero-doodle { display: none; } }
+/* trips */
+.yt{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:28px 32px;background:var(--ink);color:#fff;border-radius:14px;margin-bottom:56px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.yt:hover{transform:translateY(-4px)}
+.yt .play{width:64px;height:64px;border-radius:50%;background:var(--y);display:grid;place-items:center}
+.yt .play svg{width:22px;margin-left:4px}
+.yt h3{font-weight:500;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.03em;line-height:1.1}
+.yt .mono{color:#9a9a9a}
+.yt .go{font:400 13px "JetBrains Mono",monospace;padding:10px 16px;border:1.5px solid #fff;border-radius:99px;transition:background .25s,color .25s}
+.yt:hover .go{background:var(--y);color:var(--ink);border-color:var(--y)}
+.postcards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.pc{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:6px;background:#111;transform:rotate(var(--r)) translateY(24px);opacity:0;transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .5s}
+.pc.in{transform:rotate(var(--r));opacity:1}
+.pc:hover{transform:rotate(0) scale(1.03);z-index:2}
+.pc img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.pc:hover img{transform:scale(1.06)}
+.pc figcaption{position:absolute;left:10px;right:10px;bottom:10px;background:var(--paper);padding:8px 10px;border-radius:4px;font-size:14px;font-weight:500;line-height:1.2}
+.pc figcaption span{display:block;font:400 10px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+.pc .stamp{position:absolute;top:10px;right:10px;width:42px;height:50px;background:var(--y);border:2px dashed var(--ink);display:grid;place-items:center;font:400 9px "JetBrains Mono",monospace;transform:rotate(6deg)}
 
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--violet);
-    margin-bottom: 1.25rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .hero-eyebrow::before {
-    content: "";
-    width: 28px;
-    height: 1px;
-    background: var(--violet);
-  }
-  .hero-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(3.5rem, 9vw, 7rem);
-    line-height: .96;
-    letter-spacing: -.02em;
-    margin: 0 0 1.5rem;
-    position: relative;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--violet);
-    position: relative;
-    display: inline-block;
-  }
-  .hero-title em::after {
-    content: "";
-    position: absolute;
-    left: 4%; right: 4%; bottom: 6%;
-    height: 14px;
-    background: var(--lime);
-    z-index: -1;
-    transform: skewX(-6deg);
-  }
-  .hero-deck {
-    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-    max-width: 56ch;
-    color: var(--ink-2);
-    line-height: 1.55;
-  }
-  .hero-deck b { color: var(--ink); font-weight: 600; }
-  .hero-deck .hl {
-    background: linear-gradient(transparent 62%, rgba(212,255,61,.7) 62%);
-    padding: 0 2px;
-  }
-  .hero-warning {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    margin-top: 2rem;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .05em;
-    color: var(--bone);
-    background: var(--ink);
-    padding: 9px 16px 10px;
-    border-radius: 999px;
-    transform: rotate(-1.6deg);
-    box-shadow: 3px 3px 0 0 var(--lime);
-  }
-  .hero-warning .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--lime);
-    box-shadow: 0 0 0 0 rgba(212,255,61,.7);
-    animation: hwPulse 2s ease-out infinite;
-    flex-shrink: 0;
-  }
-  @keyframes hwPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(212,255,61,.7); }
-    70%  { box-shadow: 0 0 0 8px rgba(212,255,61,0); }
-    100% { box-shadow: 0 0 0 0 rgba(212,255,61,0); }
-  }
+/* cats */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.catcard{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:14px;padding:40px;display:grid;place-items:center;min-height:340px}
+.catcard svg{width:min(100%,360px)}
+.catcard .tail{transform-origin:122px 120px;animation:tail 2.4s ease-in-out infinite}
+@keyframes tail{50%{transform:rotate(-10deg)}}
+.catcard .blink{animation:blink 4s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.loading{display:flex;align-items:center;gap:12px;margin-top:24px}
+.bar{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:38%;background:var(--y);animation:load 2.8s ease-in-out infinite}
+@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(270%)}}
+.cats h3{font-weight:500;font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1}
+.cats p{color:var(--ink-2);margin-top:18px;max-width:460px}
 
-  /* Section header */
-  .section {
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-    border-bottom: 1px solid var(--rule);
-  }
-  .section-head {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-    align-items: end;
-  }
-  @media (max-width: 760px) {
-    .section-head { grid-template-columns: 1fr; gap: 1.25rem; }
-  }
-  .section-eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: .75rem;
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    line-height: 1.02;
-    letter-spacing: -.01em;
-    margin: 0;
-  }
-  .section-title em { font-style: italic; color: var(--violet); }
-  .section-deck {
-    color: var(--ink-2);
-    font-size: 15px;
-    line-height: 1.6;
-    max-width: 48ch;
-    margin: 0;
-  }
+footer{padding:90px 0 60px;background:var(--ink);color:#fff;text-align:center}
+footer h2{font-weight:500;font-size:clamp(36px,5vw,72px);letter-spacing:-.05em;line-height:1}
+footer .pill{border-color:#fff;margin-top:32px}
+footer .pill:hover{color:var(--ink);border-color:var(--y)}
+footer .mono{display:block;margin-top:48px;color:#8d8d8d}
 
-  /* Masonry gallery — polaroid style */
-  .gallery {
-    column-count: 3;
-    column-gap: clamp(1rem, 2vw, 1.75rem);
-    padding-top: 1rem;
-  }
-  @media (max-width: 1000px) { .gallery { column-count: 2; } }
-  @media (max-width: 560px) { .gallery { column-count: 1; } }
-
-  .g-item {
-    break-inside: avoid;
-    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
-    position: relative;
-    padding: 12px 12px 0;
-    background: #fff;
-    box-shadow: 0 8px 18px rgba(14,13,20,.10), 0 1px 0 rgba(14,13,20,.06);
-    cursor: zoom-in;
-    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, rotate .3s ease;
-    border: 1px solid rgba(14,13,20,.08);
-    overflow: visible;
-  }
-  .g-item:hover {
-    transform: translateY(-6px) scale(1.015);
-    box-shadow: 0 22px 38px rgba(14,13,20,.20), 0 2px 0 rgba(14,13,20,.08);
-    z-index: 5;
-  }
-  .g-figwrap {
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-  }
-  .g-item img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  /* Subtle tape — single decoration, INSIDE the polaroid frame at top, straight */
-  .g-item::before {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 56px;
-    height: 12px;
-    background: rgba(212,255,61,.6);
-    border-left: 1px dashed rgba(14,13,20,.2);
-    border-right: 1px dashed rgba(14,13,20,.2);
-    pointer-events: none;
-    z-index: 3;
-  }
-  .g-item:nth-child(2n)::before {
-    background: rgba(79,50,216,.28);
-  }
-
-  /* Caption sits BELOW the image, in its own area */
-  .g-cap {
-    padding: 14px 8px 12px;
-    color: var(--ink);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    line-height: 1.35;
-    text-align: center;
-    margin: 0;
-  }
-  .g-cap .g-cap-mark {
-    display: block;
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 9.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--violet);
-    margin-bottom: 4px;
-  }
-  .g-cap em { font-style: italic; color: var(--ink); font-weight: 500; }
-
-  /* Hover popup — overlays the image with the full event story */
-  .g-popup {
-    position: absolute;
-    inset: 12px 12px auto 12px;
-    bottom: auto;
-    background: rgba(14,13,20,.94);
-    color: var(--bone);
-    padding: 16px 18px 18px;
-    font-family: var(--sans);
-    font-size: 13px;
-    line-height: 1.55;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .25s ease;
-    z-index: 4;
-    max-height: calc(100% - 24px);
-    overflow-y: auto;
-    border-radius: 2px;
-  }
-  .g-item:has(.g-popup) { cursor: help; }
-  .g-item:has(.g-popup):hover .g-popup,
-  .g-item:has(.g-popup):focus-within .g-popup,
-  .g-item.is-open .g-popup {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  /* Hide the image-overlay zoom on items that have popups so popup wins */
-  .g-item:has(.g-popup) .g-figwrap { position: relative; }
-  .g-popup h4 {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 18px;
-    margin: 0 0 .5rem;
-    color: #fff;
-    font-weight: 400;
-  }
-  .g-popup .g-pop-tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: .35rem;
-  }
-  .g-popup p { margin: 0 0 .6rem; color: rgba(250,248,241,.88); }
-  .g-popup p:last-child { margin-bottom: 0; }
-  .g-popup b { color: var(--lime); font-weight: 600; }
-  .g-popup em { font-style: italic; color: #fff; }
-  /* Touch devices: a "more" pill on items with popups — ≥44px tap target */
-  .g-pop-tap {
-    display: none;
-    position: absolute;
-    bottom: 12px; right: 12px;
-    background: var(--ink);
-    color: var(--bone);
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .06em;
-    padding: 12px 16px;
-    border-radius: 999px;
-    min-height: 44px;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(14,13,20,.25);
-    z-index: 5;
-    pointer-events: none;
-  }
-  @media (hover: none) {
-    .g-item:has(.g-popup) .g-pop-tap { display: inline-flex; pointer-events: auto; }
-    .g-item.is-open .g-pop-tap { background: var(--lime); color: var(--ink); }
-  }
-
-  /* Field notes — event write-ups */
-  .field-notes {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px dashed var(--rule-strong);
-  }
-  .fn-eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
-  }
-  .fn-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
-  }
-  @media (max-width: 760px) { .fn-grid { grid-template-columns: 1fr; } }
-
-  .fn-card {
-    padding: clamp(1.5rem, 3vw, 2.25rem);
-    border: 1.5px solid var(--ink);
-    border-radius: 16px;
-    background: #fff;
-    box-shadow: 5px 5px 0 0 var(--ink);
-    position: relative;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .fn-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 0 var(--ink);
-  }
-  .fn-card-violet { background: linear-gradient(180deg, #f4efff 0%, #fff 60%); }
-  .fn-card-lime { background: linear-gradient(180deg, #f7ffd1 0%, #fff 60%); }
-
-  .fn-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
-  .fn-tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--bone);
-    background: var(--ink);
-    padding: 5px 10px 6px;
-    border-radius: 999px;
-  }
-  .fn-card-violet .fn-tag { background: var(--violet); }
-  .fn-where {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: .03em;
-  }
-  .fn-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
-  }
-  .fn-title em { font-style: italic; color: var(--violet); }
-  .fn-card p {
-    color: var(--ink-2);
-    font-size: 15px;
-    line-height: 1.6;
-    margin: 0 0 .85rem;
-  }
-  .fn-card p:last-child { margin-bottom: 0; }
-  .fn-card p b { color: var(--ink); font-weight: 600; }
-  .fn-thanks {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--ink-2) !important;
-    padding-top: .5rem;
-    border-top: 1px dashed var(--rule-strong);
-    margin-top: .5rem !important;
-  }
-
-  /* Travel section — extra playful */
-  .travel-section {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 92% 12%, rgba(79,50,216,.08), transparent 35%),
-      radial-gradient(circle at 6% 88%, rgba(212,255,61,.12), transparent 38%),
-      var(--bone);
-  }
-  .travel-section .section-title em::after {
-    content: "";
-    position: absolute;
-    left: 4%; right: 4%; bottom: 6%;
-    height: 12px;
-    background: var(--lime);
-    z-index: -1;
-    transform: skewX(-6deg);
-  }
-  .travel-section .section-title em { position: relative; display: inline-block; }
-
-  /* Floating decorations in travel */
-  .travel-deco {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .travel-deco.plane {
-    top: 8%;
-    right: 4%;
-    width: 90px;
-    color: var(--ink);
-    opacity: .55;
-    animation: planeDrift 9s ease-in-out infinite;
-  }
-  .travel-deco.compass {
-    bottom: 7%;
-    left: 2%;
-    width: 70px;
-    opacity: .35;
-    animation: compassSpin 28s linear infinite;
-  }
-  .travel-deco.palm {
-    top: 38%;
-    left: -10px;
-    width: 60px;
-    opacity: .4;
-    animation: palmSway 6s ease-in-out infinite;
-    transform-origin: bottom center;
-  }
-  .travel-deco.sun {
-    top: 45%;
-    right: 1%;
-    width: 64px;
-    opacity: .55;
-    animation: sunPulse 5s ease-in-out infinite;
-  }
-  @keyframes planeDrift {
-    0%, 100% { transform: translate(0, 0) rotate(-8deg); }
-    50%      { transform: translate(-30px, 12px) rotate(-2deg); }
-  }
-  @keyframes compassSpin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-  @keyframes palmSway {
-    0%, 100% { transform: rotate(-3deg); }
-    50%      { transform: rotate(4deg); }
-  }
-  @keyframes sunPulse {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: .55; }
-    50%      { transform: scale(1.06) rotate(15deg); opacity: .8; }
-  }
-  @media (max-width: 760px) {
-    .travel-deco.compass, .travel-deco.palm { display: none; }
-    .travel-deco.plane { width: 64px; top: 4%; }
-    .travel-deco.sun { width: 48px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .travel-deco { animation: none !important; }
-  }
-
-  /* Travel polaroids — fade-in on scroll */
-  .travel-section .g-item {
-    opacity: 0;
-    transform: translateY(24px) scale(.97);
-    transition: opacity .55s cubic-bezier(.2,.7,.2,1), transform .55s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
-  }
-  .travel-section .g-item.is-in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  .travel-section .g-item:hover {
-    transform: translateY(-8px) scale(1.02);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .travel-section .g-item { opacity: 1; transform: none; transition: none; }
-  }
-
-  /* Dotted travel route — under section title */
-  .travel-route {
-    display: block;
-    margin: .75rem 0 0;
-    width: 220px;
-    height: 26px;
-    color: var(--violet);
-  }
-
-  /* Inline animated plane in title */
-  .title-plane {
-    display: inline-block;
-    width: .85em;
-    height: .85em;
-    vertical-align: -.06em;
-    margin-left: .3em;
-    color: var(--violet);
-    animation: titlePlane 4s ease-in-out infinite;
-  }
-  @keyframes titlePlane {
-    0%, 100% { transform: translate(0, 0) rotate(-12deg); }
-    50%      { transform: translate(6px, -4px) rotate(-4deg); }
-  }
-
-  /* YouTube channel CTA — for the travel section */
-  .yt-card {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--ink);
-    color: var(--bone);
-    border-radius: 18px;
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: clamp(1rem, 2.5vw, 2rem);
-    box-shadow: 6px 6px 0 0 var(--lime);
-    text-decoration: none;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .yt-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 9px 9px 0 0 var(--lime);
-  }
-  @media (max-width: 720px) {
-    .yt-card { grid-template-columns: 1fr; text-align: left; gap: 1rem; }
-  }
-  .yt-glyph {
-    width: 70px; height: 50px;
-    background: #FF0000;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transform: rotate(-2deg);
-  }
-  .yt-glyph svg { width: 24px; height: 24px; }
-  .yt-body { min-width: 0; }
-  .yt-tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: .5rem;
-  }
-  .yt-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    line-height: 1.1;
-    margin: 0 0 .35rem;
-    color: var(--bone);
-  }
-  .yt-title em { font-style: italic; color: var(--lime); }
-  .yt-meta {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: rgba(250,248,241,.7);
-    letter-spacing: .02em;
-  }
-  .yt-meta b { color: var(--bone); font-weight: 600; }
-  .yt-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    background: var(--lime);
-    color: var(--ink);
-    padding: 11px 16px 12px;
-    border-radius: 999px;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .yt-cta .arr { font-size: 14px; }
-
-  /* Sticky-note aside — replaces the old dark quote block */
-  .sticky-aside {
-    column-span: all;
-    margin: clamp(2rem, 4vw, 3rem) auto;
-    padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2rem);
-    background: var(--lime);
-    border: 1px solid var(--ink);
-    box-shadow: 5px 5px 0 0 var(--ink);
-    max-width: 56ch;
-    position: relative;
-    transform: rotate(-1.1deg);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .sticky-aside::before {
-    content: "";
-    position: absolute;
-    top: -14px; left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    width: 90px; height: 22px;
-    background: rgba(255,255,255,.55);
-    border-left: 1px dashed rgba(14,13,20,.25);
-    border-right: 1px dashed rgba(14,13,20,.25);
-  }
-  .sticky-aside .sa-mark {
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    display: block;
-    margin-bottom: .5rem;
-  }
-  .sticky-aside b { font-weight: 600; font-style: normal; }
-
-  /* Placeholder sections (travel, cats) */
-  .coming {
-    border: 2px dashed var(--ink);
-    border-radius: 18px;
-    padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
-    text-align: center;
-    background: var(--bone-2);
-    position: relative;
-    overflow: hidden;
-  }
-  .coming.cats { background: linear-gradient(180deg, #fff7f0 0%, var(--bone-2) 100%); }
-  .coming.travel { background: linear-gradient(180deg, #f0f5ff 0%, var(--bone-2) 100%); }
-  .coming-svg {
-    width: clamp(80px, 12vw, 130px);
-    height: clamp(80px, 12vw, 130px);
-    margin: 0 auto 1.25rem;
-    display: block;
-    color: var(--ink);
-  }
-  .coming-mark {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--violet);
-    margin-bottom: 1rem;
-    display: inline-block;
-    background: #fff;
-    padding: 5px 12px 6px;
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-    transform: rotate(-1.2deg);
-    box-shadow: 2px 2px 0 0 var(--ink);
-  }
-  .coming h3 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
-    margin: 0 0 .75rem;
-    line-height: 1.05;
-  }
-  .coming h3 em {
-    font-style: italic;
-    color: var(--violet);
-    position: relative;
-  }
-  .coming h3 em::after {
-    content: "";
-    position: absolute;
-    left: 4%; right: 4%; bottom: 8%;
-    height: 10px;
-    background: var(--lime);
-    z-index: -1;
-    transform: skewX(-6deg);
-  }
-  .coming p {
-    color: var(--ink-2);
-    max-width: 48ch;
-    margin: 0 auto;
-    font-size: 15.5px;
-    line-height: 1.55;
-  }
-  .coming p em { font-style: italic; color: var(--ink); }
-
-  /* Footer */
-  .footer {
-    padding-block: 3rem;
-    text-align: center;
-    color: var(--ink-3);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: .06em;
-  }
-  .footer a { color: var(--violet); }
-
-  /* Lightbox */
-  .lb {
-    position: fixed; inset: 0; background: rgba(14,13,20,.92);
-    display: none; align-items: center; justify-content: center;
-    z-index: 100; padding: 24px;
-    cursor: zoom-out;
-  }
-  .lb.is-open { display: flex; }
-  .lb img {
-    max-width: 92vw; max-height: 88vh; border-radius: 10px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.5);
-  }
-  .lb-close {
-    position: absolute; top: 18px; right: 22px;
-    color: #fff; font-family: var(--mono); font-size: 13px;
-    background: transparent; border: 1px solid rgba(255,255,255,.3);
-    padding: 6px 12px; border-radius: 999px; cursor: pointer;
-  }
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes swipe{to{transform:scaleX(1)}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,225,77,.9)}70%,100%{box-shadow:0 0 0 8px rgba(255,225,77,0)}}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@media (max-width:900px){.wrap{padding:0 20px}.sh{grid-template-columns:1fr;gap:16px}.sh p{justify-self:start}.postcards{grid-template-columns:repeat(2,1fr)}.cats{grid-template-columns:1fr}.dlg{grid-template-columns:1fr}.dlg img{max-height:40vh;border-radius:14px 14px 0 0}.yt{grid-template-columns:auto 1fr;padding:22px}.yt .go{grid-column:1/-1;justify-self:start}section{padding:80px 0}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}.rv,.pol,.pc,.hero h1 .w,.hero .deck,.warn{opacity:1!important;transform:none!important}.hero h1 .hl::before{transform:none}}
 </style>
 </head>
 <body>
+<nav><div class="wrap"><a class="me" href="index.html"><img src="assets/ece.jpg" alt="">ece berrak</a><a class="pill" href="index.html#secret">← back to portfolio</a></div></nav>
 
-<!-- Top bar -->
-<header class="topbar">
-  <a href="index.html" class="topbar-brand">ece berrak<em>.</em></a>
-  <a href="index.html" class="topbar-back">← back to portfolio</a>
-</header>
+<header class="hero"><div class="wrap">
+  <span class="mono">off the clock · uncensored</span>
+  <h1><span class="w">The other</span><br><span class="w"><span class="hl">50%.</span></span></h1>
+  <p class="deck">The CV says what I ship. This page says what fills the rest of the week. <b>Networking events, travel, cats.</b> No filter, no positioning exercise. Just what I actually like doing when I close the laptop.</p>
+  <span class="warn"><i></i>warning: this page is a personality, not a portfolio</span>
+</div></header>
 
-<!-- Hero -->
-<section class="hero">
-  <!-- doodles -->
-  <svg class="hero-doodle d-1" width="68" height="68" viewBox="0 0 68 68" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-    <circle cx="34" cy="34" r="14" stroke="#4F32D8"/>
-    <path d="M34 6 L34 18 M34 50 L34 62 M6 34 L18 34 M50 34 L62 34 M14 14 L22 22 M46 46 L54 54 M14 54 L22 46 M46 22 L54 14" stroke="#4F32D8"/>
-  </svg>
-  <svg class="hero-doodle d-3" width="46" height="46" viewBox="0 0 46 46" fill="#D4FF3D" stroke="#0E0D14" stroke-width="2" aria-hidden="true">
-    <path d="M23 4 L28 18 L42 19 L31 28 L35 42 L23 34 L11 42 L15 28 L4 19 L18 18 Z" stroke-linejoin="round"/>
-  </svg>
+<section id="rooms"><div class="wrap">
+  <div class="sh rv"><div><span class="mono">01 · networking · berlin</span><h2>Rooms I <span class="hl">kept showing up to.</span></h2></div><p>Tech talks, startup fireside chats, women‑in‑AI breakfasts, IHK and SiBB mixers, the occasional Google Berlin door. The fastest way to learn a city's operating system is to walk into its rooms and see who's there.</p></div>
+  <div class="wall" id="wall"></div>
+</div></section>
 
-  <div class="wrap">
-    <div class="hero-eyebrow">off the clock · uncensored</div>
-    <h1 class="hero-title">The other<br/><em>50%.</em></h1>
-    <p class="hero-deck">
-      The CV says what I ship. This page says what fills the rest of the week.
-      <b>Networking events, <span class="hl">travel, cats.</span></b> No filter, no positioning exercise — just what I actually like doing when I close the laptop.
-    </p>
-    <span class="hero-warning"><span class="dot"></span> warning: this page is a personality, not a portfolio</span>
+<section id="trips"><div class="wrap">
+  <div class="sh rv"><div><span class="mono">02 · travel</span><h2>Where I go to <span class="hl">reset.</span></h2></div><p>The kind of trips that don't fit on LinkedIn. New cities, old habits, the occasional window seat that earns its keep, and a strong bias for the Mediterranean.</p></div>
+  <a class="yt rv" href="https://www.youtube.com/@berlixiz" target="_blank" rel="noopener">
+    <span class="play"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="#0a0a0a"/></svg></span>
+    <span><span class="mono">hobby channel · uncensored</span><h3>We also <em class="s">vlog</em> the trips.</h3><span class="mono">@berlixiz · ~10k subscribers · YouTube</span></span>
+    <span class="go">watch on YouTube ↗</span>
+  </a>
+  <div class="postcards" id="postcards"></div>
+</div></section>
+
+<section id="cats"><div class="wrap cats">
+  <div class="catcard rv">
+    <svg viewBox="0 0 200 150" aria-label="Doodle of two cats"><g fill="none" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M30 120c0-30 18-52 46-52s46 22 46 52"/><path d="M48 76 40 44l22 18M104 76l8-32-22 18"/><path d="M72 98l4 4 4-4M60 100H42M60 104l-16 6M92 100h18M92 104l16 6"/><path class="tail" d="M122 120c22 0 30-14 24-30"/></g><circle class="blink" cx="62" cy="88" r="3.5" fill="#0a0a0a"/><circle class="blink" cx="90" cy="88" r="3.5" fill="#0a0a0a"/><g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M140 128c0-18 10-30 24-30s22 12 22 30"/><path d="M150 102l-4-18 12 10M178 102l4-18-12 10"/><path d="M158 112c2 2 6 2 8 0"/></g><path d="M20 128h170" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="40" r="10" fill="#ffe14d"/></svg>
   </div>
-</section>
-
-<!-- Networking -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="section-eyebrow">// 01 — networking · berlin</div>
-        <h2 class="section-title">Rooms I <em>kept showing up to.</em></h2>
-      </div>
-      <p class="section-deck">
-        Tech talks, startup fireside chats, women-in-AI breakfasts, IHK and SiBB mixers, the occasional Google Berlin door.
-        The fastest way to learn a city's operating system is to walk into its rooms and see who's there.
-      </p>
-    </div>
-
-    <div class="gallery">
-
-      <figure class="g-item" data-full="uploads/networking/1771584995851.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1771584995851.jpg" alt="Axel Täubert, Head of Startups at Google, presenting on AI startups on the rise in Europe" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">talk · Google Berlin</span>Axel Täubert — <em>Head of Startups, Google</em></figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">Google Berlin · talk</span>
-          <h4>AI in Europe is no longer a prediction.</h4>
-          <p>It is already showing up in the numbers.</p>
-          <p><b>Axel Täubert</b> (Head of Startups at Google) backed this up with data. AI adoption across European startups is no longer theoretical — the infrastructure, support, and knowledge are already there.</p>
-          <p><em>The question is not whether we can build. It is whether we choose to.</em></p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1775808958950.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1775808958950.jpg" alt="Polaroid-style composite of two stage photos at Innovation Campus Berlin — Venture Café #49" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Innovation Campus</span>Venture Café Berlin <em>#49</em></figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">Venture Café #49</span>
-          <h4>Berlin did it again.</h4>
-          <p>Didn't expect to leave with more questions than answers. Went there with Gökçe Efe Kaplan — and this one stayed with us.</p>
-          <p>The <b>"Brutal Truth"</b> session by Erdinç Koç was brutal in the best way. Apparently, we needed that.</p>
-          <p>Randomly ended up talking about public funding with Anaita Azizi. Went in knowing almost nothing, left thinking <em>"okay, I've been sleeping on this."</em></p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1774256959387.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1774256959387.jpg" alt="At the SiBB × Berliner Sparkasse × IBB Ventures first VC event near Brandenburg Gate" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">SiBB × Sparkasse × IBB</span>my <em>first VC event</em> in Berlin</figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">First VC event · near Brandenburg Gate</span>
-          <h4>SiBB × Sparkasse × IBB Ventures.</h4>
-          <p>Organized by SiBB (Digitalverband Berlin-Brandenburg) together with Berliner Sparkasse and IBB Ventures. My first VC event in Berlin — a really nice experience.</p>
-          <p>The goal: bring people with experience together and create space to exchange ideas around fundraising and building startups. <b>Open, helpful, and a step outside my usual way of thinking.</b></p>
-          <p><em>Thanks to Christian Segal, Anne Biedermann, Marian Klee (brighter AI), Clemens Kabel, and Laura Möller. Looking forward to the next one.</em></p>
-          <p>P.S. Also nice to have it right next to Brandenburg Gate.</p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <div class="sticky-aside">
-        <span class="sa-mark">// margin note</span>
-        cities run on rooms. <b>berlin's are the kind you have to find</b> — once you've found a few, the city stops being a map and starts being a network.
-      </div>
-
-      <figure class="g-item" data-full="uploads/networking/1770918870552.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1770918870552.jpg" alt="With Gökçe Efe Kaplan and Jan Oberhauser (n8n founder) at Venture Café Berlin #49" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Venture Café #49</span>with <em>Jan Oberhauser</em> (n8n) + Gökçe</figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">Venture Café #49 · Innovation Campus</span>
-          <h4>The kind of room you don't forget.</h4>
-          <p>In the middle: <b>Jan Oberhauser, founder of n8n.</b> On the left: Gökçe Efe Kaplan. Random talk, real overlap.</p>
-          <p>Walking out with new ideas, new people, and things we'll <em>probably act on.</em></p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1761910916604.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1761910916604.jpg" alt="At the IHK Berlin Turkish Business Night" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">IHK Berlin</span>Turkish <em>Business Night</em></figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">IHK Berlin · Turkish Business Night</span>
-          <h4>A night full of conversations, ideas, and inspiration.</h4>
-          <p>Powerful what happens when different cultures and business minds come together to share stories, ideas, and future visions.</p>
-          <p>From <b>digitalization</b> to the growing need for <b>qualified professionals (Fachkräfte)</b>, the discussions reflected the evolving connection between Turkey and Germany — full of opportunities, innovation, and collaboration.</p>
-          <p><em>So grateful to be part of this community building bridges between the two countries.</em> 🇩🇪🇹🇷</p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1771584997040.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1771584997040.jpg" alt="Willkommen bei Google Berlin banner at entrance" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Google Berlin</span><em>willkommen</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1771584997366.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1771584997366.jpg" alt="Peec AI founder Marius Meiners in fireside chat at Road to Start Summit" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Road to Start Summit</span>Marius Meiners — <em>Peec AI founder</em> fireside</figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">Road to Start Summit · fireside</span>
-          <h4>Think bigger than what feels safe.</h4>
-          <p><b>Marius Meiners</b> from Peec AI shared both the product and the story behind it.</p>
-          <p>A good reminder that ecosystems are not driven by technology alone, but by <em>founders who decide to think bigger than what feels safe.</em></p>
-          <p>(Ambition in Germany is still a competitive advantage.)</p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1772014026194.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1772014026194.jpg" alt="Women's AI Breakfast panel on High-Risk AI under the EU AI Act" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Women's AI Breakfast</span>High-Risk AI under the <em>EU AI Act</em></figcaption>
-        <div class="g-popup" role="tooltip">
-          <span class="g-pop-tag">Women's AI Breakfast</span>
-          <h4>Different industries. Same reality.</h4>
-          <p><em>How do you launch and scale when regulation is already embedded in your roadmap?</em></p>
-          <p>Spent the morning at the Women's AI Breakfast on High-Risk AI under the EU AI Act. Listened to <b>Franziska Weindauer</b> (TÜV AI.Lab) on the regulatory side, <b>Diana Heinrichs</b> (LINDERA) in healthcare, and <b>Gigi Laan</b> (Tesla) in manufacturing.</p>
-          <p>One thing got very clear: in high-risk AI, <em>how you build matters as much as what you build.</em> Compliance is not a checkpoint — it is part of the design from day one.</p>
-          <p>Great moderation by <b>Nicole Büttner</b>, strong community vibe.</p>
-        </div>
-        <span class="g-pop-tap">tap for more</span>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/networking/1774256961143.jpg">
-        <div class="g-figwrap"><img src="uploads/networking/1774256961143.jpg" alt="Speaker presenting US vs EU innovation slide with bubble chart" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">tech talk</span>US vs EU — <em>the catch-up question</em></figcaption>
-      </figure>
-
-    </div>
+  <div class="rv">
+    <span class="mono">03 · the cats</span>
+    <h3 style="margin-top:16px">My non‑negotiable <em class="s">co‑workers.</em></h3>
+    <p>Two managers I never agreed to hire. Excellent at presence, mediocre at Slack DMs, world class at sitting on the keyboard during the wrong calls.</p>
+    <p><b>Cat dossier incoming.</b> Names, personalities, official portraits, the works. The most important section of this page.</p>
+    <div class="loading"><span class="mono">loading feline content</span><span class="bar"><i></i></span></div>
   </div>
-</section>
+</div></section>
 
-<!-- Travel -->
-<section class="section travel-section">
-  <!-- floating decorations -->
-  <svg class="travel-deco plane" viewBox="0 0 90 60" fill="currentColor" aria-hidden="true">
-    <path d="M4 32 L34 24 L46 6 L54 8 L48 24 L78 18 L84 22 L60 36 L48 56 L42 56 L48 38 L24 42 L18 50 L12 48 L18 38 Z" stroke="currentColor" stroke-width=".5" stroke-linejoin="round"/>
-  </svg>
-  <svg class="travel-deco compass" viewBox="0 0 80 80" fill="none" stroke="#4F32D8" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-    <circle cx="40" cy="40" r="32"/>
-    <path d="M40 14 L46 40 L40 66 L34 40 Z" fill="#4F32D8" opacity=".4"/>
-    <circle cx="40" cy="40" r="3" fill="#4F32D8"/>
-    <text x="40" y="11" text-anchor="middle" fill="#4F32D8" stroke="none" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">N</text>
-  </svg>
-  <svg class="travel-deco palm" viewBox="0 0 60 100" fill="none" stroke="#0E0D14" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-    <path d="M30 100 L30 50" stroke-width="3"/>
-    <path d="M30 50 Q 14 38, 4 42 M30 50 Q 46 36, 56 40 M30 48 Q 18 26, 8 22 M30 48 Q 42 24, 52 18 M30 46 Q 30 28, 26 14"/>
-  </svg>
-  <svg class="travel-deco sun" viewBox="0 0 70 70" fill="#D4FF3D" stroke="#0E0D14" stroke-width="1.5" aria-hidden="true">
-    <circle cx="35" cy="35" r="14"/>
-    <g stroke="#0E0D14" stroke-linecap="round" stroke-width="2">
-      <line x1="35" y1="6" x2="35" y2="14"/>
-      <line x1="35" y1="56" x2="35" y2="64"/>
-      <line x1="6" y1="35" x2="14" y2="35"/>
-      <line x1="56" y1="35" x2="64" y2="35"/>
-      <line x1="14" y1="14" x2="20" y2="20"/>
-      <line x1="50" y1="50" x2="56" y2="56"/>
-      <line x1="14" y1="56" x2="20" y2="50"/>
-      <line x1="50" y1="20" x2="56" y2="14"/>
-    </g>
-  </svg>
-
-  <div class="wrap" style="position:relative;z-index:1;">
-    <div class="section-head">
-      <div>
-        <div class="section-eyebrow">// 02 — travel</div>
-        <h2 class="section-title">Where I go to <em>reset.</em><svg class="title-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 19l19-7.5L2.5 4v6l13 1.5L2.5 13z"/></svg></h2>
-        <svg class="travel-route" viewBox="0 0 220 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-          <path d="M4 16 Q 40 4, 80 16 T 160 12 T 210 18" stroke-dasharray="2 5"/>
-          <circle cx="4" cy="16" r="3" fill="currentColor"/>
-          <circle cx="80" cy="16" r="2.5" fill="currentColor"/>
-          <circle cx="160" cy="12" r="2.5" fill="currentColor"/>
-          <path d="M204 14 L214 18 L204 22" fill="currentColor" stroke="none"/>
-        </svg>
-      </div>
-      <p class="section-deck">
-        The kind of trips that don't fit on LinkedIn. New cities, old habits, the occasional window seat that earns its keep — and a strong bias for the Mediterranean.
-      </p>
-    </div>
-
-    <!-- YouTube channel CTA -->
-    <a class="yt-card" href="https://www.youtube.com/@berlixiz" target="_blank" rel="noopener">
-      <span class="yt-glyph" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-      </span>
-      <div class="yt-body">
-        <span class="yt-tag">// hobby channel · uncensored</span>
-        <h3 class="yt-title">We also <em>vlog</em> the trips.</h3>
-        <div class="yt-meta">@berlixiz · <b>~10k subscribers</b> · YouTube</div>
-      </div>
-      <span class="yt-cta">watch on YouTube <span class="arr">↗</span></span>
-    </a>
-
-    <div class="gallery">
-
-      <figure class="g-item" data-full="uploads/travel/ibiza.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/ibiza.jpg" alt="Ibiza letter sign with palm trees" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Spain</span><em>Ibiza</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/marseille.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/marseille.jpg" alt="La Criée, Théâtre National de Marseille" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">France</span>Marseille — <em>La Criée</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/budapest.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/budapest.jpg" alt="Chain Bridge and Buda Castle at night, Budapest" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Hungary</span>Budapest — <em>Chain Bridge at night</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/corfu.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/corfu.jpg" alt="Corfu coastline with turquoise water" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Greece</span>Corfu — <em>Kerkyra Lines</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/rome.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/rome.jpg" alt="Trevi Fountain, Rome" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Italy</span>Roma — <em>Fontana di Trevi</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/skopje.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/skopje.jpg" alt="Skopje neoclassical building with columns" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">N. Macedonia</span><em>Skopje</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/marseille-2.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/marseille-2.jpg" alt="Marseille Vieux Port direction signs" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">France</span>Marseille — <em>Vieux Port</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/afitos.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/afitos.jpg" alt="Afitos beach with turquoise water and orange flowers" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Greece</span>Afitos — <em>Halkidiki</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/sicily-2.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/sicily-2.jpg" alt="Sicilian rocky cove with hidden lagoon" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Italy</span>Sicilia — <em>hidden lagoon</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/kremasti.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/kremasti.jpg" alt="Kremasti library with neoclassical columns" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">Greece</span>Kremasti — <em>Βιβλιοθήκη</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/skopje-2.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/skopje-2.jpg" alt="Skopje overlook with mountains in the distance" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">N. Macedonia</span>Skopje — <em>the long look</em></figcaption>
-      </figure>
-
-      <figure class="g-item" data-full="uploads/travel/skopje-3.jpg">
-        <div class="g-figwrap"><img src="uploads/travel/skopje-3.jpg" alt="Skopje street moment — meeting a stray dog" loading="lazy" /></div>
-        <figcaption class="g-cap"><span class="g-cap-mark">N. Macedonia</span>Skopje — <em>street friend</em></figcaption>
-      </figure>
-
-    </div>
-  </div>
-</section>
-
-<!-- Cats placeholder -->
-<section class="section">
+<footer>
   <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="section-eyebrow">// 03 — the cats</div>
-        <h2 class="section-title">My non-negotiable <em>co-workers.</em></h2>
-      </div>
-      <p class="section-deck">
-        Two managers I never agreed to hire. Excellent at presence, mediocre at slack DMs, world-class at sitting on the keyboard during the wrong calls.
-      </p>
-    </div>
-    <div class="coming cats">
-      <svg class="coming-svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <!-- cat body -->
-        <path d="M30 90 Q 30 56, 60 56 Q 90 56, 90 90 Z" fill="#fff"/>
-        <!-- ears -->
-        <path d="M34 60 L26 38 L44 52 Z" fill="#fff"/>
-        <path d="M86 60 L94 38 L76 52 Z" fill="#fff"/>
-        <!-- eyes -->
-        <circle cx="50" cy="74" r="2.5" fill="#0E0D14" stroke="none"/>
-        <circle cx="70" cy="74" r="2.5" fill="#0E0D14" stroke="none"/>
-        <!-- nose + mouth -->
-        <path d="M58 82 L60 84 L62 82" />
-        <path d="M60 84 Q 56 88, 54 84 M60 84 Q 64 88, 66 84"/>
-        <!-- whiskers -->
-        <path d="M40 80 L30 78 M40 84 L30 86 M80 80 L90 78 M80 84 L90 86"/>
-        <!-- tail -->
-        <path d="M90 88 Q 108 80, 102 60" fill="none"/>
-        <!-- heart sparkle -->
-        <path d="M16 28 L20 22 L24 28 L20 34 Z" fill="#D4FF3D" stroke="none"/>
-        <path d="M104 100 L108 94 L112 100 L108 106 Z" fill="#4F32D8" stroke="none"/>
-      </svg>
-      <div class="coming-mark">loading · feline content pending</div>
-      <h3>Cat dossier <em>incoming.</em></h3>
-      <p>Names, personalities, official portraits, the works. <em>The most important section of this page</em> — stay tuned.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="wrap">
-    <a href="index.html">← back to portfolio</a> &nbsp;·&nbsp; ece berrak · berlin · uncensored edition
+    <h2>Okay, back to work.</h2>
+    <a class="pill" href="index.html">← back to portfolio</a>
+    <span class="mono">ece berrak · berlin · uncensored edition</span>
   </div>
 </footer>
 
-<!-- Lightbox -->
-<div class="lb" id="lb" aria-hidden="true">
-  <button class="lb-close" id="lbClose" type="button">close ✕</button>
-  <img id="lbImg" alt="" />
-</div>
+<dialog id="dlg" aria-label="Event story"><button class="close" type="button" aria-label="Close">✕</button><div class="dlg"><img id="dlgImg" alt=""><div class="tx"><span class="mono" id="dlgTag"></span><h3 id="dlgTitle"></h3><div id="dlgBody"></div></div></div></dialog>
 
 <script>
-  // Popup tap toggle (touch devices) + Lightbox
-  (function () {
-    const lb = document.getElementById('lb');
-    const lbImg = document.getElementById('lbImg');
-    const lbClose = document.getElementById('lbClose');
-
-    // Tap toggle for popups on touch — click the small pill to open/close
-    document.querySelectorAll('.g-pop-tap').forEach(function (pill) {
-      pill.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const item = pill.closest('.g-item');
-        document.querySelectorAll('.g-item.is-open').forEach(function (other) {
-          if (other !== item) other.classList.remove('is-open');
-        });
-        item.classList.toggle('is-open');
-      });
-    });
-
-    // Open lightbox on image click (but not when clicking the pop pill or inside popup)
-    document.querySelectorAll('.g-item').forEach(function (item) {
-      item.addEventListener('click', function (e) {
-        if (e.target.closest('.g-pop-tap') || e.target.closest('.g-popup')) return;
-        const full = item.getAttribute('data-full');
-        if (!full) return;
-        lbImg.src = full;
-        lb.classList.add('is-open');
-        lb.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    function close () {
-      lb.classList.remove('is-open');
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      lbImg.src = '';
-    }
-    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === lbClose) close(); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
-      if (e.key === 'Escape') document.querySelectorAll('.g-item.is-open').forEach(function (i) { i.classList.remove('is-open'); });
-    });
-  })();
-
-  // Travel section: staggered fade-in for polaroids
-  (function () {
-    var items = document.querySelectorAll('.travel-section .g-item');
-    if (!items.length || !('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('is-in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry, i) {
-        if (entry.isIntersecting) {
-          var index = Array.prototype.indexOf.call(items, entry.target);
-          setTimeout(function () { entry.target.classList.add('is-in'); }, (index % 6) * 90);
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
-  })();
+(function(){
+  // rooms: story paragraphs use **bold** and _italic_
+  const ROOMS=[
+    {img:'uploads/networking/1771584995851.jpg',tag:'talk · Google Berlin',cap:'Axel Täubert, Head of Startups at Google',title:'AI in Europe is no longer a prediction.',story:['It is already showing up in the numbers.','**Axel Täubert** (Head of Startups at Google) backed this up with data. AI adoption across European startups is no longer theoretical. The infrastructure, support and knowledge are already there.','_The question is not whether we can build. It is whether we choose to._']},
+    {img:'uploads/networking/1775808958950.jpg',tag:'Innovation Campus',cap:'Venture Café Berlin #49',title:'Berlin did it again.',story:['Didn’t expect to leave with more questions than answers. Went there with Gökçe Efe Kaplan, and this one stayed with us.','The **"Brutal Truth"** session by Erdinç Koç was brutal in the best way. Apparently, we needed that.','Randomly ended up talking about public funding with Anaita Azizi. Went in knowing almost nothing, left thinking _"okay, I’ve been sleeping on this."_']},
+    {img:'uploads/networking/1774256959387.jpg',tag:'SiBB × Sparkasse × IBB',cap:'My first VC event in Berlin',title:'SiBB × Sparkasse × IBB Ventures.',story:['Organized by SiBB (Digitalverband Berlin‑Brandenburg) together with Berliner Sparkasse and IBB Ventures. My first VC event in Berlin, and a really nice experience.','The goal: bring people with experience together and create space to exchange ideas around fundraising and building startups. **Open, helpful, and a step outside my usual way of thinking.**','_Thanks to Christian Segal, Anne Biedermann, Marian Klee (brighter AI), Clemens Kabel and Laura Möller. Looking forward to the next one._','P.S. Also nice to have it right next to Brandenburg Gate.']},
+    {note:true},
+    {img:'uploads/networking/1770918870552.jpg',tag:'Venture Café #49',cap:'With Jan Oberhauser (n8n) and Gökçe',title:'The kind of room you don’t forget.',story:['In the middle: **Jan Oberhauser, founder of n8n.** On the left: Gökçe Efe Kaplan. Random talk, real overlap.','Walking out with new ideas, new people, and things we’ll _probably act on._']},
+    {img:'uploads/networking/1761910916604.jpg',tag:'IHK Berlin',cap:'Turkish Business Night',title:'A night full of conversations, ideas and inspiration.',story:['Powerful what happens when different cultures and business minds come together to share stories, ideas and future visions.','From **digitalization** to the growing need for **qualified professionals (Fachkräfte)**, the discussions reflected the evolving connection between Turkey and Germany: full of opportunities, innovation and collaboration.','_So grateful to be part of this community building bridges between the two countries._ 🇩🇪🇹🇷']},
+    {img:'uploads/networking/1771584997040.jpg',tag:'Google Berlin',cap:'Willkommen'},
+    {img:'uploads/networking/1771584997366.jpg',tag:'Road to Start Summit',cap:'Marius Meiners, Peec AI founder, fireside',title:'Think bigger than what feels safe.',story:['**Marius Meiners** from Peec AI shared both the product and the story behind it.','A good reminder that ecosystems are not driven by technology alone, but by _founders who decide to think bigger than what feels safe._','(Ambition in Germany is still a competitive advantage.)']},
+    {img:'uploads/networking/1772014026194.jpg',tag:'Women’s AI Breakfast',cap:'High‑Risk AI under the EU AI Act',title:'Different industries. Same reality.',story:['_How do you launch and scale when regulation is already embedded in your roadmap?_','Spent the morning at the Women’s AI Breakfast on High‑Risk AI under the EU AI Act. Listened to **Franziska Weindauer** (TÜV AI.Lab) on the regulatory side, **Diana Heinrichs** (LINDERA) in healthcare and **Gigi Laan** (Tesla) in manufacturing.','One thing got very clear: in high‑risk AI, _how you build matters as much as what you build._ Compliance is not a checkpoint; it is part of the design from day one.','Great moderation by **Nicole Büttner**, strong community vibe.']},
+    {img:'uploads/networking/1774256961143.jpg',tag:'tech talk',cap:'US vs EU: the catch‑up question'},
+  ];
+  const TRIPS=[['ibiza','Spain','Ibiza'],['marseille','France','Marseille · La Criée'],['budapest','Hungary','Budapest · Chain Bridge at night'],['corfu','Greece','Corfu · Kerkyra Lines'],['rome','Italy','Roma · Fontana di Trevi'],['skopje','N. Macedonia','Skopje'],['marseille-2','France','Marseille · Vieux Port'],['afitos','Greece','Afitos · Halkidiki'],['sicily-2','Italy','Sicilia · hidden lagoon'],['kremasti','Greece','Kremasti · Βιβλιοθήκη'],['skopje-2','N. Macedonia','Skopje · the long look'],['skopje-3','N. Macedonia','Skopje · street friend']];
+  const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const md=x=>esc(x).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/_(.+?)_/g,'<em>$1</em>');
+  const tilt=i=>(Math.sin(i*5.7)*3).toFixed(1)+'deg';
+  const wall=document.getElementById('wall'),dlg=document.getElementById('dlg');
+  ROOMS.forEach((r,i)=>{
+    if(r.note){const n=document.createElement('div');n.className='note rv';n.innerHTML='<span class="mono">margin note</span>cities run on rooms. berlin’s are the kind you have to find. once you’ve found a few, the city stops being a map and starts being a network.';wall.append(n);return}
+    const b=document.createElement('button');b.type='button';b.className='pol';b.style.setProperty('--r',tilt(i));b.style.transitionDelay=(i%4*0.08)+'s';
+    b.innerHTML='<img src="'+r.img+'" alt="'+esc(r.cap)+'"><span class="tag">'+esc(r.tag)+'</span><b>'+esc(r.cap)+'</b>'+(r.story?'<span class="more">read the story →</span>':'');
+    if(r.story)b.addEventListener('click',()=>{document.getElementById('dlgImg').src=r.img;document.getElementById('dlgImg').alt=r.cap;document.getElementById('dlgTag').textContent=r.tag;document.getElementById('dlgTitle').textContent=r.title;document.getElementById('dlgBody').innerHTML=r.story.map(p=>'<p>'+md(p)+'</p>').join('');dlg.showModal()});
+    else b.disabled=true,b.style.cursor='default';
+    wall.append(b)});
+  dlg.querySelector('.close').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+  const pcs=document.getElementById('postcards');
+  TRIPS.forEach(([f,c,t],i)=>{const fg=document.createElement('figure');fg.className='pc';fg.style.setProperty('--r',tilt(i+3));fg.style.transitionDelay=(i%4*0.08)+'s';
+    fg.innerHTML='<img src="uploads/travel/'+f+'.jpg" alt="'+esc(t)+'"><span class="stamp" aria-hidden="true">'+esc(c.slice(0,2).toUpperCase())+'</span><figcaption><span>'+esc(c)+'</span>'+esc(t)+'</figcaption>';pcs.append(fg)});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.rv,.sh,.pol,.pc').forEach(el=>io.observe(el));
+})();
 </script>
-
 </body>
 </html>
