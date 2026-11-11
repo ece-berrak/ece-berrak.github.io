@@ -195,6 +195,8 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .kw mark{background:linear-gradient(var(--y),var(--y)) no-repeat 0 88%/0% 40%;color:inherit;transition:background-size 1s .4s cubic-bezier(.7,0,.2,1)}
 .kw.in mark{background-size:100% 40%}
 .kw figcaption{margin-top:10px}
+.kwq{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.kw figcaption a{color:var(--ink)}
 .job li.refli{padding-left:0}.job li.refli::before{display:none}
 .chip.refchip{background:var(--ink);color:#fff;border-color:var(--ink)}
 .chip.refchip:hover{background:var(--y);color:var(--ink)}
@@ -433,7 +435,7 @@ footer .secret .ul{color:var(--ink)}
   .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
-  .kw{grid-template-columns:1fr;gap:10px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
+  .kw{grid-template-columns:1fr;gap:10px}.kwq{grid-template-columns:1fr;gap:28px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
@@ -653,10 +655,16 @@ footer .secret .ul{color:var(--ink)}
   <!-- KIND WORDS (compact) -->
   <section id="kind-words" class="kw rv">
     <span class="mono">kind words</span>
-    <figure>
-      <blockquote>“Working with Ece means knowing that a project is <mark>in capable hands.</mark>”</blockquote>
-      <figcaption class="mono">Kübra Demir · Corporate Reputation Executive, TürkNet · my manager at CRS Soft</figcaption>
-    </figure>
+    <div class="kwq">
+      <figure>
+        <blockquote>“One of the few people I have worked with who <mark>genuinely enjoy what they do</mark> while consistently pushing creative boundaries.”</blockquote>
+        <figcaption class="mono"><a class="ul" data-li="kubra">Kübra Demir</a> · my manager at CRS Soft, now Corporate Reputation Executive at TürkNet</figcaption>
+      </figure>
+      <figure>
+        <blockquote>“She contributed <mark>not as an intern, but as a fully engaged member</mark> of the team.”</blockquote>
+        <figcaption class="mono"><a class="ul" data-li="ekim">Ekim Yurtsever</a> · HR Business Partner for the Creative team at CRS Soft</figcaption>
+      </figure>
+    </div>
   </section>
 </div>
 
