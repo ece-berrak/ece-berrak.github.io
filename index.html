@@ -285,20 +285,39 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .usebar #useD{color:var(--ink-2)}
 
 /* contact */
-footer{padding:140px 0 48px}
-footer h2{font-weight:500;font-size:clamp(56px,9vw,140px);line-height:.9;letter-spacing:-.06em}
+footer{padding:140px 0 48px;background:var(--ink);color:#fff;margin-top:-1px}
+footer .mono{color:#8d8d8d}
+footer .kick{display:block;margin-bottom:28px}
+.fhead{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+footer h2{font-weight:500;font-size:clamp(52px,8.4vw,128px);line-height:.92;letter-spacing:-.06em}
 footer .say{position:relative;display:inline-block}
 footer .say svg{position:absolute;left:-2%;bottom:-.06em;width:104%;height:.22em;overflow:visible}
 footer .say path{fill:none;stroke:var(--y);stroke-width:12;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.1s .3s cubic-bezier(.7,0,.2,1)}
 footer.in .say path{stroke-dashoffset:0}
 footer .say span{position:relative}
-.contacts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:72px;border-top:1px solid var(--ink)}
-.contacts a{padding:24px 24px 24px 0;display:flex;justify-content:space-between;align-items:center;font-size:20px;font-weight:500;letter-spacing:-.01em;transition:padding .3s}
-.contacts a+a{padding-left:24px;border-left:1px solid var(--line)}
-.contacts a:hover{padding-left:32px}
-.contacts a:first-child:hover{padding-left:8px}
-.contacts a span.mono{display:block;font-weight:400}
-.legal{display:flex;justify-content:space-between;margin-top:80px}
+.sprout{width:clamp(90px,11vw,150px);flex:none;overflow:visible}
+.sprout path{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.sprout .s-stem{stroke-dasharray:110;stroke-dashoffset:110;transition:stroke-dashoffset 1s .5s cubic-bezier(.6,0,.2,1)}
+.sprout .s-ground{stroke:#555;stroke-dasharray:90;stroke-dashoffset:90;transition:stroke-dashoffset .6s .3s}
+.sprout .s-leaf{fill:var(--y);stroke:var(--y);transform-box:fill-box;transform:scale(0);transition:transform .6s cubic-bezier(.2,1.5,.4,1)}
+.sprout .l1{transform-origin:100% 100%;transition-delay:1.3s}.sprout .l2{transform-origin:0% 100%;transition-delay:1.5s}.sprout .l3{transform-origin:50% 100%;transition-delay:1.7s}
+footer.in .sprout .s-stem,footer.in .sprout .s-ground{stroke-dashoffset:0}
+footer.in .sprout .s-leaf{transform:none}
+footer:hover .sprout .l3{animation:sway 2.4s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(6deg)}}
+.fsub{margin-top:36px;font-size:20px;color:#cfcfcb;max-width:520px}
+.contacts{margin-top:64px;border-top:1px solid #333}
+.contacts a{position:relative;display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:24px;padding:26px 8px;border-bottom:1px solid #333;isolation:isolate;transition:color .3s,padding .3s}
+.contacts a::before{content:"";position:absolute;inset:0;background:var(--y);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
+.contacts a:hover{color:var(--ink);padding-left:20px}
+.contacts a:hover::before{transform:scaleX(1)}
+.contacts a:hover .mono{color:var(--ink)}
+.contacts .lbl{font:400 12px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:#8d8d8d}
+.contacts a:hover .lbl{color:var(--ink)}
+.contacts .val{font-weight:500;font-size:clamp(24px,3.2vw,44px);letter-spacing:-.035em;line-height:1.1}
+.legal{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;margin-top:80px}
+.legal b{font-weight:400;color:#fff}
+footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 
 /* reveal */
 .js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -327,7 +346,7 @@ footer .say span{position:relative}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
   .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
-  .contacts{grid-template-columns:1fr}.contacts a,.contacts a+a{padding:20px 0;border-left:0;border-top:1px solid var(--line)}
+  .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}
   section{padding:88px 0}
 }
@@ -530,13 +549,23 @@ footer .say span{position:relative}
 <footer id="contact">
   <div class="wrap">
     <span class="mono kick">06 · contact</span>
-    <h2>Always happy<br>to <span class="say"><span>say hello.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C 60 4, 130 4, 198 10"/></svg></span></h2>
-    <div class="contacts">
-      <a href="mailto:ece@nautilida.ai"><span>Email<span class="mono">ece@nautilida.ai</span></span><span>↗</span></a>
-      <a href="https://linkedin.com/in/eceberrak" target="_blank" rel="noopener"><span>LinkedIn<span class="mono">in/eceberrak</span></span><span>↗</span></a>
-      <a href="https://github.com/ece-berrak" target="_blank" rel="noopener"><span>GitHub<span class="mono">ece-berrak</span></span><span>↗</span></a>
+    <div class="fhead">
+      <h2>Every tree starts<br>with a <span class="say"><span>hello.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C 60 4, 130 4, 198 10"/></svg></span></h2>
+      <svg class="sprout" viewBox="0 0 120 160" aria-hidden="true">
+        <path class="s-stem" d="M60 150 C 60 120, 58 95, 60 60"/>
+        <path class="s-leaf l1" d="M60 92 C 40 88, 26 74, 22 56 C 42 58, 56 70, 60 92 Z"/>
+        <path class="s-leaf l2" d="M60 74 C 78 70, 94 56, 98 36 C 76 38, 62 52, 60 74 Z"/>
+        <path class="s-leaf l3" d="M60 60 C 54 44, 56 28, 62 14 C 70 30, 68 46, 60 60 Z"/>
+        <path class="s-ground" d="M20 150 H100"/>
+      </svg>
     </div>
-    <div class="legal mono"><span>© 2026 Ece Berrak · Berlin</span><a class="ul" href="off-the-clock.html">Off the clock ↗</a></div>
+    <p class="fsub">Ideas, questions, or a story about your users. My inbox is open.</p>
+    <div class="contacts">
+      <a href="mailto:ece@nautilida.ai" id="mailrow"><span class="lbl">Email</span><span class="val">ece@nautilida.ai</span><span class="act mono" id="copyhint">click to copy</span></a>
+      <a href="https://linkedin.com/in/eceberrak" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span class="val">in/eceberrak</span><span class="act mono">open ↗</span></a>
+      <a href="https://github.com/ece-berrak" target="_blank" rel="noopener"><span class="lbl">GitHub</span><span class="val">ece-berrak</span><span class="act mono">open ↗</span></a>
+    </div>
+    <div class="legal mono"><span>© 2026 Ece Berrak</span><span>Berlin · <b id="clock">--:--</b></span><a class="ul" href="off-the-clock.html">Off the clock ↗</a><a class="ul" href="#top">Back to top ↑</a></div>
   </div>
 </footer>
 
@@ -664,6 +693,10 @@ footer .say span{position:relative}
       t.addEventListener('mouseenter',on);t.addEventListener('focus',on);t.addEventListener('click',on);z.querySelector('.tags').append(t)});
     board.append(z)});
   setTimeout(()=>board.querySelectorAll('.tag').forEach(t=>t.style.transitionDelay=''),3000);
+  // contact: copy email + live Berlin clock
+  const mr=document.getElementById('mailrow'),ch=document.getElementById('copyhint');
+  mr.addEventListener('click',e=>{if(navigator.clipboard&&!e.metaKey&&!e.ctrlKey){e.preventDefault();navigator.clipboard.writeText('ece@nautilida.ai').then(()=>{ch.textContent='copied ✓';setTimeout(()=>ch.textContent='click to copy',1800)},()=>{location.href=mr.href})}});
+  const clk=document.getElementById('clock');const tick=()=>{try{clk.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'2-digit',minute:'2-digit'}).format(new Date())}catch(_){}};tick();setInterval(tick,30000);
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
