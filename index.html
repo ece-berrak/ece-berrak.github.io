@@ -378,12 +378,17 @@ footer:hover .sprout .l3{animation:sway 2.4s ease-in-out infinite}
 footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.hint4{margin-top:36px;opacity:.75}.hint4 b{background:var(--ink);color:var(--y);padding:1px 6px;border-radius:4px;font-weight:400}
+.hint4{margin-top:36px;opacity:.8}
+.catbtn{font:inherit;background:var(--ink);color:var(--y);border:0;border-radius:99px;padding:3px 10px;cursor:pointer}
+.catbtn:hover{background:#fff;color:var(--ink)}.hint4 b{background:var(--ink);color:var(--y);padding:1px 6px;border-radius:4px;font-weight:400}
 .parade{position:fixed;left:0;right:0;bottom:0;height:110px;pointer-events:none;z-index:60;display:none}
 .parade.go{display:block}
 .parade span{position:absolute;bottom:6px;left:0;width:120px;transform:translateX(-160px);animation:walk 6.5s linear forwards}
 .parade .pc2{width:84px;bottom:4px;animation-delay:.7s}
-.parade svg{width:100%;display:block;animation:bob4 .45s ease-in-out infinite}
+.parade svg{width:100%;display:block;overflow:visible;animation:bob4 .45s ease-in-out infinite;filter:drop-shadow(0 0 0 #ffe14d) drop-shadow(0 0 6px rgba(255,225,77,.9))}
+.parade.sit span{animation:none;transform:none}
+.parade.sit .pc1{left:24px}.parade.sit .pc2{left:150px}
+.parade.sit svg,.parade.sit .lg,.parade.sit .tl{animation:none}
 .parade .lg{transform-box:fill-box;transform-origin:top center;animation:step .45s ease-in-out infinite alternate}
 .parade .l2,.parade .l4{animation-direction:alternate-reverse}
 .parade .tl{transform-box:fill-box;transform-origin:left bottom;animation:wag .6s ease-in-out infinite alternate}
@@ -391,7 +396,7 @@ footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 @keyframes bob4{50%{transform:translateY(-3px)}}
 @keyframes step{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
 @keyframes wag{to{transform:rotate(-18deg)}}
-.toast4{position:fixed;left:50%;top:84px;z-index:61;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:99px;font:400 13px "JetBrains Mono",monospace;transition:opacity .3s,transform .4s cubic-bezier(.2,1.4,.4,1);pointer-events:none;max-width:calc(100% - 32px);text-align:center;line-height:1.4}
+.toast4{position:fixed;left:50%;top:84px;z-index:61;transform:translate(-50%,-20px);opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border:1.5px solid var(--y);border-radius:99px;font:400 13px "JetBrains Mono",monospace;transition:opacity .3s,transform .4s cubic-bezier(.2,1.4,.4,1);pointer-events:none;max-width:calc(100% - 32px);text-align:center;line-height:1.4}
 .toast4 b{color:var(--y);font-weight:400}
 .toast4.on{opacity:1;transform:translate(-50%,0)}
 /* secret */
@@ -786,13 +791,13 @@ footer .secret .ul{color:var(--ink)}
           </span>
         </button>
       </div>
-      <p class="hint4 mono">psst. there is one more secret on this page. type <b>c a t s</b> anywhere, or tap my photo in the top bar five times.</p>
+      <p class="hint4 mono">psst. there is one more secret on this page. type <b>c a t s</b> anywhere, tap my photo in the top bar five times, or <button type="button" id="catbtn" class="catbtn">just click here 🐾</button></p>
       <a class="more-ot ul" href="off-the-clock.html">The full, uncensored page →</a>
     </div>
   </section>
 </footer>
 
-<div class="parade" id="parade" aria-hidden="true"><span class="pc1"><svg viewBox="0 0 120 90" aria-hidden="true"><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span class="pc2"><svg viewBox="0 0 120 90" aria-hidden="true"><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span></div>
+<div class="parade" id="parade" aria-hidden="true"><span class="pc1"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22v16H18z" fill="#fff"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20" fill="#fff"/><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span class="pc2"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22v16H18z" fill="#fff"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20" fill="#fff"/><g fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 70c0-22 16-38 40-38 18 0 30 8 36 22"/><path class="tl" d="M94 54c10 0 18-8 16-20"/><path d="M30 40 24 18l16 14M64 34l10-18 2 20"/><path class="lg l1" d="M30 70v14"/><path class="lg l2" d="M46 72v12"/><path class="lg l3" d="M70 72v12"/><path class="lg l4" d="M86 66v18"/></g><circle cx="38" cy="52" r="3.5" fill="#0a0a0a"/><circle cx="56" cy="50" r="3.5" fill="#0a0a0a"/><path d="M44 60l3 3 3-3" stroke="#0a0a0a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span></div>
 <div class="toast4" id="toast4" role="status" aria-live="polite"></div>
 <div class="peek" id="peek" aria-hidden="true"></div>
 
@@ -931,7 +936,8 @@ footer .secret .ul{color:var(--ink)}
   const parade=document.getElementById('parade'),toast4=document.getElementById('toast4');let found4=0,buf='',taps=0,tapT;
   const showToast=m=>{toast4.innerHTML=m;toast4.classList.add('on');clearTimeout(toast4._t);toast4._t=setTimeout(()=>toast4.classList.remove('on'),3800)};
   const catsGo=()=>{found4++;showToast(found4===1?'<b>secret #04 unlocked</b> · the managers are doing their rounds':'<b>again?</b> they love the attention');
-    if(reduce)return;parade.classList.remove('go');void parade.offsetWidth;parade.classList.add('go');clearTimeout(parade._t);parade._t=setTimeout(()=>parade.classList.remove('go'),7800)};
+    parade.classList.remove('go','sit');void parade.offsetWidth;parade.classList.add('go');if(reduce)parade.classList.add('sit');clearTimeout(parade._t);parade._t=setTimeout(()=>parade.classList.remove('go','sit'),reduce?5000:7800)};
+  document.getElementById('catbtn').addEventListener('click',catsGo);
   addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,textarea,[contenteditable]'))return;if(e.key.length!==1)return;buf=(buf+e.key.toLowerCase()).slice(-4);if(buf==='cats'){buf='';catsGo()}});
   document.querySelector('nav .me').addEventListener('click',e=>{taps++;clearTimeout(tapT);tapT=setTimeout(()=>taps=0,1600);if(taps>=5){e.preventDefault();taps=0;catsGo()}else if(taps>1)e.preventDefault()});
   try{console.log('%c hi, curious one. ','background:#ffe14d;color:#0a0a0a;font:600 14px sans-serif;padding:4px 2px;border-radius:4px');console.log('You opened the console, so you get a hint: type "cats" anywhere on the page. And if you are hiring for someone who reads the source, say hello: ece@nautilida.ai')}catch(_){}
