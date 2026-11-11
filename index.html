@@ -54,7 +54,8 @@ h1{font-weight:500;font-size:clamp(44px,5.2vw,78px);line-height:1;letter-spacing
 .stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:56px}
 .stats div{padding:22px 0}
 .stats div+div{padding-left:24px;border-left:1px solid var(--line)}
-.stats b{display:block;font-weight:500;font-size:40px;letter-spacing:-.04em;line-height:1.1}
+.stats b{display:flex;align-items:flex-end;min-height:58px;font-weight:500;font-size:40px;letter-spacing:-.04em;line-height:1.05;margin-bottom:6px}
+.stats b.sm{font-size:21px;letter-spacing:-.02em;line-height:1.2;padding-bottom:3px}
 .hero .right{display:flex;align-items:center;justify-content:center;padding:40px}
 #tree{width:100%;max-width:560px;height:auto;overflow:visible}
 #tree .draw{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.2s cubic-bezier(.6,0,.2,1) forwards}
@@ -231,9 +232,9 @@ footer .say span{position:relative}
         <div class="cta"><a class="btn dark" href="#work">See the work <span class="arr">→</span></a><a class="btn" href="#contact">Say hello</a></div>
       </div>
       <div class="stats">
-        <div><b data-n="5" data-s=" yrs">5 yrs</b><span class="mono">B2B SaaS</span></div>
-        <div><b data-n="2">2</b><span class="mono">user segments</span></div>
-        <div><b data-n="5">5</b><span class="mono">teams in the loop</span></div>
+        <div><b data-n="3" data-s=" yrs">3 yrs</b><span class="mono">in B2B SaaS</span></div>
+        <div><b class="sm">Enterprise → pre‑seed</b><span class="mono">company stages</span></div>
+        <div><b class="sm">Support → sales</b><span class="mono">questions to deals</span></div>
       </div>
     </div>
     <div class="right">
@@ -270,7 +271,7 @@ footer .say span{position:relative}
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="sh rv"><div><span class="mono kick">02 — experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Five years across enterprise SaaS, community‑led growth and early‑stage product. Open any role for the detail.</p></div>
+    <div class="sh rv"><div><span class="mono kick">02 — experience</span><h2>Where I've <span class="hl">worked.</span></h2></div><p>Three years in B2B SaaS — enterprise to pre‑seed — on top of partnerships, community and content before that. Open any role for the detail.</p></div>
 
     <details class="job rv" open>
       <summary><span class="mono y">2025 — now</span><span class="co">Nautilida<small>Co‑founder &amp; CEO · Berlin</small></span><span class="one">Built go‑to‑market from an empty page for an AI‑native sales platform.</span><span class="tg" aria-hidden="true"></span></summary>
