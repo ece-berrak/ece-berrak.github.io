@@ -3,10 +3,10 @@
    ========================================= */
 
 :root {
-  --bone:#F4EFE4; --ink:#0E0D14; --ink-2:#3a3744; --ink-3:#7c7686;
-  --rule:#e6dfd0; --rule-strong:#1a1922;
-  --violet:#4F32D8; --violet-soft:#a78bfa; --lime:#D4FF3D;
-  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --bone:#f6f6f3; --ink:#0a0a0a; --ink-2:#3a3a3a; --ink-3:#7a7a7a;
+  --rule:#dcdcd6; --rule-strong:#0a0a0a;
+  --violet:#0a0a0a; --violet-soft:#7a7a7a; --lime:#ffe14d;
+  --sans:'Inter Tight',system-ui,-apple-system,sans-serif;
   --serif:'Instrument Serif',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --pad: clamp(20px, 4vw, 56px);
@@ -29,7 +29,7 @@ strong { font-weight: 600; color: var(--ink); }
 /* Top bar — sticky */
 .reader-top {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(244,239,228,0.92);
+  background: rgba(246,246,243,0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
@@ -577,3 +577,16 @@ strong { font-weight: 600; color: var(--ink); }
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+
+/* ===== 2026 redesign overrides: black / white / yellow ===== */
+.progress{background:#ffe14d !important;height:3px}
+::selection{background:#ffe14d;color:#0a0a0a}
+h1,h2,h3,h4{letter-spacing:-.03em}
+.prose-body a{text-decoration:none;border-bottom:2px solid #ffe14d}
+.prose-body a:hover{background:#ffe14d}
+.prose-toc a.active{color:#0a0a0a;font-weight:500}
+.prose-toc a.active::before{background:#ffe14d !important}
+.back:hover{background:#ffe14d;color:#0a0a0a;border-color:#0a0a0a}
+.reader-foot a.button:hover{background:#ffe14d;color:#0a0a0a}
+.compare-col.violet{background:#0a0a0a}
