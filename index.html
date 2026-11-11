@@ -190,8 +190,11 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 
 /* writing */
 .reads{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.read{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:300px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.read{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:300px;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
 .read:hover{transform:translateY(-6px);border-color:var(--ink)}
+.read .bar{position:absolute;left:0;top:0;height:4px;width:calc(var(--m) * 10%);background:var(--y);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.6,0,.2,1)}
+.read.in .bar{transform:scaleX(1)}
+.read:hover .bar{width:100%}
 .read h3{font-weight:500;font-size:26px;letter-spacing:-.03em;line-height:1.1;margin:18px 0 12px}
 .read p{color:var(--ink-2);font-size:15px}
 .read .go{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-weight:500;font-size:15px}
@@ -434,13 +437,13 @@ footer .say span{position:relative}
 
   <!-- WRITING -->
   <section id="writing">
-    <div class="sh rv"><div><span class="mono kick">04 · writing</span><h2>Long‑form <span class="hl">I wrote.</span></h2></div><p>A manifesto, a category definition and a comparison note, written for Nautilida. Each opens in its own reader.</p></div>
+    <div class="sh rv"><div><span class="mono kick">04 · writing</span><h2>Long‑form <span class="hl">I wrote.</span></h2></div><p>Category writing for Nautilida: a manifesto, a definition and a comparison, each built from the questions buyers kept asking. Every piece opens in its own reader.</p></div>
     <div class="reads">
-      <a class="read rv" href="writing/weekly-loop.html"><div><span class="mono">manifesto · 9 min</span><h3>The weekly revenue coordination loop, explained.</h3><p>Monday brief, mid‑week execution, Friday recap, compounding memory — an operating rhythm that replaces dashboard anxiety with direction.</p></div><span class="go">Read <i>→</i></span></a>
-      <a class="read rv" href="writing/ai-team-lead.html"><div><span class="mono">definition · 7 min</span><h3>What is an AI team lead for sales?</h3><p>How it differs from assistants and dashboards, and what it does for teams that live on recurring accounts.</p></div><span class="go">Read <i>→</i></span></a>
-      <a class="read rv" href="writing/revenue-intelligence-vs.html"><div><span class="mono">comparison · 6 min</span><h3>Revenue intelligence vs Nautilida.</h3><p>One tells you what happened on calls, the other what to do next. Different halves of the same problem.</p></div><span class="go">Read <i>→</i></span></a>
+      <a class="read rv" href="writing/weekly-loop.html" style="--m:9"><span class="bar" aria-hidden="true"></span><div><span class="mono">manifesto · 9 min read</span><h3>The weekly revenue coordination loop, explained.</h3><p>Monday brief, mid‑week execution, Friday recap and a memory that compounds. An operating rhythm that replaces dashboard anxiety with direction.</p></div><span class="go">Read <i>→</i></span></a>
+      <a class="read rv" href="writing/ai-team-lead.html" style="--m:7"><span class="bar" aria-hidden="true"></span><div><span class="mono">definition · 7 min read</span><h3>What is an AI team lead for sales?</h3><p>How it differs from assistants and dashboards, and what it does for teams that live on recurring accounts.</p></div><span class="go">Read <i>→</i></span></a>
+      <a class="read rv" href="writing/revenue-intelligence-vs.html" style="--m:6"><span class="bar" aria-hidden="true"></span><div><span class="mono">comparison · 6 min read</span><h3>Revenue intelligence vs Nautilida.</h3><p>One tells you what happened on calls, the other tells you what to do next. Two halves of the same problem.</p></div><span class="go">Read <i>→</i></span></a>
     </div>
-    <div class="more rv"><span class="mono" style="margin-right:6px">more →</span><a href="writing/vs-gong.html">vs Gong</a><a href="writing/vs-clari.html">vs Clari</a><a href="writing/vs-gainsight.html">vs Gainsight</a><a href="writing/manufacturing.html">For manufacturing</a><a href="writing/catering.html">For B2B catering</a></div>
+    <div class="more rv"><span class="mono" style="margin-right:6px">more pieces →</span><a href="writing/vs-gong.html">vs Gong</a><a href="writing/vs-clari.html">vs Clari</a><a href="writing/vs-gainsight.html">vs Gainsight</a><a href="writing/manufacturing.html">For manufacturing</a><a href="writing/catering.html">For B2B catering</a></div>
   </section>
 
   <!-- STACK -->
