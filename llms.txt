@@ -1,0 +1,49 @@
+# Ece Berrak
+
+> Ece Berrak is a T-shaped GTM (go-to-market) generalist based in Berlin. Her depth is user communication: support questions, onboarding, in-product messaging, lifecycle email, engagement and retention. Her breadth covers the full funnel: positioning, brand, content, SEO and AEO, website, campaigns, events, outbound and sales enablement. Product thinking is the root of how she works: start with the problem the user came with, then carry the answer across every channel.
+
+## Experience
+
+- **Nautilida** (2025 to 2026), co-founder and CEO, Berlin. Her own company: an AI-native sales platform. Built brand, positioning, the website, a sales enablement kit and outbound from scratch, worked on product features and the prompt framework, secured a design partner and LOIs.
+- **Dataiku** (2024 to 2025), Growth Marketing, Berlin. Owned user communication for an AI and analytics platform: lifecycle email in HubSpot and in-product messaging for two segments (newly onboarded users and advanced champions), engagement, adoption and retention, and answering user questions directly.
+- **CRS Soft** (2022), Creative Marketing, Istanbul. UX, SEO and content for B2B software, plus employer branding.
+- **Plandy** (2020 to 2022), Affiliate and Partnerships, remote. Built a creator affiliate network from scratch.
+- **Community Bilgi** (2019 to 2022), Marketing Content Manager, Istanbul.
+
+## Education
+
+- M.A. Political Economy, HWR Berlin (2023 to 2025). Thesis on digitalization in retail chains and the labor market, USA vs Germany.
+- B.A. International Relations and PR, Istanbul Bilgi University (2019 to 2023), marketing minor.
+- Associate degree in Social Media Management, Anadolu University (2020 to 2022).
+
+## How she works
+
+Listen to users (support threads, onboarding calls, events, in-product signals), shape the answer like a product person, then carry it through the funnel: lifecycle, content, web, campaigns and sales material.
+
+## Tools
+
+HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Figma, Canva, Webflow, Framer, WordPress, HTML/CSS/JS, n8n, Zapier, Apps Script, Notion, Airtable, Claude and Claude Code.
+
+## Pages
+
+- [Portfolio home](https://ece-berrak.github.io/): positioning, experience, work, writing and contact.
+- [Nautilida case study](https://ece-berrak.github.io/projects/nautilida.html): a B2B marketing site shipped end to end in three weeks, built for SEO, AEO and GEO.
+- [Off the clock](https://ece-berrak.github.io/off-the-clock.html): Berlin tech events, travel vlogs and two cats.
+
+## Writing
+
+- [The weekly revenue coordination loop, explained](https://ece-berrak.github.io/writing/weekly-loop.html)
+- [What is an AI team lead for sales?](https://ece-berrak.github.io/writing/ai-team-lead.html)
+- [AI Team Lead Literacy](https://ece-berrak.github.io/writing/literacy.html)
+- [Revenue intelligence vs Nautilida](https://ece-berrak.github.io/writing/revenue-intelligence-vs.html)
+- [Nautilida vs Gong](https://ece-berrak.github.io/writing/vs-gong.html)
+- [Nautilida vs Clari](https://ece-berrak.github.io/writing/vs-clari.html)
+- [Nautilida vs Gainsight](https://ece-berrak.github.io/writing/vs-gainsight.html)
+- [Nautilida for manufacturing](https://ece-berrak.github.io/writing/manufacturing.html)
+- [Nautilida for B2B catering](https://ece-berrak.github.io/writing/catering.html)
+
+## Contact
+
+- Email: ece@nautilida.ai
+- LinkedIn: https://www.linkedin.com/in/eceberrak
+- GitHub: https://github.com/ece-berrak
