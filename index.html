@@ -111,9 +111,9 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .step .eg{display:block;margin-top:20px;padding:14px 16px;border-left:3px solid var(--line);background:var(--paper);font-size:15px;color:var(--ink-2);transition:border-color .4s}
 .step .eg b{display:block;font:400 11px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:4px;font-weight:400}
 .step.on .eg{border-left-color:var(--y)}
-.back{display:flex;align-items:center;gap:10px;margin-top:36px}
-.back svg{width:22px;height:22px;transition:transform .9s}
-.loop.go .back svg{animation:spin 6s linear infinite}
+.loopback{display:flex;align-items:center;gap:10px;margin-top:36px}
+.loopback svg{width:22px;height:22px;transition:transform .9s}
+.loop.go .loopback svg{animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(-360deg)}}
 
 /* experience */
@@ -337,13 +337,13 @@ footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 .sc:hover{transform:rotate(0) translateY(-6px)}
 .sc.open{transform:rotate(0) rotateY(180deg)}
 .face{position:absolute;inset:0;border:2px solid var(--ink);border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;padding:24px}
-.front{background:var(--ink);color:#fff;justify-content:space-between}
-.front .mono{color:#9a9a9a}
-.front b{font-weight:500;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.04em;line-height:1.05}
+.sc .front{background:var(--ink);color:#fff;justify-content:space-between}
+.sc .front .mono{color:#9a9a9a}
+.sc .front b{font-weight:500;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.04em;line-height:1.05}
 .lock{width:44px;height:44px;border-radius:50%;background:var(--y);color:var(--y);display:grid;place-items:center;font-size:0;position:relative;animation:pulse 2s infinite}
 .lock::after{content:"?";font:500 22px "Inter Tight";color:var(--ink)}
 @keyframes pulse{50%{transform:scale(1.08)}}
-.back{background:var(--paper);transform:rotateY(180deg);gap:16px;justify-content:space-between}
+.sc .back{background:var(--paper);transform:rotateY(180deg);gap:16px;justify-content:space-between}
 .pols{position:relative;display:block;flex:none;height:250px;width:100%;align-self:stretch}
 .pols img{position:absolute;width:46%;aspect-ratio:4/5;object-fit:cover;background:#fff;padding:7px 7px 22px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
 .pols img:nth-child(1){left:2%;top:6%;transform:rotate(-8deg)}
@@ -455,7 +455,7 @@ footer .secret .ul{color:var(--ink)}
         <div class="step"><span class="n">02</span><h3>Shape</h3><p>Think like a product person. What needs to change in the message, the journey or the product itself so that problem gets solved?</p><span class="eg"><b>at dataiku</b>New users and advanced champions had different problems, so they got two different journeys.</span></div>
         <div class="step"><span class="n">03</span><h3>Carry it through</h3><p>Take it across the funnel: lifecycle, content, web, campaigns, sales material. Then bring it back to the teams who need to hear it.</p><span class="eg"><b>at nautilida</b>The questions buyers kept asking shaped the website, the comparison pages and the sales deck.</span></div>
       </div>
-      <div class="back mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>and back to listening</div>
+      <div class="loopback mono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>and back to listening</div>
     </div>
   </section>
 
@@ -704,7 +704,7 @@ footer .secret .ul{color:var(--ink)}
     if(d.open)d.classList.add('shown');
     d.querySelector('summary').addEventListener('click',e=>{
       e.preventDefault();if(reduce){d.open=!d.open;d.classList.toggle('shown',d.open);return}
-      if(!d.open){d.open=true;const h=body.scrollHeight;body.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:450,easing:'cubic-bezier(.2,.8,.2,1)'});requestAnimationFrame(()=>d.classList.add('shown'))}
+      if(!d.open){document.querySelectorAll('.job[open]').forEach(o=>{if(o!==d){o.classList.remove('shown');const ob=o.querySelector('.body');const an=ob.animate([{height:ob.scrollHeight+'px',opacity:1},{height:'0px',opacity:0}],{duration:300,easing:'cubic-bezier(.6,0,.4,1)'});an.onfinish=()=>o.open=false}});d.open=true;const h=body.scrollHeight;body.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:450,easing:'cubic-bezier(.2,.8,.2,1)'});requestAnimationFrame(()=>d.classList.add('shown'))}
       else{d.classList.remove('shown');const h=body.scrollHeight;const an=body.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:350,easing:'cubic-bezier(.6,0,.4,1)'});an.onfinish=()=>d.open=false}
     });
   });
