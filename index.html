@@ -319,6 +319,49 @@ footer:hover .sprout .l3{animation:sway 2.4s ease-in-out infinite}
 .legal b{font-weight:400;color:#fff}
 footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
 
+/* secret */
+.psst{margin-top:48px;text-align:center;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.secret{position:relative;margin-top:120px;margin-bottom:-48px;padding:110px 0 100px;background:var(--y);color:var(--ink);overflow:hidden}
+.secret .mono{color:#5a5000}
+.secret .sk{display:block;margin-bottom:18px}
+.secret h2{font-weight:500;font-size:clamp(40px,6vw,88px);line-height:.98;letter-spacing:-.05em;max-width:1000px}
+.stamp{display:inline-block;background:var(--ink);color:var(--y);padding:0 .18em .04em;border-radius:.12em;transform:rotate(-4deg) scale(0);transition:transform .6s .2s cubic-bezier(.2,1.6,.4,1)}
+.secret.in .stamp{transform:rotate(-4deg) scale(1)}
+.secret .sub{margin-top:24px;font-size:19px}
+.secret .sub b{font:400 12px "JetBrains Mono",monospace;background:var(--ink);color:var(--y);padding:4px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;white-space:nowrap;display:inline-block}
+.secrets{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;perspective:1400px}
+.sc{position:relative;height:420px;border:0;padding:0;background:none;cursor:pointer;font:inherit;color:inherit;text-align:left;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.3,.4,1)}
+.sc:nth-child(1){--tilt:-2deg}.sc:nth-child(2){--tilt:1.5deg}.sc:nth-child(3){--tilt:-1deg}
+.sc{transform:rotate(var(--tilt))}
+.sc:hover{transform:rotate(0) translateY(-6px)}
+.sc.open{transform:rotate(0) rotateY(180deg)}
+.face{position:absolute;inset:0;border:2px solid var(--ink);border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;padding:24px}
+.front{background:var(--ink);color:#fff;justify-content:space-between}
+.front .mono{color:#9a9a9a}
+.front b{font-weight:500;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.04em;line-height:1.05}
+.lock{width:44px;height:44px;border-radius:50%;background:var(--y);color:var(--y);display:grid;place-items:center;font-size:0;position:relative;animation:pulse 2s infinite}
+.lock::after{content:"?";font:500 22px "Inter Tight";color:var(--ink)}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.back{background:var(--paper);transform:rotateY(180deg);gap:16px;justify-content:space-between}
+.pols{position:relative;display:block;flex:none;height:250px;width:100%;align-self:stretch}
+.pols img{position:absolute;width:46%;aspect-ratio:4/5;object-fit:cover;background:#fff;padding:7px 7px 22px;box-shadow:0 10px 24px -12px rgba(0,0,0,.45);transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
+.pols img:nth-child(1){left:2%;top:6%;transform:rotate(-8deg)}
+.pols img:nth-child(2){left:27%;top:0;transform:rotate(3deg);z-index:1}
+.pols img:nth-child(3){left:50%;top:8%;transform:rotate(10deg);z-index:2}
+.sc.open:hover .pols img:nth-child(1){transform:rotate(-14deg) translateX(-10px)}
+.sc.open:hover .pols img:nth-child(3){transform:rotate(16deg) translateX(10px)}
+.catart{flex:1;display:grid;place-items:center}
+.catart svg{width:240px;max-width:90%;height:auto}
+.txt{font-size:15px;color:var(--ink-2)}
+.txt a{color:var(--ink);font-weight:500;border-bottom:2px solid var(--y)}
+.more-ot{display:inline-block;margin-top:48px;font-weight:500;font-size:18px}
+footer .secret .ul{color:var(--ink)}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:3}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;background:var(--ink);opacity:0;animation:fall var(--d) cubic-bezier(.3,.6,.5,1) var(--dl) forwards}
+.confetti i.w{background:#fff}
+@keyframes fall{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--x),620px) rotate(var(--rot))}}
+
 /* reveal */
 .js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .js .rv.in{opacity:1;transform:none}
@@ -347,7 +390,7 @@ footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
   .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
-  .legal{flex-direction:column;gap:8px}
+  .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
   section{padding:88px 0}
 }
 @media (max-width:560px){nav .links a:not(:last-child){display:none}.stats b{font-size:30px}.board{grid-template-columns:1fr}}
@@ -566,7 +609,40 @@ footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
       <a href="https://github.com/ece-berrak" target="_blank" rel="noopener"><span class="lbl">GitHub</span><span class="val">ece-berrak</span><span class="act mono">open ↗</span></a>
     </div>
     <div class="legal mono"><span>© 2026 Ece Berrak</span><span>Berlin · <b id="clock">--:--</b></span><a class="ul" href="off-the-clock.html">Off the clock ↗</a><a class="ul" href="#top">Back to top ↑</a></div>
+    <p class="psst mono">psst. keep scrolling ↓</p>
   </div>
+  <section class="secret" id="secret" aria-label="Off the clock">
+    <div class="wrap">
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <span class="mono sk">you scrolled all the way down ↓</span>
+      <h2><span class="stamp">Surprise!</span> Here are some secrets from my side.</h2>
+      <p class="sub">Not on the CV. Tap a card to open it. <b id="secretcount">0/3 opened</b></p>
+      <div class="secrets">
+        <button class="sc" type="button" aria-pressed="false">
+          <span class="face front"><span class="mono">secret #01</span><span class="lock">●</span><b>I collect rooms.</b><span class="mono">tap to open</span></span>
+          <span class="face back">
+            <span class="pols"><img src="uploads/networking/1761910916604.jpg" alt="At IHK Berlin"><img src="uploads/networking/1771584997040.jpg" alt="Google Berlin entrance"><img src="uploads/networking/1774256959387.jpg" alt="At a SiBB VC event"></span>
+            <span class="txt">Berlin tech talks, VC evenings, women‑in‑AI breakfasts, the occasional Google Berlin door. Cities run on rooms.</span>
+          </span>
+        </button>
+        <button class="sc" type="button" aria-pressed="false">
+          <span class="face front"><span class="mono">secret #02</span><span class="lock">●</span><b>I vlog our trips.</b><span class="mono">tap to open</span></span>
+          <span class="face back">
+            <span class="pols"><img src="uploads/travel/corfu.jpg" alt="Corfu"><img src="uploads/travel/rome.jpg" alt="Rome"><img src="uploads/travel/skopje-2.jpg" alt="Skopje"></span>
+            <span class="txt">Around 10k subscribers on YouTube and a strong bias for the Mediterranean. <a href="https://www.youtube.com/@berlixiz" target="_blank" rel="noopener">@berlixiz ↗</a></span>
+          </span>
+        </button>
+        <button class="sc" type="button" aria-pressed="false">
+          <span class="face front"><span class="mono">secret #03</span><span class="lock">●</span><b>Two cats run my calendar.</b><span class="mono">tap to open</span></span>
+          <span class="face back">
+            <span class="catart"><svg viewBox="0 0 200 150" aria-hidden="true"><g fill="none" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M30 120c0-30 18-52 46-52s46 22 46 52"/><path d="M48 76 40 44l22 18M104 76l8-32-22 18"/><circle cx="62" cy="88" r="3" fill="#0a0a0a"/><circle cx="90" cy="88" r="3" fill="#0a0a0a"/><path d="M72 98l4 4 4-4M60 100H42M60 104l-16 6M92 100h18M92 104l16 6"/><path d="M122 120c22 0 30-14 24-30"/></g><g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M140 128c0-18 10-30 24-30s22 12 22 30"/><path d="M150 102l-4-18 12 10M178 102l4-18-12 10"/><path d="M158 112c2 2 6 2 8 0"/></g><path d="M20 128h170" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round"/></svg></span>
+            <span class="txt">Excellent at presence, world class at sitting on the keyboard during the wrong calls. Official portraits pending.</span>
+          </span>
+        </button>
+      </div>
+      <a class="more-ot ul" href="off-the-clock.html">The full, uncensored page →</a>
+    </div>
+  </section>
 </footer>
 
 <div class="peek" id="peek" aria-hidden="true"></div>
@@ -697,6 +773,15 @@ footer .ul{color:#8d8d8d}footer .ul:hover{color:#fff}
   const mr=document.getElementById('mailrow'),ch=document.getElementById('copyhint');
   mr.addEventListener('click',e=>{if(navigator.clipboard&&!e.metaKey&&!e.ctrlKey){e.preventDefault();navigator.clipboard.writeText('ece@nautilida.ai').then(()=>{ch.textContent='copied ✓';setTimeout(()=>ch.textContent='click to copy',1800)},()=>{location.href=mr.href})}});
   const clk=document.getElementById('clock');const tick=()=>{try{clk.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',hour:'2-digit',minute:'2-digit'}).format(new Date())}catch(_){}};tick();setInterval(tick,30000);
+  // secret section: confetti on arrival + flip cards
+  const sec=document.getElementById('secret'),conf=document.getElementById('confetti'),cnt=document.getElementById('secretcount');
+  const so2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){sec.classList.add('in');so2.disconnect();if(reduce)return;
+    for(let k=0;k<60;k++){const c=document.createElement('i');if(k%3===0)c.className='w';c.style.left=(Math.random()*100)+'%';c.style.setProperty('--x',((Math.random()-.5)*240)+'px');c.style.setProperty('--rot',((Math.random()-.5)*900)+'deg');c.style.setProperty('--d',(1.6+Math.random()*1.6)+'s');c.style.setProperty('--dl',(Math.random()*.6)+'s');conf.append(c)}
+    setTimeout(()=>conf.innerHTML='',4200)}}),{threshold:.25});
+  so2.observe(sec);
+  const cards=[...document.querySelectorAll('.sc')];
+  cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a'))return;c.classList.toggle('open');c.setAttribute('aria-pressed',c.classList.contains('open'));
+    cnt.textContent=cards.filter(x=>x.classList.contains('open')).length+'/3 opened'}));
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
