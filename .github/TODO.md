@@ -4,7 +4,8 @@ Things we agreed to come back to (kept here so nothing gets lost).
 
 ## Content
 - [ ] Kind words: add LinkedIn profile links for Kübra Demir, Ekim Yurtsever and Alivia Smith (waiting for the URLs).
-- [ ] Kind words: confirm Alivia Smith's company (Dataiku?) and whether Kübra should read "manager" or "former colleague".
+- [x] Alivia Smith is at Dataiku (added).
+- [ ] Kind words: confirm whether Kübra should read "manager" or "former colleague".
 - [ ] Experience: add akirolabs (role and dates from Ece).
 - [ ] Shelf: add new campaign pieces (LinkedIn posts, newsletters) as they come. Post/newsletter preview templates are still in the code.
 - [ ] A separate section for visuals, designs and campaigns (not on the shelf).
