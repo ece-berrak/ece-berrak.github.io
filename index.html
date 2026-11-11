@@ -213,7 +213,7 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .filters button[aria-pressed="true"] sup{color:var(--y)}
 .library{display:flex;flex-direction:column;gap:56px}
 .shelfwrap{min-width:0}
-.shelf{display:flex;align-items:flex-end;gap:6px;min-height:440px;padding:0 8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.shelf{display:flex;align-items:flex-end;gap:6px;min-height:470px;padding:30px 8px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
 .shelf::-webkit-scrollbar{display:none}
 .spine{flex:none;position:relative;width:var(--w);height:var(--h);border:1.5px solid var(--ink);border-bottom:0;border-radius:4px 4px 0 0;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px 0 12px;cursor:pointer;text-decoration:none;
   transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .25s,opacity .3s,width .3s;font:inherit}
@@ -227,7 +227,7 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .spine .band{position:absolute;left:0;right:0;top:44px;height:6px;background:var(--y)}
 .spine.yel .band,.spine.dark .band{background:currentColor;opacity:.25}
 .in .spine.act{transform:translateY(-22px)}
-.in .spine:hover:not(.act){transform:translateY(-8px)}
+.in .spine:hover,.in .spine:focus-visible{transform:translateY(-22px)}
 .spine.dim{opacity:.18;pointer-events:none}
 .ghost{flex:none;width:58px;height:var(--h);border:1.5px dashed var(--line);border-bottom:0;border-radius:4px 4px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:14px;font:400 11px "JetBrains Mono",monospace;color:var(--mute);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .in .ghost{transform:none}
@@ -574,10 +574,9 @@ footer .secret .ul{color:var(--ink)}
 
   <!-- SHELF -->
   <section id="shelf-sec">
-    <div class="sh rv"><div><span class="mono kick">04 · shelf</span><h2>The <span class="hl">shelf.</span></h2></div><p>Long‑form writing, from manifestos to comparisons. Pull a spine to preview it, click to read.</p></div>
+    <div class="sh rv"><div><span class="mono kick">04 · shelf</span><h2>The <span class="hl">shelf.</span></h2></div><p>Long‑form writing, from manifestos to comparisons. Pull a spine off the shelf to read it.</p></div>
     <div class="library rv">
       <div class="shelfwrap"><div class="shelf" id="shelf" role="list"></div><div class="plank"><span class="mono" id="shelfcount"></span></div></div>
-      <article class="preview" id="wprev" aria-live="polite"></article>
     </div>
   </section>
 
@@ -724,7 +723,7 @@ footer .secret .ul{color:var(--ink)}
     {f:'article',t:'Nautilida for B2B catering',h:'writing/catering.html',k:'Use case',m:5,src:'Nautilida',d:'Office catering, corporate events, hospitality contracts. Different shapes, same memory.'},
   ];
   const FMT={article:'Article',post:'LinkedIn post',newsletter:'Newsletter'};
-  const shelf=document.getElementById('shelf'),wprev=document.getElementById('wprev');
+  const shelf=document.getElementById('shelf');
   const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const spines=WRITING.map((w,i)=>{
     const a=document.createElement('a');a.className='spine '+w.f;a.href=w.h;a.setAttribute('role','listitem');
@@ -733,22 +732,11 @@ footer .secret .ul{color:var(--ink)}
     a.style.transitionDelay=(i*0.06)+'s';
     a.innerHTML='<span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="band"></span><span class="t"></span><span class="k"></span>';
     a.querySelector('.t').textContent=w.t;a.querySelector('.k').textContent=FMT[w.f];a.setAttribute('aria-label',FMT[w.f]+': '+w.t);
-    const pick=()=>preview(i);a.addEventListener('mouseenter',pick);a.addEventListener('focus',pick);
-    a.addEventListener('click',e=>{if(matchMedia('(hover: none)').matches&&!a.classList.contains('act')){e.preventDefault();preview(i)}});
     shelf.append(a);return a});
   setTimeout(()=>spines.forEach(sp=>sp.style.transitionDelay=''),1500);
-  const media=src=>src.endsWith('.mp4')?'<video src="'+esc(src)+'" muted autoplay loop playsinline></video>':'<div class="media"><img src="'+esc(src)+'" alt=""></div>';
-  function preview(i){const w=WRITING[i];spines.forEach((sp,k)=>sp.classList.toggle('act',k===i));
-    const ext=/^https?:/.test(w.h)?' target="_blank" rel="noopener"':'';
-    let h='<div class="meta"><span class="fmt '+w.f+'">'+FMT[w.f]+'</span><span class="mono">'+esc(w.k)+(w.m?' · '+w.m+' min read':'')+' · '+esc(w.src)+'</span></div>';
-    h+='<h3>'+esc(w.t)+'</h3><div class="side">';
-    if(w.f==='article'){h+='<p>'+esc(w.d)+'</p><a class="btn dark" href="'+esc(w.h)+'">Read it <span class="arr">→</span></a>'}
-    else if(w.f==='post'){h+='<div class="mock"><div class="hd"><img src="uploads/nautilida-logo.png" alt=""><div><b>'+esc(w.src.split(' ')[0])+'</b><small>Company page · post</small></div></div><div class="tx">'+esc(w.d)+'</div>'+media(w.media)+'<div class="ft"><span>'+esc(w.src)+'</span><a href="'+esc(w.h)+'"'+ext+'>view ↗</a></div></div>'}
-    else{h+='<div class="mock"><div class="mailbar"><i></i><i></i><i></i></div><div class="subj">'+esc(w.subject||w.t)+'</div><div class="tx">'+esc(w.d)+'</div>'+(w.media?media(w.media):'')+'<div class="ft"><span>'+esc(w.src)+'</span><a href="'+esc(w.h)+'"'+ext+'>open ↗</a></div></div>'}
-    wprev.innerHTML=h+'</div>'}
   const setCount=n=>document.getElementById('shelfcount').textContent=n+' on the shelf · room for more';
   [300,350,280].forEach((hh,g)=>{const d=document.createElement('div');d.className='ghost';d.setAttribute('aria-hidden','true');d.style.setProperty('--h',hh+'px');d.style.transitionDelay=(0.8+g*0.08)+'s';d.textContent='soon';shelf.append(d)});
-  setCount(WRITING.length);preview(0);
+  setCount(WRITING.length);
   // pegboard: add a tool by adding [name, what I use it for] to a zone. tr:true = trunk (lifecycle) zone
   const TOOLS=[
     {z:'Lifecycle & CRM',tr:true,t:[['HubSpot','Lifecycle emails, segments, in‑product messaging and reporting.'],['ActiveCampaign','Automated email journeys and behaviour‑based flows.'],['Apollo.io','Prospect data and enrichment.'],['Clay','List building and enrichment workflows.'],['Instantly','Outbound sequences.']]},
