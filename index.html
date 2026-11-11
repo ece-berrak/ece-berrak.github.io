@@ -153,20 +153,22 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .edu .rows .certs{display:flex;flex-wrap:wrap;gap:8px;border:0;padding-top:20px}
 
 /* work */
-.proj{display:grid;grid-template-columns:60px 1.1fr 1.4fr 200px;gap:32px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);position:relative;transition:padding .3s}
+.proj{display:grid;grid-template-columns:60px 1fr 1.6fr 140px;gap:32px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line);position:relative;transition:padding .3s}
 .proj:last-child{border-bottom:1px solid var(--line)}
 .proj::before{content:"";position:absolute;inset:0 -20px;background:var(--paper);opacity:0;transition:opacity .3s;z-index:-1;border-radius:6px}
 .proj:hover::before{opacity:1}
 .proj:hover{padding-left:12px}
 .proj .n{font:400 12px "JetBrains Mono",monospace;color:var(--mute)}
-.proj h3{font-weight:500;font-size:28px;letter-spacing:-.03em;line-height:1.1}
+.proj h3{font-weight:500;font-size:21px;letter-spacing:-.03em;line-height:1.1}
 .proj h3 .arr{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-8px);transition:.3s}
 .proj:hover h3 .arr{opacity:1;transform:none}
-.proj p{color:var(--ink-2)}
+.proj p{color:var(--ink-2);font-size:15px}
+.sub{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.sub::after{content:"";flex:1;height:1px;background:var(--line)}
 .proj p b{font-weight:500;color:var(--ink)}
 .proj .t{text-align:right}
 .work-list{position:relative;isolation:isolate}
-.peek{position:fixed;left:0;top:0;width:240px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;pointer-events:none;z-index:30;opacity:0;transform:translate(-50%,-50%) scale(.85) rotate(-3deg);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 50px rgba(0,0,0,.18);background:#111}
+.peek{position:fixed;left:0;top:0;width:200px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;pointer-events:none;z-index:30;opacity:0;transform:translate(-50%,-50%) scale(.85) rotate(-3deg);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 50px rgba(0,0,0,.18);background:#111}
 .peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
 .peek img,.peek video{width:100%;height:100%;object-fit:cover;display:block}
 .peek .ph{width:100%;height:100%;display:grid;place-items:center;padding:20px;text-align:center;font:500 22px/1.1 "Inter Tight";letter-spacing:-.02em}
@@ -382,14 +384,16 @@ footer .say span{position:relative}
 
   <!-- WORK -->
   <section id="work">
-    <div class="sh rv"><div><span class="mono kick">03 · selected work</span><h2>Things I designed, built <span class="hl">and shipped.</span></h2></div><p>When something needed to exist, I built it — sites, narratives, workflows, brand systems.</p></div>
+    <div class="sh rv"><div><span class="mono kick">03 · work</span><h2>Things I build <span class="hl">and ship.</span></h2></div><p>When something needed to exist, I built it. Sites, narratives, brand systems and the workflows behind them.</p></div>
+    <!-- NOW BUILDING: new projects go here -->
+    <div class="sub rv"><span class="mono">shipped</span></div>
     <div class="work-list">
-      <a class="proj rv" href="projects/nautilida.html" data-peek="uploads/nautilida-product.mp4"><span class="n">01</span><h3>Nautilida.ai<span class="arr">→</span></h3><p>Marketing site designed and shipped end‑to‑end in <b>3 weeks</b> — comparison pages, glossary and structured data so AI answer engines cite the product by name.</p><span class="mono t">website · aeo · content</span></a>
-      <a class="proj rv" href="nautilida-site/literacy/" data-peek-text="literacy." ><span class="n">02</span><h3>Literacy microsite<span class="arr">→</span></h3><p>A <b>7‑chapter</b> category primer for VCs and buyers — a long‑form narrative instead of a brochure. Written and designed solo.</p><span class="mono t">narrative · microsite</span></a>
-      <a class="proj rv" href="https://github.com/ece-berrak/apps-script-lead-automation" target="_blank" rel="noopener" data-peek-text="form → enrich → crm → chat"><span class="n">03</span><h3>Inbound lead workflow<span class="arr">↗</span></h3><p>A zero‑infrastructure pipeline behind a contact form: enrichment, CRM, logging and a team alert. <b>0 € infra</b>, open source.</p><span class="mono t">automation · open source</span></a>
-      <a class="proj rv" href="https://github.com/ece-berrak/aeo-content-pipeline" target="_blank" rel="noopener" data-peek="uploads/n8n-pipeline.png"><span class="n">04</span><h3>Brand‑aware content drafts<span class="arr">↗</span></h3><p>From a Notion ticket to an on‑brand draft in Google Docs, ready for human review — <b>~$0.02 per draft</b>.</p><span class="mono t">content ops · open source</span></a>
-      <a class="proj rv" href="https://github.com/ece-berrak/n8n-research-agent" target="_blank" rel="noopener" data-peek="uploads/n8n-research-agent.png"><span class="n">05</span><h3>Research assistant<span class="arr">↗</span></h3><p>Fresh web findings, structured and saved to Notion from a single chat — runs on free tiers at <b>$0/month</b>.</p><span class="mono t">research · open source</span></a>
-      <a class="proj rv" href="projects/stratum/" data-peek="uploads/stratum-cover.png"><span class="n">06</span><h3>Stratum &amp; Volt<span class="arr">→</span></h3><p>Two brand systems built from scratch — logomark, palette, type, voice and <b>14 social artboards</b> each.</p><span class="mono t">brand · design systems</span></a>
+      <a class="proj rv" href="projects/nautilida.html" data-peek="uploads/nautilida-product.mp4"><span class="n">01</span><h3>Nautilida.ai<span class="arr">→</span></h3><p>Marketing site shipped end to end in 3 weeks, built so AI answer engines cite it.</p><span class="mono t">website</span></a>
+      <a class="proj rv" href="nautilida-site/literacy/" data-peek-text="literacy."><span class="n">02</span><h3>Literacy microsite<span class="arr">→</span></h3><p>A 7‑chapter category primer for VCs and buyers, written and designed solo.</p><span class="mono t">narrative</span></a>
+      <a class="proj rv" href="projects/stratum/" data-peek="uploads/stratum-cover.png"><span class="n">03</span><h3>Stratum &amp; Volt<span class="arr">→</span></h3><p>Two brand systems from scratch, with 14 social artboards each.</p><span class="mono t">brand</span></a>
+      <a class="proj rv" href="https://github.com/ece-berrak/apps-script-lead-automation" target="_blank" rel="noopener" data-peek-text="form → enrich → crm → chat"><span class="n">04</span><h3>Inbound lead workflow<span class="arr">↗</span></h3><p>Zero‑infrastructure pipeline behind a contact form. Open source.</p><span class="mono t">automation</span></a>
+      <a class="proj rv" href="https://github.com/ece-berrak/aeo-content-pipeline" target="_blank" rel="noopener" data-peek="uploads/n8n-pipeline.png"><span class="n">05</span><h3>Brand‑aware content drafts<span class="arr">↗</span></h3><p>From a Notion ticket to an on‑brand draft, about $0.02 each. Open source.</p><span class="mono t">content ops</span></a>
+      <a class="proj rv" href="https://github.com/ece-berrak/n8n-research-agent" target="_blank" rel="noopener" data-peek="uploads/n8n-research-agent.png"><span class="n">06</span><h3>Research assistant<span class="arr">↗</span></h3><p>Web findings structured into Notion from one chat, on free tiers. Open source.</p><span class="mono t">research</span></a>
     </div>
   </section>
 
