@@ -147,6 +147,42 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .job ul{grid-column:3;list-style:none;display:flex;flex-direction:column;gap:10px}
 .job li{position:relative;padding-left:20px;color:var(--ink-2)}
 .job li::before{content:"";position:absolute;left:0;top:.65em;width:8px;height:8px;background:var(--y);border-radius:50%}
+.school{position:relative;margin-top:96px;padding-top:56px;border-top:1px solid var(--line)}
+.school-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 32px;margin-bottom:64px}
+.school-head h3{flex:1 1 100%;font-weight:500;font-size:clamp(32px,3.8vw,54px);letter-spacing:-.045em;line-height:1}
+.school-head .hl{background:linear-gradient(var(--y),var(--y)) no-repeat 0 85%/0% 38%;transition:background-size .9s .3s cubic-bezier(.7,0,.2,1)}
+.school-head.in .hl{background-size:100% 38%}
+.yb{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;align-items:start}
+.ybc{position:relative;background:#fff;padding:12px 12px 20px;box-shadow:0 18px 40px -24px rgba(0,0,0,.45);cursor:pointer;transition:transform .5s cubic-bezier(.2,1.4,.4,1),box-shadow .3s,opacity .8s}
+.js .ybc.rv{transform:rotate(var(--r,0deg)) translateY(40px)}
+.js .ybc.rv.in{transform:rotate(var(--r,0deg))}
+.js .ybc.rv.in:hover{transform:rotate(0) translateY(-8px) scale(1.02);box-shadow:0 30px 50px -26px rgba(0,0,0,.5);z-index:2}
+.tape{position:absolute;top:-14px;left:50%;width:96px;height:28px;margin-left:-48px;background:rgba(255,225,77,.85);transform:rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.08);z-index:1}
+.ybc:nth-child(2) .tape{transform:rotate(5deg)}
+.ybc .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:#eee}
+.ybc .ph img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05);transition:filter .5s}
+.ybc:hover .ph img{filter:none}
+.ybc .ph.duo .mini{position:absolute;right:10px;bottom:10px;width:38%;height:auto;aspect-ratio:3/4;border:5px solid #fff;box-shadow:0 8px 18px -8px rgba(0,0,0,.5);transform:rotate(6deg);transition:transform .5s cubic-bezier(.2,1.4,.4,1),filter .5s}
+.ybc:hover .ph.duo .mini{transform:rotate(-3deg) scale(1.08)}
+.ybc figcaption{position:relative;padding:16px 6px 0}
+.ybc figcaption b{display:block;font-weight:500;font-size:20px;letter-spacing:-.02em;line-height:1.15;padding-right:60px}
+.ybc figcaption .mono{display:block;margin-top:6px}
+.ybc figcaption i{display:block;margin-top:10px;font-family:"Instrument Serif",serif;font-size:19px;line-height:1.25;color:var(--ink-2)}
+.yr{position:absolute;right:4px;top:14px;font:italic 400 30px/1 "Instrument Serif",serif;background:var(--y);padding:2px 8px;border-radius:4px;transform:rotate(6deg)}
+.ybc.paper .cert{aspect-ratio:4/5;border:2px solid var(--ink);outline:1px solid var(--ink);outline-offset:-10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:28px;background:repeating-linear-gradient(45deg,#fff 0 12px,#fbfbf8 12px 24px)}
+.cert b{font-weight:500;font-size:clamp(26px,2.6vw,36px);letter-spacing:-.035em;line-height:1}
+.cert .seal{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--y);border:2px dashed var(--ink);font:400 12px/1.2 "JetBrains Mono",monospace;transform:rotate(-12deg);transition:transform .8s cubic-bezier(.2,1.4,.4,1)}
+.ybc:hover .cert .seal{transform:rotate(348deg)}
+.cert .sig{font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;border-top:1px solid var(--ink);padding-top:4px;min-width:60%}
+.caps{position:absolute;inset:0;pointer-events:none;z-index:5}
+.caps .cap{position:absolute;width:46px;opacity:0;animation:toss var(--d) cubic-bezier(.25,.6,.4,1) forwards}
+.caps .cap svg{width:100%;display:block}
+@keyframes toss{0%{transform:translate(0,0) rotate(0);opacity:0}8%{opacity:1}55%{transform:translate(var(--x),var(--up)) rotate(var(--rot));opacity:1}100%{transform:translate(calc(var(--x) * 1.4),40px) rotate(calc(var(--rot) * 1.8));opacity:0}}
+.stickers{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:72px}
+.stickers>div{display:flex;flex-wrap:wrap;gap:14px}
+.stk{display:inline-block;padding:9px 14px;border:1.5px solid var(--ink);border-radius:8px;background:#fff;font-weight:500;font-size:14px;transform:rotate(var(--sr,0deg));box-shadow:2px 3px 0 var(--ink);transition:transform .4s cubic-bezier(.2,1.6,.4,1)}
+.stk.y{background:var(--y)}.stk.d{background:var(--ink);color:#fff;box-shadow:2px 3px 0 var(--y)}
+.stk:hover{transform:rotate(0) translateY(-4px) scale(1.06)}
 .edu{display:grid;grid-template-columns:150px 1fr;gap:32px;margin-top:72px}
 .edu .rows div{display:grid;grid-template-columns:1.1fr 1.4fr;gap:32px;padding:16px 0;border-top:1px solid var(--line)}
 .edu .rows b{font-weight:500}
@@ -385,7 +421,7 @@ footer .secret .ul{color:var(--ink)}
   .job summary .one{grid-column:1/-1;grid-row:3}
   .job summary .tg{grid-column:2;grid-row:2}
   .job .inner{grid-template-columns:1fr;gap:20px}.job .inner>span{display:none}.job .tree-tags,.job ul{grid-column:1}.legend{flex-direction:column;gap:8px;margin-top:-16px}
-  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
+  .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
   .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
@@ -527,14 +563,30 @@ footer .secret .ul{color:var(--ink)}
       </div></div>
     </details>
 
-    <div class="edu rv">
-      <span class="mono">education</span>
-      <div class="rows">
-        <div><b>M.A. Political Economy · HWR Berlin</b><span>2023 → 2025. Thesis on digitalization in retail chains and its labor‑market impact, comparing the USA and Germany.</span></div>
-        <div><b>B.A. International Relations &amp; PR · Istanbul Bilgi University</b><span>2019 → 2023. Marketing minor. Where I learned how stories travel.</span></div>
-        <div><b>Social Media Management · Anadolu University</b><span>2020 → 2022. Associate programme, taken in parallel.</span></div>
-        <div class="certs"><span class="chip">HubSpot Sales Hub</span><span class="chip">HubSpot Reporting</span><span class="chip">HubSpot Email Marketing</span><span class="chip">Google Ads</span><span class="chip">Google Digital Marketing &amp; E‑commerce</span><span class="chip">Dataiku Core Designer</span><span class="chip">IDEO.org Human‑Centered Design</span></div>
+    <div class="school" id="school">
+      <div class="school-head rv"><span class="mono">education · the yearbook</span><p class="mono">tap a photo for another toss ↓</p><h3>Two cities, two degrees, <span class="hl">one cap toss.</span></h3></div>
+      <div class="caps" id="caps" aria-hidden="true"></div>
+      <div class="yb">
+        <figure class="ybc rv" data-r="-3deg">
+          <span class="tape"></span>
+          <div class="ph"><img src="uploads/edu-hwr-sm.jpg" alt="Holding my HWR Berlin diploma"></div>
+          <figcaption><span class="yr">'25</span><b>M.A. Political Economy</b><span class="mono">HWR Berlin · 2023 → 2025</span><i>Thesis on digitalization in retail chains and the labor market, USA vs Germany.</i></figcaption>
+        </figure>
+        <figure class="ybc rv" data-r="2.5deg">
+          <span class="tape"></span>
+          <div class="ph duo"><img src="uploads/edu-bilgi-sm.jpg" alt="In my graduation gown at Istanbul Bilgi University"><img class="mini" src="uploads/edu-diploma-sm.jpg" alt="Diploma at the 2023 Bilgi graduation ceremony"></div>
+          <figcaption><span class="yr">'23</span><b>B.A. International Relations &amp; PR</b><span class="mono">Istanbul Bilgi University · 2019 → 2023</span><i>Marketing minor. Where I learned how stories travel.</i></figcaption>
+        </figure>
+        <figure class="ybc paper rv" data-r="-1.5deg">
+          <span class="tape"></span>
+          <div class="cert"><span class="mono">certificate of</span><b>Social Media<br>Management</b><span class="seal">AÖF<br>'22</span><span class="sig">anadolu university</span></div>
+          <figcaption><span class="yr">'22</span><b>Associate degree</b><span class="mono">Anadolu University · 2020 → 2022</span><i>Taken in parallel with the B.A., because one degree at a time felt slow.</i></figcaption>
+        </figure>
       </div>
+      <div class="stickers rv"><span class="mono">certifications that stuck</span><div>
+        <span class="stk">HubSpot Sales Hub</span><span class="stk y">HubSpot Reporting</span><span class="stk">HubSpot Email Marketing</span><span class="stk d">Google Ads</span><span class="stk">Google Digital Marketing &amp; E‑commerce</span><span class="stk y">Dataiku Core Designer</span><span class="stk d">IDEO.org Human‑Centered Design</span>
+      </div></div>
+      <template id="captpl"><svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 4 2 18l30 14 30-14z" fill="#0a0a0a"/><path d="M14 24v12c0 4 8 8 18 8s18-4 18-8V24L32 32z" fill="#0a0a0a"/><path d="M58 20v14" stroke="#ffe14d" stroke-width="3" stroke-linecap="round"/><circle cx="58" cy="36" r="3.5" fill="#ffe14d"/></svg></template>
     </div>
   </section>
 
@@ -767,6 +819,17 @@ footer .secret .ul{color:var(--ink)}
   const cards=[...document.querySelectorAll('.sc')];
   cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a'))return;c.classList.toggle('open');c.setAttribute('aria-pressed',c.classList.contains('open'));
     cnt.textContent=cards.filter(x=>x.classList.contains('open')).length+'/3 opened'}));
+  // school yearbook: tilt, sticker rotation, cap toss on arrival and on tap
+  document.querySelectorAll('.ybc').forEach(c=>c.style.setProperty('--r',c.dataset.r));
+  document.querySelectorAll('.stk').forEach((s,i)=>s.style.setProperty('--sr',(Math.sin(i*2.3)*4).toFixed(1)+'deg'));
+  const school=document.getElementById('school'),capsEl=document.getElementById('caps'),capSvg=document.getElementById('captpl').innerHTML;
+  const toss=fromEl=>{if(reduce)return;const sr=school.getBoundingClientRect();const targets=fromEl?[fromEl]:[...school.querySelectorAll('.ybc')];
+    targets.forEach(t=>{const r=t.getBoundingClientRect();for(let k=0;k<(fromEl?4:2);k++){const c=document.createElement('span');c.className='cap';c.innerHTML=capSvg;
+      c.style.left=(r.left-sr.left+r.width*(.25+Math.random()*.5))+'px';c.style.top=(r.top-sr.top+r.height*.3)+'px';
+      c.style.setProperty('--x',((Math.random()-.5)*160)+'px');c.style.setProperty('--up',(-180-Math.random()*160)+'px');c.style.setProperty('--rot',((Math.random()-.5)*540)+'deg');c.style.setProperty('--d',(1.6+Math.random()*.8)+'s');c.style.animationDelay=(k*.12)+'s';
+      capsEl.append(c);setTimeout(()=>c.remove(),3200)}})};
+  let tossed=false;new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting&&!tossed){tossed=true;setTimeout(()=>toss(),700);o.disconnect()}}),{threshold:.35}).observe(school.querySelector('.yb'));
+  school.querySelectorAll('.ybc').forEach(c=>c.addEventListener('click',()=>toss(c)));
   // how-i-work loop
   const loopEl=document.getElementById('loop'),steps=[...loopEl.querySelectorAll('.step')],dot=document.getElementById('dot');
   let li=0,loopTimer;
