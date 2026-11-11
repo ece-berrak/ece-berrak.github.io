@@ -189,6 +189,32 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .edu .rows span{color:var(--ink-2)}
 .edu .rows .certs{display:flex;flex-wrap:wrap;gap:8px;border:0;padding-top:20px}
 
+/* kind words */
+.refs{display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:stretch}
+.ref{position:relative;background:var(--paper);border:1.5px solid var(--ink);border-radius:14px;padding:56px 56px 36px;box-shadow:8px 8px 0 var(--y)}
+.ref .qm{position:absolute;top:-30px;left:40px;width:64px;height:64px;border-radius:50%;background:var(--y);border:1.5px solid var(--ink);display:grid;place-items:center;transform:scale(0) rotate(-20deg);transition:transform .6s .2s cubic-bezier(.2,1.5,.4,1)}
+.ref .qm svg{width:28px;height:28px}
+.ref.in .qm{transform:none}
+.ref blockquote p{color:var(--ink-2);font-size:18px;max-width:780px}
+.ref blockquote p+p{margin-top:14px}
+.ref .lead-q{font-family:"Instrument Serif",serif;font-style:italic;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-.01em;color:var(--ink)!important;margin-bottom:24px;max-width:900px!important}
+.ref mark{background:linear-gradient(var(--y),var(--y)) no-repeat 0 88%/0% 40%;color:inherit;transition:background-size 1s .6s cubic-bezier(.7,0,.2,1)}
+.ref.in mark{background-size:100% 40%}
+.ref figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:32px;padding-top:22px;border-top:1px solid var(--line)}
+.ref .who{display:flex;align-items:center;gap:12px}
+.ref .who b{display:block;font-weight:500}
+.ref .ini{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;font:400 13px "JetBrains Mono",monospace}
+.ref .traits{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.ref .traits .chip{transition:background .25s}
+.ref .traits .chip:hover{background:var(--y)}
+.ref-slot{border:1.5px dashed var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px}
+.ref-slot .dots{display:flex;gap:6px}
+.ref-slot .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);animation:typing 1.4s infinite}
+.ref-slot .dots i:nth-child(2){animation-delay:.2s}.ref-slot .dots i:nth-child(3){animation-delay:.4s}
+@keyframes typing{30%{background:var(--ink);transform:translateY(-4px)}60%{background:var(--line);transform:none}}
+.job li.refli{padding-left:0}.job li.refli::before{display:none}
+.chip.refchip{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.refchip:hover{background:var(--y);color:var(--ink)}
 /* work */
 .proj{display:grid;grid-template-columns:60px 1fr 1.6fr 140px;gap:32px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line);position:relative;transition:padding .3s}
 .proj:last-child{border-bottom:1px solid var(--line)}
@@ -424,7 +450,7 @@ footer .secret .ul{color:var(--ink)}
   .yb{grid-template-columns:1fr;gap:48px;max-width:420px;margin:0 auto}  .edu{grid-template-columns:1fr;gap:12px}.edu .rows div{grid-template-columns:1fr;gap:4px}
   .proj{grid-template-columns:40px 1fr;gap:8px 16px}
   .proj p{grid-column:2}.proj .t{grid-column:2;text-align:left}
-  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
+  .refs{grid-template-columns:1fr}.ref{padding:48px 22px 26px}.ref-slot{min-height:120px}  .reads{grid-template-columns:1fr}.now{grid-template-columns:1fr}.library{gap:40px}.preview{grid-template-columns:1fr;gap:16px}.shelf{min-height:300px;scroll-snap-type:x mandatory}.spine{scroll-snap-align:start;height:calc(var(--h) * .68);width:calc(var(--w) * .85)}.spine .t{font-size:13px;max-height:calc(var(--h) * .68 - 80px)}.preview{min-height:0}
   .board{grid-template-columns:1fr 1fr}.zone{min-height:0;border-bottom:1px solid var(--line)}.usebar{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--ink);padding:14px 0}
   .contacts a{grid-template-columns:1fr auto;gap:4px 12px;padding:20px 4px}.contacts .val{grid-column:1/-1;grid-row:2}.fhead{align-items:flex-start}
   .legal{flex-direction:column;gap:8px}.secrets{grid-template-columns:1fr}.sc{height:380px}
@@ -537,6 +563,7 @@ footer .secret .ul{color:var(--ink)}
           <li>Improved user flows, discoverability and usability across software products through UX, SEO and content work.</li>
           <li>Supported HR marketing and employer branding, including career pages and recruitment content.</li>
           <li>Designed user journeys and research frameworks in Miro, aligning UX thinking with performance goals.</li>
+          <li class="refli"><a class="chip refchip" href="#kind-words">★ read what my manager said</a></li>
         </ul>
       </div></div>
     </details>
@@ -587,6 +614,27 @@ footer .secret .ul{color:var(--ink)}
         <span class="stk">HubSpot Sales Hub</span><span class="stk y">HubSpot Reporting</span><span class="stk">HubSpot Email Marketing</span><span class="stk d">Google Ads</span><span class="stk">Google Digital Marketing &amp; E‑commerce</span><span class="stk y">Dataiku Core Designer</span><span class="stk d">IDEO.org Human‑Centered Design</span>
       </div></div>
       <template id="captpl"><svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 4 2 18l30 14 30-14z" fill="#0a0a0a"/><path d="M14 24v12c0 4 8 8 18 8s18-4 18-8V24L32 32z" fill="#0a0a0a"/><path d="M58 20v14" stroke="#ffe14d" stroke-width="3" stroke-linecap="round"/><circle cx="58" cy="36" r="3.5" fill="#ffe14d"/></svg></template>
+    </div>
+  </section>
+
+  <!-- KIND WORDS -->
+  <section id="kind-words">
+    <div class="sh rv"><div><span class="mono kick">kind words</span><h2>What it's like <span class="hl">working with me.</span></h2></div><p>In the words of the people I've worked with. Full letters available on request.</p></div>
+    <div class="refs">
+      <figure class="ref rv">
+        <span class="qm" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 26V17c0-6 3-10 9-12l1 3c-3 1.5-5 4-5 7h5v11zm15 0V17c0-6 3-10 9-12l1 3c-3 1.5-5 4-5 7h5v11z" fill="#0a0a0a"/></svg></span>
+        <blockquote>
+          <p class="lead-q">Working with Ece means knowing that a project is <mark>in capable hands.</mark></p>
+          <p>She is someone you can genuinely rely on, not only because of her strong sense of responsibility and dedication, but also because of the enthusiasm and creativity she brings to everything she does.</p>
+          <p>She is one of the few people I have worked with who <mark>genuinely enjoy what they do</mark> while consistently pushing creative boundaries.</p>
+        </blockquote>
+        <figcaption>
+          <span class="who"><span class="ini" aria-hidden="true">KD</span><span><b>Kübra Demir</b><span class="mono">Corporate Reputation Executive · TürkNet</span></span></span>
+          <span class="ctx mono">my manager at CRS Soft · 2022</span>
+        </figcaption>
+        <div class="traits"><span class="chip">reliable</span><span class="chip">creative</span><span class="chip">proactive</span><span class="chip">positive energy</span><span class="chip">goes the extra mile</span></div>
+      </figure>
+      <div class="ref-slot rv" aria-hidden="true"><span class="mono">next reference</span><span class="dots"><i></i><i></i><i></i></span></div>
     </div>
   </section>
 
@@ -840,7 +888,7 @@ footer .secret .ul{color:var(--ink)}
   // active nav
   const links=[...document.querySelectorAll('nav .links a')];
   const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
-  ['hero','approach','experience','work','shelf-sec','stack','contact'].forEach(id=>so.observe(document.getElementById(id)));
+  ['hero','approach','experience','kind-words','work','shelf-sec','stack','contact'].forEach(id=>so.observe(document.getElementById(id)));
   // work hover peek
   const peek=document.getElementById('peek');let px=0,py=0,cx=0,cy=0,raf;
   const loop=()=>{cx+=(px-cx)*.18;cy+=(py-cy)*.18;peek.style.left=cx+'px';peek.style.top=cy+'px';raf=requestAnimationFrame(loop)};
