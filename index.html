@@ -60,11 +60,24 @@ h1{font-weight:500;font-size:clamp(44px,5.2vw,78px);line-height:1;letter-spacing
 #tree .draw{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.2s cubic-bezier(.6,0,.2,1) forwards}
 #tree .leaf{opacity:0;animation:pop .5s cubic-bezier(.2,1.4,.4,1) forwards;transform-box:fill-box;transform-origin:center;cursor:default}
 #tree .leaf rect{fill:#fff;stroke:var(--ink);stroke-width:1.2;transition:fill .2s}
-#tree .leaf:hover rect{fill:var(--y)}
 #tree .leaf text{font:500 13px "Inter Tight",sans-serif;text-anchor:middle;dominant-baseline:central}
 #tree .tick{opacity:0;animation:fadein .5s forwards}
 #tree .tick text{font:400 11px "JetBrains Mono",monospace;fill:var(--ink)}
 #tree .lab{font:400 11px "JetBrains Mono",monospace;fill:var(--mute);letter-spacing:.06em;text-transform:uppercase;opacity:0;animation:fadein .6s forwards}
+
+.treebox{width:100%;max-width:560px}
+#tree .branch{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw .9s cubic-bezier(.6,0,.2,1) forwards}
+#tree .twig{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw .5s ease-out forwards}
+#tree .sap{fill:none;stroke:var(--y);stroke-width:7;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1s cubic-bezier(.6,0,.2,1) forwards;mix-blend-mode:multiply}
+#tree .leaf.lit rect{fill:#fff4b8}
+#tree .leaf.act rect{fill:var(--y);stroke-width:2}
+#tree .leaf{cursor:pointer}
+.lens{margin-top:8px;border-top:1px solid var(--ink);padding-top:14px;min-height:96px}
+.lens-row{display:grid;grid-template-columns:150px 1fr;gap:16px;margin-top:10px;align-items:baseline}
+.lens b{font-weight:500;font-size:20px;letter-spacing:-.02em}
+.lens p{color:var(--ink-2);font-size:16px}
+.lens .swap{animation:up .45s cubic-bezier(.2,.8,.2,1)}
+@media (max-width:560px){.lens-row{grid-template-columns:1fr;gap:4px}}
 
 /* sections */
 section{padding:120px 0;border-bottom:1px solid var(--line)}
@@ -214,7 +227,7 @@ footer .say span{position:relative}
       <div>
         <span class="mono">( t‑shaped · gtm generalist · berlin )</span>
         <h1 id="h" style="margin-top:28px">Broad across the <em class="s">funnel</em>. Deep <span class="under"><span>where users live.</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 14 C 50 4, 120 4, 198 12"/></svg></span></h1>
-        <p class="lead">User communication, engagement and retention are my home turf. Whatever the role, the goal stays the same: the user's problem, actually solved. Product thinking is the root.</p>
+        <p class="lead">I work across the full funnel — through one lens. Answering user questions, onboarding, lifecycle and retention taught me what people actually need, and that changes how I build every campaign, page and sales conversation.</p>
         <div class="cta"><a class="btn dark" href="#work">See the work <span class="arr">→</span></a><a class="btn" href="#contact">Say hello</a></div>
       </div>
       <div class="stats">
@@ -224,26 +237,24 @@ footer .say span{position:relative}
       </div>
     </div>
     <div class="right">
-      <svg id="tree" viewBox="0 0 560 640" role="img" aria-label="A tree: roots are product thinking, the trunk is user communication through lifecycle, the canopy is the full funnel">
+      <div class="treebox">
+      <svg id="tree" viewBox="0 0 560 600" role="img" aria-label="A tree. Roots: product thinking. Trunk: user communication — support questions, onboarding, in-product messages, lifecycle, engagement, retention. The trunk feeds every branch of full-funnel marketing.">
         <path class="draw" style="--len:480;animation-delay:.2s" stroke-width="1" d="M40 440 H520"/>
-        <path class="draw" style="--len:260;animation-delay:.5s;stroke:var(--y)" stroke-width="26" d="M280 440 V190"/>
-        <path class="draw" style="--len:260;animation-delay:.6s" stroke-width="3" d="M280 440 V190"/>
-        <path class="draw" style="--len:200;animation-delay:1.2s" stroke-width="2" d="M280 250 C 250 220, 190 190, 130 150"/>
-        <path class="draw" style="--len:200;animation-delay:1.3s" stroke-width="2" d="M280 230 C 310 200, 370 175, 430 140"/>
-        <path class="draw" style="--len:120;animation-delay:1.4s" stroke-width="2" d="M280 190 V90"/>
-        <path class="draw" style="--len:140;animation-delay:1.5s" stroke-width="2" d="M280 210 C 250 180, 230 140, 200 80"/>
-        <path class="draw" style="--len:140;animation-delay:1.55s" stroke-width="2" d="M280 210 C 310 180, 330 140, 360 80"/>
-        <path class="draw" style="--len:200;animation-delay:.9s" stroke-width="2" d="M280 440 C 270 480, 220 510, 170 540"/>
-        <path class="draw" style="--len:200;animation-delay:.95s" stroke-width="2" d="M280 440 C 290 480, 340 510, 390 540"/>
-        <path class="draw" style="--len:160;animation-delay:1s" stroke-width="2" d="M280 440 V570"/>
-        <path class="draw" style="--len:120;animation-delay:1.05s" stroke-width="1.5" d="M280 470 C 250 500, 230 540, 225 580"/>
-        <path class="draw" style="--len:120;animation-delay:1.05s" stroke-width="1.5" d="M280 470 C 310 500, 330 540, 335 580"/>
-        <text class="lab" x="280" y="612" text-anchor="middle" style="animation-delay:1.6s">roots — product thinking</text>
+        <path class="draw" style="--len:160;animation-delay:.9s" stroke-width="2" d="M280 440 C 270 475, 225 500, 180 525"/>
+        <path class="draw" style="--len:160;animation-delay:.95s" stroke-width="2" d="M280 440 C 290 475, 335 500, 380 525"/>
+        <path class="draw" style="--len:120;animation-delay:1s" stroke-width="2" d="M280 440 V545"/>
+        <path class="draw" style="--len:110;animation-delay:1.05s" stroke-width="1.5" d="M280 465 C 255 490, 238 520, 232 550"/>
+        <path class="draw" style="--len:110;animation-delay:1.05s" stroke-width="1.5" d="M280 465 C 305 490, 322 520, 328 550"/>
+        <text class="lab" x="280" y="578" text-anchor="middle" style="animation-delay:1.4s">roots — product thinking</text>
+        <path class="draw" style="--len:250;animation-delay:.5s;stroke:var(--y)" stroke-width="26" d="M280 440 V200"/>
+        <path class="draw" style="--len:250;animation-delay:.6s" stroke-width="3" d="M280 440 V200"/>
+        <g id="branches"></g>
         <g id="ticks"></g>
-        <text class="lab" x="40" y="430" style="animation-delay:1.6s">the depth ↓</text>
-        <text class="lab" x="40" y="272" style="animation-delay:2s">the breadth — full funnel ↑</text>
+        <text class="lab" x="300" y="460" style="animation-delay:1.4s">trunk — user communication</text>
         <g id="leaves"></g>
       </svg>
+      <div class="lens" id="lens" aria-live="polite"><span class="mono">the same funnel, through the user lens</span><div class="lens-row"><b id="lensT">&nbsp;</b><p id="lensP">&nbsp;</p></div></div>
+      </div>
     </div>
   </header>
 
@@ -397,12 +408,42 @@ footer .say span{position:relative}
   if(!reduce)document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s||'';el.textContent='0'+s;let t0;const run=t=>{t0??=t;const k=Math.min((t-t0)/1200,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(run)};setTimeout(()=>requestAnimationFrame(run),900)});
   // tree
   const NS='http://www.w3.org/2000/svg',mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
-  const ticks=[['user communication',415],['onboarding',375],['adoption',335],['engagement',295],['retention',255],['lifecycle',215]];
+  const ticks=[['support questions',420],['onboarding',390],['in‑product messages',360],['lifecycle email',330],['engagement',300],['retention',270]];
   const tg=document.getElementById('ticks');
-  ticks.forEach(([s,y],i)=>{const g=mk('g',{class:'tick'});g.style.animationDelay=(.8+i*.12)+'s';g.append(mk('line',{x1:296,x2:316,y1:y,y2:y,stroke:'#0a0a0a','stroke-width':1}));const t=mk('text',{x:322,y:y+4});t.textContent=s;g.append(t);tg.append(g)});
-  const leaves=[['Brand',130,150],['Content',430,140],['SEO',200,80],['Campaigns',360,80],['Community',280,52],['Paid',70,110],['Events',490,100],['Partners',140,40],['Positioning',420,36]];
-  const lg=document.getElementById('leaves');
-  leaves.forEach(([s,x,y],i)=>{const w=s.length*7.6+22;const g=mk('g',{class:'leaf'});g.style.animationDelay=(1.7+i*.08)+'s';g.append(mk('rect',{x:x-w/2,y:y-14,width:w,height:28,rx:14}));const t=mk('text',{x,y});t.textContent=s;g.append(t);lg.append(g)});
+  ticks.forEach(([s,y],i)=>{const g=mk('g',{class:'tick'});g.style.animationDelay=(.8+i*.1)+'s';g.append(mk('line',{x1:296,x2:312,y1:y,y2:y,stroke:'#0a0a0a','stroke-width':1}));const t=mk('text',{x:318,y:y+4});t.textContent=s;g.append(t);tg.append(g)});
+  // branches: start on trunk -> tip
+  const BR=[[200,[280,255],[200,240],[115,190]],[200,[280,250],[370,235],[450,190]],[240,[280,250],[230,200],[175,125]],[230,[280,240],[330,190],[385,120]],[150,[280,205],[280,150],[280,85]]];
+  const brG=document.getElementById('branches');
+  const pathD=(a,c,b)=>`M${a[0]} ${a[1]} Q ${c[0]} ${c[1]} ${b[0]} ${b[1]}`;
+  // leaves: [name, x, y, branch, lens]
+  const L=[
+    ['Positioning',150,40,4,'Built from the words users actually use — not the ones we wish they did.'],
+    ['Brand',280,40,4,'A voice that sounds like someone who has actually helped you.'],
+    ['Outbound',405,40,4,'Leads with the problem the user has, not the product we sell.'],
+    ['SEO',90,105,2,'Targets the questions people really search for, straight from support threads.'],
+    ['Content',195,82,2,'Starts from real support questions and the success stories behind them.'],
+    ['Website',360,80,3,'Answers the objections and setup questions we hear every week.'],
+    ['Campaigns',480,100,3,'Timed to where each user is in their journey, not to our calendar.'],
+    ['Events',55,158,0,'A room to listen in — every talk turns into the next use case.'],
+    ['Paid',75,225,0,'Only promises what onboarding can deliver.'],
+    ['Sales enablement',462,236,1,'Decks and one‑pagers built on real use cases and the questions buyers ask.'],
+    ['Community',495,150,1,'Users helping users — and telling us what’s missing.'],
+  ];
+  const T0=1.2;
+  BR.forEach(([len,a,c,b],i)=>{const d=pathD(a,c,b);const p=mk('path',{class:'branch',d});p.style.setProperty('--len',len);p.style.animationDelay=(T0+i*.08)+'s';brG.append(p);
+    const sp=mk('path',{class:'sap',d});sp.style.setProperty('--len',len);sp.style.animationDelay=(2.3+i*.12)+'s';brG.append(sp)});
+  const lg=document.getElementById('leaves');const leafEls=[];
+  L.forEach(([s,x,y,bi,lens],i)=>{const tip=BR[bi][3];const tw=Math.hypot(x-tip[0],y-tip[1]);
+    const t1=mk('path',{class:'twig',d:`M${tip[0]} ${tip[1]} L${x} ${y}`});t1.style.setProperty('--len',Math.ceil(tw));t1.style.animationDelay=(T0+.7+i*.04)+'s';brG.insertBefore(t1,brG.firstChild);
+    const w=s.length*7.4+24;const g=mk('g',{class:'leaf',tabindex:0,role:'button','aria-label':s+': '+lens});g.style.animationDelay=(1.8+i*.06)+'s';
+    g.append(mk('rect',{x:x-w/2,y:y-14,width:w,height:28,rx:14}));const t=mk('text',{x,y});t.textContent=s;g.append(t);lg.append(g);leafEls.push(g);
+    setTimeout(()=>g.classList.add('lit'),reduce?0:(3.1+i*.12)*1000)});
+  // lens caption: auto-cycles, hover/focus to pick
+  const lt=document.getElementById('lensT'),lp=document.getElementById('lensP');let cur=-1,timer,hold=false;
+  const show=i=>{leafEls.forEach((g,k)=>g.classList.toggle('act',k===i));cur=i;lt.textContent=L[i][0];lp.textContent=L[i][4];[lt,lp].forEach(e=>{e.classList.remove('swap');void e.offsetWidth;e.classList.add('swap')})};
+  const cycle=()=>{if(!hold)show((cur+1)%L.length)};
+  setTimeout(()=>{show(1);timer=setInterval(cycle,3000)},reduce?0:4600);
+  leafEls.forEach((g,i)=>{const on=()=>{hold=true;show(i)},off=()=>{hold=false};g.addEventListener('mouseenter',on);g.addEventListener('focus',on);g.addEventListener('mouseleave',off);g.addEventListener('blur',off);g.addEventListener('click',on)});
   // scroll reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.rv, footer').forEach((el,i)=>{io.observe(el)});
