@@ -24,6 +24,12 @@ Listen to users (support threads, onboarding calls, events, in-product signals),
 
 HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Figma, Canva, Webflow, Framer, WordPress, HTML/CSS/JS, n8n, Zapier, Apps Script, Notion, Airtable, Claude and Claude Code.
 
+## Now building
+
+- [mutfaq](https://mutfaq.co/): The Chef's Library, a library of around 3,000 chef recipes with exact grams, temperatures and technique. Brand, product and content.
+- Two Forks: an app for finding what you both want to eat (coming soon).
+- Quzgun: an app that keeps families in touch when networks fail (in development).
+
 ## Pages
 
 - [Portfolio home](https://ece-berrak.github.io/): positioning, experience, work, writing and contact.

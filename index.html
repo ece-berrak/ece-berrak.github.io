@@ -240,6 +240,10 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .nowc h3{font-weight:500;font-size:26px;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px}
 .nowc p{color:var(--ink-2);font-size:15px;flex:1}
 .roles{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+a.nowc{color:inherit;text-decoration:none}
+.nowc .visit{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-weight:500;font-size:15px}
+.nowc .visit i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;transition:background .3s,color .3s,transform .3s}
+a.nowc:hover .visit i{background:var(--y);color:var(--ink);transform:rotate(-12deg)}
 .work-list{position:relative;isolation:isolate}
 .peek{position:fixed;left:0;top:0;width:200px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;pointer-events:none;z-index:30;opacity:0;transform:translate(-50%,-50%) scale(.85) rotate(-3deg);transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 50px rgba(0,0,0,.18);background:#111}
 .peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
@@ -660,12 +664,13 @@ footer .secret .ul{color:var(--ink)}
     <div class="sh rv"><div><span class="mono kick">03 · work</span><h2>Things I build <span class="hl">and ship.</span></h2></div><p>Side projects in progress, plus the sites, narratives, brand systems and workflows I have already shipped.</p></div>
     <div class="sub rv"><span class="mono">now building</span></div>
     <div class="now">
-      <article class="nowc rv">
-        <div class="nowtop"><span class="mark mark-word">mutfaq<i>.</i></span><span class="live mono"><b></b>in progress</span></div>
+      <a class="nowc rv" href="https://mutfaq.co/" target="_blank" rel="noopener">
+        <div class="nowtop"><span class="mark mark-word">mutfaq<i>.</i></span><span class="live mono"><b></b>live</span></div>
         <h3>The Chef's Library</h3>
         <p>A library of around 3,000 chef recipes from regional and world cuisine, with exact grams, temperatures and technique. The base the other food products cook from.</p>
         <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Content</span></div>
-      </article>
+        <span class="visit">mutfaq.co <i>↗</i></span>
+      </a>
       <article class="nowc rv">
         <div class="nowtop"><span class="mark"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><g transform="rotate(-24 60 64)"><path d="M44 18v20M52 18v20M60 18v20M44 38q0 10 8 12q8 -2 8 -12"/><path d="M52 50v56"/></g><g transform="rotate(24 60 64)"><path d="M60 18v20M68 18v20M76 18v20M60 38q0 10 8 12q8 -2 8 -12"/><path d="M68 50v56"/></g></g><path transform="translate(0 15.5)" stroke="var(--paper)" stroke-width="6" paint-order="stroke" stroke-linejoin="round" fill="var(--y)" d="M60 79c-6-5-11-8.5-11-13.2c0-3 2.4-5.3 5.3-5.3c2.4 0 4.2 1.4 5.7 3.4c1.5-2 3.3-3.4 5.7-3.4c2.9 0 5.3 2.3 5.3 5.3c0 4.7-5 8.2-11 13.2z"/></svg></span><span class="live mono"><b></b>app coming soon</span></div>
         <h3>Two Forks</h3>

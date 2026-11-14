@@ -10,7 +10,8 @@ Things we agreed to come back to (kept here so nothing gets lost).
 - [ ] Shelf: add new campaign pieces (LinkedIn posts, newsletters) as they come. Post/newsletter preview templates are still in the code.
 - [ ] A separate section for visuals, designs and campaigns (not on the shelf).
 - [ ] Off the clock: real cat photos to replace the doodles (index surprise cards and off-the-clock.html).
-- [ ] Now building: link mutfaq, Two Forks and Quzgun once they are public; confirm Ece's role tags on each card.
+- [x] mutfaq linked to https://mutfaq.co/ (live).
+- [ ] Now building: link Two Forks and Quzgun once they are public; confirm Ece's role tags on each card.
 - [ ] Toolbox: double-check the "used for" lines (some were best guesses).
 - [ ] Education: confirm the Anadolu card joke ("one degree at a time felt slow").
 
