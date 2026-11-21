@@ -225,7 +225,8 @@ section{padding:120px 0;border-bottom:1px solid var(--line)}
 .sub::after{content:"";flex:1;height:1px;background:var(--line)}
 .proj p b{font-weight:500;color:var(--ink)}
 .proj .t{text-align:right}
-.now{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:8px}
+.now{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:8px}
+@media(max-width:1180px){.now{grid-template-columns:repeat(2,1fr)}}
 .nowc{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .35s}
 .nowc:hover{transform:translateY(-6px);border-color:var(--ink);box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
 .nowtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;min-height:56px}
@@ -664,19 +665,27 @@ footer .secret .ul{color:var(--ink)}
     <div class="sh rv"><div><span class="mono kick">03 · work</span><h2>Things I build <span class="hl">and ship.</span></h2></div><p>Side projects in progress, plus the sites, narratives, brand systems and workflows I have already shipped.</p></div>
     <div class="sub rv"><span class="mono">now building</span></div>
     <div class="now">
-      <a class="nowc rv" href="https://mutfaq.co/" target="_blank" rel="noopener">
+      <a class="nowc rv" href="projects/mutfaq/">
         <div class="nowtop"><span class="mark mark-word">mutfaq<i>.</i></span><span class="live mono"><b></b>live</span></div>
         <h3>The Chef's Library</h3>
-        <p>A library of around 3,000 chef recipes from regional and world cuisine, with exact grams, temperatures and technique. The base the other food products cook from.</p>
-        <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Content</span></div>
-        <span class="visit">mutfaq.co <i>↗</i></span>
+        <p>A library of around 3,000 chef recipes from regional and world cuisine, with exact grams, temperatures and technique. The base the other food products cook from. Now testing Pinterest reach in four languages.</p>
+        <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Content</span><span class="chip">Pinterest reach</span></div>
+        <span class="visit">Read the case <i>→</i></span>
       </a>
-      <article class="nowc rv">
-        <div class="nowtop"><span class="mark"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><g transform="rotate(-24 60 64)"><path d="M44 18v20M52 18v20M60 18v20M44 38q0 10 8 12q8 -2 8 -12"/><path d="M52 50v56"/></g><g transform="rotate(24 60 64)"><path d="M60 18v20M68 18v20M76 18v20M60 38q0 10 8 12q8 -2 8 -12"/><path d="M68 50v56"/></g></g><path transform="translate(0 15.5)" stroke="var(--paper)" stroke-width="6" paint-order="stroke" stroke-linejoin="round" fill="var(--y)" d="M60 79c-6-5-11-8.5-11-13.2c0-3 2.4-5.3 5.3-5.3c2.4 0 4.2 1.4 5.7 3.4c1.5-2 3.3-3.4 5.7-3.4c2.9 0 5.3 2.3 5.3 5.3c0 4.7-5 8.2-11 13.2z"/></svg></span><span class="live mono"><b></b>app coming soon</span></div>
+      <a class="nowc rv" href="projects/two-forks/">
+        <div class="nowtop"><span class="mark"><svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><g transform="rotate(-24 60 64)"><path d="M44 18v20M52 18v20M60 18v20M44 38q0 10 8 12q8 -2 8 -12"/><path d="M52 50v56"/></g><g transform="rotate(24 60 64)"><path d="M60 18v20M68 18v20M76 18v20M60 38q0 10 8 12q8 -2 8 -12"/><path d="M68 50v56"/></g></g><path transform="translate(0 15.5)" stroke="var(--paper)" stroke-width="6" paint-order="stroke" stroke-linejoin="round" fill="var(--y)" d="M60 79c-6-5-11-8.5-11-13.2c0-3 2.4-5.3 5.3-5.3c2.4 0 4.2 1.4 5.7 3.4c1.5-2 3.3-3.4 5.7-3.4c2.9 0 5.3 2.3 5.3 5.3c0 4.7-5 8.2-11 13.2z"/></svg></span><span class="live mono"><b></b>live · twoforqs.app</span></div>
         <h3>Two Forks</h3>
         <p>Find what you both want to eat. Swipe through dishes together or alone, see your taste match and get the recipe. Couples, groups and a shareable food personality card.</p>
-        <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Growth loops</span></div>
-      </article>
+        <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Growth loops</span><span class="chip">Instagram + TikTok</span></div>
+        <span class="visit">Read the case <i>→</i></span>
+      </a>
+      <a class="nowc rv" href="projects/qutum/">
+        <div class="nowtop"><span class="mark"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="44" height="44" rx="5.2" fill="#FF5A1F"/><rect x="56" width="44" height="44" rx="5.2" fill="#F2B544"/><rect y="56" width="44" height="44" rx="5.2" fill="#2F6BFF"/><path d="M59.5 73V59.5H73 M83 59.5H96.5V73 M59.5 83V96.5H73 M83 96.5H96.5V83" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="live mono"><b></b>launch Dec 11</span></div>
+        <h3>Qutum</h3>
+        <p>Game night without the box. The TV is the board, every phone is a private hand, and joining takes one scan. Brand, product story and a launch content system.</p>
+        <div class="roles"><span class="chip">Brand</span><span class="chip">Product</span><span class="chip">Launch content</span><span class="chip">Instagram + TikTok</span></div>
+        <span class="visit">Read the case <i>→</i></span>
+      </a>
       <article class="nowc rv">
         <div class="nowtop"><span class="mark"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="66" cy="50" r="30" fill="var(--y)"/><path d="M14 104 L52 58 L66 74 L80 60 L108 104 Z" fill="currentColor"/><path d="M48 52c4-6 12-9 18-7l7-4-3 6c3 3 3 8 0 11l-6 3-10-2-6 5 1-6c-2-1-2-4-1-6z" fill="currentColor"/></svg></span><span class="live mono"><b></b>in development</span></div>
         <h3>Quzgun</h3>
@@ -717,7 +726,7 @@ footer .secret .ul{color:var(--ink)}
   <!-- STACK -->
   <section id="stack">
     <div class="sh rv"><div><span class="mono kick">05 · toolbox</span><h2>The <span class="hl">pegboard.</span></h2></div><p>The tools change; the habit of picking up whatever the job needs doesn't. Yellow tags hang on the trunk: the ones I live in.</p></div>
-    <p class="sr-only">Tools: HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Schema.org, llms.txt, Figma, Canva, CapCut, Webflow, Framer, WordPress, HTML, CSS and JavaScript, n8n, Zapier, Apps Script, Notion, Airtable, Asana, Tally, Claude and Claude Code, ChatGPT, Perplexity, Dataiku.</p>
+    <p class="sr-only">Tools: HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Schema.org, llms.txt, Figma, Get Contrast, Canva, CapCut, Webflow, Framer, WordPress, HTML, CSS and JavaScript, n8n, Zapier, Apps Script, Notion, Airtable, Asana, Tally, Claude and Claude Code, ChatGPT, Perplexity, Dataiku.</p>
     <div class="board rv" id="board"></div>
     <div class="usebar rv" aria-live="polite"><span class="mono">used for →</span><b id="useT">Hover a tag</b><span id="useD">to see what I use it for.</span></div>
   </section>
@@ -901,7 +910,7 @@ footer .secret .ul{color:var(--ink)}
   const TOOLS=[
     {z:'Lifecycle & CRM',tr:true,t:[['HubSpot','Lifecycle emails, segments, in‑product messaging and reporting.'],['ActiveCampaign','Automated email journeys and behaviour‑based flows.'],['Apollo.io','Prospect data and enrichment.'],['Clay','List building and enrichment workflows.'],['Instantly','Outbound sequences.']]},
     {z:'SEO & analytics',t:[['Semrush','Keyword, content gap and competitor research.'],['Google Analytics 4','Site and funnel analytics.'],['Search Console','Search performance and indexing.'],['Google Ads','Paid search campaigns.'],['Schema.org','Structured data so search and AI engines understand the page.'],['llms.txt','Making a site readable for AI answer engines.']]},
-    {z:'Content & web',t:[['Figma','Design, from social assets to site layouts.'],['Canva','Fast campaign and social assets.'],['CapCut','Short video for posts.'],['Webflow','Marketing sites.'],['Framer','Landing pages and prototypes.'],['WordPress','Content sites and blogs.'],['HTML / CSS / JS','Building pages myself, this one included.']]},
+    {z:'Content & web',t:[['Figma','Design, from social assets to site layouts.'],['Get Contrast','Checking colour contrast so brand palettes stay readable.'],['Canva','Fast campaign and social assets.'],['CapCut','Short video for posts.'],['Webflow','Marketing sites.'],['Framer','Landing pages and prototypes.'],['WordPress','Content sites and blogs.'],['HTML / CSS / JS','Building pages myself, this one included.']]},
     {z:'Ops & automation',t:[['n8n','Workflows and research agents.'],['Zapier','Glue between tools.'],['Apps Script','Zero‑infrastructure automations.'],['Notion','Docs, content ops and briefs.'],['Airtable','Lightweight databases.'],['Asana','Project tracking.'],['Tally','Forms.']]},
     {z:'AI & data',t:[['Claude & Claude Code','Writing, research and shipping code.'],['ChatGPT','Drafting and ideation.'],['Perplexity','Research with sources.'],['Dataiku','Data prep and analytics.']]},
   ];

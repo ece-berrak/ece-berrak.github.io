@@ -22,12 +22,13 @@ Listen to users (support threads, onboarding calls, events, in-product signals),
 
 ## Tools
 
-HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Figma, Canva, Webflow, Framer, WordPress, HTML/CSS/JS, n8n, Zapier, Apps Script, Notion, Airtable, Claude and Claude Code.
+HubSpot, ActiveCampaign, Apollo.io, Clay, Instantly, Semrush, Google Analytics 4, Search Console, Google Ads, Figma, Get Contrast, Canva, Webflow, Framer, WordPress, HTML/CSS/JS, n8n, Zapier, Apps Script, Notion, Airtable, Claude and Claude Code.
 
 ## Now building
 
-- [mutfaq](https://mutfaq.co/): The Chef's Library, a library of around 3,000 chef recipes with exact grams, temperatures and technique. Brand, product and content.
-- Two Forks: an app for finding what you both want to eat (coming soon).
+- [mutfaq](https://ece-berrak.github.io/projects/mutfaq/): The Chef's Library, a library of around 3,000 chef recipes with exact grams, temperatures and technique (live at [mutfaq.co](https://mutfaq.co/)). Brand, product, content and a four-language Pinterest reach test. Case study with the colour and type decisions.
+- [Two Forks](https://ece-berrak.github.io/projects/two-forks/): an app for finding what you both want to eat (live at [twoforqs.app](https://twoforqs.app/)). Brand, product thinking and launch Instagram and TikTok content.
+- [Qutum](https://ece-berrak.github.io/projects/qutum/): a party-game console that turns any TV into the board and every phone into a private hand (social launch Dec 11, 2026). Brand, product thinking and launch content for Instagram and TikTok.
 - Quzgun: an app that keeps families in touch when networks fail (in development).
 
 ## Pages
