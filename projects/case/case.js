@@ -113,7 +113,7 @@
     }
     if (gal.dataset.ig) {
       var a = document.createElement('a'); a.href = 'https://www.instagram.com/' + gal.dataset.ig + '/';
-      a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'See it live on Instagram: @' + gal.dataset.ig + ' ↗';
+      a.target = '_blank'; a.rel = 'noopener'; a.textContent = '@' + gal.dataset.ig + ' on Instagram ↗';
       row.appendChild(a);
     }
     if (row.children.length) gal.parentNode.insertBefore(row, gal.nextSibling);
