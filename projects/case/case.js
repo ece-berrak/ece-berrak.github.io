@@ -100,6 +100,24 @@
       items.forEach(function (it) { it.hidden = !(f === 'all' || it.dataset.ch === f || it.dataset.fmt === f); });
     });
   });
+  /* show a few pieces first; the rest on request, and Instagram for everything else */
+  var gal = $('.gal'), LIM = 8;
+  if (gal && items.length) {
+    var row = document.createElement('div'); row.className = 'galmore';
+    if (items.length > LIM) {
+      items.slice(LIM).forEach(function (it) { it.hidden = true; });
+      var more = document.createElement('button'); more.type = 'button';
+      more.textContent = 'Show all ' + items.length + ' pieces';
+      more.addEventListener('click', function () { items.forEach(function (it) { it.hidden = false; }); more.hidden = true; });
+      row.appendChild(more);
+    }
+    if (gal.dataset.ig) {
+      var a = document.createElement('a'); a.href = 'https://www.instagram.com/' + gal.dataset.ig + '/';
+      a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'See it live on Instagram: @' + gal.dataset.ig + ' ↗';
+      row.appendChild(a);
+    }
+    if (row.children.length) gal.parentNode.insertBefore(row, gal.nextSibling);
+  }
   items.forEach(function (it) {
     var v = $('video', it);
     if (v) { it.addEventListener('mouseenter', function () { v.play().catch(function () {}); }); it.addEventListener('mouseleave', function () { v.pause(); }); }
