@@ -420,3 +420,22 @@ dialog.gs .gin{height:100%;display:flex;align-items:center;justify-content:cente
 .gal .it[data-fmt=highlight]{width:150px;margin-left:auto;margin-right:auto;border-radius:50%;box-shadow:var(--sw-shadow)}
 .gal .it[data-fmt=highlight] img{border-radius:50%}
 .gal .it[data-fmt=highlight]::before,.gal .it[data-fmt=highlight] .tg{display:none}
+
+/* calm gallery (2026-11): even grid, no tape or tilt, fewer pieces at first, Instagram for the rest */
+.gal{columns:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px;align-items:start}
+.gal .it{margin:0;aspect-ratio:4/5;overflow:hidden;border:1px solid color-mix(in srgb,var(--fg) 14%,transparent);border-radius:14px;box-shadow:none;background:var(--card);transition:transform .25s ease,box-shadow .25s ease}
+.gal .it:hover{transform:translateY(-3px)!important;box-shadow:0 10px 28px rgba(0,0,0,.10)}
+.gal .it::before,.gal .it .lay{display:none}
+.gal .it img,.gal .it video{width:100%;height:100%;object-fit:cover;border-radius:0}
+.gal .it .tg{display:block;left:10px;top:auto;bottom:10px;font:500 11px "Inter Tight",system-ui,sans-serif;background:rgba(255,255,255,.88);color:#1a1a1a;padding:4px 10px}
+.gal .it .cnt{right:10px;top:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px}
+.gal .it .newr{right:10px;bottom:10px;transform:none;border:0;border-radius:99px;font:600 11px "Inter Tight",system-ui,sans-serif;padding:4px 10px}
+.gal .it[data-fmt=highlight]{aspect-ratio:1;width:100%;border-radius:50%}
+.filters[aria-label="Filter work"]{display:none}
+.galmore{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:30px}
+.galmore button,.galmore a{font:500 15px "Inter Tight",system-ui,sans-serif;padding:12px 20px;border-radius:99px;border:1.5px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer;text-decoration:none}
+.galmore a{background:var(--fg);color:var(--pg)}
+.galmore button:hover,.galmore a:hover{transform:translateY(-2px)}
+.galmore button[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.gal .it,.galmore a,.galmore button{transition:none}.gal .it:hover{transform:none!important}}
+@media (max-width:560px){.gal{grid-template-columns:repeat(2,1fr);gap:12px}.galmore{gap:10px}.galmore a,.galmore button{font-size:14px;padding:11px 16px}}
